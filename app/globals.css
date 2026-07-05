@@ -1,0 +1,747 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #102f46;
+  --muted: #61717e;
+  --paper: #f8f1e5;
+  --sand: #ead9bc;
+  --water: #c7e4e5;
+  --teal: #14777c;
+  --gold: #c98624;
+  --coral: #de6246;
+  --navy: #102f46;
+  --night: #071b28;
+  --card: #fffaf0;
+  --line: rgba(16, 47, 70, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--paper);
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(20, 119, 124, 0.2), transparent 32rem),
+    linear-gradient(180deg, #fff8eb 0%, #f2e2c6 48%, #dcecee 100%);
+  font-family: "Bahnschrift", "Aptos", "Trebuchet MS", sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+main {
+  overflow: hidden;
+}
+
+.hero {
+  min-height: 100svh;
+  position: relative;
+  display: grid;
+  align-items: end;
+  padding: 1rem;
+  color: white;
+  isolation: isolate;
+}
+
+.hero-bg,
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.hero-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-shade {
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(7, 27, 40, 0.18), rgba(7, 27, 40, 0.82)),
+    radial-gradient(circle at 80% 20%, rgba(222, 98, 70, 0.42), transparent 18rem);
+}
+
+.topnav {
+  position: fixed;
+  top: 0.7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.38rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: rgba(7, 27, 40, 0.76);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0.8rem 2rem rgba(7, 27, 40, 0.28);
+}
+
+.topnav a {
+  min-width: 3.9rem;
+  padding: 0.68rem 0.7rem 0.55rem;
+  border-radius: 999px;
+  color: white;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+}
+
+.topnav a:active,
+.topnav a:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.hero-copy {
+  max-width: 45rem;
+  margin: 0 auto;
+  padding: 8rem 1rem 3.4rem;
+  animation: rise 0.8s ease-out both;
+}
+
+.eyebrow {
+  margin: 0 0 0.8rem;
+  color: var(--teal);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero .eyebrow {
+  color: #ffde9c;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.055em;
+  line-height: 0.94;
+  overflow-wrap: break-word;
+}
+
+h1 {
+  max-width: 12ch;
+  font-size: clamp(3.9rem, 18vw, 7.5rem);
+}
+
+h2 {
+  font-size: clamp(2.5rem, 12vw, 4.8rem);
+}
+
+h3 {
+  font-size: clamp(1.65rem, 7vw, 3.1rem);
+}
+
+p {
+  line-height: 1.55;
+}
+
+.hero-copy > p:not(.eyebrow) {
+  max-width: 34rem;
+  font-size: 1.08rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+  margin-top: 1.4rem;
+}
+
+.hero-stats span {
+  padding: 0.9rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.15rem;
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(12px);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.hero-stats b {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+.section {
+  width: min(72rem, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 4.2rem 0;
+}
+
+.intro {
+  padding-top: 4.8rem;
+}
+
+.intro p:last-child,
+.section-head p,
+.source-section p {
+  max-width: 42rem;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+}
+
+.weather-card,
+.food-list article,
+.source-section,
+.intro,
+.real-map,
+.attraction,
+.day-card {
+  border: 1px solid var(--line);
+  box-shadow: 0 1.1rem 2.8rem rgba(16, 47, 70, 0.09);
+}
+
+.weather-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1rem;
+  padding: 0.52rem 0.72rem;
+  border: 1px solid rgba(16, 47, 70, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.72);
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.weather-status span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.45rem;
+  padding: 0 0.55rem;
+  border-radius: 999px;
+  background: var(--gold);
+  color: white;
+}
+
+.weather-status[data-live="true"] span {
+  background: var(--teal);
+}
+
+.weather-card {
+  min-height: 12rem;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  background: linear-gradient(160deg, #fffdf5, #dceff1);
+}
+
+.weather-card span {
+  display: inline-grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--night);
+  color: white;
+  font-weight: 900;
+}
+
+.weather-card strong {
+  display: block;
+  margin-top: 1.15rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.1rem;
+  letter-spacing: -0.05em;
+}
+
+.weather-card b {
+  display: block;
+  color: var(--coral);
+}
+
+.weather-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.weather-source {
+  display: inline-flex;
+  margin-top: 0.8rem;
+  color: var(--teal);
+  font-size: 0.88rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.real-map {
+  margin: 1.6rem 0 0;
+  overflow: hidden;
+  border-radius: 2rem;
+  background: var(--card);
+}
+
+.real-map img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.real-map figcaption {
+  margin: 0;
+  padding: 0.85rem 1rem 1rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.route-map {
+  position: relative;
+  min-height: 32rem;
+  margin-top: 1.6rem;
+  overflow: hidden;
+  border-radius: 2rem;
+  background:
+    linear-gradient(135deg, rgba(255, 250, 240, 0.9), rgba(218, 237, 234, 0.92)),
+    radial-gradient(circle at 25% 20%, rgba(201, 134, 36, 0.3), transparent 12rem);
+}
+
+.water {
+  position: absolute;
+  top: 9%;
+  bottom: 7%;
+  width: 22%;
+  border-radius: 999px;
+  background: rgba(148, 205, 211, 0.72);
+  filter: blur(0.2px);
+}
+
+.water-one {
+  left: 53%;
+  transform: rotate(4deg);
+}
+
+.water-two {
+  left: 69%;
+  transform: rotate(-8deg);
+}
+
+.route-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.route-lines path {
+  fill: none;
+  stroke: rgba(16, 47, 70, 0.32);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-dasharray: 3 3;
+}
+
+.pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 8.2rem;
+  padding: 0.42rem 0.5rem;
+  border-radius: 1rem;
+  background: rgba(255, 250, 240, 0.9);
+  box-shadow: 0 0.7rem 1.6rem rgba(16, 47, 70, 0.14);
+  font-size: 0.74rem;
+  font-weight: 900;
+}
+
+.pin span {
+  display: inline-grid;
+  width: 1.65rem;
+  height: 1.65rem;
+  place-items: center;
+  margin-right: 0.25rem;
+  border-radius: 50%;
+  background: var(--coral);
+  color: white;
+}
+
+.pin b {
+  vertical-align: middle;
+}
+
+.days {
+  display: grid;
+  gap: 1.4rem;
+  margin-top: 1.5rem;
+}
+
+.day-card {
+  overflow: hidden;
+  border-radius: 2rem;
+  background: var(--card);
+}
+
+.day-card > img {
+  width: 100%;
+  height: 16rem;
+  object-fit: cover;
+}
+
+.day-body {
+  padding: 1.1rem;
+}
+
+.day-label,
+.weather-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  margin: 0 0 0.7rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  color: white;
+  background: var(--teal);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.weather-pill {
+  margin-top: 0.9rem;
+  color: var(--ink);
+  background: #e8f3f1;
+}
+
+.day-card.gold .day-label {
+  background: var(--gold);
+}
+
+.day-card.coral .day-label {
+  background: var(--coral);
+}
+
+.day-card.navy .day-label {
+  background: var(--navy);
+}
+
+.day-body > p:not(.day-label):not(.weather-pill) {
+  color: var(--muted);
+}
+
+ol {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  display: grid;
+  grid-template-columns: 3.7rem minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.82rem;
+  border-radius: 1.1rem;
+  background: rgba(16, 47, 70, 0.045);
+}
+
+time {
+  padding-top: 0.18rem;
+  color: var(--coral);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.stop-copy {
+  color: var(--muted);
+  font-size: 0.92rem;
+  min-width: 0;
+}
+
+.stop-copy b {
+  display: block;
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.maps-link {
+  display: flex;
+  justify-self: end;
+  width: 5.9rem;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.55rem 0.35rem 0.35rem;
+  border: 1px solid rgba(20, 119, 124, 0.18);
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, rgba(255, 250, 240, 0.98), rgba(220, 239, 241, 0.94));
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 0.45rem 1.1rem rgba(16, 47, 70, 0.08);
+}
+
+.maps-link:active,
+.maps-link:hover {
+  transform: translateY(-1px);
+  border-color: rgba(20, 119, 124, 0.42);
+}
+
+.maps-link small {
+  display: block;
+  color: var(--teal);
+  font-size: 0.55rem;
+  line-height: 1.05;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.maps-mark {
+  position: relative;
+  display: inline-grid;
+  flex: 0 0 auto;
+  width: 2.18rem;
+  height: 2.18rem;
+  place-items: center;
+  border-radius: 50% 50% 50% 0;
+  background: var(--coral);
+  transform: rotate(-45deg);
+  box-shadow: inset 0 0 0 0.25rem rgba(255, 255, 255, 0.28);
+}
+
+.maps-mark::after {
+  content: "";
+  width: 0.64rem;
+  height: 0.64rem;
+  border-radius: 50%;
+  background: white;
+}
+
+.attraction-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.attraction {
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: var(--card);
+}
+
+.attraction img {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+}
+
+.attraction div {
+  padding: 1rem;
+}
+
+.attraction span,
+.food-list span {
+  display: inline-flex;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(20, 119, 124, 0.13);
+  color: var(--teal);
+  font-size: 0.74rem;
+  font-weight: 900;
+}
+
+.attraction h3 {
+  margin-top: 0.7rem;
+  font-size: 1.65rem;
+}
+
+.attraction p,
+.food-list p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.split-images {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 0.75rem;
+  margin-bottom: 1.4rem;
+}
+
+.split-images img {
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+  border-radius: 1.5rem;
+}
+
+.food-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.food-list article {
+  display: grid;
+  grid-template-columns: 9rem 7rem 1fr;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 1.2rem;
+  background: rgba(255, 250, 240, 0.88);
+}
+
+.source-section {
+  margin-bottom: 4rem;
+  padding: 1.2rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 250, 240, 0.78);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.6rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 760px) {
+  .section {
+    width: min(100% - 1.1rem, 42rem);
+    padding: 3.2rem 0;
+  }
+
+  .topnav {
+    width: calc(100% - 1rem);
+    justify-content: space-between;
+  }
+
+  .topnav a {
+    min-width: auto;
+    flex: 1;
+    padding-inline: 0.35rem;
+  }
+
+  .hero {
+    min-height: 94svh;
+    padding: 0.55rem;
+  }
+
+  .hero-copy {
+    padding-inline: 0.35rem;
+    padding-bottom: 2rem;
+  }
+
+  h1 {
+    max-width: 100%;
+    font-size: clamp(3.55rem, 14.5vw, 4.6rem);
+  }
+
+  .hero-stats {
+    gap: 0.45rem;
+  }
+
+  .hero-stats span {
+    padding: 0.75rem 0.6rem;
+  }
+
+  .weather-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .weather-card {
+    min-height: 11rem;
+  }
+
+  .route-map,
+  .real-map {
+    min-height: 29rem;
+    border-radius: 1.6rem;
+  }
+
+  .pin {
+    width: 7rem;
+    font-size: 0.68rem;
+  }
+
+  .day-card {
+    border-radius: 1.55rem;
+  }
+
+  .day-card > img {
+    height: 13.5rem;
+  }
+
+  li {
+    grid-template-columns: 3.05rem minmax(0, 1fr) 5.6rem;
+    padding: 0.75rem;
+    gap: 0.55rem;
+  }
+
+  .maps-link {
+    width: 5.6rem;
+    min-height: 2.8rem;
+    padding-right: 0.42rem;
+  }
+
+  .maps-mark {
+    width: 1.95rem;
+    height: 1.95rem;
+  }
+
+  .attraction-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .attraction {
+    display: grid;
+    grid-template-columns: 7.4rem 1fr;
+    min-height: 10.5rem;
+  }
+
+  .attraction img {
+    height: 100%;
+  }
+
+  .split-images {
+    grid-template-columns: 1fr;
+  }
+
+  .split-images img {
+    height: 12rem;
+  }
+
+  .food-list article {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .days {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .day-card:first-child,
+  .day-card:nth-child(4) {
+    transform: translateY(2rem);
+  }
+}
