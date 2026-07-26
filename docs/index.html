@@ -3,97 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Mobile Kopenhagen-Reisebroschüre mit Wetter, Karte, Tagesplan, Fotos und Google-Maps-Links." />
-    <title>Kopenhagen Reiseplan 2026</title>
+    <meta name="description" content="Mobiler, bildstarker Reiseplan." />
+    <title>Reiseplan</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main>
-      <section class="hero" id="top">
-        <img src="./photos/web/aerial-1200.jpg" alt="Kopenhagen von oben" class="hero-bg" />
-        <div class="hero-shade"></div>
-        <nav class="topnav" aria-label="Reiseabschnitte">
-          <a href="#tage">Tage</a>
-          <a href="#wetter">Wetter</a>
-          <a href="#karte">Karte</a>
-          <a href="#essen">Essen</a>
-        </nav>
-        <div class="hero-copy">
-          <p class="eyebrow">06.-09. Juli 2026 · Christian & Silke</p>
-          <h1>Kopenhagen mobil</h1>
-          <p>Ein besserer Reiseplan fürs Handy: große Bilder, klare Tageslogik, Wetterentscheidungen, Route und kurze Erklärungen zu den Orten.</p>
-          <div class="hero-stats">
-            <span><b>4</b>Tage</span>
-            <span><b>20+</b>Stops</span>
-            <span><b>27</b>Maps-Links</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section intro">
-        <p class="eyebrow">Leselogik</p>
-        <h2>Nicht nur Ablauf, sondern Reisegefühl.</h2>
-        <p>Der Plan nutzt Christianshavn als ruhigen Anker, setzt Klassiker gezielt ein und lässt am dritten Tag Kopenhagens moderne Hafenseite wirken. Alles ist so sortiert, dass ihr unterwegs schnell entscheiden könnt: machen, tauschen oder kürzen.</p>
-      </section>
-
-      <section class="section weather-section" id="wetter">
-        <div class="section-head">
-          <p class="eyebrow">Aktuelle Prognose</p>
-          <h2>Wetterfenster für die Route</h2>
-          <p>Die Daten werden beim Öffnen live für Kopenhagen geladen. Falls der Abruf scheitert, bleibt eine sichere Fallback-Prognose sichtbar.</p>
-        </div>
-        <div class="weather-status" id="weatherStatus" data-live="false"><span>Fallback</span>Lade aktuelle Prognose ...</div>
-        <div class="weather-grid" id="weatherGrid"></div>
-        <a class="weather-source" href="https://open-meteo.com/" target="_blank" rel="noreferrer">Quelle: Open-Meteo Live Forecast</a>
-      </section>
-
-      <section class="section map-section" id="karte">
-        <div class="section-head">
-          <p class="eyebrow">Landkarte</p>
-          <h2>Schöne Routenkarte fürs Handy</h2>
-          <p>Echte Kartenbasis mit Tagespins, Wasser, Stadtteilen und den langen Sprüngen zum Flughafen. Die einzelnen Stops öffnen zusätzlich direkt in Google Maps.</p>
-        </div>
-        <figure class="real-map">
-          <img src="./route-map-copenhagen.jpg" alt="Kopenhagen Stadtkarte mit Tagespins und Routenverbindungen" />
-          <figcaption>Kartendaten © OpenStreetMap-Mitwirkende. Eigene Tagespins und Routenlinien.</figcaption>
-        </figure>
-      </section>
-
-      <section class="section day-section" id="tage">
-        <div class="section-head">
-          <p class="eyebrow">Tagespläne</p>
-          <h2>Vier Tage, mobil lesbar</h2>
-        </div>
-        <div class="days" id="days"></div>
-      </section>
-
-      <section class="section gallery-section">
-        <div class="section-head">
-          <p class="eyebrow">Attraktionen</p>
-          <h2>Warum diese Orte drin sind</h2>
-        </div>
-        <div class="attraction-grid" id="attractions"></div>
-      </section>
-
-      <section class="section food-section" id="essen">
-        <div class="split-images">
-          <img src="./photos/web/reffen-720.jpg" alt="Reffen Street Food" />
-          <img src="./photos/web/refshaleoen-720.jpg" alt="Refshaleøen am Wasser" />
-        </div>
-        <div class="section-head">
-          <p class="eyebrow">Essen</p>
-          <h2>Gastro-Route statt Touristenfalle</h2>
-          <p>Jeder Essensstopp hat eine Aufgabe: ankommen, lokal werden, Wasser spüren oder sauber abschließen.</p>
-        </div>
-        <div class="food-list" id="food"></div>
-      </section>
-
-      <section class="section source-section">
-        <p class="eyebrow">Quellen</p>
-        <h2>Recherche und Bilder</h2>
-        <p>Faktenquellen: offizielle Seiten von Vor Frelsers Kirke, Rosenborg, Rundetårn, Designmuseum Danmark, CopenHill, GoBoat, Cisternerne, Reffen und VisitCopenhagen. Wetter: live über Open-Meteo im Browser. Bilder: Wikimedia Commons und ein offizielles Frederiksbergmuseerne-Motiv für Cisternerne.</p>
-      </section>
-    </main>
-    <script src="./app.js"></script>
+    <main id="app" aria-live="polite"></main>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>
