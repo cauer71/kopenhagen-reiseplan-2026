@@ -1,0 +1,7 @@
+{
+  "_hinweis": "Reihenfolge dieser Liste = Reihenfolge der Kacheln auf der Startseite. Titel, Datum und Untertitel kommen aus der jeweiligen Reisedatei und werden hier NICHT wiederholt.",
+  "trips": [
+    { "slug": "kopenhagen", "tileImage": "aerial" },
+    { "slug": "rom", "tileImage": "colosseo", "badge": "Testaufenthalt" }
+  ]
+}

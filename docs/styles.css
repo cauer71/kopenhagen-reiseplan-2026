@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --ink: #102f46;
   --muted: #61717e;
   --paper: #f8f1e5;
@@ -189,8 +189,7 @@ p {
 }
 
 .intro p:last-child,
-.section-head p,
-.source-section p {
+.section-head p {
   max-width: 42rem;
   color: var(--muted);
   font-size: 1.02rem;
@@ -198,17 +197,15 @@ p {
 
 .weather-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* auto-fit statt fester Spaltenzahl: die Reisen haben unterschiedlich viele Tage.
+     Die Kartenbreite ist begrenzt, damit zwei Tage keine 570-Pixel-Kacheln ergeben. */
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
   gap: 0.8rem;
   margin-top: 1.4rem;
 }
 
 .weather-card,
-.food-list article,
-.source-section,
 .intro,
-.real-map,
-.attraction,
 .day-card {
   border: 1px solid var(--line);
   box-shadow: 0 1.1rem 2.8rem rgba(16, 47, 70, 0.09);
@@ -337,6 +334,45 @@ p {
   margin: 0.8rem 0 0;
 }
 
+/* Kurzer Aufhänger über der ausführlichen Beschreibung. */
+.stop-description {
+  color: var(--ink);
+  font-size: 1.02rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.stop-body p {
+  max-width: 44rem;
+  color: var(--muted);
+  font-size: 0.97rem;
+  line-height: 1.62;
+}
+
+.stop-facts {
+  display: grid;
+  gap: 0.55rem 1.4rem;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  margin: 1rem 0 0;
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  background: rgba(24, 122, 118, 0.07);
+}
+
+.stop-facts dt {
+  color: var(--teal);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.stop-facts dd {
+  margin: 0.15rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
 .route {
   color: var(--muted);
   font-size: 0.78rem;
@@ -425,6 +461,8 @@ p {
 }
 
 .weather-card {
+  /* begrenzt, damit eine Reise mit nur zwei Tagen keine überbreiten Kacheln bekommt */
+  max-width: 24rem;
   min-height: 12rem;
   padding: 1rem;
   border-radius: 1.5rem;
@@ -461,112 +499,13 @@ p {
   font-size: 0.92rem;
 }
 
-.weather-source {
-  display: inline-flex;
-  margin-top: 0.8rem;
-  color: var(--teal);
-  font-size: 0.88rem;
-  font-weight: 900;
-  text-decoration: none;
-}
-
-.real-map {
-  margin: 1.6rem 0 0;
-  overflow: hidden;
-  border-radius: 2rem;
-  background: var(--card);
-}
-
-.real-map img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.real-map figcaption {
-  margin: 0;
-  padding: 0.85rem 1rem 1rem;
-  color: var(--muted);
-  font-size: 0.82rem;
-}
-
-.route-map {
-  position: relative;
-  min-height: 32rem;
-  margin-top: 1.6rem;
-  overflow: hidden;
-  border-radius: 2rem;
-  background:
-    linear-gradient(135deg, rgba(255, 250, 240, 0.9), rgba(218, 237, 234, 0.92)),
-    radial-gradient(circle at 25% 20%, rgba(201, 134, 36, 0.3), transparent 12rem);
-}
-
-.water {
-  position: absolute;
-  top: 9%;
-  bottom: 7%;
-  width: 22%;
-  border-radius: 999px;
-  background: rgba(148, 205, 211, 0.72);
-  filter: blur(0.2px);
-}
-
-.water-one {
-  left: 53%;
-  transform: rotate(4deg);
-}
-
-.water-two {
-  left: 69%;
-  transform: rotate(-8deg);
-}
-
-.route-lines {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.route-lines path {
-  fill: none;
-  stroke: rgba(16, 47, 70, 0.32);
-  stroke-width: 1.2;
-  stroke-linecap: round;
-  stroke-dasharray: 3 3;
-}
-
-.pin {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  width: 8.2rem;
-  padding: 0.42rem 0.5rem;
-  border-radius: 1rem;
-  background: rgba(255, 250, 240, 0.9);
-  box-shadow: 0 0.7rem 1.6rem rgba(16, 47, 70, 0.14);
-  font-size: 0.74rem;
-  font-weight: 900;
-}
-
-.pin span {
-  display: inline-grid;
-  width: 1.65rem;
-  height: 1.65rem;
-  place-items: center;
-  margin-right: 0.25rem;
-  border-radius: 50%;
-  background: var(--coral);
-  color: white;
-}
-
-.pin b {
-  vertical-align: middle;
-}
-
 .days {
   display: grid;
   gap: 1.4rem;
   margin-top: 1.5rem;
+  /* Jede Tageskarte behält ihre eigene Höhe. Ohne "start" streckt das Grid
+     die zugeklappte Nachbarkarte auf die Höhe der aufgeklappten Karte. */
+  align-items: start;
 }
 
 .day-card {
@@ -685,6 +624,19 @@ p {
   background: #e8f3f1;
 }
 
+/* Gefüllt aus der Live-Prognose statt aus dem statischen Planungshinweis. */
+.weather-pill[data-live="true"] {
+  color: white;
+  background: var(--teal);
+}
+
+/* Platzhalter, solange keine echte Prognose vorliegt – nie erfundene Zahlen. */
+.weather-empty {
+  color: var(--muted);
+  font-style: italic;
+  font-weight: 600;
+}
+
 .day-card.gold .day-label {
   background: var(--gold);
 }
@@ -724,18 +676,6 @@ time {
   color: var(--coral);
   font-size: 0.82rem;
   font-weight: 900;
-}
-
-.stop-copy {
-  color: var(--muted);
-  font-size: 0.92rem;
-  min-width: 0;
-}
-
-.stop-copy b {
-  display: block;
-  color: var(--ink);
-  font-size: 1rem;
 }
 
 .maps-link {
@@ -790,87 +730,6 @@ time {
   height: 0.64rem;
   border-radius: 50%;
   background: white;
-}
-
-.attraction-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.attraction {
-  overflow: hidden;
-  border-radius: 1.5rem;
-  background: var(--card);
-}
-
-.attraction img {
-  width: 100%;
-  height: 12rem;
-  object-fit: cover;
-}
-
-.attraction div {
-  padding: 1rem;
-}
-
-.attraction span,
-.food-list span {
-  display: inline-flex;
-  padding: 0.35rem 0.65rem;
-  border-radius: 999px;
-  background: rgba(20, 119, 124, 0.13);
-  color: var(--teal);
-  font-size: 0.74rem;
-  font-weight: 900;
-}
-
-.attraction h3 {
-  margin-top: 0.7rem;
-  font-size: 1.65rem;
-}
-
-.attraction p,
-.food-list p {
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-.split-images {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 0.75rem;
-  margin-bottom: 1.4rem;
-}
-
-.split-images img {
-  width: 100%;
-  height: 15rem;
-  object-fit: cover;
-  border-radius: 1.5rem;
-}
-
-.food-list {
-  display: grid;
-  gap: 0.75rem;
-}
-
-.food-list article {
-  display: grid;
-  grid-template-columns: 9rem 7rem 1fr;
-  gap: 0.7rem;
-  align-items: center;
-  padding: 1rem;
-  border-radius: 1.2rem;
-  background: rgba(255, 250, 240, 0.88);
-}
-
-.source-section {
-  margin-bottom: 4rem;
-  padding: 1.2rem;
-  border-radius: 1.5rem;
-  background: rgba(255, 250, 240, 0.78);
 }
 
 @keyframes rise {
@@ -934,17 +793,6 @@ time {
 
   .weather-card {
     min-height: 11rem;
-  }
-
-  .route-map,
-  .real-map {
-    min-height: 29rem;
-    border-radius: 1.6rem;
-  }
-
-  .pin {
-    width: 7rem;
-    font-size: 0.68rem;
   }
 
   .day-card {
@@ -1032,31 +880,6 @@ time {
     height: 1.95rem;
   }
 
-  .attraction-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .attraction {
-    display: grid;
-    grid-template-columns: 7.4rem 1fr;
-    min-height: 10.5rem;
-  }
-
-  .attraction img {
-    height: 100%;
-  }
-
-  .split-images {
-    grid-template-columns: 1fr;
-  }
-
-  .split-images img {
-    height: 12rem;
-  }
-
-  .food-list article {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (min-width: 900px) {
