@@ -85,3 +85,38 @@
 .trip-tile:focus-visible img {
   transform: scale(1.05);
 }
+
+/* Status macht die berechnete Reihenfolge lesbar: laufend, bevorstehend, vergangen. */
+.trip-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.55rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  backdrop-filter: blur(4px);
+}
+
+.trip-tile[data-status="laufend"] .trip-status {
+  background: var(--coral);
+}
+
+.trip-tile[data-status="bevorstehend"] .trip-status {
+  background: var(--teal);
+}
+
+/* Vergangene Reisen bleiben vollständig lesbar, treten aber zurück. */
+.trip-tile[data-status="vergangen"] img {
+  filter: saturate(0.55);
+}
+
+.trip-tile[data-status="vergangen"]:hover img,
+.trip-tile[data-status="vergangen"]:focus-visible img {
+  filter: none;
+}
