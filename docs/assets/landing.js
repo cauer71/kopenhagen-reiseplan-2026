@@ -2,8 +2,9 @@
  * Startseite mit Reisekacheln.
  *
  * Titel, Datum, Untertitel und Reisende werden aus den Reisedateien gelesen –
- * hier steht bewusst nichts doppelt. Zu pflegen ist nur die Reihenfolge in
- * `data/trips/index.json`.
+ * hier steht bewusst nichts doppelt. Zu pflegen ist nur die Liste der Reisen in
+ * `data/trips/index.json`; die Reihenfolge auf der Seite ergibt sich aus den
+ * Reisedaten (siehe `sortTrips`).
  */
 
 const root = document.querySelector("#app");
@@ -22,16 +23,62 @@ async function loadJson(url) {
   return response.json();
 }
 
-function tile(entry, data) {
+/* ------------------------------------------------------- Reihenfolge */
+
+/** Heutiges Datum als JJJJ-MM-TT in lokaler Zeit (toISOString wäre UTC). */
+function today() {
+  const now = new Date();
+  const pad = (value) => String(value).padStart(2, "0");
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+}
+
+/** Erster und letzter Reisetag aus den isoDate-Angaben der Tagesabschnitte. */
+function span(data) {
+  const dates = data.days.map((day) => day.isoDate).filter(Boolean).sort();
+  return { start: dates[0] ?? "", end: dates[dates.length - 1] ?? "" };
+}
+
+const STATUS_LABEL = { laufend: "Läuft gerade", bevorstehend: "Bevorstehend", vergangen: "Vergangen" };
+const STATUS_RANK = { laufend: 0, bevorstehend: 1, vergangen: 2 };
+
+function statusOf({ start, end }, now) {
+  if (!start) return "bevorstehend";
+  if (start <= now && now <= end) return "laufend";
+  return start > now ? "bevorstehend" : "vergangen";
+}
+
+/**
+ * Laufende Reise zuoberst, dann die bevorstehenden mit der nächsten zuerst,
+ * darunter die vergangenen mit der jüngsten zuerst – die Liste läuft also von
+ * „jetzt“ aus in beide Richtungen auseinander.
+ *
+ * Sollen die vergangenen stattdessen mit der ältesten beginnen, ist nur der
+ * Vergleich in der letzten Zeile umzudrehen.
+ */
+function sortTrips(trips) {
+  return [...trips].sort((a, b) => {
+    if (STATUS_RANK[a.status] !== STATUS_RANK[b.status]) {
+      return STATUS_RANK[a.status] - STATUS_RANK[b.status];
+    }
+    return a.status === "vergangen"
+      ? b.start.localeCompare(a.start)
+      : a.start.localeCompare(b.start);
+  });
+}
+
+/* ------------------------------------------------------------ Kacheln */
+
+function tile({ entry, data, status }) {
   const { trip, days } = data;
   const stops = days.reduce((sum, day) => sum + day.stops.length, 0);
   const meta = [`${days.length} Tage`, `${stops} Stops`, trip.travellers, entry.badge]
     .filter(Boolean).map(esc).join(" · ");
   const hero = entry.tileImage ?? trip.heroImage;
-  return `<a class="trip-tile" href="./trips/${encodeURIComponent(entry.slug)}/">
+  return `<a class="trip-tile" href="./trips/${encodeURIComponent(entry.slug)}/" data-status="${status}">
     <img src="${image(hero)}"${srcset(hero)} sizes="(min-width: 60rem) 33vw, 100vw" alt="${esc(trip.destination)}" loading="lazy" decoding="async">
     <span class="trip-tile-shade"></span>
     <div>
+      <p class="trip-status">${esc(STATUS_LABEL[status])}</p>
       <p class="eyebrow">${esc(trip.dates)}</p>
       <h2>${esc(trip.destination)}</h2>
       <p>${esc(trip.subtitle)}</p>
@@ -45,15 +92,18 @@ async function init() {
   const index = await loadJson(`./data/trips/index.json${query}`);
   const entries = index.trips ?? [];
 
+  const now = today();
   const loaded = await Promise.all(entries.map(async (entry) => {
     try {
-      return { entry, data: await loadJson(`./data/trips/${entry.slug}.json${query}`) };
+      const data = await loadJson(`./data/trips/${entry.slug}.json${query}`);
+      const { start, end } = span(data);
+      return { entry, data, start, end, status: statusOf({ start, end }, now) };
     } catch {
       return null; // eine defekte Reise soll die Startseite nicht leer machen
     }
   }));
 
-  const tiles = loaded.filter(Boolean).map(({ entry, data }) => tile(entry, data)).join("");
+  const tiles = sortTrips(loaded.filter(Boolean)).map(tile).join("");
   root.innerHTML = `<main class="trip-index">
     <div class="index-intro">
       <p class="eyebrow">Reiseplaner</p>

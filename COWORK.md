@@ -252,9 +252,9 @@ frei.
 1. `docs/data/trips/<slug>.json` aus einer bestehenden Reise ableiten.
 2. `docs/trips/<slug>/index.html` kopieren und darin `data-trip`, `title`,
    `description` und die vier `og:`-Angaben anpassen.
-3. Slug in `docs/data/trips/index.json` ergänzen – die Reihenfolge dort ist die
-   Reihenfolge der Kacheln auf der Startseite. Titel, Datum und Untertitel
-   **nicht** wiederholen, die liest die Startseite aus der Reisedatei.
+3. Slug in `docs/data/trips/index.json` ergänzen. Die Reihenfolge dort ist ohne
+   Bedeutung – die Startseite sortiert selbst (siehe unten). Titel, Datum und
+   Untertitel **nicht** wiederholen, die liest die Startseite aus der Reisedatei.
 4. Die Reise in `SHELL` in `docs/sw.js` aufnehmen, damit sie offline verfügbar ist.
 5. `python tools/validate_trips.py` und `python tools/plan.py bump`.
 
@@ -328,7 +328,32 @@ Die Action prüft, deployt und die Seite ist nach wenigen Minuten aktuell.
 
 ---
 
-## 7. Was die Seite außerdem kann
+## 7. Reihenfolge auf der Startseite
+
+Die Kacheln werden **berechnet** sortiert, nicht gepflegt. Grundlage sind die
+`isoDate`-Angaben der Tagesabschnitte: der erste ist der Reisebeginn, der letzte
+das Reiseende.
+
+| Position | Status | Sortierung innerhalb |
+|---|---|---|
+| oben | **läuft gerade** (heute liegt zwischen Beginn und Ende) | – |
+| darunter | **bevorstehend** | nächste Reise zuerst |
+| unten | **vergangen** | jüngste Reise zuerst |
+
+Die Liste läuft also von „jetzt“ aus in beide Richtungen auseinander. Jede Kachel
+trägt den Status als Kennzeichnung; vergangene Reisen sind leicht entsättigt,
+bleiben aber vollständig lesbar und anklickbar.
+
+Damit das stimmt, muss jeder Tagesabschnitt ein korrektes `isoDate` haben – die
+Prüfung erzwingt das. Ein Umsortieren von Hand ist nicht nötig und nicht möglich:
+die Reihenfolge in `index.json` wird ignoriert.
+
+> Sollen vergangene Reisen mit der **ältesten** beginnen, ist in
+> `docs/assets/landing.js` nur der Vergleich in `sortTrips` umzudrehen.
+
+---
+
+## 8. Was die Seite außerdem kann
 
 - **Deep-Links.** `#tag2` klappt einen Tag auf, `#tag2-stop-11` zusätzlich den
   Stop und scrollt hin. Diese Links sind stabil und eignen sich für
