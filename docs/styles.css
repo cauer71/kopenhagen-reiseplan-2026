@@ -11,6 +11,16 @@
   --night: #071b28;
   --card: #fffaf0;
   --line: rgba(16, 47, 70, 0.16);
+
+  /* Seitenrand aller Inhaltsbereiche, je Seite. Eine Stellschraube für
+     Reiseseiten und Startseite; auf schmalen Fenstern weiter unten kleiner. */
+  --gutter: 2.5rem;
+
+  /* Innenabstand der Karten. Als Variable, weil der zugeklappte und der
+     aufgeklappte Teil einer Karte denselben Wert brauchen – sonst springt
+     der Text beim Öffnen um ein paar Pixel. */
+  --day-pad: 1.6rem;
+  --stop-pad: 1.35rem;
 }
 
 * {
@@ -179,7 +189,7 @@ p {
 }
 
 .section {
-  width: min(72rem, calc(100% - 2rem));
+  width: min(72rem, calc(100% - 2 * var(--gutter)));
   margin: 0 auto;
   padding: 4.2rem 0;
 }
@@ -257,7 +267,7 @@ p {
 
 .stop-summary {
   display: block;
-  padding: 1rem;
+  padding: var(--stop-pad);
   min-width: 0;
 }
 
@@ -332,7 +342,7 @@ p {
 }
 
 .stop-details {
-  padding: 0 1rem 1rem;
+  padding: 0 var(--stop-pad) var(--stop-pad);
   border-top: 1px solid var(--line);
 }
 
@@ -421,10 +431,6 @@ p {
     min-height: 100%;
   }
 
-  .stop-summary {
-    padding: 0.8rem;
-  }
-
   .stop-title {
     font-size: 1.28rem;
   }
@@ -434,9 +440,6 @@ p {
     font-size: 0.68rem;
   }
 
-  .stop-details {
-    padding: 0 0.8rem 0.8rem;
-  }
 }
 
 .weather-status {
@@ -550,7 +553,11 @@ p {
 }
 
 .day-body {
-  padding: 1.1rem;
+  /* display: block ist zwingend – als <span> bliebe das Element inline, und die
+     Polsterung würde die Blockelemente darin nicht einrücken. Genau deshalb
+     klebten Titel und Notiz vorher am Kartenrand. */
+  display: block;
+  padding: var(--day-pad);
 }
 
 .day-heading {
@@ -608,7 +615,7 @@ p {
 }
 
 .day-details {
-  padding: 0 1.1rem 1.1rem;
+  padding: 0 var(--day-pad) var(--day-pad);
 }
 
 .day-label,
@@ -751,8 +758,17 @@ time {
 }
 
 @media (max-width: 760px) {
+  /* Auf schmalen Fenstern kleinere Abstände – aber nicht so klein, dass der
+     Text am Rand klebt. Die Lesebreite ist reichlich bemessen, damit sie nicht
+     den Seitenrand bestimmt. */
+  :root {
+    --gutter: 1.25rem;
+    --day-pad: 1.15rem;
+    --stop-pad: 1.05rem;
+  }
+
   .section {
-    width: min(100% - 1.1rem, 42rem);
+    width: min(100% - 2 * var(--gutter), 44rem);
     padding: 3.2rem 0;
   }
 
@@ -820,7 +836,6 @@ time {
 
   .day-body {
     min-width: 0;
-    padding: 0.85rem;
   }
 
   .day-heading {
@@ -866,9 +881,6 @@ time {
     font-size: 1.55rem;
   }
 
-  .day-details {
-    padding: 0 0.75rem 0.75rem;
-  }
 
   li {
     grid-template-columns: 3.05rem minmax(0, 1fr) 5.6rem;
