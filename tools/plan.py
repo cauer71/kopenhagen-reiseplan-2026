@@ -185,7 +185,8 @@ def _write(slug: str, data: dict, summary: str) -> None:
     tripdata.save(slug, data)
     print(summary)
     print(f"geschrieben: docs/data/trips/{slug}.json")
-    print("Nicht vergessen: python tools/plan.py bump   (damit Browser die Änderung laden)")
+    print("Nächster Schritt: committen und pushen – die Action prüft und veröffentlicht.")
+    print("`bump` ist dafür nicht nötig; das braucht nur CSS, JavaScript oder HTML.")
 
 
 def build_parser() -> argparse.ArgumentParser:

@@ -31,11 +31,11 @@ Der Kern: Reihenfolge und Inhalt sind getrennt. Ein Stop zu verschieben oder ein
 Tagesreihenfolge umzustellen bewegt eine Zeile, nicht einen Textblock.
 
 ```bash
-python tools/plan.py show  kopenhagen              # Überblick mit allen UIDs
-python tools/plan.py move  kopenhagen 05 tag2      # Stop in einen anderen Tag
-python tools/plan.py order kopenhagen tag1 01,02,04,03,05,06,07
-python tools/plan.py swap  kopenhagen 11 24        # Wettertausch
-python tools/plan.py bump                          # danach immer
+python3 tools/plan.py show  kopenhagen              # Überblick mit allen UIDs
+python3 tools/plan.py move  kopenhagen 05 tag2      # Stop in einen anderen Tag
+python3 tools/plan.py order kopenhagen tag1 01,02,04,03,05,06,07
+python3 tools/plan.py swap  kopenhagen 11 24        # Wettertausch
+python3 tools/plan.py bump                          # danach immer
 ```
 
 ## Lokal ansehen
@@ -50,7 +50,7 @@ weil die Seite ihre Daten per `fetch` lädt.
 ## Prüfen
 
 ```bash
-python tools/validate_trips.py
+python3 tools/validate_trips.py
 ```
 
 Prüft alle Reisedateien auf Vollständigkeit, eindeutige UIDs, vorhandene Bilder in
