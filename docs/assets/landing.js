@@ -18,7 +18,9 @@ const image = (name, size = 1200) => (String(name).startsWith("http") ? name : `
 const srcset = (name) => (String(name).startsWith("http") ? "" : ` srcset="${image(name, 720)} 720w, ${image(name, 1200)} 1200w"`);
 
 async function loadJson(url) {
-  const response = await fetch(url);
+  // no-cache: Rückfrage per ETag statt zehn Minuten blindem Cache, damit eine
+  // Planänderung sofort sichtbar wird. Offline übernimmt der Service Worker.
+  const response = await fetch(url, { cache: "no-cache" });
   if (!response.ok) throw new Error(`${url}: ${response.status}`);
   return response.json();
 }

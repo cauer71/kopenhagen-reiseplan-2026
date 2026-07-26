@@ -27,7 +27,7 @@ docs/
 ├── assets/app.js                   Darstellung einer Reise (für alle Reisen gleich)
 ├── assets/landing.js               Darstellung der Startseite
 ├── assets/styles.css               gemeinsames Design
-├── data/trips/index.json           welche Reisen es gibt und in welcher Reihenfolge
+├── data/trips/index.json           welche Reisen es gibt (Reihenfolge wird berechnet)
 ├── data/trips/kopenhagen.json      ← hier stehen die Inhalte
 ├── data/trips/rom.json             ← hier stehen die Inhalte
 ├── photos/web/<name>-720.jpg       Bilder, immer in zwei Breiten
@@ -44,8 +44,10 @@ tools/
 Für **Inhaltsänderungen** ist ausschließlich `docs/data/trips/` relevant. `assets/`
 muss dafür nie angefasst werden.
 
-Die Werkzeuge sind in Python geschrieben (Standardbibliothek, keine Installation),
-weil das auf dem Arbeitsrechner und in GitHub Actions ohne Vorbedingungen läuft.
+Die Werkzeuge sind in Python geschrieben und nutzen ausschließlich die
+Standardbibliothek. Deshalb laufen sie ohne `npm install`, ohne Build und ohne
+jede Vorbereitung – auch in einer frisch geklonten Cowork-Sitzung vom Handy aus.
+Das ist der Grund für diese Wahl, siehe Abschnitt 4.
 
 ---
 
@@ -127,17 +129,23 @@ Alle Befehle laufen im Repo-Wurzelverzeichnis. Jeder schreibende Befehl prüft d
 Datei **vorher** und schreibt nur, wenn sie stimmig bleibt – eine kaputte Datei
 kann so nicht entstehen.
 
+> **Interpreter-Name.** Die Beispiele nutzen `python3`, weil das in Linux-Umgebungen
+> gilt – also in der Cowork-Cloud, die der Regelfall ist. Auf einem Windows-Rechner
+> heißt der Befehl `python`; `python3` ist dort ein Platzhalter, der mit einem Hinweis
+> auf den Microsoft Store abbricht. Falls beides fehlschlägt, sind die Skripte
+> ausführbar: `./tools/plan.py show kopenhagen`.
+
 ### Ansehen
 
 ```bash
-python tools/plan.py show kopenhagen
+python3 tools/plan.py show kopenhagen
 ```
 
 Zeigt alle Tagesabschnitte mit UID, Uhrzeit und Titel. Mit einem Tag als zweitem
 Argument nur diesen:
 
 ```bash
-python tools/plan.py show kopenhagen tag2
+python3 tools/plan.py show kopenhagen tag2
 ```
 
 Am Ende listet `show` Ortsbeschreibungen auf, die keinem Tag zugeordnet sind.
@@ -146,7 +154,7 @@ Das ist der erste Befehl bei jedem Auftrag – ohne die UIDs geht nichts.
 ### Stop in einen anderen Tag verschieben
 
 ```bash
-python tools/plan.py move kopenhagen 05 tag2 --time 10:30
+python3 tools/plan.py move kopenhagen 05 tag2 --time 10:30
 ```
 
 Nimmt UID 05 aus seinem bisherigen Tag heraus und setzt ihn in `tag2` an der
@@ -155,7 +163,7 @@ zeitlich passenden Stelle ein. Ohne `--time` behält der Stop seine Uhrzeit.
 ### Uhrzeit ändern
 
 ```bash
-python tools/plan.py time kopenhagen 11 09:30
+python3 tools/plan.py time kopenhagen 11 09:30
 ```
 
 Der Stop rutscht dabei automatisch an die richtige Position im Tag.
@@ -163,7 +171,7 @@ Der Stop rutscht dabei automatisch an die richtige Position im Tag.
 ### Reihenfolge innerhalb eines Tages umstellen
 
 ```bash
-python tools/plan.py order kopenhagen tag1 01,02,04,03,05,06,07
+python3 tools/plan.py order kopenhagen tag1 01,02,04,03,05,06,07
 ```
 
 Die Liste muss **genau** die UIDs dieses Tages enthalten – nicht mehr und nicht
@@ -175,7 +183,7 @@ innerhalb eines Tages anders sein soll.
 ### Zwei Stops tauschen
 
 ```bash
-python tools/plan.py swap kopenhagen 11 24
+python3 tools/plan.py swap kopenhagen 11 24
 ```
 
 Tauscht Platz **und** Uhrzeit – auch über Tagesgrenzen hinweg. Der typische
@@ -185,39 +193,70 @@ schönen Tag.
 ### Cache-Version anheben
 
 ```bash
-python tools/plan.py bump
+python3 tools/plan.py bump
 ```
 
-**Nach jeder Inhaltsänderung ausführen.** Der Befehl erhöht den
-`?v=`-Parameter in allen HTML-Dateien. Ohne ihn liefern Browser und der
-GitHub-Pages-Cache die alte Fassung aus, und die Änderung ist für Besucher
-unsichtbar. Mit `--version 20260726-4` lässt sich ein Wert erzwingen.
+Erhöht den `?v=`-Parameter in allen HTML-Dateien. Mit `--version 20260726-4`
+lässt sich ein Wert erzwingen.
+
+**Nötig nach Änderungen an CSS, JavaScript oder HTML.** Für reine
+Planänderungen ist es **nicht** nötig: die Reisedaten werden mit
+`cache: "no-cache"` geladen, also per ETag zurückgefragt statt zehn Minuten
+blind gecacht. Eine verschobene Attraktion ist damit sofort nach dem Deploy
+sichtbar – wichtig, wenn man unterwegs nur das Handy hat und nicht warten kann.
 
 ---
 
-## 4. Typische Aufträge
+## 4. Notfall am Reiseort – nur mit dem Handy
 
-### „Am Dienstag regnet es, zieh das Designmuseum vor“
+**Das ist der wichtigste Anwendungsfall dieses Repos.** Das Wetter kippt, der Plan
+muss heute anders aussehen, und zur Verfügung steht nur ein Telefon. Der Rechner
+zu Hause ist aus.
 
-```bash
-python tools/plan.py show kopenhagen tag2          # UID des Designmuseums finden → 11
-python tools/plan.py time kopenhagen 11 09:45
-python tools/plan.py bump
-```
+### Ablauf
 
-### „Tausch den Aufstieg auf die Erlöserkirche gegen Cisternerne“
+1. Cowork auf dem Handy öffnen und eine Sitzung auf `cauer71/reiseplan` starten.
+   Die Umgebung klont frisch; es muss nichts installiert werden, weil die
+   Werkzeuge reine Python-Standardbibliothek sind.
+2. In eigenen Worten sagen, was sich ändern soll (Beispiele unten).
+3. Ergebnis mit `show` gegenlesen, committen, pushen.
+4. Die Action prüft und deployt. Nach etwa einer Minute ist
+   <https://cauer71.github.io/reiseplan/> aktuell – ohne `bump`, weil die
+   Reisedaten per ETag zurückgefragt werden.
 
-```bash
-python tools/plan.py swap kopenhagen 05 24
-python tools/plan.py bump
-```
+**Für Planänderungen ist `bump` nicht nötig.** Ein Befehl, ein Commit, fertig.
 
-### „Verschieb GoBoat auf Tag 3“
+### Was gesagt wird und was zu tun ist
 
-```bash
-python tools/plan.py move kopenhagen 06 tag3 --time 15:30
-python tools/plan.py bump
-```
+| Auftrag am Telefon | Befehl |
+|---|---|
+| „Es regnet, zieh das Designmuseum auf den Vormittag" | `plan.py time kopenhagen 11 09:45` |
+| „Tausch die Erlöserkirche gegen Cisternerne" | `plan.py swap kopenhagen 05 24` |
+| „Verschieb GoBoat auf Tag 3, nachmittags" | `plan.py move kopenhagen 06 tag3 --time 15:30` |
+| „Dreh die Reihenfolge von Tag 1: erst die Kanäle, dann Lunch" | `plan.py order kopenhagen tag1 01,02,04,03,05,06,07` |
+| „Was ist heute geplant?" | `plan.py show kopenhagen tag1` |
+
+Immer zuerst `show` ausführen – ohne die UIDs lässt sich kein Auftrag zuordnen.
+Die Beschreibungen in `places` sagen, welche Orte wetterabhängig sind: bei UID 05
+steht der gesperrte Außenaufstieg, bei UID 11, 17 und 24 die verlässlichen
+Innenräume. Daraus ergibt sich, was bei Regen getauscht wird.
+
+### Regeln für den Notfall
+
+- **Nur `days[].stops` anfassen.** Beschreibungen, Bilder und UIDs bleiben, wie
+  sie sind – es geht ausschließlich um Reihenfolge und Uhrzeit.
+- **Nichts löschen.** Ein Stop, der heute nicht passt, wird verschoben, nicht
+  entfernt.
+- **Nach dem Push kurz prüfen**, dass die Action grün ist. Sie ist die einzige
+  Rückmeldung, ob die Datei stimmig blieb.
+
+> **Einmal vor der Reise testen.** Der Weg funktioniert nur mit Netz und nur,
+> wenn die Cowork-Sitzung Schreibrechte auf das Repository hat. Das sollte man
+> einmal vom Handy aus durchgespielt haben, bevor man es im Regen braucht.
+
+---
+
+## 5. Weitere typische Aufträge
 
 ### „Ändere den Wetterhinweis eines Tages“
 
@@ -237,8 +276,8 @@ und werden nicht in der Datei gepflegt.
 5. Prüfen und Version anheben:
 
 ```bash
-python tools/validate_trips.py
-python tools/plan.py bump
+python3 tools/validate_trips.py
+python3 tools/plan.py bump
 ```
 
 ### Ort entfernen
@@ -256,11 +295,11 @@ frei.
    Bedeutung – die Startseite sortiert selbst (siehe unten). Titel, Datum und
    Untertitel **nicht** wiederholen, die liest die Startseite aus der Reisedatei.
 4. Die Reise in `SHELL` in `docs/sw.js` aufnehmen, damit sie offline verfügbar ist.
-5. `python tools/validate_trips.py` und `python tools/plan.py bump`.
+5. `python3 tools/validate_trips.py` und `python3 tools/plan.py bump`.
 
 ---
 
-## 5. Regeln, die nicht gebrochen werden
+## 6. Regeln, die nicht gebrochen werden
 
 1. **UIDs sind unveränderlich** und werden nach dem Löschen nicht wiederverwendet.
 2. **Beschreibungen gehören nach `places`.** In `days[].stops` stehen
@@ -273,18 +312,19 @@ frei.
    statt Zahlen, die richtig aussehen, aber geraten sind.
 5. **Keine externen Bild-URLs.** Bilder liegen in `docs/photos/web/` in 720 und
    1200 Pixel Breite. Hotlinks brechen und funktionieren offline nicht.
-6. **Nach jeder Änderung `bump`.** Sonst sehen Besucher die alte Fassung.
+6. **`bump` nach Änderungen an CSS, JavaScript oder HTML**, sonst sehen Besucher
+   die alte Fassung. Für reine Planänderungen ist es nicht nötig.
 7. **Kein Build-Schritt.** Es gibt bewusst kein npm, kein Bundler, kein
    Framework. Wer eine Abhängigkeit einführen will, braucht einen guten Grund.
 
 ---
 
-## 6. Prüfen, ansehen, veröffentlichen
+## 7. Prüfen, ansehen, veröffentlichen
 
 ### Prüfen
 
 ```bash
-python tools/validate_trips.py
+python3 tools/validate_trips.py
 ```
 
 Geprüft wird:
@@ -328,7 +368,7 @@ Die Action prüft, deployt und die Seite ist nach wenigen Minuten aktuell.
 
 ---
 
-## 7. Reihenfolge auf der Startseite
+## 8. Reihenfolge auf der Startseite
 
 Die Kacheln werden **berechnet** sortiert, nicht gepflegt. Grundlage sind die
 `isoDate`-Angaben der Tagesabschnitte: der erste ist der Reisebeginn, der letzte
@@ -353,7 +393,7 @@ die Reihenfolge in `index.json` wird ignoriert.
 
 ---
 
-## 8. Was die Seite außerdem kann
+## 9. Was die Seite außerdem kann
 
 - **Deep-Links.** `#tag2` klappt einen Tag auf, `#tag2-stop-11` zusätzlich den
   Stop und scrollt hin. Diese Links sind stabil und eignen sich für

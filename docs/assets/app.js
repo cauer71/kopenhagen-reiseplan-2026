@@ -252,7 +252,10 @@ function joinStops(days, places) {
 }
 
 async function init() {
-  const response = await fetch(tripSource);
+  // no-cache erzwingt eine Rückfrage per ETag statt zehn Minuten blindem Cache.
+  // Damit wirkt eine Planänderung sofort, ohne dass die Cache-Version steigen muss.
+  // Ohne Netz scheitert der Abruf und der Service Worker liefert die letzte Fassung.
+  const response = await fetch(tripSource, { cache: "no-cache" });
   if (!response.ok) throw new Error(`Reisedaten nicht erreichbar (${response.status})`);
   const data = await response.json();
   const { trip, places = {} } = data;
