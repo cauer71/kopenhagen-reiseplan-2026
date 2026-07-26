@@ -1,14 +1,14 @@
 {
   "trip": {
     "destination": "Rom",
-    "title": "Rom in zwei Tagen",
+    "title": "Rom in drei Tagen",
     "subtitle": "Antike, Barock und zeitgenössische Architektur – als flexibler Testaufenthalt.",
-    "dates": "05.–06. September 2026",
+    "dates": "05.–07. September 2026",
     "travellers": "Christian & Julia",
     "heroImage": "colosseo",
     "introLabel": "Testaufenthalt",
     "introTitle": "Rom funktioniert am besten in Schichten.",
-    "introText": "Der Beispieldatensatz zeigt das wiederverwendbare Reise-Template mit zwei Tagesabschnitten, stabilen Kalender-UIDs, Kartenlinks und optionalen Ticketlinks. Bei einer Wetteränderung wird ein Stop einfach in einen anderen Tagesabschnitt verschoben – UID und Bildzuordnung bleiben erhalten.",
+    "introText": "Der Beispieldatensatz zeigt das wiederverwendbare Reise-Template mit drei Tagesabschnitten, stabilen Kalender-UIDs, Kartenlinks und optionalen Ticketlinks. Der Plan verbindet die wichtigsten Schichten Roms mit einem zusätzlichen Architektur- und Museumstag. Bei einer Wetteränderung wird ein Stop einfach in einen anderen Tagesabschnitt verschoben – UID und Bildzuordnung bleiben erhalten.",
     "theme": "coral",
     "weather": {
       "enabled": true,
@@ -16,7 +16,7 @@
       "longitude": 12.4964,
       "timezone": "Europe/Rome",
       "startDate": "2026-09-05",
-      "endDate": "2026-09-06",
+      "endDate": "2026-09-07",
       "notes": [
         {
           "date": "2026-09-05",
@@ -27,6 +27,11 @@
           "date": "2026-09-06",
           "day": "So",
           "action": "MAXXI als flexibler Indoor-Block, falls das Wetter kippt."
+        },
+        {
+          "date": "2026-09-07",
+          "day": "Mo",
+          "action": "Kapitolinische Museen und Trajansmärkte sind montagstaugliche Indoor-Blöcke; den EUR-Spaziergang flexibel nach dem Wetter legen."
         }
       ]
     }
@@ -43,12 +48,30 @@
       "weather": "Wettercheck: Kolosseum früh besuchen, die offenen Plätze später legen.",
       "note": "Ein dichter, aber gut lesbarer Einstieg: erst das antike Rom, dann Pantheon und Campo de’ Fiori, zum Schluss ein entspannter vegetarischer Abend.",
       "stops": [
-        { "uid": "01", "time": "09:00" },
-        { "uid": "02", "time": "11:00" },
-        { "uid": "03", "time": "13:15" },
-        { "uid": "04", "time": "15:00" },
-        { "uid": "05", "time": "16:00" },
-        { "uid": "06", "time": "19:30" }
+        {
+          "uid": "01",
+          "time": "09:00"
+        },
+        {
+          "uid": "02",
+          "time": "11:00"
+        },
+        {
+          "uid": "03",
+          "time": "13:15"
+        },
+        {
+          "uid": "04",
+          "time": "15:00"
+        },
+        {
+          "uid": "05",
+          "time": "16:00"
+        },
+        {
+          "uid": "06",
+          "time": "19:30"
+        }
       ]
     },
     {
@@ -62,16 +85,193 @@
       "weather": "Wettercheck: Vatikan am Morgen, MAXXI als wetterfester Nachmittagsblock.",
       "note": "Der zweite Tag verbindet die große sakrale Architektur des Vatikans mit Zaha Hadids MAXXI und einem lockeren Abend im Viertel Flaminio.",
       "stops": [
-        { "uid": "07", "time": "08:30" },
-        { "uid": "08", "time": "12:00" },
-        { "uid": "09", "time": "13:30" },
-        { "uid": "10", "time": "15:00" },
-        { "uid": "11", "time": "17:30" },
-        { "uid": "12", "time": "19:00" }
+        {
+          "uid": "07",
+          "time": "08:30"
+        },
+        {
+          "uid": "08",
+          "time": "12:00"
+        },
+        {
+          "uid": "09",
+          "time": "13:30"
+        },
+        {
+          "uid": "10",
+          "time": "15:00"
+        },
+        {
+          "uid": "11",
+          "time": "17:30"
+        },
+        {
+          "uid": "12",
+          "time": "19:00"
+        }
+      ]
+    },
+    {
+      "id": "tag3",
+      "label": "Tag 3",
+      "date": "Mo 07.09.",
+      "isoDate": "2026-09-07",
+      "title": "Kapitolinische Museen, Trajansmärkte und EUR",
+      "tone": "gold",
+      "heroImage": "pantheon",
+      "weather": "Wettercheck: Die beiden Museen sichern den Tag ab; den Außenstopp im EUR bei trockenem Wetter nutzen.",
+      "note": "Der dritte Tag ergänzt die großen Rom-Klassiker um Stadtmodell, Museumsarchitektur und das rationalistische 20. Jahrhundert – mit einer veganen Mittagspause und Craft Beer am Abend.",
+      "stops": [
+        {
+          "uid": "13",
+          "time": "09:30"
+        },
+        {
+          "uid": "14",
+          "time": "12:15"
+        },
+        {
+          "uid": "15",
+          "time": "14:00"
+        },
+        {
+          "uid": "16",
+          "time": "17:15"
+        },
+        {
+          "uid": "17",
+          "time": "19:30"
+        }
       ]
     }
   ],
   "places": {
+    "10": {
+      "title": "MAXXI",
+      "detail": "Zaha Hadids fließende Architektur und zeitgenössische Kunst als Kontrast zum historischen Rom.",
+      "description": [
+        "Das MAXXI – Museo nazionale delle arti del XXI secolo – wurde 2010 eröffnet und ist Zaha Hadids wichtigster Bau in Italien. Auf dem Gelände einer ehemaligen Kaserne im Viertel Flaminio hat sie keine Kiste mit Räumen entworfen, sondern ein Geflecht aus übereinandergeschobenen Betonbändern: Wände krümmen sich, Treppen schweben schwarz durch das Volumen, Oberlichter ziehen das Tageslicht in Streifen nach innen.",
+        "Der Bau ist damit selbst das Hauptexponat – die Sammlung zu Kunst und Architektur des 21. Jahrhunderts und die wechselnden Ausstellungen kommen hinzu. Manche Kritik trifft zu: Die fließenden Räume sind für Kunst nicht immer einfach. Als Erlebnis ist es dennoch eindrücklich.",
+        "Für diese Reise ist das die gesetzte Gegenposition: Nach zwei Tagen Antike, Barock und Sakralarchitektur endet das Programm bewusst im 21. Jahrhundert – und weil alles innen liegt, ist es zugleich der wetterfeste Block, den man bei umschlagendem Wetter nach vorn ziehen kann."
+      ],
+      "image": "forum",
+      "place": "MAXXI, Via Guido Reni 4A, Rome",
+      "weather": "innen",
+      "address": "Via Guido Reni 4A",
+      "duration": "1,5–2 Std.",
+      "tip": "Montags meist geschlossen; das Foyer und die Freitreppe sind auch ohne Ticket zugänglich.",
+      "ticketUrl": "https://www.maxxi.art/en/orari-e-biglietteria/"
+    },
+    "11": {
+      "title": "Ponte della Musica und Flaminio",
+      "detail": "Moderner Brückenraum, offene Uferblicke und ein ruhiger Übergang zum Abend.",
+      "description": [
+        "Die Ponte della Musica Armando Trovajoli wurde 2011 eröffnet und ist eine der wenigen dezidiert modernen Brücken Roms: ein schlanker Stahlbogen, ausschließlich für Fußgänger und Radfahrer, der Flaminio mit dem Foro Italico auf der anderen Tiberseite verbindet. Weil kein Verkehr darüber läuft, ist es vor allem ein Aufenthaltsort.",
+        "Von der Brückenmitte öffnet sich der Blick beide Uferrichtungen entlang – Platanen, Uferwege, im Hintergrund die Hügel von Monte Mario. Ringsum liegt das Flaminio-Viertel mit Renzo Pianos Auditorium Parco della Musica und dem MAXXI, ein kleines Cluster zeitgenössischer Architektur, wie es das im historischen Zentrum nicht gibt.",
+        "Als Übergang vom Museum zum Abend funktioniert der Stop gut: ein ruhiger Spaziergang im weicheren Licht, ohne Eintritt, ohne Warteschlange."
+      ],
+      "image": "cucina",
+      "place": "Ponte della Musica, Rome",
+      "weather": "aussen",
+      "duration": "30–45 Min.",
+      "tip": "Kostenlos und jederzeit zugänglich – schönstes Licht kurz vor Sonnenuntergang."
+    },
+    "12": {
+      "title": "Aperitivo – Open Baladin",
+      "detail": "Große Craft-Beer-Auswahl und vegetarische Snacks zum Abschluss.",
+      "description": [
+        "Open Baladin in der Via degli Specchi, wenige Schritte vom Campo de’ Fiori, gehört zur Baladin-Brauerei aus dem Piemont und war eine der ersten Adressen, die italienisches Craft Beer in Rom sichtbar gemacht haben. Auf den Hähnen stehen Dutzende Sorten, im Kühlregal ein Vielfaches davon – überwiegend italienische Kleinbrauereien.",
+        "Dazu kommt eine Küche, die auf Burger und vor allem auf handgeschnittene Pommes spezialisiert ist, mit vegetarischen Varianten und Snacks zum Teilen. Als Aperitivo-Format heißt das: kleine Portionen, viel probieren, kein festes Menü.",
+        "Damit schließt der Testaufenthalt dort, wo er am ersten Abend hingeführt hat – im Zentrum zwischen den Barockplätzen, nur eine Ebene entspannter."
+      ],
+      "image": "cucina",
+      "place": "Open Baladin Roma, Via degli Specchi 6, Rome",
+      "weather": "innen",
+      "address": "Via degli Specchi 6",
+      "duration": "1,5–2 Std.",
+      "tip": "Am frühen Abend noch Platz; nach 20 Uhr wird es rund um Campo de’ Fiori sehr voll.",
+      "ticketUrl": "https://www.openbaladinroma.it/"
+    },
+    "13": {
+      "title": "Musei Capitolini",
+      "detail": "Michelangelos Campidoglio, römische Sammlung und ein Museum als architektonisches Ensemble.",
+      "description": [
+        "Der Campidoglio ist kein zufällig gewachsener Platz, sondern Michelangelos bewusst komponierte Bühne auf dem Kapitolshügel. Die leicht trapezförmige Piazza, das sternförmige Pflaster und die Cordonata verbinden Stadtplanung, Skulptur und Aufstieg zu einem einzigen Raum.",
+        "In den beiden Palazzi liegen die Musei Capitolini mit der Kapitolinischen Wölfin, dem Reiterstandbild Marc Aurels und einer der wichtigsten Sammlungen zur antiken Stadtgeschichte. Für Montag ist der Besuch besonders praktisch: Das Museum ist laut offizieller Angabe täglich von 9.30 bis 19.30 Uhr geöffnet, letzter Einlass eine Stunde vorher.",
+        "Der Stop ist der wetterfeste Auftakt des Tages und setzt einen architektonischen Gegenpol zur Antike unter freiem Himmel: Hier wird nicht nur eine Sammlung besichtigt, sondern ein ganzer Platz als Werk erlebt."
+      ],
+      "image": "pantheon",
+      "place": "Musei Capitolini, Piazza del Campidoglio 1, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Piazza del Campidoglio 1",
+      "duration": "2–2,5 Std.",
+      "tip": "Ticket vorab prüfen; letzter Einlass ist laut offizieller Museumsinformation eine Stunde vor Schließung.",
+      "ticketUrl": "https://www.museicapitolini.org/en/"
+    },
+    "14": {
+      "title": "Lunch – Origano Campo de’ Fiori",
+      "detail": "Veganer Lunch mit Pizza, Pinsa und römisch-mediterraner Küche im historischen Zentrum.",
+      "description": [
+        "Origano liegt in der Nähe von Campo de’ Fiori und ist deshalb ein sinnvoller kurzer Wechsel vom Kapitol in das dichteste historische Zentrum. Das Restaurant beschreibt sich selbst als vegan und verbindet römisch-mediterrane Gerichte mit Pizza und Pinsa aus dem Holzofen.",
+        "Für Julia ist der Stop unkompliziert, weil die Auswahl nicht nur aus einzelnen vegetarischen Beilagen besteht, sondern auf eine eigene vegane Küche ausgelegt ist. Die offizielle Website nennt durchgehende Öffnung täglich von 10.00 bis 22.45 Uhr – damit bleibt der Lunch zeitlich flexibel.",
+        "Nach dem Museumsblock ist das eine bewusste Pause ohne zusätzliche Besichtigungslogik: essen, Schatten suchen und anschließend zu den Trajansmärkten weitergehen."
+      ],
+      "image": "cucina",
+      "place": "Origano Campo de’ Fiori, Largo dei Chiavari 83/84, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Largo dei Chiavari 83/84",
+      "duration": "1 Std.",
+      "tip": "Für zwei Personen möglichst vorab reservieren; vegane Wünsche bei der Bestellung nochmals nennen.",
+      "ticketUrl": "https://origanocampodefiori.com/"
+    },
+    "15": {
+      "title": "Mercati di Traiano – Museo dei Fori Imperiali",
+      "detail": "Terrassen, Ziegelgewölbe und ein ungewöhnlicher Blick auf die kaiserlichen Foren.",
+      "description": [
+        "Die Trajansmärkte sind kein einzelner Marktbau im modernen Sinn, sondern ein mehrgeschossiger Komplex aus Tabernae, Verwaltungsräumen und Stützmauern am Quirinalshang. Die halbkreisförmige Anlage zeigt besonders deutlich, wie römische Architektur mit schwieriger Topografie und großmaßstäblicher Stadtplanung umging.",
+        "Im Museum der Kaiserforen werden die archäologischen Fragmente nicht isoliert präsentiert, sondern in die räumliche Struktur des Bauwerks zurückgesetzt. Wege über Terrassen und durch Ziegelräume öffnen immer neue Blickbeziehungen zum Forum und zur Via dei Fori Imperiali.",
+        "Auch dieser Stop ist montagstauglich: Die offizielle Museumsinformation nennt täglich 9.30 bis 19.30 Uhr, letzter Einlass eine Stunde vor Schließung. Der Besuch bleibt damit ein robuster Indoor-/Outdoor-Mix für wechselhaftes Wetter."
+      ],
+      "image": "forum",
+      "place": "Mercati di Traiano, Via IV Novembre 94, 00187 Roma RM, Italien",
+      "weather": "beides",
+      "address": "Via IV Novembre 94",
+      "duration": "1,5–2 Std.",
+      "tip": "Ticket und eventuelle Sonderausstellungen vorab prüfen; letzter Einlass eine Stunde vor Schließung.",
+      "ticketUrl": "https://www.museiincomuneroma.it/it/orari-indirizzi/mercati-di-traiano-museo-dei-fori-imperiali"
+    },
+    "16": {
+      "title": "Palazzo della Civiltà Italiana im EUR",
+      "detail": "Der „Quadratische Kolosseum“ als Ikone der römischen Rationalismus- und EUR-Architektur.",
+      "description": [
+        "Der Palazzo della Civiltà Italiana ist eines der klarsten Bilder des römischen 20. Jahrhunderts: vier gleichartige Fassaden, 216 regelmäßig gesetzte Rundbogenöffnungen und Travertin als monumentale Oberfläche. Der Bau entstand im Zusammenhang mit der geplanten Weltausstellung von 1942 und wurde nach dem Krieg fertiggestellt.",
+        "Die Architektur zitiert das Kolosseum, ist aber zugleich streng rationalistisch und fast metaphysisch reduziert. Unter den Bögen stehen Skulpturen zu Künsten und Tätigkeiten; die Proportionen funktionieren besonders gut aus der Distanz auf dem Vorplatz und im Verhältnis zum offenen EUR-Stadtgrundriss.",
+        "Das Gebäude beherbergt heute die Fendi-Zentrale und ist kein normales Museum. Der Besuch ist daher als Außenbesichtigung mit Fotopause geplant – ohne Eintritt und ohne die Erwartung eines öffentlich zugänglichen Innenrundgangs."
+      ],
+      "image": "colosseo",
+      "place": "Palazzo della Civiltà Italiana, Quadrato della Concordia 3, 00144 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Quadrato della Concordia 3",
+      "duration": "45–60 Min.",
+      "tip": "Nur Außenbesichtigung einplanen; der Bau beherbergt heute Büros der Fendi-Zentrale.",
+      "ticketUrl": "https://www.turismoroma.it/en/places/palace-italian-civilization"
+    },
+    "17": {
+      "title": "Dinner – Bir & Fud",
+      "detail": "Craft Beer, Sauerteigpizza und vegetarisch geeignete Fritti zum Abschluss.",
+      "description": [
+        "Bir & Fud in Trastevere verbindet eine große Auswahl italienischer Craft Beers mit Pizza aus lang geführtem Sauerteig und frittierten Snacks. Für Christian ist das der passende Bierabschluss; Julia kann aus vegetarischen Pizzen und fleischlosen Beilagen wählen.",
+        "Die Adresse liegt in der Via Benedetta, mitten im abendlichen Trastevere. Nach dem Ausflug in den EUR-Rationalismus kippt der Tag damit bewusst wieder in eine kleinteilige, lebendige römische Gassenatmosphäre.",
+        "Für den Montagabend sollte vorab geprüft werden, ob die aktuellen Öffnungszeiten unverändert sind, und bei zwei Personen ist eine Reservierung sinnvoll. Die offizielle Website ist als Restaurant- und Kontaktquelle hinterlegt."
+      ],
+      "image": "cucina",
+      "place": "Bir & Fud, Via Benedetta 23, 00153 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Benedetta 23",
+      "duration": "1,5–2 Std.",
+      "tip": "Öffnungszeiten für Montag und vegetarische Pizzaauswahl vorab prüfen; Tischreservierung empfohlen.",
+      "ticketUrl": "https://birandfud.it/"
+    },
     "01": {
       "title": "Kolosseum",
       "detail": "Das ikonische Amphitheater als erster großer Fixpunkt; Zeitfenster früh buchen.",
@@ -213,52 +413,6 @@
       "address": "Via Giovanni Bettolo 54",
       "duration": "45–60 Min.",
       "tip": "Selbstbedienungsformat, keine Reservierung nötig – gut für einen schnellen Zwischenstop."
-    },
-    "10": {
-      "title": "MAXXI",
-      "detail": "Zaha Hadids fließende Architektur und zeitgenössische Kunst als Kontrast zum historischen Rom.",
-      "description": [
-        "Das MAXXI – Museo nazionale delle arti del XXI secolo – wurde 2010 eröffnet und ist Zaha Hadids wichtigster Bau in Italien. Auf dem Gelände einer ehemaligen Kaserne im Viertel Flaminio hat sie keine Kiste mit Räumen entworfen, sondern ein Geflecht aus übereinandergeschobenen Betonbändern: Wände krümmen sich, Treppen schweben schwarz durch das Volumen, Oberlichter ziehen das Tageslicht in Streifen nach innen.",
-        "Der Bau ist damit selbst das Hauptexponat – die Sammlung zu Kunst und Architektur des 21. Jahrhunderts und die wechselnden Ausstellungen kommen hinzu. Manche Kritik trifft zu: Die fließenden Räume sind für Kunst nicht immer einfach. Als Erlebnis ist es dennoch eindrücklich.",
-        "Für diese Reise ist das die gesetzte Gegenposition: Nach zwei Tagen Antike, Barock und Sakralarchitektur endet das Programm bewusst im 21. Jahrhundert – und weil alles innen liegt, ist es zugleich der wetterfeste Block, den man bei umschlagendem Wetter nach vorn ziehen kann."
-      ],
-      "image": "forum",
-      "place": "MAXXI, Via Guido Reni 4A, Rome",
-      "weather": "innen",
-      "address": "Via Guido Reni 4A",
-      "duration": "1,5–2 Std.",
-      "tip": "Montags meist geschlossen; das Foyer und die Freitreppe sind auch ohne Ticket zugänglich.",
-      "ticketUrl": "https://www.maxxi.art/en/orari-e-biglietteria/"
-    },
-    "11": {
-      "title": "Ponte della Musica und Flaminio",
-      "detail": "Moderner Brückenraum, offene Uferblicke und ein ruhiger Übergang zum Abend.",
-      "description": [
-        "Die Ponte della Musica Armando Trovajoli wurde 2011 eröffnet und ist eine der wenigen dezidiert modernen Brücken Roms: ein schlanker Stahlbogen, ausschließlich für Fußgänger und Radfahrer, der Flaminio mit dem Foro Italico auf der anderen Tiberseite verbindet. Weil kein Verkehr darüber läuft, ist es vor allem ein Aufenthaltsort.",
-        "Von der Brückenmitte öffnet sich der Blick beide Uferrichtungen entlang – Platanen, Uferwege, im Hintergrund die Hügel von Monte Mario. Ringsum liegt das Flaminio-Viertel mit Renzo Pianos Auditorium Parco della Musica und dem MAXXI, ein kleines Cluster zeitgenössischer Architektur, wie es das im historischen Zentrum nicht gibt.",
-        "Als Übergang vom Museum zum Abend funktioniert der Stop gut: ein ruhiger Spaziergang im weicheren Licht, ohne Eintritt, ohne Warteschlange."
-      ],
-      "image": "cucina",
-      "place": "Ponte della Musica, Rome",
-      "weather": "aussen",
-      "duration": "30–45 Min.",
-      "tip": "Kostenlos und jederzeit zugänglich – schönstes Licht kurz vor Sonnenuntergang."
-    },
-    "12": {
-      "title": "Aperitivo – Open Baladin",
-      "detail": "Große Craft-Beer-Auswahl und vegetarische Snacks zum Abschluss.",
-      "description": [
-        "Open Baladin in der Via degli Specchi, wenige Schritte vom Campo de’ Fiori, gehört zur Baladin-Brauerei aus dem Piemont und war eine der ersten Adressen, die italienisches Craft Beer in Rom sichtbar gemacht haben. Auf den Hähnen stehen Dutzende Sorten, im Kühlregal ein Vielfaches davon – überwiegend italienische Kleinbrauereien.",
-        "Dazu kommt eine Küche, die auf Burger und vor allem auf handgeschnittene Pommes spezialisiert ist, mit vegetarischen Varianten und Snacks zum Teilen. Als Aperitivo-Format heißt das: kleine Portionen, viel probieren, kein festes Menü.",
-        "Damit schließt der Testaufenthalt dort, wo er am ersten Abend hingeführt hat – im Zentrum zwischen den Barockplätzen, nur eine Ebene entspannter."
-      ],
-      "image": "cucina",
-      "place": "Open Baladin Roma, Via degli Specchi 6, Rome",
-      "weather": "innen",
-      "address": "Via degli Specchi 6",
-      "duration": "1,5–2 Std.",
-      "tip": "Am frühen Abend noch Platz; nach 20 Uhr wird es rund um Campo de’ Fiori sehr voll.",
-      "ticketUrl": "https://www.openbaladinroma.it/"
     }
   }
 }
