@@ -1,7 +1,7 @@
 @import url("../styles.css");
 
 .trip-index {
-  width: min(76rem, calc(100% - 2rem));
+  width: min(76rem, calc(100% - 2 * var(--gutter)));
   margin: 0 auto;
   padding: 5rem 0 7rem;
 }
@@ -61,7 +61,7 @@
 }
 
 .trip-tile > div {
-  padding: 1.35rem;
+  padding: var(--day-pad);
 }
 
 .trip-tile .eyebrow {
