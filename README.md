@@ -27,6 +27,18 @@ This starter does not use `wrangler.jsonc`.
 - `examples/d1/` contains an optional D1 example surface
 - `drizzle.config.ts` supports local migration generation when needed
 
+## Reiseplan-Template
+
+The GitHub Pages version is rendered from `docs/data/trip.json`. The visual
+template in `docs/index.html`, `docs/app.js`, and `docs/styles.css` is reusable
+for every trip. Replace the data file and the images in `docs/photos/web/`;
+the layout does not need to change.
+
+Every stop has a stable two-digit `uid`. For a weather-related change, move a
+stop to another day's `stops` array without changing its `uid`, image, or place.
+This keeps the connection to the matching Google Calendar entry and its future
+image card stable. See `docs/data/README.md` for the editing workflow.
+
 ## Workspace Auth Headers
 
 OpenAI workspace sites can read the current user's email from
