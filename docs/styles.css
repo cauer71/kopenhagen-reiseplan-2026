@@ -93,6 +93,21 @@ main {
   background: rgba(7, 27, 40, 0.76);
   backdrop-filter: blur(16px);
   box-shadow: 0 0.8rem 2rem rgba(7, 27, 40, 0.28);
+  transition: transform 240ms ease, opacity 240ms ease;
+}
+
+/* Beim Herunterscrollen weggeschoben (siehe bindNavAutoHide in app.js).
+   translateX(-50%) muss erhalten bleiben, es zentriert die Leiste. */
+.topnav[data-hidden="true"] {
+  transform: translateX(-50%) translateY(calc(-100% - 1.4rem));
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topnav {
+    transition: none;
+  }
 }
 
 .topnav a {
