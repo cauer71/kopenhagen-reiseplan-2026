@@ -14,8 +14,8 @@ docs/
 
 Beispiele:
 
-- `/kopenhagen-reiseplan-2026/kopenhagen/`
-- `/kopenhagen-reiseplan-2026/rom/`
+- `/kopenhagen-reiseplan-2026/trips/kopenhagen/`
+- `/kopenhagen-reiseplan-2026/trips/rom/`
 
 Für eine neue Reise kopierst du eine vorhandene JSON-Datei nach `docs/data/trips/<slug>.json` und eine vorhandene Unterseite nach `docs/trips/<slug>/index.html`. In der HTML-Datei wird nur der Pfad zur JSON-Datei geändert. Danach kommt die Reise als Kachel in `docs/assets/landing.js` hinzu. Darstellung und Styles bleiben unverändert.
 
