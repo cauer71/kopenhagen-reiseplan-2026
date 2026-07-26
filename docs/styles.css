@@ -274,11 +274,18 @@ p {
   font-weight: 900;
 }
 
-.uid {
+/* Die UID ist die Klammer zum Kalendereintrag, aber keine Reiseinformation.
+   Sie steht deshalb ganz unten in der geöffneten Karte, nicht in der Übersicht. */
+/* .stop-details .uid statt .uid: sonst gewinnt die allgemeine `.stop-details p`-Regel. */
+.stop-details .uid {
+  margin-top: 1rem;
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--line);
   color: var(--muted);
   font-size: 0.7rem;
   font-weight: 900;
   letter-spacing: 0.08em;
+  text-align: right;
   text-transform: uppercase;
 }
 

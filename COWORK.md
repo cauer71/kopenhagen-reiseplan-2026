@@ -110,6 +110,10 @@ fehlende Felder werden übersprungen.
 Jeder Ort hat eine stabile zweistellige UID. Sie verbindet die Website mit dem
 Google-Kalender­eintrag (`[REISE-…] [UID:05]`) und ist der Schlüssel in `places`.
 
+Auf der Seite steht sie unauffällig am **Fuß der geöffneten Stop-Karte**. In der
+zugeklappten Übersicht erscheint sie bewusst nicht: dort zählt die Reise­information,
+nicht der technische Schlüssel.
+
 > **Eine UID wird nie geändert und nie neu vergeben.** Ein Stop wird verschoben,
 > umsortiert, zeitlich verlegt oder entfernt – seine UID bleibt dieselbe. Eine
 > gelöschte UID wird nicht wiederverwendet; neue Orte bekommen die nächste freie
