@@ -166,6 +166,31 @@ function openFromHash() {
   target.scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
+/* ------------------------------------------------------ Navigation */
+
+/**
+ * Blendet die Navigationsleiste beim Herunterscrollen aus und beim Hochscrollen
+ * wieder ein. Sie liegt fest über dem Inhalt und ist auf schmalen Fenstern fast
+ * fensterbreit – ohne das verdeckt sie beim Lesen dauerhaft eine Textzeile.
+ */
+function bindNavAutoHide() {
+  const nav = document.querySelector(".topnav");
+  if (!nav) return;
+
+  const OBEN_FREI = 140; // im Titelbereich bleibt sie immer sichtbar
+  const SCHWELLE = 6;    // kleine Bewegungen ignorieren, sonst zappelt sie
+  let letzte = window.scrollY;
+
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY;
+    if (Math.abs(y - letzte) < SCHWELLE) return;
+    const runter = y > letzte;
+    letzte = y;
+    // Mit Tastaturfokus in der Leiste nie ausblenden.
+    nav.dataset.hidden = String(runter && y > OBEN_FREI && !nav.contains(document.activeElement));
+  }, { passive: true });
+}
+
 /* ---------------------------------------------------- Live-Prognose */
 
 async function loadWeather(trip) {
@@ -274,6 +299,7 @@ async function init() {
 
   readState();
   bindToggles();
+  bindNavAutoHide();
   restoreState();
   openFromHash();
   window.addEventListener("hashchange", openFromHash);
