@@ -45,7 +45,25 @@ function renderStop(stop, previous) {
 function renderDay(day) {
   let previous = "Unterkunft / Basis";
   const stops = day.stops.map((stop) => { const html = renderStop(stop, previous); previous = stop.title; return html; }).join("");
-  return `<article class="day-card ${esc(day.tone)}" id="${esc(day.id)}"><img class="day-hero" src="${image(day.heroImage)}" alt="${esc(day.title)}"><div class="day-body"><p class="day-label">${esc(day.label)} · ${esc(day.date)}</p><h3>${esc(day.title)}</h3><p class="weather-pill">${esc(day.weather ?? "")}</p><p>${esc(day.note ?? "")}</p><div class="stops">${stops}</div></div></article>`;
+  const detailsId = `${day.id}-details`;
+  return `<article class="day-card ${esc(day.tone)}" id="${esc(day.id)}">
+    <button class="day-toggle" type="button" aria-expanded="false" aria-controls="${detailsId}">
+      <img class="day-hero" src="${image(day.heroImage)}" alt="${esc(day.title)}">
+      <span class="day-body"><span class="day-label">${esc(day.label)} · ${esc(day.date)}</span><span class="day-heading"><span><span class="day-title" role="heading" aria-level="3">${esc(day.title)}</span><span class="weather-pill">${esc(day.weather ?? "")}</span></span><span class="day-chevron" aria-hidden="true">⌄</span></span><span class="day-note">${esc(day.note ?? "")}</span><span class="day-hint">Attraktionen und Beschreibungen anzeigen</span></span>
+    </button>
+    <div class="day-details" id="${detailsId}" hidden><div class="stops">${stops}</div></div>
+  </article>`;
+}
+
+function bindDayToggles() {
+  document.querySelectorAll(".day-toggle").forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const details = document.getElementById(toggle.getAttribute("aria-controls"));
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      details.hidden = expanded;
+    });
+  });
 }
 
 async function loadWeather(trip) {
@@ -70,6 +88,7 @@ async function init() {
   const { trip, days } = data;
   document.title = `${trip.title} · ${trip.destination}`;
   root.innerHTML = `<section class="hero" id="top"><img src="${image(trip.heroImage)}" alt="${esc(trip.destination)}" class="hero-bg"><div class="hero-shade"></div><nav class="topnav" aria-label="Reiseabschnitte"><a href="${siteRoot}">Alle Reisen</a><a href="#tage">Tage</a>${trip.weather?.enabled ? '<a href="#wetter">Wetter</a>' : ""}</nav><div class="hero-copy"><p class="eyebrow">${esc(trip.dates)} · ${esc(trip.travellers)}</p><h1>${esc(trip.title)}</h1><p>${esc(trip.subtitle)}</p><div class="hero-stats"><span><b>${days.length}</b>Tage</span><span><b>${days.reduce((sum, day) => sum + day.stops.length, 0)}</b>Stops</span></div></div></section><section class="section intro"><p class="eyebrow">${esc(trip.introLabel ?? "Reise")}</p><h2>${esc(trip.introTitle ?? trip.destination)}</h2><p>${esc(trip.introText ?? "")}</p></section>${renderWeather(trip)}<section class="section day-section" id="tage"><div class="section-head"><p class="eyebrow">Tagespläne</p><h2>${days.length} Tage, mobil lesbar</h2></div><div class="days">${days.map(renderDay).join("")}</div></section>`;
+  bindDayToggles();
   loadWeather(trip);
 }
 
