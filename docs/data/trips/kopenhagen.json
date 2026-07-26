@@ -132,6 +132,8 @@
       ],
       "image": "aerial",
       "place": "Copenhagen Airport",
+      "weather": "beides",
+      "fixed": true,
       "duration": "Transfer in die Stadt ca. 20–25 Min.",
       "tip": "Metro M2 fährt oberhalb der Ankunftshalle ab; Richtung Vanløse ist die Stadtrichtung."
     },
@@ -144,6 +146,7 @@
       ],
       "image": "christianshavn",
       "place": "LuggageHero Copenhagen",
+      "weather": "beides",
       "duration": "Abgabe ca. 10 Min.",
       "tip": "Vorab in der App buchen – die Preise laufen pro Stunde mit einem Tagesmaximum."
     },
@@ -156,6 +159,7 @@
       ],
       "image": "christianshavn",
       "place": "Cafe Wilder Copenhagen",
+      "weather": "innen",
       "duration": "ca. 1 Std.",
       "tip": "Mittags ist es meist ohne Reservierung machbar, abends deutlich voller."
     },
@@ -168,6 +172,7 @@
       ],
       "image": "christianshavn",
       "place": "Christianshavn Canal Copenhagen",
+      "weather": "aussen",
       "duration": "45–75 Min.",
       "tip": "In Christiania keine Fotos machen und den Handelsbereich zügig passieren."
     },
@@ -181,6 +186,7 @@
       ],
       "image": "saviour",
       "place": "Church of Our Saviour Copenhagen",
+      "weather": "aussen",
       "duration": "45–60 Min. inkl. Aufstieg",
       "tip": "Zeitfenster online sichern; rund 400 Stufen, davon die letzten außen und ungeschützt."
     },
@@ -194,6 +200,7 @@
       ],
       "image": "goboat",
       "place": "GoBoat Islands Brygge Copenhagen",
+      "weather": "aussen",
       "duration": "1–2 Std. Mietzeit",
       "tip": "Kein Führerschein nötig; Verpflegung mitbringen, an Bord gibt es keinen Verkauf."
     },
@@ -206,6 +213,7 @@
       ],
       "image": "refshaleoen",
       "place": "Christianshavns Faergecafe Copenhagen",
+      "weather": "innen",
       "duration": "ca. 1,5 Std.",
       "tip": "Abends reservieren; der Heringsteller wird gern geteilt."
     },
@@ -219,6 +227,7 @@
       ],
       "image": "rosenborg",
       "place": "Rosenborg Castle Copenhagen",
+      "weather": "innen",
       "duration": "1,5–2 Std.",
       "tip": "Direkt nach Öffnung starten – die Schatzkammer ist der Engpass."
     },
@@ -231,6 +240,7 @@
       ],
       "image": "designfurniture",
       "place": "Selma Copenhagen",
+      "weather": "innen",
       "duration": "ca. 1 Std.",
       "tip": "Drei bis vier Stücke pro Person genügen; früh reservieren lohnt sich."
     },
@@ -244,6 +254,7 @@
       ],
       "image": "roundtower",
       "place": "Round Tower Copenhagen",
+      "weather": "innen",
       "duration": "45 Min.",
       "tip": "Barrierearm bis fast nach oben – nur das letzte Stück ist eine kurze Treppe."
     },
@@ -257,6 +268,7 @@
       ],
       "image": "designmuseum",
       "place": "Designmuseum Danmark Copenhagen",
+      "weather": "innen",
       "duration": "1,5–2 Std.",
       "tip": "Der Innenhof mit Café ist auch ohne Ticket eine Pause wert."
     },
@@ -270,6 +282,7 @@
       ],
       "image": "amalienborg",
       "place": "Frederiksstaden Copenhagen",
+      "weather": "aussen",
       "duration": "1–1,5 Std. als Spaziergang",
       "tip": "Wachablösung ist gegen Mittag – am späten Nachmittag ist es hier deutlich ruhiger."
     },
@@ -282,6 +295,7 @@
       ],
       "image": "cc",
       "place": "Folkehuset Absalon Copenhagen",
+      "weather": "innen",
       "duration": "ca. 1,5 Std.",
       "tip": "Früh dort sein, das Essen startet zu einer festen Uhrzeit und ist begrenzt."
     },
@@ -294,6 +308,7 @@
       ],
       "image": "refshaleoen",
       "place": "Fermentoren Copenhagen",
+      "weather": "innen",
       "duration": "1–1,5 Std.",
       "tip": "Kleine Gläser bestellen – die Biere haben oft deutlich mehr Alkohol als erwartet."
     },
@@ -307,6 +322,7 @@
       ],
       "image": "copenhill",
       "place": "CopenHill Copenhagen",
+      "weather": "aussen",
       "duration": "1–1,5 Std.",
       "tip": "Der Aufstieg zur Aussicht ist frei; feste Schuhe helfen, oben ist es windig."
     },
@@ -319,6 +335,7 @@
       ],
       "image": "refshaleoen",
       "place": "Lille Bakery Refshaleoen Copenhagen",
+      "weather": "innen",
       "duration": "45–60 Min.",
       "tip": "Beliebte Backwaren sind mittags oft aus; früher kommen lohnt sich."
     },
@@ -332,6 +349,7 @@
       ],
       "image": "cc",
       "place": "Copenhagen Contemporary",
+      "weather": "innen",
       "duration": "1,5–2 Std.",
       "tip": "Vorab prüfen, welche Ausstellung läuft – das Programm wechselt komplett."
     },
@@ -345,6 +363,7 @@
       ],
       "image": "refshaleoen",
       "place": "La Banchina Copenhagen",
+      "weather": "aussen",
       "duration": "1–1,5 Std.",
       "tip": "Badesachen und Handtuch mitnehmen; Sauna nur mit Voranmeldung."
     },
@@ -358,6 +377,7 @@
       ],
       "image": "reffen",
       "place": "Reffen Copenhagen Street Food",
+      "weather": "aussen",
       "duration": "45–60 Min.",
       "tip": "Nur ein Snack – das Abendessen wartet in Nørrebro."
     },
@@ -370,6 +390,7 @@
       ],
       "image": "norrebro",
       "place": "Poulette Pompette Copenhagen",
+      "weather": "innen",
       "duration": "1,5–2 Std.",
       "tip": "Beide sind sehr klein – reservieren oder früh dort sein."
     },
@@ -382,6 +403,8 @@
       ],
       "image": "christianshavn",
       "place": "LuggageHero Copenhagen",
+      "weather": "beides",
+      "fixed": true,
       "duration": "ca. 30 Min. inkl. Weg",
       "tip": "Öffnungszeiten der Annahmestelle gegen die geplante Abholzeit prüfen."
     },
@@ -395,6 +418,7 @@
       ],
       "image": "christiansborg",
       "place": "Christiansborg Tower Copenhagen",
+      "weather": "innen",
       "duration": "45 Min.",
       "tip": "Eintritt frei, aber Sicherheitskontrolle – und der Turm schließt an einzelnen Tagen für Staatsanlässe."
     },
@@ -407,6 +431,7 @@
       ],
       "image": "christiansborg",
       "place": "Admiralgade 26 Copenhagen",
+      "weather": "innen",
       "duration": "ca. 1 Std.",
       "tip": "Mittags meist unkompliziert – bei knapper Zeit vorher kurz anrufen."
     },
@@ -420,6 +445,7 @@
       ],
       "image": "cisternerne",
       "place": "Cisternerne Copenhagen",
+      "weather": "innen",
       "duration": "1–1,5 Std.",
       "tip": "Rund 10 °C und nasser Boden – Jacke und rutschfeste Schuhe mitnehmen."
     },
@@ -432,6 +458,7 @@
       ],
       "image": "norrebro",
       "place": "Vaernedamsvej Copenhagen",
+      "weather": "aussen",
       "duration": "45–60 Min.",
       "tip": "Guter Ort für Mitbringsel – Lakritz, Kaffee, Käse statt Souvenirshop."
     },
@@ -444,6 +471,8 @@
       ],
       "image": "aerial",
       "place": "Copenhagen Airport",
+      "weather": "beides",
+      "fixed": true,
       "duration": "Transfer ca. 20–30 Min.",
       "tip": "Am Flughafen mindestens zwei Stunden vor Abflug – im Sommer sind die Kontrollen langsam."
     },
@@ -456,6 +485,8 @@
       ],
       "image": "aerial",
       "place": "Copenhagen Airport",
+      "weather": "beides",
+      "fixed": true,
       "duration": "Abflug 20:20",
       "tip": "Gate erst kurz vor Abflug auf den Anzeigen prüfen; Wege sind lang."
     }

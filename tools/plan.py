@@ -5,17 +5,24 @@ Jeder schreibende Befehl prüft die Datei anschließend automatisch und schreibt
 nur, wenn sie stimmig bleibt. Die Reihenfolge im `stops`-Array ist immer die
 Anzeigereihenfolge und immer zeitlich aufsteigend.
 
-    python tools/plan.py show   <reise> [<tag>]
-    python tools/plan.py move   <reise> <uid> <tag> [--time HH:MM]
-    python tools/plan.py time   <reise> <uid> <HH:MM>
-    python tools/plan.py order  <reise> <tag> <uid,uid,...>
-    python tools/plan.py swap   <reise> <uidA> <uidB>
-    python tools/plan.py bump   [--version JJJJMMTT-N]
+    python3 tools/plan.py show   <reise> [<tag>]
+    python3 tools/plan.py wetter <reise> <tag>
+    python3 tools/plan.py move   <reise> <uid> <tag> [--time HH:MM]
+    python3 tools/plan.py time   <reise> <uid> <HH:MM>
+    python3 tools/plan.py order  <reise> <tag> <uid,uid,...>
+    python3 tools/plan.py swap   <reise> <uidA> <uidB>
+    python3 tools/plan.py bump   [--version JJJJMMTT-N]
 
 Beispiele:
-    python tools/plan.py move kopenhagen 05 tag2 --time 10:30
-    python tools/plan.py order kopenhagen tag1 04,05,03,06,01,02,07
-    python tools/plan.py swap kopenhagen 11 24
+    python3 tools/plan.py wetter kopenhagen tag1
+    python3 tools/plan.py move kopenhagen 05 tag2 --time 10:30
+    python3 tools/plan.py order kopenhagen tag1 04,05,03,06,01,02,07
+    python3 tools/plan.py swap kopenhagen 11 24
+
+Feste Termine – Flüge, Transfers, gebuchte Zeitfenster – sind über `fixed: true`
+markiert und werden nicht verschoben; dafür braucht es ausdrücklich --force.
+
+Auf Windows heißt der Interpreter `python` statt `python3`.
 """
 
 from __future__ import annotations
@@ -46,8 +53,12 @@ def cmd_show(args) -> int:
         print(f"{day['id']}  {day['label']} · {day['date']} ({day['isoDate']})  [{day['tone']}]")
         print(f"        {day['title']}")
         for stop in day["stops"]:
-            title = places.get(stop["uid"], {}).get("title", "?? fehlende Beschreibung")
-            print(f"        {stop['time']}  UID:{stop['uid']}  {title}")
+            place = places.get(stop["uid"], {})
+            marks = {"aussen": "außen ", "innen": "innen ", "beides": "      "}
+            mark = marks.get(place.get("weather"), "  ?   ")
+            fixed = " FEST" if place.get("fixed") else "     "
+            title = place.get("title", "?? fehlende Beschreibung")
+            print(f"        {stop['time']}  UID:{stop['uid']}  {mark}{fixed}  {title}")
         print()
     unplanned = sorted(set(places) - {s["uid"] for d in data["days"] for s in d["stops"]})
     if unplanned:
@@ -59,6 +70,7 @@ def cmd_show(args) -> int:
 
 def cmd_move(args) -> int:
     data = tripdata.load(args.trip)
+    _check_movable(data, args.uid, args.force)
     source, index = tripdata.locate(data, args.uid)
     target = tripdata.find_day(data, args.day)
 
@@ -76,6 +88,7 @@ def cmd_move(args) -> int:
 
 def cmd_time(args) -> int:
     data = tripdata.load(args.trip)
+    _check_movable(data, args.uid, args.force)
     _check_time(args.time)
     day, index = tripdata.locate(data, args.uid)
     stop = day["stops"].pop(index)
@@ -109,19 +122,111 @@ def cmd_order(args) -> int:
                         f"enthalten ({'; '.join(detail)})")
 
     times = sorted(stop["time"] for stop in day["stops"])
+    before = {stop["uid"]: stop["time"] for stop in day["stops"]}
+
+    # Feste Termine müssen ihre Uhrzeit behalten – sonst nimmt ein umsortierter Tag
+    # den Rückflug mit. Lieber abbrechen und die Ursache benennen.
+    if not args.force:
+        for uid, time in zip(wanted, times):
+            place = data["places"].get(uid, {})
+            if place.get("fixed") and time != before[uid]:
+                raise DataError(
+                    f"UID {uid} ({place.get('title', '?')}) ist ein fester Termin um "
+                    f"{before[uid]} und würde durch diese Reihenfolge auf {time} rutschen.\n"
+                    f"  Reihenfolge so wählen, dass {uid} an seiner Stelle bleibt, "
+                    f"oder --force verwenden.")
+
     day["stops"] = [{"uid": uid, "time": time} for uid, time in zip(wanted, times)]
     _write(args.trip, data,
            f"{day['id']} neu geordnet: " + " → ".join(f"{u}@{t}" for u, t in zip(wanted, times)))
     return 0
 
 
+def _minutes(time: str) -> int:
+    hours, minutes = time.split(":")
+    return int(hours) * 60 + int(minutes)
+
+
+def cmd_wetter(args) -> int:
+    """Tauschvorschläge für einen Regentag – ohne selbst etwas zu ändern.
+
+    Antwort auf den Auftrag „es regnet heute": listet die Außenpunkte des Tages und
+    die überdachten Kandidaten aus den anderen Tagen und schreibt die fertigen
+    swap-Befehle dazu. Entschieden wird bewusst nicht automatisch.
+    """
+    data = tripdata.load(args.trip)
+    places = data["places"]
+    day = tripdata.find_day(data, args.day)
+
+    def entries(target, kind):
+        return [(stop, places.get(stop["uid"], {})) for stop in target["stops"]
+                if places.get(stop["uid"], {}).get("weather") == kind
+                and not places.get(stop["uid"], {}).get("fixed")]
+
+    outdoor = entries(day, "aussen")
+    print(f"{day['id']} – {day['label']} · {day['date']}: {day['title']}\n")
+
+    # Feste Außentermine lassen sich nicht tauschen, sind bei Regen aber genau das
+    # Problem – etwa ein gebuchtes Zeitfenster im Kolosseum. Darum benennen.
+    blocked = [(stop, places.get(stop["uid"], {})) for stop in day["stops"]
+               if places.get(stop["uid"], {}).get("weather") == "aussen"
+               and places.get(stop["uid"], {}).get("fixed")]
+    if blocked:
+        print("Fest gebucht und trotzdem im Freien – nicht tauschbar, nur mit Regenschutz:")
+        for stop, place in blocked:
+            print(f"  {stop['time']}  UID:{stop['uid']}  {place['title']}")
+            if place.get("ticketUrl"):
+                print(f"            Umbuchen ginge nur über {place['ticketUrl']}")
+        print()
+
+    if not outdoor:
+        print("Keine tauschbaren Außenpunkte an diesem Tag – der Tag hält Regen aus.")
+        return 0
+
+    print("Wetterabhängig an diesem Tag:")
+    for stop, place in outdoor:
+        print(f"  {stop['time']}  UID:{stop['uid']}  {place['title']}")
+        if place.get("tip"):
+            print(f"            {place['tip']}")
+
+    candidates = [(other, stop, place) for other in data["days"] if other["id"] != day["id"]
+                  for stop, place in entries(other, "innen")]
+    if not candidates:
+        print("\nKeine überdachten Kandidaten in anderen Tagen zum Tauschen vorhanden.")
+        return 0
+
+    print("\nÜberdachte Kandidaten aus anderen Tagen:")
+    for other, stop, place in candidates:
+        print(f"  {other['id']}  {stop['time']}  UID:{stop['uid']}  {place['title']}")
+
+    # Beim Tauschen wandern die Uhrzeiten mit. Deshalb wird nach Tageszeit gepaart –
+    # sonst landet ein Mittagessen um 16 Uhr und ein Museum zur Frühstückszeit.
+    print("\nVorschlag – jeweils ein Außenpunkt gegen einen Innenraum ähnlicher Tageszeit:")
+    frei = list(candidates)
+    for stop, place in outdoor:
+        if not frei:
+            break
+        best = min(frei, key=lambda c: abs(_minutes(c[1]["time"]) - _minutes(stop["time"])))
+        frei.remove(best)
+        other, cand_stop, cand_place = best
+        print(f"  {stop['time']} {place['title']} ↔ {cand_stop['time']} {cand_place['title']} ({other['id']})")
+        print(f"    python3 tools/plan.py swap {args.trip} {stop['uid']} {cand_stop['uid']}")
+
+    if len(outdoor) > len(candidates):
+        print(f"\nHinweis: {len(outdoor)} Außenpunkte, aber nur {len(candidates)} überdachte "
+              f"Kandidaten – für den Rest bleibt nur Verschieben auf einen anderen Tag.")
+    return 0
+
+
 def cmd_swap(args) -> int:
     """Zwei Stops tauschen Platz und Uhrzeit – auch über Tagesgrenzen hinweg."""
     data = tripdata.load(args.trip)
-    day_a, index_a = tripdata.locate(data, args.uid_a)
-    day_b, index_b = tripdata.locate(data, args.uid_b)
     if args.uid_a == args.uid_b:
         raise DataError("Zwei verschiedene UIDs angeben")
+    _check_movable(data, args.uid_a, args.force)
+    _check_movable(data, args.uid_b, args.force)
+    day_a, index_a = tripdata.locate(data, args.uid_a)
+    day_b, index_b = tripdata.locate(data, args.uid_b)
 
     time_a = day_a["stops"][index_a]["time"]
     time_b = day_b["stops"][index_b]["time"]
@@ -176,6 +281,19 @@ def _check_time(value: str) -> None:
         raise DataError(f"Uhrzeit '{value}' muss das Format HH:MM haben")
 
 
+def _check_movable(data: dict, uid: str, force: bool) -> None:
+    """Feste Termine – Flüge, Transfers, gebuchte Zeitfenster – nicht versehentlich verschieben.
+
+    Beim Umplanen wegen Wetter ist genau das der teure Fehler: ein umsortierter Tag,
+    der den Rückflug mitnimmt.
+    """
+    place = data["places"].get(uid, {})
+    if place.get("fixed") and not force:
+        raise DataError(
+            f"UID {uid} ({place.get('title', '?')}) ist ein fester Termin und wird nicht "
+            f"verschoben. Mit --force trotzdem ändern.")
+
+
 def _write(slug: str, data: dict, summary: str) -> None:
     """Erst prüfen, dann schreiben – eine kaputte Datei entsteht so nie."""
     problems = tripdata.validate(slug, data)
@@ -200,29 +318,40 @@ def build_parser() -> argparse.ArgumentParser:
     show.add_argument("day", nargs="?")
     show.set_defaults(func=cmd_show)
 
+    force_help = "auch feste Termine (Flüge, Transfers, gebuchte Zeitfenster) ändern"
+
+    wetter = sub.add_parser("wetter", help="Tauschvorschläge für einen Regentag")
+    wetter.add_argument("trip")
+    wetter.add_argument("day")
+    wetter.set_defaults(func=cmd_wetter)
+
     move = sub.add_parser("move", help="Stop in einen anderen Tagesabschnitt verschieben")
     move.add_argument("trip")
     move.add_argument("uid")
     move.add_argument("day")
     move.add_argument("--time", help="neue Uhrzeit HH:MM (sonst bleibt die bisherige)")
+    move.add_argument("--force", action="store_true", help=force_help)
     move.set_defaults(func=cmd_move)
 
     time_cmd = sub.add_parser("time", help="Uhrzeit eines Stops ändern")
     time_cmd.add_argument("trip")
     time_cmd.add_argument("uid")
     time_cmd.add_argument("time")
+    time_cmd.add_argument("--force", action="store_true", help=force_help)
     time_cmd.set_defaults(func=cmd_time)
 
     order = sub.add_parser("order", help="Reihenfolge innerhalb eines Tages umstellen")
     order.add_argument("trip")
     order.add_argument("day")
     order.add_argument("uids", help="alle UIDs des Tages in der gewünschten Reihenfolge, z. B. 04,05,03")
+    order.add_argument("--force", action="store_true", help=force_help)
     order.set_defaults(func=cmd_order)
 
     swap = sub.add_parser("swap", help="zwei Stops gegeneinander tauschen")
     swap.add_argument("trip")
     swap.add_argument("uid_a", metavar="uidA")
     swap.add_argument("uid_b", metavar="uidB")
+    swap.add_argument("--force", action="store_true", help=force_help)
     swap.set_defaults(func=cmd_swap)
 
     bump = sub.add_parser("bump", help="Cache-Version in allen Seiten anheben")
