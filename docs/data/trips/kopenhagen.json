@@ -1,0 +1,57 @@
+{
+  "trip": {
+    "destination": "Kopenhagen",
+    "title": "Kopenhagen mobil",
+    "subtitle": "Kanäle, Design, Hafen und nordisches Stadtgefühl – als flexibler Reiseplan fürs Handy.",
+    "dates": "06.–09. Juli 2026",
+    "travellers": "Christian & Silke",
+    "heroImage": "aerial",
+    "introLabel": "Reise",
+    "introTitle": "Nicht nur Ablauf, sondern Reisegefühl.",
+    "introText": "Christianshavn ist der ruhige Anker für vier Tage zwischen Kanälen, Design, Hafen und besonderen Innenräumen. Die Tagesabschnitte bleiben flexibel: Bei Wetterwechseln kann jeder Stop anhand seiner stabilen UID in einen anderen Tag verschoben werden.",
+    "theme": "teal",
+    "weather": { "enabled": true, "latitude": 55.6761, "longitude": 12.5683, "timezone": "Europe/Copenhagen", "startDate": "2026-07-06", "endDate": "2026-07-09", "fallback": [
+      { "date": "2026-07-06", "day": "Mo", "tempMax": 20, "tempMin": 12, "code": 3, "pop": 20, "wind": 18, "action": "GoBoat passt, den Turm nur bei gutem Wind einplanen." },
+      { "date": "2026-07-07", "day": "Di", "tempMax": 18, "tempMin": 13, "code": 61, "pop": 65, "wind": 22, "action": "Designmuseum als sicheren Regenblock nutzen." },
+      { "date": "2026-07-08", "day": "Mi", "tempMax": 21, "tempMin": 13, "code": 2, "pop": 35, "wind": 31, "action": "Hafenroute gut, Windjacke einpacken." },
+      { "date": "2026-07-09", "day": "Do", "tempMax": 24, "tempMin": 12, "code": 1, "pop": 10, "wind": 17, "action": "Schöner Abreisetag mit ausreichendem Flughafenpuffer." }
+    ] }
+  },
+  "days": [
+    { "id": "tag1", "label": "Tag 1", "date": "Mo 06.07.", "title": "Ankommen, Christianshavn, Turm und Wasser", "weather": "Wettercheck: Turm und Boot nur bei gutem Wind.", "tone": "teal", "heroImage": "christianshavn", "note": "Der erste Tag bleibt weich: Gepäck weg, Christianshavn lesen, Aussicht holen und die Stadt vom Wasser aus ankommen lassen.", "stops": [
+      { "uid": "01", "time": "08:40", "title": "Flug BGY → CPH", "detail": "Früher Flug, dadurch fast ein voller Stadttag.", "image": "aerial", "place": "Copenhagen Airport" },
+      { "uid": "02", "time": "10:45", "title": "Gepäckaufbewahrung", "detail": "Direkt in die Stadt und das Gepäck sicher abgeben.", "image": "christianshavn", "place": "LuggageHero Copenhagen" },
+      { "uid": "03", "time": "12:00", "title": "Lunch – Cafe Wilder", "detail": "Erster Lunch im Viertel statt Food-Hall.", "image": "christianshavn", "place": "Cafe Wilder Copenhagen" },
+      { "uid": "04", "time": "13:15", "title": "Christianshavn Kanäle", "detail": "Hausboote, Speicher, Brücken und kurzer Christiania-Rand.", "image": "christianshavn", "place": "Christianshavn Canal Copenhagen" },
+      { "uid": "05", "time": "16:05", "title": "Vor Frelsers Kirke", "detail": "Signature-Moment mit spektakulärem Außenaufstieg.", "image": "saviour", "place": "Church of Our Saviour Copenhagen" },
+      { "uid": "06", "time": "17:30", "title": "GoBoat", "detail": "Selbst fahren, Picknick-Gefühl und Stadt vom Hafen aus.", "image": "goboat", "place": "GoBoat Islands Brygge Copenhagen" },
+      { "uid": "07", "time": "19:15", "title": "Dinner – Færgecafe", "detail": "Maritimes Abendessen, passend zum ersten Tag.", "image": "refshaleoen", "place": "Christianshavns Faergecafe Copenhagen" }
+    ] },
+    { "id": "tag2", "label": "Tag 2", "date": "Di 07.07.", "title": "Klassiker, Design und lokaler Abend", "weather": "Wettercheck: Bei Regen Designmuseum nach vorn ziehen.", "tone": "gold", "heroImage": "rosenborg", "note": "Rosenborg früh, danach Rundetårn und Designmuseum als starke Indoor-Blöcke.", "stops": [
+      { "uid": "08", "time": "09:45", "title": "Rosenborg Slot", "detail": "Schloss, Garten und Kronjuwelen kompakt erleben.", "image": "rosenborg", "place": "Rosenborg Castle Copenhagen" },
+      { "uid": "09", "time": "11:30", "title": "Lunch – Selma", "detail": "Modernes Smørrebrød mit Foodie-Wert.", "image": "designfurniture", "place": "Selma Copenhagen" },
+      { "uid": "10", "time": "13:00", "title": "Rundetårn", "detail": "Spiralrampe, Altstadtblick und kurzer Klassiker.", "image": "roundtower", "place": "Round Tower Copenhagen" },
+      { "uid": "11", "time": "14:25", "title": "Designmuseum Danmark", "detail": "Danish Modern, Möbel, Grafik und Alltagsdesign.", "image": "designmuseum", "place": "Designmuseum Danmark Copenhagen" },
+      { "uid": "12", "time": "16:00", "title": "Frederiksstaden", "detail": "Marmorkirken, Amalienborg und Ofelia Plads.", "image": "amalienborg", "place": "Frederiksstaden Copenhagen" },
+      { "uid": "13", "time": "17:30", "title": "Dinner – Absalon", "detail": "Gemeinschaftsdinner an langen Tischen.", "image": "cc", "place": "Folkehuset Absalon Copenhagen" },
+      { "uid": "14", "time": "19:45", "title": "Craft Beer – Fermentoren", "detail": "Craft-Beer-Abschluss in Vesterbro.", "image": "refshaleoen", "place": "Fermentoren Copenhagen" }
+    ] },
+    { "id": "tag3", "label": "Tag 3", "date": "Mi 08.07.", "title": "Moderner Hafen, Kunst und Sommerwasser", "weather": "Wettercheck: Hafenroute ist stark, aber windanfällig.", "tone": "coral", "heroImage": "copenhill", "note": "Der modernste Tag: Kraftwerk als Stadtberg, Industrieinsel, große Installation und Hafenbad-Gefühl.", "stops": [
+      { "uid": "15", "time": "10:00", "title": "CopenHill", "detail": "Architektur, Aussicht und Freizeit auf dem Kraftwerk.", "image": "copenhill", "place": "CopenHill Copenhagen" },
+      { "uid": "16", "time": "11:45", "title": "Lille Bakery", "detail": "Bäckerei- und Hallen-Vibe auf Refshaleøen.", "image": "refshaleoen", "place": "Lille Bakery Refshaleoen Copenhagen" },
+      { "uid": "17", "time": "13:00", "title": "Copenhagen Contemporary", "detail": "Großformatige Installationskunst in Industriehallen.", "image": "cc", "place": "Copenhagen Contemporary" },
+      { "uid": "18", "time": "14:45", "title": "La Banchina", "detail": "Holzsteg, Wasser, Naturwein und optional Baden.", "image": "refshaleoen", "place": "La Banchina Copenhagen" },
+      { "uid": "19", "time": "16:30", "title": "Reffen", "detail": "Kurzer Snack oder Drink am Wasser.", "image": "reffen", "place": "Reffen Copenhagen Street Food" },
+      { "uid": "20", "time": "19:30", "title": "Dinner – Poulette + Pompette", "detail": "Urbaner, kleiner Nørrebro-Abschluss.", "image": "norrebro", "place": "Poulette Pompette Copenhagen" }
+    ] },
+    { "id": "tag4", "label": "Tag 4", "date": "Do 09.07.", "title": "Letzter Blick, Untergrundkunst, Flughafenpuffer", "weather": "Wettercheck: Cisternerne ist auch bei wechselhaftem Wetter gut.", "tone": "navy", "heroImage": "christiansborg", "note": "Der Abreisetag bleibt kontrolliert: Gepäckstress rausnehmen, ein letzter Blick von oben und Cisternerne als besonderer Schluss.", "stops": [
+      { "uid": "21", "time": "10:00", "title": "Check-out + Gepäck", "detail": "Gepäck direkt weg, der Tag bleibt frei.", "image": "christianshavn", "place": "LuggageHero Copenhagen" },
+      { "uid": "22", "time": "10:45", "title": "Christiansborg Tower", "detail": "Kostenloser Aussichtspunkt über Slotsholmen.", "image": "christiansborg", "place": "Christiansborg Tower Copenhagen" },
+      { "uid": "23", "time": "12:00", "title": "Lunch – Admiralgade 26", "detail": "Bewusster letzter Lunch statt Einkaufsstraßen-Snack.", "image": "christiansborg", "place": "Admiralgade 26 Copenhagen" },
+      { "uid": "24", "time": "13:50", "title": "Cisternerne", "detail": "Dunkel, feucht, kühl und atmosphärisch.", "image": "cisternerne", "place": "Cisternerne Copenhagen" },
+      { "uid": "25", "time": "15:30", "title": "Værnedamsvej", "detail": "Kaffee, kleine Shops und letztes Viertelgefühl.", "image": "norrebro", "place": "Vaernedamsvej Copenhagen" },
+      { "uid": "26", "time": "17:15", "title": "Transfer zum Flughafen", "detail": "Der Puffer macht den Schluss ruhig.", "image": "aerial", "place": "Copenhagen Airport" },
+      { "uid": "27", "time": "20:20", "title": "Rückflug", "detail": "CPH → BGY.", "image": "aerial", "place": "Copenhagen Airport" }
+    ] }
+  ]
+}

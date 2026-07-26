@@ -1,6 +1,23 @@
-# Reiseplan schnell aktualisieren
+# Reiseplan-Template: neue Reise anlegen
 
-Die Website wird vollständig aus `trip.json` aufgebaut. Für eine neue Reise wird die Datei kopiert und mit den neuen Reisedaten gefüllt; das Layout und `app.js` bleiben unverändert. Der aktuelle Datensatz ist ein zweitägiges Rom-Beispiel für den Aufenthalt vom 5.–6. September 2026.
+Die Startseite liegt unter `/kopenhagen-reiseplan-2026/`. Jede Reise hat einen eigenen Unterordner und eine eigene Datendatei:
+
+```text
+docs/
+├── index.html                         Startseite mit Reiseauswahl
+├── assets/app.js                      gemeinsame Darstellung
+├── assets/styles.css                  gemeinsames Design
+├── data/trips/kopenhagen.json         Kopenhagen-Daten
+├── data/trips/rom.json                Rom-Daten
+└── trips/<slug>/index.html            eigene URL der Reise
+```
+
+Beispiele:
+
+- `/kopenhagen-reiseplan-2026/kopenhagen/`
+- `/kopenhagen-reiseplan-2026/rom/`
+
+Für eine neue Reise kopierst du eine vorhandene JSON-Datei nach `docs/data/trips/<slug>.json` und eine vorhandene Unterseite nach `docs/trips/<slug>/index.html`. In der HTML-Datei wird nur der Pfad zur JSON-Datei geändert. Danach kommt die Reise als Kachel in `docs/assets/landing.js` hinzu. Darstellung und Styles bleiben unverändert.
 
 ## Wetterbedingte Änderungen
 

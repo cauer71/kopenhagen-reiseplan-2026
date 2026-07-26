@@ -1,0 +1,87 @@
+@import url("../styles.css");
+
+.trip-index {
+  width: min(76rem, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 5rem 0 7rem;
+}
+
+.index-intro {
+  max-width: 42rem;
+  padding: 2rem 0 3rem;
+}
+
+.index-intro h1 {
+  max-width: none;
+  color: var(--ink);
+}
+
+.index-intro > p:last-child {
+  max-width: 34rem;
+  color: var(--muted);
+  font-size: 1.08rem;
+}
+
+.trip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.2rem;
+}
+
+.trip-tile {
+  position: relative;
+  min-height: 26rem;
+  display: flex;
+  align-items: end;
+  overflow: hidden;
+  border-radius: 1.6rem;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 1.2rem 3rem rgba(16, 47, 70, 0.18);
+  isolation: isolate;
+}
+
+.trip-tile img,
+.trip-tile-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.trip-tile img {
+  z-index: -2;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.trip-tile-shade {
+  z-index: -1;
+  background: linear-gradient(180deg, transparent 25%, rgba(7, 27, 40, 0.88));
+}
+
+.trip-tile > div {
+  padding: 1.35rem;
+}
+
+.trip-tile .eyebrow {
+  color: #ffde9c;
+}
+
+.trip-tile h2 {
+  font-size: clamp(2.4rem, 8vw, 4.2rem);
+}
+
+.trip-tile p:not(.eyebrow) {
+  margin-bottom: 0.8rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.trip-tile small {
+  font-weight: 800;
+}
+
+.trip-tile:hover img,
+.trip-tile:focus-visible img {
+  transform: scale(1.05);
+}

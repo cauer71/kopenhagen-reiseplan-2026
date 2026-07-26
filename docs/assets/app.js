@@ -1,5 +1,6 @@
 const root = document.querySelector("#app");
-const image = (name, size = 1200) => String(name).startsWith("http") ? name : `./photos/web/${name}-${size}.jpg`;
+const siteRoot = document.body.dataset.siteRoot ?? "./";
+const image = (name, size = 1200) => String(name).startsWith("http") ? name : `${siteRoot}photos/web/${name}-${size}.jpg`;
 const maps = (place) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
 
 const weatherLabel = (code) => {
@@ -64,11 +65,11 @@ async function loadWeather(trip) {
 }
 
 async function init() {
-  const response = await fetch("./data/trip.json");
+  const response = await fetch(document.body.dataset.trip ?? "./data/trip.json");
   const data = await response.json();
   const { trip, days } = data;
   document.title = `${trip.title} · ${trip.destination}`;
-  root.innerHTML = `<section class="hero" id="top"><img src="${image(trip.heroImage)}" alt="${esc(trip.destination)}" class="hero-bg"><div class="hero-shade"></div><nav class="topnav" aria-label="Reiseabschnitte"><a href="#tage">Tage</a>${trip.weather?.enabled ? '<a href="#wetter">Wetter</a>' : ""}</nav><div class="hero-copy"><p class="eyebrow">${esc(trip.dates)} · ${esc(trip.travellers)}</p><h1>${esc(trip.title)}</h1><p>${esc(trip.subtitle)}</p><div class="hero-stats"><span><b>${days.length}</b>Tage</span><span><b>${days.reduce((sum, day) => sum + day.stops.length, 0)}</b>Stops</span><span><b>${days.reduce((sum, day) => sum + day.stops.filter((stop) => stop.image).length, 0)}</b>Bilder</span></div></div></section><section class="section intro"><p class="eyebrow">${esc(trip.introLabel ?? "Reise")}</p><h2>${esc(trip.introTitle ?? trip.destination)}</h2><p>${esc(trip.introText ?? "")}</p></section>${renderWeather(trip)}<section class="section day-section" id="tage"><div class="section-head"><p class="eyebrow">Tagespläne</p><h2>${days.length} Tage, mobil lesbar</h2></div><div class="days">${days.map(renderDay).join("")}</div></section>`;
+  root.innerHTML = `<section class="hero" id="top"><img src="${image(trip.heroImage)}" alt="${esc(trip.destination)}" class="hero-bg"><div class="hero-shade"></div><nav class="topnav" aria-label="Reiseabschnitte"><a href="${siteRoot}">Alle Reisen</a><a href="#tage">Tage</a>${trip.weather?.enabled ? '<a href="#wetter">Wetter</a>' : ""}</nav><div class="hero-copy"><p class="eyebrow">${esc(trip.dates)} · ${esc(trip.travellers)}</p><h1>${esc(trip.title)}</h1><p>${esc(trip.subtitle)}</p><div class="hero-stats"><span><b>${days.length}</b>Tage</span><span><b>${days.reduce((sum, day) => sum + day.stops.length, 0)}</b>Stops</span><span><b>${days.reduce((sum, day) => sum + day.stops.filter((stop) => stop.image).length, 0)}</b>Bilder</span></div></div></section><section class="section intro"><p class="eyebrow">${esc(trip.introLabel ?? "Reise")}</p><h2>${esc(trip.introTitle ?? trip.destination)}</h2><p>${esc(trip.introText ?? "")}</p></section>${renderWeather(trip)}<section class="section day-section" id="tage"><div class="section-head"><p class="eyebrow">Tagespläne</p><h2>${days.length} Tage, mobil lesbar</h2></div><div class="days">${days.map(renderDay).join("")}</div></section>`;
   loadWeather(trip);
 }
 
