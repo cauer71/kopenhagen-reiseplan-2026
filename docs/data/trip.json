@@ -1,0 +1,36 @@
+{
+  "trip": {
+    "destination": "Rom",
+    "title": "Rom in zwei Tagen",
+    "subtitle": "Antike, Barock und zeitgenössische Architektur – als flexibler Testaufenthalt.",
+    "dates": "05.–06. September 2026",
+    "travellers": "Christian & Julia",
+    "heroImage": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1800&q=85",
+    "introLabel": "Testaufenthalt",
+    "introTitle": "Rom funktioniert am besten in Schichten.",
+    "introText": "Der Beispieldatensatz zeigt das wiederverwendbare Reise-Template mit zwei Tagesabschnitten, stabilen Kalender-UIDs, Kartenlinks und optionalen Ticketlinks. Bei einer Wetteränderung wird ein Stop einfach in einen anderen Tagesabschnitt verschoben – UID und Bildzuordnung bleiben erhalten.",
+    "theme": "coral",
+    "weather": { "enabled": true, "latitude": 41.9028, "longitude": 12.4964, "timezone": "Europe/Rome", "startDate": "2026-09-05", "endDate": "2026-09-06", "fallback": [
+      { "date": "2026-09-05", "day": "Sa", "tempMax": 29, "tempMin": 18, "code": 1, "pop": 10, "wind": 12, "action": "Antike und Außenräume am Vormittag, Schattenpausen einplanen." },
+      { "date": "2026-09-06", "day": "So", "tempMax": 28, "tempMin": 18, "code": 2, "pop": 15, "wind": 10, "action": "MAXXI als flexibler Indoor-Block, falls das Wetter kippt." }
+    ] }
+  },
+  "days": [
+    { "id": "tag1", "label": "Tag 1", "date": "Sa 05.09.", "title": "Antike, Campo de’ Fiori und Abend in Trastevere", "weather": "Wettercheck: Kolosseum früh besuchen, die offenen Plätze später legen.", "tone": "coral", "heroImage": "https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1500&q=85", "note": "Ein dichter, aber gut lesbarer Einstieg: erst das antike Rom, dann Pantheon und Campo de’ Fiori, zum Schluss ein entspannter vegetarischer Abend.", "stops": [
+      { "uid": "01", "time": "09:00", "title": "Kolosseum", "detail": "Das ikonische Amphitheater als erster großer Fixpunkt; Zeitfenster früh buchen.", "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=85", "place": "Colosseum, Piazza del Colosseo 1, Rome", "ticketUrl": "https://ticketing.colosseo.it/en/" },
+      { "uid": "02", "time": "11:00", "title": "Forum Romanum und Palatin", "detail": "Ruinenlandschaft, Stadtgeschichte und starke Blicke über das antike Zentrum.", "image": "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=1000&q=85", "place": "Roman Forum, Via della Salara Vecchia 5/6, Rome", "ticketUrl": "https://ticketing.colosseo.it/en/" },
+      { "uid": "03", "time": "13:15", "title": "Lunch – Il Margutta", "detail": "Vegetarisches Restaurant nahe der Spanischen Treppe; Reservierung sinnvoll.", "image": "https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=1000&q=85", "place": "Il Margutta Vegetarian Food & Art, Via Margutta 118, Rome", "ticketUrl": "https://www.ilmargutta.bio/" },
+      { "uid": "04", "time": "15:00", "title": "Pantheon", "detail": "Der außergewöhnlich gut erhaltene Kuppelbau mit Oculus und klarer Raumgeometrie.", "image": "https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1000&q=85", "place": "Pantheon, Piazza della Rotonda, Rome", "ticketUrl": "https://portale.museiitaliani.it/b2c/#/" },
+      { "uid": "05", "time": "16:00", "title": "Piazza Navona und Campo de’ Fiori", "detail": "Barocke Platzfolge mit Berninis Vierströmebrunnen, Marktstimmung und Fotospots.", "image": "https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1000&q=85", "place": "Piazza Navona, Rome" },
+      { "uid": "06", "time": "19:30", "title": "Dinner – Nannarella", "detail": "Römische Küche in Trastevere mit vegetarischen Klassikern; abends reservieren.", "image": "https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=1000&q=85", "place": "Nannarella, Piazza di San Calisto 7a, Rome", "ticketUrl": "https://www.nannarella.it/" }
+    ] },
+    { "id": "tag2", "label": "Tag 2", "date": "So 06.09.", "title": "Vatikan, MAXXI und moderner Aperitivo", "weather": "Wettercheck: Vatikan am Morgen, MAXXI als wetterfester Nachmittagsblock.", "tone": "teal", "heroImage": "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=1500&q=85", "note": "Der zweite Tag verbindet die große sakrale Architektur des Vatikans mit Zaha Hadids MAXXI und einem lockeren Abend im Viertel Flaminio.", "stops": [
+      { "uid": "07", "time": "08:30", "title": "Vatikanische Museen", "detail": "Früher Einlass zu Sammlungen, Innenhöfen und Sixtinischer Kapelle; Zeitfenster vorab buchen.", "image": "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=1000&q=85", "place": "Vatican Museums, Viale Vaticano, Rome", "ticketUrl": "https://tickets.museivaticani.va/" },
+      { "uid": "08", "time": "12:00", "title": "Petersdom", "detail": "Monumentaler Innenraum, Michelangelos Pietà und eine der prägendsten Kirchen Europas.", "image": "https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1000&q=85", "place": "St. Peter’s Basilica, Piazza San Pietro, Vatican City" },
+      { "uid": "09", "time": "13:30", "title": "Lunch – 100% Bio", "detail": "Unkomplizierter vegetarischer Lunch in Prati mit saisonalen Gerichten.", "image": "https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=1000&q=85", "place": "100% Bio, Via Giovanni Bettolo 54, Rome" },
+      { "uid": "10", "time": "15:00", "title": "MAXXI", "detail": "Zaha Hadids fließende Architektur und zeitgenössische Kunst als Kontrast zum historischen Rom.", "image": "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=1000&q=85", "place": "MAXXI, Via Guido Reni 4A, Rome", "ticketUrl": "https://www.maxxi.art/en/orari-e-biglietteria/" },
+      { "uid": "11", "time": "17:30", "title": "Ponte della Musica und Flaminio", "detail": "Moderner Brückenraum, offene Uferblicke und ein ruhiger Übergang zum Abend.", "image": "https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=1000&q=85", "place": "Ponte della Musica, Rome" },
+      { "uid": "12", "time": "19:00", "title": "Aperitivo – Open Baladin", "detail": "Große Craft-Beer-Auswahl und vegetarische Snacks zum Abschluss.", "image": "https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=1000&q=85", "place": "Open Baladin Roma, Via degli Specchi 6, Rome", "ticketUrl": "https://www.openbaladinroma.it/" }
+    ] }
+  ]
+}
