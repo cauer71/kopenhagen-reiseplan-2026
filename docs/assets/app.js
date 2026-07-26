@@ -30,12 +30,19 @@ function weatherCard(item) {
   return `<article class="weather-card"><span>${esc(item.day)}</span><strong>${item.tempMax}/${item.tempMin} °C</strong><b>${weatherLabel(item.code)}</b><p>${item.pop ?? "–"}% Regen · Wind ${item.wind ?? "–"} km/h</p><p>${esc(item.action ?? "")}</p></article>`;
 }
 
-function renderStop(stop, previous) {
+function renderStop(stop, previous, dayId) {
   const ticket = stop.ticketUrl ? `<div class="ticket"><b>Ticket:</b><a href="${esc(stop.ticketUrl)}" target="_blank" rel="noreferrer">Offizielle Buchung</a></div>` : "";
+  const detailsId = `${dayId}-stop-${stop.uid}-details`;
   return `<article class="stop-card">
-    <img src="${image(stop.image, 720)}" alt="${esc(stop.title)}" loading="lazy">
-    <div class="stop-copy"><div class="stop-top"><time>${esc(stop.time)}</time><span class="uid">UID:${esc(stop.uid)}</span></div>
-      <h4>${esc(stop.title)}</h4><p>${esc(stop.detail ?? "")}</p>
+    <button class="stop-toggle" type="button" aria-expanded="false" aria-controls="${detailsId}">
+      <img src="${image(stop.image, 720)}" alt="${esc(stop.title)}" loading="lazy">
+      <span class="stop-summary"><span class="stop-top"><time>${esc(stop.time)}</time><span class="uid">UID:${esc(stop.uid)}</span></span>
+        <span class="stop-heading"><span class="stop-title" role="heading" aria-level="4">${esc(stop.title)}</span><span class="stop-chevron" aria-hidden="true">⌄</span></span>
+        <span class="stop-hint">Beschreibung öffnen</span>
+      </span>
+    </button>
+    <div class="stop-details" id="${detailsId}" hidden>
+      <p class="stop-description">${esc(stop.detail ?? "")}</p>
       <p class="route">Von ${esc(previous)} · zu Fuß / ÖPNV nach ${esc(stop.title)}</p>
       <div class="stop-links"><a class="maps-link" href="${maps(stop.place)}" target="_blank" rel="noreferrer"><span class="maps-mark" aria-hidden="true"></span><span>Karte<small>Google Maps</small></span></a>${ticket}</div>
     </div>
@@ -44,7 +51,7 @@ function renderStop(stop, previous) {
 
 function renderDay(day) {
   let previous = "Unterkunft / Basis";
-  const stops = day.stops.map((stop) => { const html = renderStop(stop, previous); previous = stop.title; return html; }).join("");
+  const stops = day.stops.map((stop) => { const html = renderStop(stop, previous, day.id); previous = stop.title; return html; }).join("");
   const detailsId = `${day.id}-details`;
   return `<article class="day-card ${esc(day.tone)}" id="${esc(day.id)}">
     <button class="day-toggle" type="button" aria-expanded="false" aria-controls="${detailsId}">
@@ -57,6 +64,17 @@ function renderDay(day) {
 
 function bindDayToggles() {
   document.querySelectorAll(".day-toggle").forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const details = document.getElementById(toggle.getAttribute("aria-controls"));
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      details.hidden = expanded;
+    });
+  });
+}
+
+function bindStopToggles() {
+  document.querySelectorAll(".stop-toggle").forEach((toggle) => {
     toggle.addEventListener("click", () => {
       const details = document.getElementById(toggle.getAttribute("aria-controls"));
       const expanded = toggle.getAttribute("aria-expanded") === "true";
@@ -89,6 +107,7 @@ async function init() {
   document.title = `${trip.title} · ${trip.destination}`;
   root.innerHTML = `<section class="hero" id="top"><img src="${image(trip.heroImage)}" alt="${esc(trip.destination)}" class="hero-bg"><div class="hero-shade"></div><nav class="topnav" aria-label="Reiseabschnitte"><a href="${siteRoot}">Alle Reisen</a><a href="#tage">Tage</a>${trip.weather?.enabled ? '<a href="#wetter">Wetter</a>' : ""}</nav><div class="hero-copy"><p class="eyebrow">${esc(trip.dates)} · ${esc(trip.travellers)}</p><h1>${esc(trip.title)}</h1><p>${esc(trip.subtitle)}</p><div class="hero-stats"><span><b>${days.length}</b>Tage</span><span><b>${days.reduce((sum, day) => sum + day.stops.length, 0)}</b>Stops</span></div></div></section><section class="section intro"><p class="eyebrow">${esc(trip.introLabel ?? "Reise")}</p><h2>${esc(trip.introTitle ?? trip.destination)}</h2><p>${esc(trip.introText ?? "")}</p></section>${renderWeather(trip)}<section class="section day-section" id="tage"><div class="section-head"><p class="eyebrow">Tagespläne</p><h2>${days.length} Tage, mobil lesbar</h2></div><div class="days">${days.map(renderDay).join("")}</div></section>`;
   bindDayToggles();
+  bindStopToggles();
   loadWeather(trip);
 }
 
