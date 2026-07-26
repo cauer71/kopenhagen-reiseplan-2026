@@ -48,11 +48,19 @@ function weatherCard(note, live = null) {
 
 const paragraphs = (value) => (Array.isArray(value) ? value : [value]).filter(Boolean);
 
+const WEATHER_LABEL = {
+  aussen: "Im Freien – wetterabhängig",
+  innen: "Überdacht – auch bei Regen gut",
+  beides: "Wetterunabhängig",
+};
+
 function renderFacts(place) {
   const facts = [
     ["Adresse", place.address],
     ["Dauer", place.duration],
     ["Eintritt", place.price],
+    ["Wetter", WEATHER_LABEL[place.weather]],
+    ["Termin", place.fixed ? "Fest – nicht verschieben" : null],
     ["Gut zu wissen", place.tip],
   ].filter(([, value]) => value);
   if (!facts.length) return "";

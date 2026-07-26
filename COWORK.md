@@ -93,6 +93,8 @@ Jede Reise ist **eine** Datei mit drei Blöcken:
       ],
       "image": "aerial",             // Dateiname ohne -720/-1200 und ohne .jpg
       "place": "Copenhagen Airport", // Suchbegriff für den Google-Maps-Link
+      "weather": "beides",           // aussen | innen | beides – Pflicht
+      "fixed": true,                 // optional: nicht verschiebbar
       "address": "…",                // optional
       "duration": "…",               // optional
       "price": "…",                  // optional
@@ -103,9 +105,32 @@ Jede Reise ist **eine** Datei mit drei Blöcken:
 }
 ```
 
-`title`, `detail`, `description`, `image` und `place` sind Pflicht. `address`,
-`duration`, `price` und `tip` erscheinen als Faktenblock unter der Beschreibung;
-fehlende Felder werden übersprungen.
+`title`, `detail`, `description`, `image`, `place` und `weather` sind Pflicht.
+`address`, `duration`, `price` und `tip` erscheinen als Faktenblock unter der
+Beschreibung; fehlende Felder werden übersprungen.
+
+### Wettertauglichkeit und feste Termine
+
+Zwei Felder steuern, was beim Umplanen passieren darf:
+
+| Feld | Werte | Bedeutung |
+|---|---|---|
+| `weather` | `aussen` | im Freien, bei Regen problematisch |
+| | `innen` | überdacht, taugt als Regenblock |
+| | `beides` | wetterunabhängig oder gemischt |
+| `fixed` | `true` oder fehlt | fester Termin: Flug, Transfer, Check-out, gebuchtes Zeitfenster |
+
+`weather` ist die Grundlage für `plan.py wetter` – damit lässt sich der Auftrag
+„es regnet heute" beantworten, ohne die Beschreibungen zu lesen.
+
+`fixed` ist eine **Schutzschaltung**. `move`, `time`, `swap` und `order`
+verweigern die Änderung eines festen Termins und nennen den Grund. Das verhindert
+den teuren Fehler beim Umplanen: einen umsortierten Tag, der den Rückflug
+mitnimmt. Wirklich nötige Ausnahmen brauchen ausdrücklich `--force`.
+
+> Ein Ort kann `aussen` **und** `fixed` sein – etwa das Kolosseum mit gebuchtem
+> Zeitfenster. Solche Punkte sind bei Regen das eigentliche Problem und lassen
+> sich nicht tauschen; `plan.py wetter` weist eigens darauf hin.
 
 ### Die UID ist die Klammer
 
@@ -180,6 +205,23 @@ Reihenfolge verteilt: der erste genannte Stop bekommt die früheste Uhrzeit, der
 zweite die nächste und so weiter. Genau das braucht man, wenn nur die Abfolge
 innerhalb eines Tages anders sein soll.
 
+### Regentag analysieren
+
+```bash
+python3 tools/plan.py wetter kopenhagen tag1
+```
+
+Ändert **nichts**, sondern beantwortet die Frage „was tue ich, wenn es heute
+regnet". Die Ausgabe nennt:
+
+- fest gebuchte Außentermine, die sich nicht tauschen lassen (nur Regenschutz hilft)
+- die tauschbaren Außenpunkte des Tages samt Hinweis
+- überdachte Kandidaten aus den anderen Tagen
+- einen Vorschlag, gepaart nach **ähnlicher Tageszeit**, mit fertigen `swap`-Befehlen
+
+Die Tageszeit ist wichtig, weil `swap` die Uhrzeiten mit tauscht: ohne Paarung
+landet sonst ein Mittagessen um 16 Uhr.
+
 ### Zwei Stops tauschen
 
 ```bash
@@ -230,16 +272,19 @@ zu Hause ist aus.
 
 | Auftrag am Telefon | Befehl |
 |---|---|
-| „Es regnet, zieh das Designmuseum auf den Vormittag" | `plan.py time kopenhagen 11 09:45` |
-| „Tausch die Erlöserkirche gegen Cisternerne" | `plan.py swap kopenhagen 05 24` |
+| **„Es regnet heute"** | `plan.py wetter kopenhagen tag1` – liefert fertige Tauschvorschläge |
+| „Mach den Tausch aus Vorschlag 2" | `plan.py swap kopenhagen 05 24` |
+| „Zieh das Designmuseum auf den Vormittag" | `plan.py time kopenhagen 11 09:45` |
 | „Verschieb GoBoat auf Tag 3, nachmittags" | `plan.py move kopenhagen 06 tag3 --time 15:30` |
 | „Dreh die Reihenfolge von Tag 1: erst die Kanäle, dann Lunch" | `plan.py order kopenhagen tag1 01,02,04,03,05,06,07` |
 | „Was ist heute geplant?" | `plan.py show kopenhagen tag1` |
 
-Immer zuerst `show` ausführen – ohne die UIDs lässt sich kein Auftrag zuordnen.
-Die Beschreibungen in `places` sagen, welche Orte wetterabhängig sind: bei UID 05
-steht der gesperrte Außenaufstieg, bei UID 11, 17 und 24 die verlässlichen
-Innenräume. Daraus ergibt sich, was bei Regen getauscht wird.
+Bei „es regnet" ist `wetter` immer der erste Befehl – er zeigt in einem Durchgang,
+was betroffen ist und welche Tausche in Frage kommen. Danach nur noch den
+vorgeschlagenen `swap` ausführen.
+
+Für alles andere gilt: zuerst `show`. Es kennzeichnet jeden Stop mit `außen`,
+`innen` oder `FEST`, sodass die Lage ohne Lesen der Beschreibungen erkennbar ist.
 
 ### Regeln für den Notfall
 
@@ -247,6 +292,9 @@ Innenräume. Daraus ergibt sich, was bei Regen getauscht wird.
   sie sind – es geht ausschließlich um Reihenfolge und Uhrzeit.
 - **Nichts löschen.** Ein Stop, der heute nicht passt, wird verschoben, nicht
   entfernt.
+- **Feste Termine bleiben stehen.** Flüge, Transfers, Check-out und gebuchte
+  Zeitfenster sind mit `fixed` markiert; das Werkzeug verweigert sie von selbst.
+  `--force` nur, wenn der Reisende das ausdrücklich verlangt hat.
 - **Nach dem Push kurz prüfen**, dass die Action grün ist. Sie ist die einzige
   Rückmeldung, ob die Datei stimmig blieb.
 
@@ -270,7 +318,8 @@ und werden nicht in der Datei gepflegt.
    `<name>-720.jpg` und `<name>-1200.jpg`. Ohne beide schlägt die Prüfung fehl.
 2. Nächste freie UID ermitteln (höchster Schlüssel in `places` + 1, zweistellig).
 3. Eintrag in `places` anlegen – alle Pflichtfelder, `description` mit
-   mindestens zwei Absätzen.
+   mindestens zwei Absätzen und `weather` gesetzt. `fixed: true` nur bei
+   Flügen, Transfers oder gebuchten Zeitfenstern.
 4. `{ "uid": "28", "time": "14:00" }` an der zeitlich richtigen Stelle in das
    `stops`-Array des gewünschten Tages einfügen.
 5. Prüfen und Version anheben:
@@ -337,6 +386,8 @@ Geprüft wird:
 - `isoDate` ist ein echtes Datum und liegt nach dem Vortag
 - `tone` ist einer der vier erlaubten Werte
 - `description` ist eine Liste mit mindestens zwei Absätzen
+- `weather` ist gesetzt und einer von `aussen`, `innen`, `beides`
+- `fixed` ist entweder `true` oder fehlt
 - `trip.weather.notes` enthält keine Prognosezahlen
 - `ticketUrl` ist eine `https`-Adresse
 

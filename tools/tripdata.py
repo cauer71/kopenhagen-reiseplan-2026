@@ -16,16 +16,23 @@ PHOTOS = ROOT / "docs" / "photos" / "web"
 IMAGE_SIZES = (720, 1200)
 
 TONES = {"teal", "gold", "coral", "navy"}
+
+# Wettertauglichkeit eines Ortes. Grundlage für Umplanungen bei Wetterwechsel.
+WEATHER_VALUES = {
+    "aussen": "im Freien, wetterabhängig",
+    "innen": "überdacht, auch bei Regen gut",
+    "beides": "wetterunabhängig oder gemischt",
+}
 TIME_RE = re.compile(r"^([01]\d|2[0-3]):[0-5]\d$")
 UID_RE = re.compile(r"^\d{2}$")
 ISO_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 TRIP_REQUIRED = ("destination", "title", "subtitle", "dates", "travellers", "heroImage")
 DAY_REQUIRED = ("id", "label", "date", "isoDate", "title", "tone", "heroImage", "stops")
-PLACE_REQUIRED = ("title", "detail", "description", "image", "place")
+PLACE_REQUIRED = ("title", "detail", "description", "image", "place", "weather")
 
 PLACE_ORDER = ("title", "detail", "description", "image", "place",
-               "address", "duration", "price", "tip", "ticketUrl")
+               "weather", "fixed", "address", "duration", "price", "tip", "ticketUrl")
 DAY_ORDER = ("id", "label", "date", "isoDate", "title", "tone", "heroImage",
              "weather", "note", "stops")
 
@@ -212,6 +219,13 @@ def validate(slug: str, data: dict) -> list[str]:
         elif isinstance(description, list) and len(description) < 2:
             problems.append(f"{slug}: places['{uid}'].description hat nur {len(description)} Absatz – "
                             f"mindestens zwei sind vorgesehen")
+        # Nur prüfen, wenn gesetzt – das Fehlen meldet bereits die Pflichtfeldprüfung.
+        if "weather" in place and place["weather"] not in WEATHER_VALUES:
+            problems.append(f"{slug}: places['{uid}'].weather ist '{place.get('weather')}' – "
+                            f"erlaubt: {', '.join(sorted(WEATHER_VALUES))}")
+        if "fixed" in place and place["fixed"] is not True:
+            problems.append(f"{slug}: places['{uid}'].fixed darf nur true sein oder fehlen "
+                            f"(gefunden: {place['fixed']!r})")
         problems += _image_problems(place.get("image", ""), f"{slug}: places['{uid}'].image")
         for field in ("ticketUrl",):
             value = place.get(field)
