@@ -5,32 +5,246 @@
     "subtitle": "Antike, Barock und zeitgenössische Architektur – als flexibler Testaufenthalt.",
     "dates": "05.–06. September 2026",
     "travellers": "Christian & Julia",
-    "heroImage": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1800&q=85",
+    "heroImage": "colosseo",
     "introLabel": "Testaufenthalt",
     "introTitle": "Rom funktioniert am besten in Schichten.",
     "introText": "Der Beispieldatensatz zeigt das wiederverwendbare Reise-Template mit zwei Tagesabschnitten, stabilen Kalender-UIDs, Kartenlinks und optionalen Ticketlinks. Bei einer Wetteränderung wird ein Stop einfach in einen anderen Tagesabschnitt verschoben – UID und Bildzuordnung bleiben erhalten.",
     "theme": "coral",
-    "weather": { "enabled": true, "latitude": 41.9028, "longitude": 12.4964, "timezone": "Europe/Rome", "startDate": "2026-09-05", "endDate": "2026-09-06", "fallback": [
-      { "date": "2026-09-05", "day": "Sa", "tempMax": 29, "tempMin": 18, "code": 1, "pop": 10, "wind": 12, "action": "Antike und Außenräume am Vormittag, Schattenpausen einplanen." },
-      { "date": "2026-09-06", "day": "So", "tempMax": 28, "tempMin": 18, "code": 2, "pop": 15, "wind": 10, "action": "MAXXI als flexibler Indoor-Block, falls das Wetter kippt." }
-    ] }
+    "weather": {
+      "enabled": true,
+      "latitude": 41.9028,
+      "longitude": 12.4964,
+      "timezone": "Europe/Rome",
+      "startDate": "2026-09-05",
+      "endDate": "2026-09-06",
+      "notes": [
+        {
+          "date": "2026-09-05",
+          "day": "Sa",
+          "action": "Antike und Außenräume am Vormittag, Schattenpausen einplanen."
+        },
+        {
+          "date": "2026-09-06",
+          "day": "So",
+          "action": "MAXXI als flexibler Indoor-Block, falls das Wetter kippt."
+        }
+      ]
+    }
   },
   "days": [
-    { "id": "tag1", "label": "Tag 1", "date": "Sa 05.09.", "title": "Antike, Campo de’ Fiori und Abend in Trastevere", "weather": "Wettercheck: Kolosseum früh besuchen, die offenen Plätze später legen.", "tone": "coral", "heroImage": "https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1500&q=85", "note": "Ein dichter, aber gut lesbarer Einstieg: erst das antike Rom, dann Pantheon und Campo de’ Fiori, zum Schluss ein entspannter vegetarischer Abend.", "stops": [
-      { "uid": "01", "time": "09:00", "title": "Kolosseum", "detail": "Das ikonische Amphitheater als erster großer Fixpunkt; Zeitfenster früh buchen.", "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=85", "place": "Colosseum, Piazza del Colosseo 1, Rome", "ticketUrl": "https://ticketing.colosseo.it/en/" },
-      { "uid": "02", "time": "11:00", "title": "Forum Romanum und Palatin", "detail": "Ruinenlandschaft, Stadtgeschichte und starke Blicke über das antike Zentrum.", "image": "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=1000&q=85", "place": "Roman Forum, Via della Salara Vecchia 5/6, Rome", "ticketUrl": "https://ticketing.colosseo.it/en/" },
-      { "uid": "03", "time": "13:15", "title": "Lunch – Il Margutta", "detail": "Vegetarisches Restaurant nahe der Spanischen Treppe; Reservierung sinnvoll.", "image": "https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=1000&q=85", "place": "Il Margutta Vegetarian Food & Art, Via Margutta 118, Rome", "ticketUrl": "https://www.ilmargutta.bio/" },
-      { "uid": "04", "time": "15:00", "title": "Pantheon", "detail": "Der außergewöhnlich gut erhaltene Kuppelbau mit Oculus und klarer Raumgeometrie.", "image": "https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1000&q=85", "place": "Pantheon, Piazza della Rotonda, Rome", "ticketUrl": "https://portale.museiitaliani.it/b2c/#/" },
-      { "uid": "05", "time": "16:00", "title": "Piazza Navona und Campo de’ Fiori", "detail": "Barocke Platzfolge mit Berninis Vierströmebrunnen, Marktstimmung und Fotospots.", "image": "https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1000&q=85", "place": "Piazza Navona, Rome" },
-      { "uid": "06", "time": "19:30", "title": "Dinner – Nannarella", "detail": "Römische Küche in Trastevere mit vegetarischen Klassikern; abends reservieren.", "image": "https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=1000&q=85", "place": "Nannarella, Piazza di San Calisto 7a, Rome", "ticketUrl": "https://www.nannarella.it/" }
-    ] },
-    { "id": "tag2", "label": "Tag 2", "date": "So 06.09.", "title": "Vatikan, MAXXI und moderner Aperitivo", "weather": "Wettercheck: Vatikan am Morgen, MAXXI als wetterfester Nachmittagsblock.", "tone": "teal", "heroImage": "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=1500&q=85", "note": "Der zweite Tag verbindet die große sakrale Architektur des Vatikans mit Zaha Hadids MAXXI und einem lockeren Abend im Viertel Flaminio.", "stops": [
-      { "uid": "07", "time": "08:30", "title": "Vatikanische Museen", "detail": "Früher Einlass zu Sammlungen, Innenhöfen und Sixtinischer Kapelle; Zeitfenster vorab buchen.", "image": "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=1000&q=85", "place": "Vatican Museums, Viale Vaticano, Rome", "ticketUrl": "https://tickets.museivaticani.va/" },
-      { "uid": "08", "time": "12:00", "title": "Petersdom", "detail": "Monumentaler Innenraum, Michelangelos Pietà und eine der prägendsten Kirchen Europas.", "image": "https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1000&q=85", "place": "St. Peter’s Basilica, Piazza San Pietro, Vatican City" },
-      { "uid": "09", "time": "13:30", "title": "Lunch – 100% Bio", "detail": "Unkomplizierter vegetarischer Lunch in Prati mit saisonalen Gerichten.", "image": "https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=1000&q=85", "place": "100% Bio, Via Giovanni Bettolo 54, Rome" },
-      { "uid": "10", "time": "15:00", "title": "MAXXI", "detail": "Zaha Hadids fließende Architektur und zeitgenössische Kunst als Kontrast zum historischen Rom.", "image": "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=1000&q=85", "place": "MAXXI, Via Guido Reni 4A, Rome", "ticketUrl": "https://www.maxxi.art/en/orari-e-biglietteria/" },
-      { "uid": "11", "time": "17:30", "title": "Ponte della Musica und Flaminio", "detail": "Moderner Brückenraum, offene Uferblicke und ein ruhiger Übergang zum Abend.", "image": "https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=1000&q=85", "place": "Ponte della Musica, Rome" },
-      { "uid": "12", "time": "19:00", "title": "Aperitivo – Open Baladin", "detail": "Große Craft-Beer-Auswahl und vegetarische Snacks zum Abschluss.", "image": "https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=1000&q=85", "place": "Open Baladin Roma, Via degli Specchi 6, Rome", "ticketUrl": "https://www.openbaladinroma.it/" }
-    ] }
-  ]
+    {
+      "id": "tag1",
+      "label": "Tag 1",
+      "date": "Sa 05.09.",
+      "isoDate": "2026-09-05",
+      "title": "Antike, Campo de’ Fiori und Abend in Trastevere",
+      "tone": "coral",
+      "heroImage": "pantheon",
+      "weather": "Wettercheck: Kolosseum früh besuchen, die offenen Plätze später legen.",
+      "note": "Ein dichter, aber gut lesbarer Einstieg: erst das antike Rom, dann Pantheon und Campo de’ Fiori, zum Schluss ein entspannter vegetarischer Abend.",
+      "stops": [
+        { "uid": "01", "time": "09:00" },
+        { "uid": "02", "time": "11:00" },
+        { "uid": "03", "time": "13:15" },
+        { "uid": "04", "time": "15:00" },
+        { "uid": "05", "time": "16:00" },
+        { "uid": "06", "time": "19:30" }
+      ]
+    },
+    {
+      "id": "tag2",
+      "label": "Tag 2",
+      "date": "So 06.09.",
+      "isoDate": "2026-09-06",
+      "title": "Vatikan, MAXXI und moderner Aperitivo",
+      "tone": "teal",
+      "heroImage": "forum",
+      "weather": "Wettercheck: Vatikan am Morgen, MAXXI als wetterfester Nachmittagsblock.",
+      "note": "Der zweite Tag verbindet die große sakrale Architektur des Vatikans mit Zaha Hadids MAXXI und einem lockeren Abend im Viertel Flaminio.",
+      "stops": [
+        { "uid": "07", "time": "08:30" },
+        { "uid": "08", "time": "12:00" },
+        { "uid": "09", "time": "13:30" },
+        { "uid": "10", "time": "15:00" },
+        { "uid": "11", "time": "17:30" },
+        { "uid": "12", "time": "19:00" }
+      ]
+    }
+  ],
+  "places": {
+    "01": {
+      "title": "Kolosseum",
+      "detail": "Das ikonische Amphitheater als erster großer Fixpunkt; Zeitfenster früh buchen.",
+      "description": [
+        "Das Flavische Amphitheater wurde ab 72 n. Chr. unter Vespasian begonnen und 80 n. Chr. unter Titus eingeweiht – auf dem Gelände eines künstlichen Sees, der zum Palast Neros gehörte. Mit Platz für geschätzt 50.000 Zuschauer war es der größte Bau seiner Art im Römischen Reich, aus Travertin, Tuff und römischem Beton, mit einem System aus 80 nummerierten Eingängen, das die Massen in Minuten sortierte.",
+        "Sichtbar wird heute vor allem die Konstruktion: die drei Arkadengeschosse mit ihrer Säulenordnung, die Ziegelrippen des Zuschauerraums und darunter die freigelegten Hypogäen – Gänge, Käfige und Aufzugsschächte, mit denen Tiere und Kulissen in die Arena gehoben wurden. Etwa zwei Drittel des Originalbaus fehlen; die Steine wurden über Jahrhunderte für römische Paläste abgetragen.",
+        "Als erster Punkt des Tages ist das bewusst früh gesetzt: Die Arena liegt praktisch ohne Schatten, und im September wird es ab dem späten Vormittag unangenehm heiß und deutlich voller."
+      ],
+      "image": "colosseo",
+      "place": "Colosseum, Piazza del Colosseo 1, Rome",
+      "address": "Piazza del Colosseo 1",
+      "duration": "1,5–2 Std.",
+      "tip": "Zeitfenster-Ticket ist Pflicht und Wochen vorher weg; das Kombiticket gilt auch für Forum und Palatin.",
+      "ticketUrl": "https://ticketing.colosseo.it/en/"
+    },
+    "02": {
+      "title": "Forum Romanum und Palatin",
+      "detail": "Ruinenlandschaft, Stadtgeschichte und starke Blicke über das antike Zentrum.",
+      "description": [
+        "Das Forum Romanum war über ein Jahrtausend das politische, religiöse und juristische Zentrum der Stadt – kein geplanter Platz, sondern eine über Jahrhunderte gewachsene Verdichtung aus Tempeln, Basiliken, Ehrenbögen und Rednertribünen. Entlang der Via Sacra reihen sich die Reste des Saturntempels, der Basilica Julia, des Vestatempels und des Titusbogens; erst Ausgrabungen ab dem 19. Jahrhundert legten das um Meter verschüttete Niveau wieder frei.",
+        "Direkt darüber erhebt sich der Palatin, einer der sieben Hügel und laut Überlieferung Ort der Stadtgründung. Aus dem Wohnviertel der Republik wurde unter den Kaisern ein durchgehender Palastbezirk – Domus Flavia, Domus Augustana, Stadion – dessen Name bis heute das Wort „Palast“ trägt.",
+        "Praktisch ist der Palatin der angenehmere Teil: mehr Schatten durch die Pinien der Farnesischen Gärten und von der oberen Terrasse der beste Gesamtblick über das Forum. Wer die Hitze scheut, dreht die Reihenfolge und geht zuerst hinauf."
+      ],
+      "image": "forum",
+      "place": "Roman Forum, Via della Salara Vecchia 5/6, Rome",
+      "address": "Via della Salara Vecchia 5/6",
+      "duration": "2–2,5 Std.",
+      "tip": "Im Kombiticket mit dem Kolosseum enthalten; Wasserflasche füllen, es gibt öffentliche Trinkbrunnen.",
+      "ticketUrl": "https://ticketing.colosseo.it/en/"
+    },
+    "03": {
+      "title": "Lunch – Il Margutta",
+      "detail": "Vegetarisches Restaurant nahe der Spanischen Treppe; Reservierung sinnvoll.",
+      "description": [
+        "Il Margutta liegt in der Via Margutta, jener stillen Künstlerstraße unterhalb des Pincio, in der einst Ateliers und Werkstätten saßen und die durch „Ein Herz und eine Krone“ Filmgeschichte wurde. Das Lokal gehört zu den ältesten rein vegetarischen Restaurants Roms und versteht sich zugleich als Galerie: Die Wände hängen voll wechselnder Kunst.",
+        "Die Küche arbeitet mit Bio-Produkten und saisonalem Gemüse und bietet mittags ein Buffet- bzw. Menüformat an, das deutlich günstiger ist als am Abend – für eine Mittagspause zwischen Antike und Barock genau richtig.",
+        "Nach dem schattenlosen Vormittag auf Forum und Palatin ist das der eingeplante Kühlpunkt des Tages: drinnen, ruhig und nah genug an der Spanischen Treppe, um danach ohne Umweg weiterzugehen."
+      ],
+      "image": "cucina",
+      "place": "Il Margutta Vegetarian Food & Art, Via Margutta 118, Rome",
+      "address": "Via Margutta 118",
+      "duration": "1–1,5 Std.",
+      "tip": "Mittags gibt es das günstigere Format – trotzdem reservieren, das Lokal ist bekannt.",
+      "ticketUrl": "https://www.ilmargutta.bio/"
+    },
+    "04": {
+      "title": "Pantheon",
+      "detail": "Der außergewöhnlich gut erhaltene Kuppelbau mit Oculus und klarer Raumgeometrie.",
+      "description": [
+        "Das Pantheon in seiner heutigen Form entstand um 126 n. Chr. unter Hadrian und ist der besterhaltene Großbau der römischen Antike – nicht als Ruine, sondern durchgehend in Nutzung, seit dem 7. Jahrhundert als Kirche Santa Maria ad Martyres. Genau das hat ihn gerettet.",
+        "Der Innenraum ist eine geometrische Setzung von seltener Klarheit: Die Kuppel hat mit rund 43 Metern denselben Durchmesser wie die Scheitelhöhe, sodass sich eine perfekte Kugel in den Raum denken lässt. Sie ist bis heute die größte unbewehrte Betonkuppel der Welt – möglich durch nach oben immer leichtere Zuschläge und die kassettierte, sich verjüngende Schale. Die einzige Öffnung ist der Oculus von knapp neun Metern, durch den Licht als wandernder Kreis über Wände und Boden zieht; bei Regen läuft das Wasser über die leicht gewölbte, gelochte Bodenmitte ab.",
+        "Neben der Architektur liegen hier Grabstätten – unter anderem die Raffaels und der Könige des geeinten Italien. Seit 2023 wird Eintritt verlangt; als Kirche gilt weiterhin die Kleiderordnung mit bedeckten Schultern und Knien."
+      ],
+      "image": "pantheon",
+      "place": "Pantheon, Piazza della Rotonda, Rome",
+      "address": "Piazza della Rotonda",
+      "duration": "45 Min.",
+      "tip": "Eintritt kostenpflichtig, Ticket am besten online; Schultern und Knie bedeckt halten.",
+      "ticketUrl": "https://portale.museiitaliani.it/b2c/#/"
+    },
+    "05": {
+      "title": "Piazza Navona und Campo de’ Fiori",
+      "detail": "Barocke Platzfolge mit Berninis Vierströmebrunnen, Marktstimmung und Fotospots.",
+      "description": [
+        "Die Piazza Navona hat ihre langgezogene, abgerundete Form nicht zufällig: Sie folgt exakt dem Grundriss des Stadions des Domitian aus dem 1. Jahrhundert, dessen Zuschauerränge die Fundamente der heutigen Häuserzeilen bilden. Im 17. Jahrhundert wurde daraus die Bühne des römischen Barock – in der Mitte Berninis Vierströmebrunnen mit den Personifikationen von Donau, Ganges, Nil und Río de la Plata, gegenüber Borrominis konkav geschwungene Fassade von Sant’Agnese in Agone. Dass die beiden Architekten Rivalen waren, gehört zu den Geschichten, die man hier unweigerlich erzählt bekommt.",
+        "Wenige Minuten weiter südlich liegt der Campo de’ Fiori, seit dem 19. Jahrhundert Markt und bis heute vormittags mit Ständen belegt; nachmittags übernehmen die Cafés und Bars ringsum. In der Mitte steht das Denkmal für Giordano Bruno, der genau hier 1600 verbrannt wurde – ein Platz mit deutlich dunklerer Geschichte als seine heutige Stimmung vermuten lässt.",
+        "Der späte Nachmittag ist für diese Abfolge der beste Zeitpunkt: Die Fassaden stehen im warmen Licht, die Plätze liegen zunehmend im Schatten der Häuserzeilen, und der Weg nach Trastevere ist von hier kurz."
+      ],
+      "image": "pantheon",
+      "place": "Piazza Navona, Rome",
+      "duration": "1–1,5 Std. als Spaziergang",
+      "tip": "Direkt an den Plätzen ist Gastronomie teuer und mittelmäßig – lieber eine Gasse weiter."
+    },
+    "06": {
+      "title": "Dinner – Nannarella",
+      "detail": "Römische Küche in Trastevere mit vegetarischen Klassikern; abends reservieren.",
+      "description": [
+        "Trastevere, jenseits des Tibers, war lange das Handwerker- und Arbeiterviertel Roms und hat sich seine engen Gassen, Efeufassaden und kleinen Plätze bewahrt – heute die lebendigste Abendgegend der Stadt. Nannarella liegt an der Piazza di San Calisto, mitten in diesem Geflecht, und kocht ausdrücklich römisch statt italienisch allgemein.",
+        "Für einen vegetarischen Abend passt das besser, als es klingt: Die römische Küche hat mit Cacio e Pepe, Pasta alla Gricia-Variante ohne Fleisch, Carciofi und gebratenen Zucchiniblüten eine ganze Reihe fleischloser Klassiker, die hier auf der Karte stehen. Die Portionen sind groß, der Service schnell und laut.",
+        "Reserviert werden sollte auf jeden Fall – an einem Samstagabend füllt sich Trastevere früh, und Wartelisten vor den Türen sind normal."
+      ],
+      "image": "cucina",
+      "place": "Nannarella, Piazza di San Calisto 7a, Rome",
+      "address": "Piazza di San Calisto 7a",
+      "duration": "1,5–2 Std.",
+      "tip": "Samstagabend unbedingt reservieren; Cacio e Pepe und Carciofi sind die vegetarischen Klassiker.",
+      "ticketUrl": "https://www.nannarella.it/"
+    },
+    "07": {
+      "title": "Vatikanische Museen",
+      "detail": "Früher Einlass zu Sammlungen, Innenhöfen und Sixtinischer Kapelle; Zeitfenster vorab buchen.",
+      "description": [
+        "Die Vatikanischen Museen sind kein Museum, sondern ein Weg: eine festgelegte Route von mehreren Kilometern durch die päpstlichen Paläste, die aus der Sammelleidenschaft der Renaissance-Päpste hervorging. Sie beginnt bei antiker Skulptur – Laokoon-Gruppe und Apoll vom Belvedere im Cortile Ottagono –, führt durch die Galerie der Landkarten mit ihren gemalten Italienbildern des 16. Jahrhunderts und dann in die Stanzen Raffaels mit der Schule von Athen.",
+        "Am Ende steht die Sixtinische Kapelle: Michelangelos Deckenfresken von 1508 bis 1512 und das Jüngste Gericht an der Altarwand, entstanden Jahrzehnte später. Fotografieren ist dort verboten, Sprechen soll leise bleiben – und die Aufseher setzen das durch.",
+        "Der frühe Slot ist entscheidend. Die Museen zählen zu den besuchtesten der Welt, und ab dem Vormittag wird die Route zum Gedränge, in dem man das Tempo nicht mehr selbst bestimmt. Auch die Kleiderordnung gilt hier: keine kurzen Hosen, keine schulterfreien Oberteile."
+      ],
+      "image": "forum",
+      "place": "Vatican Museums, Viale Vaticano, Rome",
+      "address": "Viale Vaticano",
+      "duration": "2,5–3 Std.",
+      "tip": "Zeitfenster online buchen; Sonntags ist meist geschlossen – Öffnung vorab prüfen. Kleiderordnung beachten.",
+      "ticketUrl": "https://tickets.museivaticani.va/"
+    },
+    "08": {
+      "title": "Petersdom",
+      "detail": "Monumentaler Innenraum, Michelangelos Pietà und eine der prägendsten Kirchen Europas.",
+      "description": [
+        "Der Petersdom entstand über mehr als ein Jahrhundert an der Stelle einer konstantinischen Basilika und vereint die Handschriften von Bramante, Michelangelo, Maderno und Bernini. Michelangelo verantwortete die Kuppel, die mit rund 136 Metern Höhe bis heute die Silhouette Roms bestimmt; Bernini gestaltete den Bronzebaldachin über dem Papstaltar und den ovalen Petersplatz mit seinen doppelten Kolonnaden.",
+        "Der Innenraum arbeitet mit Maßstab: Bodenmarkierungen zeigen die Längen anderer großer Kirchen der Welt zum Vergleich, und Figuren, die von unten normal wirken, sind in Wahrheit mehrere Meter hoch. Rechts vom Eingang steht Michelangelos Pietà, hinter Panzerglas seit dem Angriff von 1972.",
+        "Der Eintritt in die Basilika ist frei, die Sicherheitskontrolle auf dem Petersplatz kostet dafür Zeit. Optional lässt sich die Kuppel besteigen – mit Aufzug bis zur Dachterrasse und danach einer engen, gekrümmten Treppe zwischen den beiden Kuppelschalen; wer dafür keine Reserven hat, lässt es an diesem dichten Tag besser."
+      ],
+      "image": "pantheon",
+      "place": "St. Peter’s Basilica, Piazza San Pietro, Vatican City",
+      "address": "Piazza San Pietro, Vatikanstadt",
+      "duration": "1–1,5 Std. (Kuppel +1 Std.)",
+      "tip": "Eintritt frei, aber Kontrolle mit Wartezeit; sonntags mittags kann der Angelus den Platz sperren."
+    },
+    "09": {
+      "title": "Lunch – 100% Bio",
+      "detail": "Unkomplizierter vegetarischer Lunch in Prati mit saisonalen Gerichten.",
+      "description": [
+        "Prati, das Viertel nördlich des Vatikans, wurde erst nach 1870 auf ehemaligen Wiesen angelegt – breite Straßen, gründerzeitliche Blöcke und ein Alltagspublikum, das mit dem Pilgerstrom wenig zu tun hat. Wer nur ein paar Straßen weit vom Vatikan weggeht, entkommt damit auch dem Preisniveau direkt an den Museen.",
+        "100% Bio in der Via Giovanni Bettolo ist genau dafür gedacht: unkompliziert, vegetarisch und mit Bio-Zutaten, mit einer wechselnden Auswahl warmer Gerichte und Salate, die man sich zusammenstellt statt à la carte zu bestellen.",
+        "Für die Tageslogik ist das ein bewusst kurzer Stop – der Nachmittag gehört dem MAXXI, und von Prati führt der Weg dorthin in wenigen Minuten über den Tiber."
+      ],
+      "image": "cucina",
+      "place": "100% Bio, Via Giovanni Bettolo 54, Rome",
+      "address": "Via Giovanni Bettolo 54",
+      "duration": "45–60 Min.",
+      "tip": "Selbstbedienungsformat, keine Reservierung nötig – gut für einen schnellen Zwischenstop."
+    },
+    "10": {
+      "title": "MAXXI",
+      "detail": "Zaha Hadids fließende Architektur und zeitgenössische Kunst als Kontrast zum historischen Rom.",
+      "description": [
+        "Das MAXXI – Museo nazionale delle arti del XXI secolo – wurde 2010 eröffnet und ist Zaha Hadids wichtigster Bau in Italien. Auf dem Gelände einer ehemaligen Kaserne im Viertel Flaminio hat sie keine Kiste mit Räumen entworfen, sondern ein Geflecht aus übereinandergeschobenen Betonbändern: Wände krümmen sich, Treppen schweben schwarz durch das Volumen, Oberlichter ziehen das Tageslicht in Streifen nach innen.",
+        "Der Bau ist damit selbst das Hauptexponat – die Sammlung zu Kunst und Architektur des 21. Jahrhunderts und die wechselnden Ausstellungen kommen hinzu. Manche Kritik trifft zu: Die fließenden Räume sind für Kunst nicht immer einfach. Als Erlebnis ist es dennoch eindrücklich.",
+        "Für diese Reise ist das die gesetzte Gegenposition: Nach zwei Tagen Antike, Barock und Sakralarchitektur endet das Programm bewusst im 21. Jahrhundert – und weil alles innen liegt, ist es zugleich der wetterfeste Block, den man bei umschlagendem Wetter nach vorn ziehen kann."
+      ],
+      "image": "forum",
+      "place": "MAXXI, Via Guido Reni 4A, Rome",
+      "address": "Via Guido Reni 4A",
+      "duration": "1,5–2 Std.",
+      "tip": "Montags meist geschlossen; das Foyer und die Freitreppe sind auch ohne Ticket zugänglich.",
+      "ticketUrl": "https://www.maxxi.art/en/orari-e-biglietteria/"
+    },
+    "11": {
+      "title": "Ponte della Musica und Flaminio",
+      "detail": "Moderner Brückenraum, offene Uferblicke und ein ruhiger Übergang zum Abend.",
+      "description": [
+        "Die Ponte della Musica Armando Trovajoli wurde 2011 eröffnet und ist eine der wenigen dezidiert modernen Brücken Roms: ein schlanker Stahlbogen, ausschließlich für Fußgänger und Radfahrer, der Flaminio mit dem Foro Italico auf der anderen Tiberseite verbindet. Weil kein Verkehr darüber läuft, ist es vor allem ein Aufenthaltsort.",
+        "Von der Brückenmitte öffnet sich der Blick beide Uferrichtungen entlang – Platanen, Uferwege, im Hintergrund die Hügel von Monte Mario. Ringsum liegt das Flaminio-Viertel mit Renzo Pianos Auditorium Parco della Musica und dem MAXXI, ein kleines Cluster zeitgenössischer Architektur, wie es das im historischen Zentrum nicht gibt.",
+        "Als Übergang vom Museum zum Abend funktioniert der Stop gut: ein ruhiger Spaziergang im weicheren Licht, ohne Eintritt, ohne Warteschlange."
+      ],
+      "image": "cucina",
+      "place": "Ponte della Musica, Rome",
+      "duration": "30–45 Min.",
+      "tip": "Kostenlos und jederzeit zugänglich – schönstes Licht kurz vor Sonnenuntergang."
+    },
+    "12": {
+      "title": "Aperitivo – Open Baladin",
+      "detail": "Große Craft-Beer-Auswahl und vegetarische Snacks zum Abschluss.",
+      "description": [
+        "Open Baladin in der Via degli Specchi, wenige Schritte vom Campo de’ Fiori, gehört zur Baladin-Brauerei aus dem Piemont und war eine der ersten Adressen, die italienisches Craft Beer in Rom sichtbar gemacht haben. Auf den Hähnen stehen Dutzende Sorten, im Kühlregal ein Vielfaches davon – überwiegend italienische Kleinbrauereien.",
+        "Dazu kommt eine Küche, die auf Burger und vor allem auf handgeschnittene Pommes spezialisiert ist, mit vegetarischen Varianten und Snacks zum Teilen. Als Aperitivo-Format heißt das: kleine Portionen, viel probieren, kein festes Menü.",
+        "Damit schließt der Testaufenthalt dort, wo er am ersten Abend hingeführt hat – im Zentrum zwischen den Barockplätzen, nur eine Ebene entspannter."
+      ],
+      "image": "cucina",
+      "place": "Open Baladin Roma, Via degli Specchi 6, Rome",
+      "address": "Via degli Specchi 6",
+      "duration": "1,5–2 Std.",
+      "tip": "Am frühen Abend noch Platz; nach 20 Uhr wird es rund um Campo de’ Fiori sehr voll.",
+      "ticketUrl": "https://www.openbaladinroma.it/"
+    }
+  }
 }

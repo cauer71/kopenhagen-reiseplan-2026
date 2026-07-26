@@ -1,25 +1,73 @@
+/**
+ * Startseite mit Reisekacheln.
+ *
+ * Titel, Datum, Untertitel und Reisende werden aus den Reisedateien gelesen –
+ * hier steht bewusst nichts doppelt. Zu pflegen ist nur die Reihenfolge in
+ * `data/trips/index.json`.
+ */
+
 const root = document.querySelector("#app");
+const version = document.body.dataset.version ?? "";
+const query = version ? `?v=${encodeURIComponent(version)}` : "";
 
-const trips = [
-  {
-    href: "./trips/kopenhagen/",
-    title: "Kopenhagen",
-    dates: "06.–09. Juli 2026",
-    subtitle: "Kanäle, Design, Hafen und nordisches Stadtgefühl.",
-    image: "./photos/web/aerial-1200.jpg",
-    meta: "4 Tage · Christian & Silke",
-  },
-  {
-    href: "./trips/rom/",
-    title: "Rom",
-    dates: "05.–06. September 2026",
-    subtitle: "Antike, Barock und zeitgenössische Architektur.",
-    image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1400&q=85",
-    meta: "2 Tage · Christian & Julia · Testaufenthalt",
-  },
-];
+const esc = (value = "") => String(value).replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
 
-const esc = (value = "") => String(value).replace(/[&<>\"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
+const image = (name, size = 1200) => (String(name).startsWith("http") ? name : `./photos/web/${name}-${size}.jpg`);
 
-document.title = "Meine Reisen";
-root.innerHTML = `<main class="trip-index"><div class="index-intro"><p class="eyebrow">Reiseplaner</p><h1>Meine Reisen</h1><p>Jede Reise hat ihren eigenen Bereich. Bilder, Tagespläne, Wetter und stabile Termin-UIDs bleiben je Reise getrennt.</p></div><div class="trip-grid">${trips.map((trip) => `<a class="trip-tile" href="${trip.href}"><img src="${trip.image}" alt="${esc(trip.title)}"><span class="trip-tile-shade"></span><div><p class="eyebrow">${esc(trip.dates)}</p><h2>${esc(trip.title)}</h2><p>${esc(trip.subtitle)}</p><small>${esc(trip.meta)} · Reise öffnen →</small></div></a>`).join("")}</div></main>`;
+const srcset = (name) => (String(name).startsWith("http") ? "" : ` srcset="${image(name, 720)} 720w, ${image(name, 1200)} 1200w"`);
+
+async function loadJson(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`${url}: ${response.status}`);
+  return response.json();
+}
+
+function tile(entry, data) {
+  const { trip, days } = data;
+  const stops = days.reduce((sum, day) => sum + day.stops.length, 0);
+  const meta = [`${days.length} Tage`, `${stops} Stops`, trip.travellers, entry.badge]
+    .filter(Boolean).map(esc).join(" · ");
+  const hero = entry.tileImage ?? trip.heroImage;
+  return `<a class="trip-tile" href="./trips/${encodeURIComponent(entry.slug)}/">
+    <img src="${image(hero)}"${srcset(hero)} sizes="(min-width: 60rem) 33vw, 100vw" alt="${esc(trip.destination)}" loading="lazy" decoding="async">
+    <span class="trip-tile-shade"></span>
+    <div>
+      <p class="eyebrow">${esc(trip.dates)}</p>
+      <h2>${esc(trip.destination)}</h2>
+      <p>${esc(trip.subtitle)}</p>
+      <small>${meta} · Reise öffnen →</small>
+    </div>
+  </a>`;
+}
+
+async function init() {
+  document.title = "Meine Reisen";
+  const index = await loadJson(`./data/trips/index.json${query}`);
+  const entries = index.trips ?? [];
+
+  const loaded = await Promise.all(entries.map(async (entry) => {
+    try {
+      return { entry, data: await loadJson(`./data/trips/${entry.slug}.json${query}`) };
+    } catch {
+      return null; // eine defekte Reise soll die Startseite nicht leer machen
+    }
+  }));
+
+  const tiles = loaded.filter(Boolean).map(({ entry, data }) => tile(entry, data)).join("");
+  root.innerHTML = `<main class="trip-index">
+    <div class="index-intro">
+      <p class="eyebrow">Reiseplaner</p>
+      <h1>Meine Reisen</h1>
+      <p>Jede Reise hat ihren eigenen Bereich. Bilder, Tagespläne, Wetter und stabile Termin-UIDs bleiben je Reise getrennt.</p>
+    </div>
+    <div class="trip-grid">${tiles}</div>
+  </main>`;
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  }
+}
+
+init().catch(() => {
+  root.innerHTML = '<p class="load-error">Die Reiseübersicht konnte nicht geladen werden.</p>';
+});

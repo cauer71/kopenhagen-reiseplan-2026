@@ -1,0 +1,8 @@
+# Einheitliche Zeilenenden. Ohne das wandern Dateien zwischen Windows-Arbeitsplatz
+# und Linux-CI hin und her und erzeugen Diffs, in denen jede Zeile geändert scheint.
+* text=auto eol=lf
+
+# Binärdateien nicht anfassen
+*.jpg binary
+*.png binary
+*.ico binary

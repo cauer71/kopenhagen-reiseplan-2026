@@ -1,109 +1,74 @@
-# vinext-starter
+# Reiseplan
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Bildstarke, mobil lesbare Reisepläne als statische Website.
+Live: <https://cauer71.github.io/reiseplan/>
 
-## Prerequisites
+- **Kopenhagen** · 06.–09. Juli 2026 → [`/trips/kopenhagen/`](https://cauer71.github.io/reiseplan/trips/kopenhagen/)
+- **Rom** · 05.–06. September 2026 → [`/trips/rom/`](https://cauer71.github.io/reiseplan/trips/rom/)
 
-- Node.js `>=22.13.0`
+Jede Reise besteht aus Tagesabschnitten, die sich aufklappen lassen. Darin liegen
+die einzelnen Stops mit ausführlicher Beschreibung des Ortes, Adresse, Dauer,
+Hinweisen, Kartenlink und – wo vorhanden – Ticketlink.
 
-## Quick Start
+## Wie es gebaut ist
+
+Kein Build-Schritt, kein Framework, keine Abhängigkeiten. Der Ordner `docs/` ist
+die Website und wird von GitHub Actions unverändert nach GitHub Pages deployt.
+Ein gemeinsames Template (`docs/assets/app.js`) rendert jede Reise aus einer
+JSON-Datei; für eine neue Reise kommen eine Datendatei und eine Unterseite hinzu,
+die Darstellung bleibt unverändert.
+
+Die Seite funktioniert offline: Beim ersten Besuch legt ein Service Worker Seite,
+Daten und die Bilder der geöffneten Reise ab. Unterwegs ohne Netz ist der Plan
+damit vollständig lesbar – nur die Live-Wetterprognose fehlt. Über „Zum
+Homescreen hinzufügen“ läuft sie wie eine App.
+
+## Inhalte ändern
+
+**→ [COWORK.md](COWORK.md)** beschreibt das Datenmodell und die Befehle.
+
+Der Kern: Reihenfolge und Inhalt sind getrennt. Ein Stop zu verschieben oder eine
+Tagesreihenfolge umzustellen bewegt eine Zeile, nicht einen Textblock.
 
 ```bash
-npm install
-npm run dev
-npm run build
+python tools/plan.py show  kopenhagen              # Überblick mit allen UIDs
+python tools/plan.py move  kopenhagen 05 tag2      # Stop in einen anderen Tag
+python tools/plan.py order kopenhagen tag1 01,02,04,03,05,06,07
+python tools/plan.py swap  kopenhagen 11 24        # Wettertausch
+python tools/plan.py bump                          # danach immer
 ```
 
-This starter does not use `wrangler.jsonc`.
+## Lokal ansehen
 
-## Included Shape
-
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Reiseplan-Template
-
-The GitHub Pages version is rendered from `docs/data/trip.json`. The visual
-template in `docs/index.html`, `docs/app.js`, and `docs/styles.css` is reusable
-for every trip. Replace the data file and the images in `docs/photos/web/`;
-the layout does not need to change.
-
-Every stop has a stable two-digit `uid`. For a weather-related change, move a
-stop to another day's `stops` array without changing its `uid`, image, or place.
-This keeps the connection to the matching Google Calendar entry and its future
-image card stable. See `docs/data/README.md` for the editing workflow.
-
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+python -m http.server 8099 --directory docs
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+<http://localhost:8099/> öffnen. Ein direkter `file://`-Aufruf funktioniert nicht,
+weil die Seite ihre Daten per `fetch` lädt.
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+## Prüfen
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+```bash
+python tools/validate_trips.py
+```
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+Prüft alle Reisedateien auf Vollständigkeit, eindeutige UIDs, vorhandene Bilder in
+beiden Breiten, aufsteigende Uhrzeiten und gültige Datumsangaben. Dieselbe Prüfung
+läuft in GitHub Actions vor jedem Deploy, damit fehlerhafte Daten nicht live gehen.
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+## Struktur
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+```text
+docs/                      die Website (wird deployt)
+├── data/trips/            Reisedaten – hier stehen alle Inhalte
+├── photos/web/            Bilder, je in 720 und 1200 Pixel Breite
+├── assets/                Template, Startseite, Design
+├── trips/<slug>/          eigene URL je Reise
+└── sw.js                  Offline-Cache
 
-## Useful Commands
+tools/                     Python-Werkzeuge (nur Standardbibliothek)
+COWORK.md                  Anleitung zum Pflegen der Inhalte
+```
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+Bilder: Unsplash. Wetter: [Open-Meteo](https://open-meteo.com/). Karten: Google Maps.
