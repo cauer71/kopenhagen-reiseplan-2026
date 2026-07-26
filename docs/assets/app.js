@@ -66,7 +66,7 @@ function renderStop(stop, previous, dayId) {
   return `<article class="stop-card" id="${anchor}">
     <button class="stop-toggle" type="button" aria-expanded="false" aria-controls="${anchor}-details">
       <img src="${image(stop.image, 720)}"${srcset(stop.image)} sizes="(min-width: 40rem) 13rem, 6.6rem" alt="${esc(stop.title)}" loading="lazy" decoding="async">
-      <span class="stop-summary"><span class="stop-top"><time>${esc(stop.time)}</time><span class="uid">UID:${esc(stop.uid)}</span></span>
+      <span class="stop-summary"><span class="stop-top"><time>${esc(stop.time)}</time></span>
         <span class="stop-heading"><span class="stop-title" role="heading" aria-level="4">${esc(stop.title)}</span><span class="stop-chevron" aria-hidden="true">⌄</span></span>
         <span class="stop-hint">Beschreibung öffnen</span>
       </span>
@@ -77,6 +77,7 @@ function renderStop(stop, previous, dayId) {
       ${renderFacts(stop)}
       <p class="route">Von ${esc(previous)} · zu Fuß / ÖPNV nach ${esc(stop.title)}</p>
       <div class="stop-links"><a class="maps-link" href="${maps(stop.place)}" target="_blank" rel="noreferrer"><span class="maps-mark" aria-hidden="true"></span><span>Karte<small>Google Maps</small></span></a>${ticket}</div>
+      <p class="uid">UID:${esc(stop.uid)}</p>
     </div>
   </article>`;
 }
