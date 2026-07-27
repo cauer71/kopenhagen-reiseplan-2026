@@ -25,6 +25,10 @@
      der Text beim Öffnen um ein paar Pixel. */
   --day-pad: 1.6rem;
   --stop-pad: 1.35rem;
+
+  /* Farbe des randlosen Einleitungsbands. Kühl getönt, damit es sich vom warmen
+     Seitenverlauf und von den hellen Karten darunter absetzt. */
+  --band: rgba(199, 228, 229, 0.42);
 }
 
 * {
@@ -220,8 +224,20 @@ p {
   scroll-margin-top: var(--stick);
 }
 
+/* Der Einleitungsblock ist ein durchgehendes Farbband statt eines Kastens: Der
+   Text behält die Inhaltsbreite der Seite, die Fläche läuft bis an beide
+   Bildschirmränder. Vorher stand hier ein 1px-Rahmen – zusammen mit
+   `padding: 4.2rem 0` in `.section` lag der Text ohne Abstand auf der Linie.
+
+   Umgesetzt über einen sehr weiten Schattenrand statt über 100vw: Das verändert
+   die Breite des Elements nicht und erzeugt deshalb keine waagrechte
+   Bildlaufleiste. clip-path beschneidet oben und unten, damit das Band genau an
+   der Ober- und Unterkante endet. */
 .intro {
   padding-top: 4.8rem;
+  background: var(--band);
+  box-shadow: 0 0 0 100vmax var(--band);
+  clip-path: inset(0 -100vmax);
 }
 
 .intro p:last-child,
@@ -241,7 +257,6 @@ p {
 }
 
 .weather-card,
-.intro,
 .day-card {
   border: 1px solid var(--line);
   box-shadow: 0 1.1rem 2.8rem rgba(16, 47, 70, 0.09);
