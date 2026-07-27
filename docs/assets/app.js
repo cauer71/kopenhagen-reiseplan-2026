@@ -71,21 +71,28 @@ function renderStop(stop, previous, dayId) {
   const anchor = `${dayId}-stop-${stop.uid}`;
   const ticket = stop.ticketUrl ? `<div class="ticket"><b>Ticket:</b><a href="${esc(stop.ticketUrl)}" target="_blank" rel="noreferrer">Offizielle Buchung</a></div>` : "";
   const body = paragraphs(stop.description).map((text) => `<p>${esc(text)}</p>`).join("");
+  // Nur die Dauer steht in der zugeklappten Zeile; Wetter und Adresse
+  // gehören zu den Fakten im Aufklapper und würden die Achse zulaufen lassen.
+  const chips = stop.duration ? `<span class="stop-chips"><span>${esc(stop.duration)}</span></span>` : "";
   return `<article class="stop-card" id="${anchor}">
-    <button class="stop-toggle" type="button" aria-expanded="false" aria-controls="${anchor}-details">
-      <img src="${image(stop.image, 720)}"${srcset(stop.image)} sizes="(min-width: 48rem) 13rem, 6.6rem" alt="${esc(stop.title)}" loading="lazy" decoding="async">
-      <span class="stop-summary"><span class="stop-top"><time>${esc(stop.time)}</time></span>
+    <div class="stop-rail">
+      <time class="stop-time">${esc(stop.time)}</time>
+      <img class="stop-mark" src="${image(stop.image, 720)}" alt="" decoding="async">
+      <span class="stop-line" aria-hidden="true"></span>
+    </div>
+    <div class="stop-main">
+      <button class="stop-toggle" type="button" aria-expanded="false" aria-controls="${anchor}-details">
         <span class="stop-heading"><span class="stop-title" role="heading" aria-level="4">${esc(stop.title)}</span><span class="stop-chevron" aria-hidden="true">⌄</span></span>
-        <span class="stop-hint">Beschreibung öffnen</span>
-      </span>
-    </button>
-    <div class="stop-details" id="${anchor}-details" hidden>
-      <p class="stop-description">${esc(stop.detail ?? "")}</p>
+        <span class="stop-lead">${esc(stop.detail ?? "")}</span>
+        ${chips}
+      </button>
+      <div class="stop-details" id="${anchor}-details" hidden>
       <div class="stop-body">${body}</div>
       ${renderFacts(stop)}
       <p class="route">Von ${esc(previous)} · zu Fuß / ÖPNV nach ${esc(stop.title)}</p>
       <div class="stop-links"><a class="maps-link" href="${maps(stop.place)}" target="_blank" rel="noreferrer"><span class="maps-mark" aria-hidden="true"></span><span>Karte<small>Google Maps</small></span></a>${ticket}</div>
       <p class="uid">UID:${esc(stop.uid)}</p>
+      </div>
     </div>
   </article>`;
 }
