@@ -73,7 +73,7 @@ function renderStop(stop, previous, dayId) {
   const body = paragraphs(stop.description).map((text) => `<p>${esc(text)}</p>`).join("");
   return `<article class="stop-card" id="${anchor}">
     <button class="stop-toggle" type="button" aria-expanded="false" aria-controls="${anchor}-details">
-      <img src="${image(stop.image, 720)}"${srcset(stop.image)} sizes="(min-width: 40rem) 13rem, 6.6rem" alt="${esc(stop.title)}" loading="lazy" decoding="async">
+      <img src="${image(stop.image, 720)}"${srcset(stop.image)} sizes="(min-width: 48rem) 13rem, 6.6rem" alt="${esc(stop.title)}" loading="lazy" decoding="async">
       <span class="stop-summary"><span class="stop-top"><time>${esc(stop.time)}</time></span>
         <span class="stop-heading"><span class="stop-title" role="heading" aria-level="4">${esc(stop.title)}</span><span class="stop-chevron" aria-hidden="true">⌄</span></span>
         <span class="stop-hint">Beschreibung öffnen</span>
@@ -90,31 +90,113 @@ function renderStop(stop, previous, dayId) {
   </article>`;
 }
 
+/**
+ * Eine Tageskarte ist kein Aufklapper mehr, sondern ein Panel: sichtbar ist
+ * immer genau ein Tag, gewechselt wird über die Leiste. Damit kostet der Weg
+ * zum Tagesplan keinen Tap – vorher lagen 27 Stops hinter 4 geschlossenen Türen.
+ */
 function renderDay(day) {
   let previous = "Unterkunft / Basis";
   const stops = day.stops.map((stop) => { const html = renderStop(stop, previous, day.id); previous = stop.title; return html; }).join("");
-  return `<article class="day-card ${esc(day.tone)}" id="${esc(day.id)}">
-    <button class="day-toggle" type="button" aria-expanded="false" aria-controls="${esc(day.id)}-details">
-      <img class="day-hero" src="${image(day.heroImage)}"${srcset(day.heroImage)} sizes="(min-width: 900px) 45vw, 100vw" alt="${esc(day.title)}" loading="lazy" decoding="async">
-      <span class="day-body"><span class="day-label">${esc(day.label)} · ${esc(day.date)}</span><span class="day-heading"><span><span class="day-title" role="heading" aria-level="3">${esc(day.title)}</span><span class="weather-pill" data-iso="${esc(day.isoDate ?? "")}">${esc(day.weather ?? "")}</span></span><span class="day-chevron" aria-hidden="true">⌄</span></span><span class="day-note">${esc(day.note ?? "")}</span><span class="day-hint">Attraktionen und Beschreibungen anzeigen</span></span>
-    </button>
-    <div class="day-details" id="${esc(day.id)}-details" hidden><div class="stops">${stops}</div></div>
+  return `<article class="day-card ${esc(day.tone)}" id="${esc(day.id)}" role="tabpanel" aria-labelledby="tab-${esc(day.id)}" hidden>
+    <img class="day-hero" src="${image(day.heroImage)}"${srcset(day.heroImage)} sizes="(min-width: 48rem) 60vw, 100vw" alt="${esc(day.title)}" loading="lazy" decoding="async">
+    <div class="day-body">
+      <p class="day-label">${esc(day.label)} · ${esc(day.date)}</p>
+      <h3 class="day-title">${esc(day.title)}</h3>
+      <p class="weather-pill" data-iso="${esc(day.isoDate ?? "")}">${esc(day.weather ?? "")}</p>
+      <p class="day-note">${esc(day.note ?? "")}</p>
+    </div>
+    <div class="day-details"><div class="stops">${stops}</div></div>
   </article>`;
+}
+
+/** Die Leiste, die den Tag wechselt. Wochentag groß, Datum klein darunter. */
+function renderTabs(days) {
+  const tabs = days.map((day) => {
+    const [weekday, dayMonth] = String(day.date ?? "").split(" ");
+    return `<button class="day-tab" type="button" role="tab" id="tab-${esc(day.id)}" aria-controls="${esc(day.id)}" aria-selected="false" data-day="${esc(day.id)}">
+      <b>${esc(weekday || day.label)}</b><small>${esc(dayMonth ?? "")}</small>
+    </button>`;
+  }).join("");
+  return `<div class="day-tabs" role="tablist" aria-label="Reisetage">${tabs}</div>`;
+}
+
+/* -------------------------------------------------- Einstieg „heute“ */
+
+/** Heutiges Datum als JJJJ-MM-TT in lokaler Zeit (toISOString wäre UTC). */
+function todayIso() {
+  const now = new Date();
+  const pad = (value) => String(value).padStart(2, "0");
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+}
+
+/**
+ * Welcher Tag beim Öffnen gilt – und was als nächstes ansteht. Dieselbe
+ * Statusidee wie auf der Startseite, nur hier auf Tagesebene: läuft die Reise,
+ * ist der heutige Tag offen; liegt sie noch vor uns, der erste.
+ */
+function focusOf(days) {
+  const iso = todayIso();
+  const dated = days.filter((day) => day.isoDate);
+  const heute = dated.find((day) => day.isoDate === iso);
+  if (heute) {
+    const jetzt = new Date().toTimeString().slice(0, 5);
+    return { status: "laufend", day: heute, next: heute.stops.find((stop) => stop.time >= jetzt) ?? null };
+  }
+  const kommend = dated.find((day) => day.isoDate > iso);
+  if (kommend) {
+    const tage = Math.round((new Date(`${kommend.isoDate}T12:00:00`) - new Date(`${iso}T12:00:00`)) / 86400000);
+    return { status: "bevorstehend", day: kommend, tage };
+  }
+  return { status: "vergangen", day: days[0] ?? null };
+}
+
+function renderFocus(focus) {
+  if (!focus.day) return "";
+  if (focus.status === "laufend") {
+    const next = focus.next;
+    if (!next) {
+      return `<div class="today-card" data-status="laufend"><p class="today-eyebrow">Heute · ${esc(focus.day.label)}</p><p class="today-title">Tagesprogramm durch</p><p class="today-meta">Alle Stops dieses Tages liegen hinter euch.</p></div>`;
+    }
+    const meta = [WEATHER_LABEL[next.weather], next.duration, next.address].filter(Boolean).map(esc).join(" · ");
+    return `<div class="today-card" data-status="laufend">
+      <p class="today-eyebrow">Als nächstes · ${esc(next.time)}</p>
+      <p class="today-title">${esc(next.title)}</p>
+      <p class="today-meta">${meta}</p>
+      <a class="today-jump" href="${maps(next.place)}" target="_blank" rel="noreferrer">Route öffnen</a>
+    </div>`;
+  }
+  if (focus.status === "bevorstehend") {
+    const first = focus.day.stops[0];
+    return `<div class="today-card" data-status="bevorstehend">
+      <p class="today-eyebrow">${focus.tage === 1 ? "Morgen geht es los" : `Noch ${focus.tage} Tage`}</p>
+      <p class="today-title">${esc(focus.day.label)} · ${esc(focus.day.date)}</p>
+      <p class="today-meta">${first ? `Erster Stop ${esc(first.time)} · ${esc(first.title)}` : esc(focus.day.title)}</p>
+    </div>`;
+  }
+  return `<div class="today-card" data-status="vergangen">
+    <p class="today-eyebrow">Diese Reise liegt zurück</p>
+    <p class="today-title">${esc(focus.day.label)} · ${esc(focus.day.date)}</p>
+    <p class="today-meta">Zum Nachlesen geöffnet – den Tag wechselst du in der Leiste.</p>
+  </div>`;
 }
 
 /* ------------------------------------------- Aufklappen, Zustand, Links */
 
 const openIds = new Set();
+let currentDay = null;
 
 function readState() {
   try {
-    JSON.parse(sessionStorage.getItem(stateKey) ?? "[]").forEach((id) => openIds.add(id));
-  } catch { /* kein nutzbarer Zustand – dann bleibt alles zu */ }
+    const saved = JSON.parse(sessionStorage.getItem(stateKey) ?? "{}");
+    (saved.stops ?? []).forEach((id) => openIds.add(id));
+    currentDay = saved.day ?? null;
+  } catch { /* kein nutzbarer Zustand – dann entscheidet das Datum */ }
 }
 
 function writeState() {
   try {
-    sessionStorage.setItem(stateKey, JSON.stringify([...openIds]));
+    sessionStorage.setItem(stateKey, JSON.stringify({ day: currentDay, stops: [...openIds] }));
   } catch { /* privater Modus o. Ä. – Zustand ist dann nur flüchtig */ }
 }
 
@@ -126,22 +208,41 @@ function setExpanded(toggle, expanded) {
   if (expanded) openIds.add(details.id); else openIds.delete(details.id);
 }
 
+/** Wechselt den sichtbaren Tag. Genau einer ist immer offen. */
+function selectDay(id, { scroll = false } = {}) {
+  const card = id ? document.getElementById(id) : null;
+  if (!card) return;
+  document.querySelectorAll(".day-card").forEach((el) => { el.hidden = el.id !== id; });
+  document.querySelectorAll(".day-tab").forEach((tab) => {
+    tab.setAttribute("aria-selected", String(tab.dataset.day === id));
+  });
+  currentDay = id;
+  writeState();
+  if (scroll) card.scrollIntoView({ block: "start", behavior: "smooth" });
+}
+
+function bindTabs() {
+  document.querySelectorAll(".day-tab").forEach((tab) => {
+    tab.addEventListener("click", () => selectDay(tab.dataset.day, { scroll: true }));
+  });
+}
+
 function bindToggles() {
-  document.querySelectorAll(".day-toggle, .stop-toggle").forEach((toggle) => {
+  document.querySelectorAll(".stop-toggle").forEach((toggle) => {
     toggle.addEventListener("click", () => {
       const expanded = toggle.getAttribute("aria-expanded") === "true";
       setExpanded(toggle, !expanded);
       writeState();
       // Beim Öffnen wird die Karte adressierbar, ohne die History zu füllen.
       if (!expanded) {
-        const anchor = toggle.closest(".day-card, .stop-card");
+        const anchor = toggle.closest(".stop-card");
         if (anchor?.id) history.replaceState(null, "", `#${anchor.id}`);
       }
     });
   });
 }
 
-function restoreState() {
+function restoreStops() {
   openIds.forEach((id) => {
     const toggle = document.querySelector(`[aria-controls="${id}"]`);
     if (toggle) setExpanded(toggle, true);
@@ -149,21 +250,26 @@ function restoreState() {
 }
 
 /**
- * Öffnet das Ziel eines Deep-Links: `#tag2` klappt den Tag auf,
+ * Öffnet das Ziel eines Deep-Links: `#tag2` wählt den Tag,
  * `#tag2-stop-08` zusätzlich den Stop, und scrollt anschließend hin.
+ * Der Abstand nach oben kommt aus `scroll-margin-top`, damit die Überschrift
+ * nicht unter der festen Leiste verschwindet.
  */
 function openFromHash() {
   const id = decodeURIComponent(location.hash.replace(/^#/, ""));
-  if (!id) return;
+  if (!id) return false;
   const target = document.getElementById(id);
-  if (!target) return;
-  const cards = [target.closest(".day-card"), target.closest(".stop-card")].filter(Boolean);
-  cards.forEach((card) => {
-    const toggle = card.querySelector(":scope > .day-toggle, :scope > .stop-toggle");
+  if (!target) return false;
+  const day = target.closest(".day-card");
+  if (day) selectDay(day.id);
+  const stop = target.closest(".stop-card");
+  if (stop) {
+    const toggle = stop.querySelector(":scope > .stop-toggle");
     if (toggle) setExpanded(toggle, true);
-  });
+  }
   writeState();
   target.scrollIntoView({ block: "start", behavior: "smooth" });
+  return true;
 }
 
 /* ------------------------------------------------------ Navigation */
@@ -293,15 +399,21 @@ async function init() {
   const data = await response.json();
   const { trip, places = {} } = data;
   const days = joinStops(data.days, places);
+  const focus = focusOf(days);
 
   document.title = `${trip.title} · ${trip.destination}`;
-  root.innerHTML = `<section class="hero" id="top"><img src="${image(trip.heroImage)}"${srcset(trip.heroImage)} sizes="100vw" alt="${esc(trip.destination)}" class="hero-bg" fetchpriority="high"><div class="hero-shade"></div><nav class="topnav" aria-label="Reiseabschnitte"><a href="${siteRoot}">Alle Reisen</a><a href="#tage">Tage</a>${trip.weather?.enabled ? '<a href="#wetter">Wetter</a>' : ""}</nav><div class="hero-copy"><p class="eyebrow">${esc(trip.dates)} · ${esc(trip.travellers)}</p><h1>${esc(trip.title)}</h1><p>${esc(trip.subtitle)}</p><div class="hero-stats"><span><b>${days.length}</b>Tage</span><span><b>${days.reduce((sum, day) => sum + day.stops.length, 0)}</b>Stops</span></div></div></section><section class="section intro"><p class="eyebrow">${esc(trip.introLabel ?? "Reise")}</p><h2>${esc(trip.introTitle ?? trip.destination)}</h2><p>${esc(trip.introText ?? "")}</p></section>${renderWeather(trip)}<section class="section day-section" id="tage"><div class="section-head"><p class="eyebrow">Tagespläne</p><h2>${days.length} Tage, mobil lesbar</h2></div><div class="days">${days.map(renderDay).join("")}</div></section>`;
+  root.innerHTML = `<section class="hero" id="top"><img src="${image(trip.heroImage)}"${srcset(trip.heroImage)} sizes="100vw" alt="${esc(trip.destination)}" class="hero-bg" fetchpriority="high"><div class="hero-shade"></div><nav class="topnav" aria-label="Reiseabschnitte"><a href="${siteRoot}">Alle Reisen</a><a href="#tage">Tage</a>${trip.weather?.enabled ? '<a href="#wetter">Wetter</a>' : ""}</nav><div class="hero-copy"><p class="eyebrow">${esc(trip.dates)} · ${esc(trip.travellers)}</p><h1>${esc(trip.title)}</h1><p>${esc(trip.subtitle)}</p><div class="hero-stats"><span><b>${days.length}</b>Tage</span><span><b>${days.reduce((sum, day) => sum + day.stops.length, 0)}</b>Stops</span></div></div></section><section class="section intro"><p class="eyebrow">${esc(trip.introLabel ?? "Reise")}</p><h2>${esc(trip.introTitle ?? trip.destination)}</h2><p>${esc(trip.introText ?? "")}</p></section>${renderWeather(trip)}<section class="section day-section" id="tage"><div class="section-head"><p class="eyebrow">Tagespläne</p><h2>${days.length} Tage, mobil lesbar</h2></div>${renderTabs(days)}${renderFocus(focus)}<div class="days">${days.map(renderDay).join("")}</div></section>`;
 
   readState();
+  bindTabs();
   bindToggles();
   bindNavAutoHide();
-  restoreState();
-  openFromHash();
+  restoreStops();
+  // Deep-Link gewinnt; sonst der gespeicherte Tag, sonst der heutige.
+  if (!openFromHash()) {
+    const gespeichert = currentDay && document.getElementById(currentDay) ? currentDay : null;
+    selectDay(gespeichert ?? focus.day?.id, { scroll: !gespeichert && focus.status === "laufend" });
+  }
   window.addEventListener("hashchange", openFromHash);
 
   loadWeather(trip);
