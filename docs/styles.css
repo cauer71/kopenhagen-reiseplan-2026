@@ -419,6 +419,19 @@ p {
   background: rgba(199, 228, 229, 0.34);
 }
 
+/* Das Foto des Ortes, erst im aufgeklappten Zustand. Die Bildmarke auf der
+   Zeitachse ist nur 2,6rem groß und zeigt kaum etwas – hier bekommt der Ort ein
+   Gesicht. Es lädt erst beim Öffnen, weil der Aufklapper bis dahin `hidden` ist. */
+.stop-photo {
+  display: block;
+  width: 100%;
+  height: clamp(9rem, 24vw, 15rem);
+  margin-top: 0.8rem;
+  border-radius: 0.7rem;
+  object-fit: cover;
+  background: rgba(16, 47, 70, 0.06);
+}
+
 .stop-description,
 .stop-details p {
   margin: 0.8rem 0 0;
