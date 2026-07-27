@@ -180,11 +180,42 @@ function renderHero(trip, days, focus) {
 
 /* -------------------------------------------------- Einstieg „heute“ */
 
+/* ------------------------------------------------------- Testansicht */
+
+/**
+ * Der Unterwegs-Zustand gilt nur, während die Reise läuft – im Alltag ist er
+ * also unsichtbar und ein Fehler darin fällt erst im Urlaub auf. Deshalb lassen
+ * sich Datum und Uhrzeit über die Adresse setzen:
+ *
+ *   ?heute=2026-09-05            → dieser Tag gilt als heute
+ *   ?heute=2026-09-05&jetzt=14:30 → zusätzlich diese Uhrzeit
+ *
+ * Nur genau diese Formate werden angenommen; ein Tippfehler wird ignoriert
+ * statt stillschweigend auf einen anderen Tag zu führen. Ist ein Wert gesetzt,
+ * weist ein Hinweis am unteren Rand darauf hin – eine Testansicht darf nicht
+ * mit der Wirklichkeit verwechselt werden.
+ */
+const testParams = new URLSearchParams(location.search);
+const testDate = /^\d{4}-\d{2}-\d{2}$/.test(testParams.get("heute") ?? "") ? testParams.get("heute") : null;
+const testTime = /^([01]\d|2[0-3]):[0-5]\d$/.test(testParams.get("jetzt") ?? "") ? testParams.get("jetzt") : null;
+
 /** Heutiges Datum als JJJJ-MM-TT in lokaler Zeit (toISOString wäre UTC). */
 function todayIso() {
+  if (testDate) return testDate;
   const now = new Date();
   const pad = (value) => String(value).padStart(2, "0");
   return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+}
+
+/** Aktuelle Uhrzeit als HH:MM, ebenfalls über die Adresse setzbar. */
+function nowHm() {
+  return testTime ?? new Date().toTimeString().slice(0, 5);
+}
+
+function renderTestHint() {
+  if (!testDate && !testTime) return "";
+  const teile = [testDate && `Datum ${testDate}`, testTime && `Uhrzeit ${testTime}`].filter(Boolean);
+  return `<p class="test-hint">Testansicht · ${esc(teile.join(" · "))} · <a href="${location.pathname}">echte Zeit</a></p>`;
 }
 
 /**
@@ -197,7 +228,7 @@ function focusOf(days) {
   const dated = days.filter((day) => day.isoDate);
   const heute = dated.find((day) => day.isoDate === iso);
   if (heute) {
-    const jetzt = new Date().toTimeString().slice(0, 5);
+    const jetzt = nowHm();
     // `jetzt` wandert mit nach oben: die Heute-Karte rechnet daraus den Vorlauf.
     return { status: "laufend", day: heute, jetzt, next: heute.stops.find((stop) => stop.time >= jetzt) ?? null };
   }
@@ -253,7 +284,7 @@ function renderFocus(focus) {
  */
 function markProgress(days) {
   const iso = todayIso();
-  const jetzt = new Date().toTimeString().slice(0, 5);
+  const jetzt = nowHm();
   days.forEach((day) => {
     const heute = day.isoDate === iso;
     day.stops.forEach((stop) => {
@@ -500,9 +531,9 @@ async function init() {
   const tage = `<section class="section day-section${laufend ? " is-running" : ""}" id="tage">${kopfzeile}${renderTabs(days)}${renderFocus(focus)}<div class="days">${days.map((day) => renderDay(day, laufend)).join("")}</div></section>`;
 
   // Unterwegs zählt der Tag, davor und danach die Reise.
-  root.innerHTML = laufend
+  root.innerHTML = (laufend
     ? `${kopf}${wetterzeilen}${tage}${einleitung}${renderWeather(trip)}`
-    : `${kopf}${einleitung}${renderWeather(trip)}${tage}`;
+    : `${kopf}${einleitung}${renderWeather(trip)}${tage}`) + renderTestHint();
 
   readState();
   bindTabs();

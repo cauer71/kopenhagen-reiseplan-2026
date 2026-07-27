@@ -47,6 +47,32 @@
   display: none !important;
 }
 
+/* Hinweis bei gesetztem ?heute= oder ?jetzt=. Fest am unteren Rand, damit er
+   weder die Navigationsleiste noch die Sprungziele stört – und auffällig genug,
+   dass eine Testansicht nicht mit der Wirklichkeit verwechselt wird. */
+.test-hint {
+  position: fixed;
+  left: 50%;
+  bottom: 0.7rem;
+  transform: translateX(-50%);
+  z-index: 30;
+  margin: 0;
+  max-width: calc(100% - 1.4rem);
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: var(--coral);
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-align: center;
+  box-shadow: 0 0.6rem 1.6rem rgba(7, 27, 40, 0.3);
+}
+
+.test-hint a {
+  text-decoration: underline;
+}
+
 /* scroll-behavior steht hier absichtlich nicht mehr: global gesetzt galt es auch
    für jedes scrollIntoView nach dem Aufklappen. Es wird jetzt pro Aufruf gesetzt. */
 html {
