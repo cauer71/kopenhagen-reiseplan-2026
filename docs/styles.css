@@ -1066,3 +1066,122 @@ time {
     height: 20rem;
   }
 }
+
+
+/* ---------------------------------------------- Unterwegs: "Direkt im Tag" */
+
+/* Der Vollbild-Hero ist ein Ankunftsbild. Läuft die Reise, reicht ein Kopf:
+   Bild, Tagesnummer, Titel - der Rest waere Weg zum Plan. Vor und nach der
+   Reise bleibt `.hero` unveraendert, deshalb steht hier nur die Abweichung. */
+.hero-compact {
+  min-height: 13.25rem;
+  align-items: end;
+  padding: 0;
+}
+
+.hero-compact .hero-copy {
+  padding: 0 var(--gutter) 1rem;
+  animation-duration: 0.5s;
+}
+
+.hero-compact h1 {
+  max-width: 14ch;
+  font-size: clamp(2.1rem, 9vw, 3rem);
+  line-height: 0.98;
+}
+
+.hero-compact .eyebrow {
+  margin-bottom: 0.4rem;
+  font-size: 0.72rem;
+}
+
+/* Wetter unterwegs: eine Zeile mit Zahl und Konsequenz. Die volle Sektion mit
+   allen Reisetagen bleibt erhalten, steht aber unter dem Plan. */
+.weather-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.65rem var(--gutter);
+  border-bottom: 1px solid rgba(16, 47, 70, 0.1);
+  background: rgba(199, 228, 229, 0.55);
+}
+
+.weather-line .weather-pill {
+  margin: 0;
+  min-height: 1.4rem;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.67rem;
+}
+
+.weather-line b {
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+/* Ohne Sektionskopf beginnt der Plan direkt unter der Wetterzeile. */
+.day-section.is-running {
+  padding-top: 1rem;
+}
+
+.day-section.is-running .day-tabs {
+  margin-top: 0;
+}
+
+/* Erledigte Stops bleiben lesbar, treten aber zurueck - die Achse zeigt damit
+   den Tagesfortschritt, ohne dass etwas verschwindet. Gesetzt wird das
+   Attribut in markProgress(), hier steht nur das Aussehen. */
+.stop-card[data-past="true"] .stop-main {
+  opacity: 0.5;
+}
+
+.stop-card[data-past="true"] .stop-time {
+  color: var(--muted);
+}
+
+.stop-card[data-past="true"] .stop-mark {
+  filter: saturate(0.4);
+  box-shadow: 0 0 0 2px rgba(16, 47, 70, 0.2);
+}
+
+/* Innen oder aussen entscheidet unterwegs ueber die Reihenfolge - deshalb steht
+   es als zweiter Chip in der Zeile und nicht erst in den Fakten. */
+.stop-chips [data-weather="aussen"] {
+  background: rgba(222, 98, 70, 0.12);
+  color: #a8442c;
+}
+
+.stop-chips [data-weather="innen"] {
+  background: rgba(20, 119, 124, 0.12);
+  color: #0f5b5f;
+}
+
+.stop-chips [data-weather="beides"] {
+  background: rgba(16, 47, 70, 0.07);
+  color: var(--muted);
+}
+
+/* Route und Details nebeneinander statt nur Route. */
+.today-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.45rem;
+}
+
+.today-actions .today-jump {
+  margin-top: 0;
+}
+
+.today-more {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 0 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 0.9rem;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-decoration: none;
+}
