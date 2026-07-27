@@ -271,7 +271,10 @@ function openFromHash() {
   if (day) selectDay(day.id);
   const stop = target.closest(".stop-card");
   if (stop) {
-    const toggle = stop.querySelector(":scope > .stop-toggle");
+    // Absteigend suchen, nicht `:scope >`: der Knopf liegt seit der Zeitachse
+    // in `.stop-main`, eine Ebene tiefer. Stop-Karten verschachteln sich nicht,
+    // deshalb ist die Suche eindeutig.
+    const toggle = stop.querySelector(".stop-toggle");
     if (toggle) setExpanded(toggle, true);
   }
   writeState();
