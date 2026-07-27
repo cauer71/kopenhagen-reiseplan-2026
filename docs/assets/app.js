@@ -44,6 +44,19 @@ function weatherCard(note, live = null) {
   return `<article class="weather-card"><span>${esc(note.day)}</span>${numbers}<p>${esc(note.action ?? "")}</p></article>`;
 }
 
+/**
+ * Unterwegs steht das Wetter nicht in einer eigenen Sektion, sondern als eine
+ * Zeile über dem Plan: Prognosepille plus die Konsequenz aus den Planungs-
+ * hinweisen. Gerendert wird eine Zeile je Tag; umgeschaltet wird sie wie die
+ * Tageskarten, damit `loadWeather()` die Pillen weiterhin über
+ * `.weather-pill[data-iso]` findet und nichts nachgeladen werden muss.
+ */
+function renderWeatherLine(trip, day) {
+  if (!trip.weather?.enabled || !day.isoDate) return "";
+  const note = (trip.weather.notes ?? []).find((n) => n.date === day.isoDate);
+  return `<div class="weather-line" data-day="${esc(day.id)}" hidden><span class="weather-pill" data-iso="${esc(day.isoDate)}">${esc(day.weather ?? "")}</span><b>${esc(note?.action ?? "")}</b></div>`;
+}
+
 /* ----------------------------------------------------------------- Stops */
 
 const paragraphs = (value) => (Array.isArray(value) ? value : [value]).filter(Boolean);
@@ -53,6 +66,16 @@ const WEATHER_LABEL = {
   innen: "Überdacht – auch bei Regen gut",
   beides: "Wetterunabhängig",
 };
+
+/* Kurzform für die Chipzeile – die Langform bleibt in den Fakten. */
+const WEATHER_SHORT = {
+  aussen: "Im Freien",
+  innen: "Überdacht",
+  beides: "Wetterfest",
+};
+
+/** Uhrzeit "HH:MM" als Minuten seit Mitternacht. */
+const minutes = (time) => Number(time.slice(0, 2)) * 60 + Number(time.slice(3, 5));
 
 function renderFacts(place) {
   const facts = [
@@ -71,9 +94,14 @@ function renderStop(stop, previous, dayId) {
   const anchor = `${dayId}-stop-${stop.uid}`;
   const ticket = stop.ticketUrl ? `<div class="ticket"><b>Ticket:</b><a href="${esc(stop.ticketUrl)}" target="_blank" rel="noreferrer">Offizielle Buchung</a></div>` : "";
   const body = paragraphs(stop.description).map((text) => `<p>${esc(text)}</p>`).join("");
-  // Nur die Dauer steht in der zugeklappten Zeile; Wetter und Adresse
-  // gehören zu den Fakten im Aufklapper und würden die Achse zulaufen lassen.
-  const chips = stop.duration ? `<span class="stop-chips"><span>${esc(stop.duration)}</span></span>` : "";
+  // Dauer und Wetterart stehen in der zugeklappten Zeile: unterwegs entscheidet
+  // „innen oder außen“ über die Reihenfolge. Adresse und Hinweise gehören
+  // weiterhin zu den Fakten im Aufklapper.
+  const chips = [
+    stop.duration ? `<span>${esc(stop.duration)}</span>` : "",
+    stop.weather ? `<span data-weather="${esc(stop.weather)}">${esc(WEATHER_SHORT[stop.weather])}</span>` : "",
+  ].join("");
+  const chipRow = chips ? `<span class="stop-chips">${chips}</span>` : "";
   return `<article class="stop-card" id="${anchor}">
     <div class="stop-rail">
       <time class="stop-time">${esc(stop.time)}</time>
@@ -84,7 +112,7 @@ function renderStop(stop, previous, dayId) {
       <button class="stop-toggle" type="button" aria-expanded="false" aria-controls="${anchor}-details">
         <span class="stop-heading"><span class="stop-title" role="heading" aria-level="4">${esc(stop.title)}</span><span class="stop-chevron" aria-hidden="true">⌄</span></span>
         <span class="stop-lead">${esc(stop.detail ?? "")}</span>
-        ${chips}
+        ${chipRow}
       </button>
       <div class="stop-details" id="${anchor}-details" hidden>
       <img class="stop-photo" src="${image(stop.image, 1200)}"${srcset(stop.image)} sizes="(min-width: 48rem) 62rem, 90vw" alt="${esc(stop.title)}" loading="lazy" decoding="async">
@@ -100,20 +128,22 @@ function renderStop(stop, previous, dayId) {
 
 /**
  * Eine Tageskarte ist kein Aufklapper mehr, sondern ein Panel: sichtbar ist
- * immer genau ein Tag, gewechselt wird über die Leiste. Damit kostet der Weg
- * zum Tagesplan keinen Tap – vorher lagen 27 Stops hinter 4 geschlossenen Türen.
+ * immer genau ein Tag, gewechselt wird über die Leiste.
+ *
+ * Läuft die Reise (`laufend`), fallen Tagesbild, Tagesnummer und Wetterpille
+ * weg: Die Nummer steht im Kopf, das Wetter in der Zeile darüber, und das Bild
+ * doppelt den Kopf. Vor und nach der Reise bleibt die Karte wie bisher.
  */
-function renderDay(day) {
+function renderDay(day, laufend = false) {
   let previous = "Unterkunft / Basis";
   const stops = day.stops.map((stop) => { const html = renderStop(stop, previous, day.id); previous = stop.title; return html; }).join("");
+  const hero = laufend ? "" : `<img class="day-hero" src="${image(day.heroImage)}"${srcset(day.heroImage)} sizes="(min-width: 48rem) 60vw, 100vw" alt="${esc(day.title)}" loading="lazy" decoding="async">`;
+  const kopf = laufend
+    ? `<h3 class="day-title">${esc(day.title)}</h3><p class="day-note">${esc(day.note ?? "")}</p>`
+    : `<p class="day-label">${esc(day.label)} · ${esc(day.date)}</p><h3 class="day-title">${esc(day.title)}</h3><p class="weather-pill" data-iso="${esc(day.isoDate ?? "")}">${esc(day.weather ?? "")}</p><p class="day-note">${esc(day.note ?? "")}</p>`;
   return `<article class="day-card ${esc(day.tone)}" id="${esc(day.id)}" role="tabpanel" aria-labelledby="tab-${esc(day.id)}" hidden>
-    <img class="day-hero" src="${image(day.heroImage)}"${srcset(day.heroImage)} sizes="(min-width: 48rem) 60vw, 100vw" alt="${esc(day.title)}" loading="lazy" decoding="async">
-    <div class="day-body">
-      <p class="day-label">${esc(day.label)} · ${esc(day.date)}</p>
-      <h3 class="day-title">${esc(day.title)}</h3>
-      <p class="weather-pill" data-iso="${esc(day.isoDate ?? "")}">${esc(day.weather ?? "")}</p>
-      <p class="day-note">${esc(day.note ?? "")}</p>
-    </div>
+    ${hero}
+    <div class="day-body">${kopf}</div>
     <div class="day-details"><div class="stops">${stops}</div></div>
   </article>`;
 }
@@ -127,6 +157,25 @@ function renderTabs(days) {
     </button>`;
   }).join("");
   return `<div class="day-tabs" role="tablist" aria-label="Reisetage">${tabs}</div>`;
+}
+
+/* ------------------------------------------------------------------ Kopf */
+
+/**
+ * Der Vollbild-Hero ist ein Ankunftsbild – unterwegs kostet er zweieinhalb
+ * Bildschirmhöhen bis zum ersten Stop. Läuft die Reise, schrumpft er auf einen
+ * Kopf mit Tagesnummer; davor und danach bleibt er unverändert.
+ */
+function renderHero(trip, days, focus) {
+  const nav = `<nav class="topnav" aria-label="Reiseabschnitte"><a href="${siteRoot}">Alle Reisen</a><a href="#tage">Tage</a>${trip.weather?.enabled ? '<a href="#wetter">Wetter</a>' : ""}</nav>`;
+  const bild = `<img src="${image(trip.heroImage)}"${srcset(trip.heroImage)} sizes="100vw" alt="${esc(trip.destination)}" class="hero-bg" fetchpriority="high"><div class="hero-shade"></div>`;
+
+  if (focus.status !== "laufend") {
+    return `<section class="hero" id="top">${bild}${nav}<div class="hero-copy"><p class="eyebrow">${esc(trip.dates)} · ${esc(trip.travellers)}</p><h1>${esc(trip.title)}</h1><p>${esc(trip.subtitle)}</p><div class="hero-stats"><span><b>${days.length}</b>Tage</span><span><b>${days.reduce((sum, day) => sum + day.stops.length, 0)}</b>Stops</span></div></div></section>`;
+  }
+
+  const nummer = days.indexOf(focus.day) + 1;
+  return `<section class="hero hero-compact" id="top">${bild}${nav}<div class="hero-copy"><p class="eyebrow">Tag ${nummer} von ${days.length} · ${esc(focus.day.date)} · ${esc(trip.travellers)}</p><h1>${esc(trip.title)}</h1></div></section>`;
 }
 
 /* -------------------------------------------------- Einstieg „heute“ */
@@ -149,7 +198,8 @@ function focusOf(days) {
   const heute = dated.find((day) => day.isoDate === iso);
   if (heute) {
     const jetzt = new Date().toTimeString().slice(0, 5);
-    return { status: "laufend", day: heute, next: heute.stops.find((stop) => stop.time >= jetzt) ?? null };
+    // `jetzt` wandert mit nach oben: die Heute-Karte rechnet daraus den Vorlauf.
+    return { status: "laufend", day: heute, jetzt, next: heute.stops.find((stop) => stop.time >= jetzt) ?? null };
   }
   const kommend = dated.find((day) => day.isoDate > iso);
   if (kommend) {
@@ -166,12 +216,19 @@ function renderFocus(focus) {
     if (!next) {
       return `<div class="today-card" data-status="laufend"><p class="today-eyebrow">Heute · ${esc(focus.day.label)}</p><p class="today-title">Tagesprogramm durch</p><p class="today-meta">Alle Stops dieses Tages liegen hinter euch.</p></div>`;
     }
+    // Der Vorlauf ist die eigentliche Antwort auf „was jetzt?“ – deshalb steht
+    // er in derselben Zeile wie die Uhrzeit, nicht im Fließtext.
+    const rest = minutes(next.time) - minutes(focus.jetzt);
+    const gleich = rest > 90 ? `in ${Math.round(rest / 60)} Std.` : `in ${Math.max(rest, 0)} Min.`;
     const meta = [WEATHER_LABEL[next.weather], next.duration, next.address].filter(Boolean).map(esc).join(" · ");
     return `<div class="today-card" data-status="laufend">
-      <p class="today-eyebrow">Als nächstes · ${esc(next.time)}</p>
+      <p class="today-eyebrow">Als nächstes · ${esc(next.time)} · ${gleich}</p>
       <p class="today-title">${esc(next.title)}</p>
       <p class="today-meta">${meta}</p>
-      <a class="today-jump" href="${maps(next.place)}" target="_blank" rel="noreferrer">Route öffnen</a>
+      <div class="today-actions">
+        <a class="today-jump" href="${maps(next.place)}" target="_blank" rel="noreferrer">Route öffnen</a>
+        <a class="today-more" href="#${esc(focus.day.id)}-stop-${esc(next.uid)}">Details</a>
+      </div>
     </div>`;
   }
   if (focus.status === "bevorstehend") {
@@ -187,6 +244,23 @@ function renderFocus(focus) {
     <p class="today-title">${esc(focus.day.label)} · ${esc(focus.day.date)}</p>
     <p class="today-meta">Zum Nachlesen geöffnet – den Tag wechselst du in der Leiste.</p>
   </div>`;
+}
+
+/**
+ * Markiert vergangene Stops des heutigen Tages. Setzt nur ein Attribut, das
+ * Aussehen macht CSS – dadurch bleibt jeder Aufklapper offen und die Achse
+ * wandert im Minutentakt mit, ohne dass neu gerendert wird.
+ */
+function markProgress(days) {
+  const iso = todayIso();
+  const jetzt = new Date().toTimeString().slice(0, 5);
+  days.forEach((day) => {
+    const heute = day.isoDate === iso;
+    day.stops.forEach((stop) => {
+      const card = document.getElementById(`${day.id}-stop-${stop.uid}`);
+      if (card) card.dataset.past = String(heute && stop.time < jetzt);
+    });
+  });
 }
 
 /* ------------------------------------------- Aufklappen, Zustand, Links */
@@ -221,6 +295,8 @@ function selectDay(id, { scroll = false } = {}) {
   const card = id ? document.getElementById(id) : null;
   if (!card) return;
   document.querySelectorAll(".day-card").forEach((el) => { el.hidden = el.id !== id; });
+  // Die Wetterzeile gehört zum Tag und wird mitgeschaltet.
+  document.querySelectorAll(".weather-line").forEach((el) => { el.hidden = el.dataset.day !== id; });
   document.querySelectorAll(".day-tab").forEach((tab) => {
     tab.setAttribute("aria-selected", String(tab.dataset.day === id));
   });
@@ -344,7 +420,8 @@ async function loadWeather(trip) {
       return weatherCard(note, byDate.get(date));
     }).join("");
 
-    // Dieselbe Prognose in die Tageskarten spiegeln, damit dort nichts veraltet.
+    // Dieselbe Prognose in die Tageskarten bzw. in die Wetterzeile spiegeln,
+    // damit dort nichts veraltet. Die Pille trägt in beiden Fällen `data-iso`.
     document.querySelectorAll(".weather-pill[data-iso]").forEach((pill) => {
       const live = byDate.get(pill.dataset.iso);
       if (!live) return;
@@ -411,9 +488,21 @@ async function init() {
   const { trip, places = {} } = data;
   const days = joinStops(data.days, places);
   const focus = focusOf(days);
+  const laufend = focus.status === "laufend";
 
   document.title = `${trip.title} · ${trip.destination}`;
-  root.innerHTML = `<section class="hero" id="top"><img src="${image(trip.heroImage)}"${srcset(trip.heroImage)} sizes="100vw" alt="${esc(trip.destination)}" class="hero-bg" fetchpriority="high"><div class="hero-shade"></div><nav class="topnav" aria-label="Reiseabschnitte"><a href="${siteRoot}">Alle Reisen</a><a href="#tage">Tage</a>${trip.weather?.enabled ? '<a href="#wetter">Wetter</a>' : ""}</nav><div class="hero-copy"><p class="eyebrow">${esc(trip.dates)} · ${esc(trip.travellers)}</p><h1>${esc(trip.title)}</h1><p>${esc(trip.subtitle)}</p><div class="hero-stats"><span><b>${days.length}</b>Tage</span><span><b>${days.reduce((sum, day) => sum + day.stops.length, 0)}</b>Stops</span></div></div></section><section class="section intro"><p class="eyebrow">${esc(trip.introLabel ?? "Reise")}</p><h2>${esc(trip.introTitle ?? trip.destination)}</h2><p>${esc(trip.introText ?? "")}</p></section>${renderWeather(trip)}<section class="section day-section" id="tage"><div class="section-head"><p class="eyebrow">Tagespläne</p><h2>${days.length} Tage, mobil lesbar</h2></div>${renderTabs(days)}${renderFocus(focus)}<div class="days">${days.map(renderDay).join("")}</div></section>`;
+
+  const kopf = renderHero(trip, days, focus);
+  const wetterzeilen = days.map((day) => renderWeatherLine(trip, day)).join("");
+  const einleitung = `<section class="section intro"><p class="eyebrow">${esc(trip.introLabel ?? "Reise")}</p><h2>${esc(trip.introTitle ?? trip.destination)}</h2><p>${esc(trip.introText ?? "")}</p></section>`;
+  // Unterwegs kostet der Sektionskopf eine halbe Bildschirmhöhe vor der Leiste.
+  const kopfzeile = laufend ? "" : `<div class="section-head"><p class="eyebrow">Tagespläne</p><h2>${days.length} Tage, mobil lesbar</h2></div>`;
+  const tage = `<section class="section day-section${laufend ? " is-running" : ""}" id="tage">${kopfzeile}${renderTabs(days)}${renderFocus(focus)}<div class="days">${days.map((day) => renderDay(day, laufend)).join("")}</div></section>`;
+
+  // Unterwegs zählt der Tag, davor und danach die Reise.
+  root.innerHTML = laufend
+    ? `${kopf}${wetterzeilen}${tage}${einleitung}${renderWeather(trip)}`
+    : `${kopf}${einleitung}${renderWeather(trip)}${tage}`;
 
   readState();
   bindTabs();
@@ -426,6 +515,9 @@ async function init() {
     selectDay(gespeichert ?? focus.day?.id, { scroll: !gespeichert && focus.status === "laufend" });
   }
   window.addEventListener("hashchange", openFromHash);
+
+  markProgress(days);
+  setInterval(() => markProgress(days), 60000);
 
   loadWeather(trip);
   enableOffline(days);
