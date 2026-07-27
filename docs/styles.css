@@ -20,6 +20,16 @@
      braucht jedes Sprungziel denselben Abstand nach oben (scroll-margin-top). */
   --stick: 8.6rem;
 
+  /* Wo die Tagesleiste hängen bleibt. Solange die Topnav sichtbar ist, unter
+     ihrer Unterkante; sobald sie beim Herunterscrollen verschwindet, rückt die
+     Leiste in die frei gewordene Höhe nach – sonst schwebt sie mitten im Bild
+     über einer leeren Stelle. Den Zustand setzt bindNavAutoHide in app.js. */
+  --tabs-top: 4.6rem;
+}
+
+:root[data-nav="hidden"] {
+  --tabs-top: 0.5rem;
+
   /* Innenabstand der Karten. Als Variable, weil der zugeklappte und der
      aufgeklappte Teil einer Karte denselben Wert brauchen – sonst springt
      der Text beim Öffnen um ein paar Pixel. */
@@ -152,7 +162,8 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .topnav {
+  .topnav,
+  .day-tabs {
     transition: none;
   }
 }
@@ -508,7 +519,11 @@ p {
 .stop-facts {
   display: grid;
   gap: 0.55rem 1.4rem;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  /* min(13rem, 100%) statt 13rem: Die Zeitachse verengt die Spalte auf dem Handy
+     auf rund 165px. Eine feste Mindestbreite von 13rem (208px) kann dort nicht
+     schrumpfen – der Kasten wurde 27px breiter als sein Platz und der Text lief
+     über den Rand. Mit min() fällt die Spalte auf die verfügbare Breite zurück. */
+  grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr));
   margin: 1rem 0 0;
   padding: 0.85rem 1rem;
   border-radius: 1rem;
@@ -662,9 +677,11 @@ p {
    ein Tap wechselt ihn – statt erst einmal Inhalt sichtbar zu machen. */
 .day-tabs {
   position: sticky;
-  /* 4,6rem = Unterkante der Topnav (0,7rem Abstand + 44px + Rahmen) plus Luft.
-     Sonst schiebt sich die Pille über den oberen Rand der Leiste. */
-  top: 4.6rem;
+  /* Ohne Topnav 4,6rem = deren Unterkante plus Luft, mit ausgeblendeter Topnav
+     dicht am oberen Rand. Der Übergang ist animiert, damit die Leiste nachrückt
+     statt zu springen. */
+  top: var(--tabs-top);
+  transition: top 240ms ease;
   z-index: 15;
   display: grid;
   grid-auto-flow: column;

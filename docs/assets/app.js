@@ -411,7 +411,11 @@ function bindNavAutoHide() {
     const runter = y > letzte;
     letzte = y;
     // Mit Tastaturfokus in der Leiste nie ausblenden.
-    nav.dataset.hidden = String(runter && y > OBEN_FREI && !nav.contains(document.activeElement));
+    const versteckt = runter && y > OBEN_FREI && !nav.contains(document.activeElement);
+    nav.dataset.hidden = String(versteckt);
+    // Der Zustand wandert nach oben ans Wurzelelement, damit die Tagesleiste in
+    // die frei gewordene Höhe nachrücken kann – siehe --tabs-top in styles.css.
+    document.documentElement.dataset.nav = versteckt ? "hidden" : "visible";
   }, { passive: true });
 }
 
