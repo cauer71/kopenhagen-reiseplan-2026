@@ -1,4 +1,7 @@
-@import url("../styles.css");
+/* Kein @import auf ../styles.css mehr: Der Import trug keinen Versionsparameter,
+   deshalb lieferte der Cache die Designdatei bis zu zehn Minuten alt aus – `bump`
+   erneuert nur die HTML-Dateien. Beide Stilvorlagen werden jetzt direkt im HTML
+   verlinkt, versioniert und parallel geladen statt nacheinander. */
 
 .trip-index {
   width: min(76rem, calc(100% - 2 * var(--gutter)));
