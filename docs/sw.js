@@ -11,12 +11,13 @@
  * CACHE_VERSION bei Änderungen an dieser Datei oder am Shell-Umfang erhöhen.
  */
 
-const CACHE_VERSION = "reiseplan-v3";
+const CACHE_VERSION = "reiseplan-v4";
 
 const SHELL = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
+  "./styles.css",
   "./assets/styles.css",
   "./assets/app.js",
   "./assets/landing.js",
