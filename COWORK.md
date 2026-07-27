@@ -407,6 +407,31 @@ Beim Testen von Änderungen stört der Service Worker: In den DevTools unter
 *Application → Service Workers* „Update on reload“ aktivieren oder mit
 Strg+Shift+R neu laden.
 
+### Den Unterwegs-Zustand ansehen
+
+Während einer laufenden Reise sieht die Seite anders aus: kleiner Titelkopf statt
+Vollbild, Wetter als Zeile über dem Plan, eine „Als nächstes“-Karte mit Vorlauf,
+und vergangene Stops des Tages sind abgesetzt. Im Alltag ist dieser Zustand
+**unsichtbar** – ein Fehler darin fiele erst im Urlaub auf.
+
+Deshalb lassen sich Datum und Uhrzeit über die Adresse setzen:
+
+```text
+…/trips/rom/?heute=2026-09-05
+…/trips/rom/?heute=2026-09-05&jetzt=14:30
+```
+
+Das funktioniert auch auf der Live-Seite und damit auf dem Handy, ohne Code zu
+ändern. Nur genau diese Formate werden angenommen (`JJJJ-MM-TT` und `HH:MM`); ein
+Tippfehler wird ignoriert statt stillschweigend auf einen anderen Tag zu führen.
+
+Ist ein Wert gesetzt, erscheint unten ein roter Hinweis „Testansicht“ mit einem
+Link zurück zur echten Zeit. Eine Testansicht darf nicht mit der Wirklichkeit
+verwechselt werden – erst recht nicht, wenn man unterwegs schnell nachsieht, was
+als nächstes ansteht.
+
+Ohne Parameter verhält sich die Seite unverändert.
+
 ### Veröffentlichen
 
 ```bash
