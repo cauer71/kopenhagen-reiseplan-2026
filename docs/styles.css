@@ -35,6 +35,18 @@
   box-sizing: border-box;
 }
 
+/* Das hidden-Attribut muss gewinnen. Die Regel dafür steht nur im Stylesheet des
+   Browsers, und jede eigene display-Angabe schlägt sie – unabhängig von der
+   Spezifität, weil Autorenregeln vor Browserregeln kommen. Genau dadurch waren
+   beide Wetterzeilen gleichzeitig sichtbar: `.weather-line` setzt display: flex,
+   also blieb das gesetzte hidden ohne Wirkung.
+
+   Die Regel gilt absichtlich für alles, was hidden benutzt – Wetterzeilen,
+   Tageskarten und Aufklapper –, damit derselbe Fehler nicht wiederkehrt. */
+[hidden] {
+  display: none !important;
+}
+
 /* scroll-behavior steht hier absichtlich nicht mehr: global gesetzt galt es auch
    für jedes scrollIntoView nach dem Aufklappen. Es wird jetzt pro Aufruf gesetzt. */
 html {
