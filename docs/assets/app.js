@@ -87,6 +87,7 @@ function renderStop(stop, previous, dayId) {
         ${chips}
       </button>
       <div class="stop-details" id="${anchor}-details" hidden>
+      <img class="stop-photo" src="${image(stop.image, 1200)}"${srcset(stop.image)} sizes="(min-width: 48rem) 62rem, 90vw" alt="${esc(stop.title)}" loading="lazy" decoding="async">
       <div class="stop-body">${body}</div>
       ${renderFacts(stop)}
       <p class="route">Von ${esc(previous)} · zu Fuß / ÖPNV nach ${esc(stop.title)}</p>
