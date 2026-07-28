@@ -25,10 +25,6 @@
      Leiste in die frei gewordene Höhe nach – sonst schwebt sie mitten im Bild
      über einer leeren Stelle. Den Zustand setzt bindNavAutoHide in app.js. */
   --tabs-top: 4.6rem;
-}
-
-:root[data-nav="hidden"] {
-  --tabs-top: 0.5rem;
 
   /* Innenabstand der Karten. Als Variable, weil der zugeklappte und der
      aufgeklappte Teil einer Karte denselben Wert brauchen – sonst springt
@@ -39,6 +35,18 @@
   /* Farbe des randlosen Einleitungsbands. Kühl getönt, damit es sich vom warmen
      Seitenverlauf und von den hellen Karten darunter absetzt. */
   --band: rgba(199, 228, 229, 0.42);
+}
+
+/* Nur die Position der Tagesleiste hängt am Scrollzustand. Die drei Variablen
+   darüber standen versehentlich hier drin: Da das Attribut erst beim ersten
+   Scrollen gesetzt wird und beim Hochscrollen auf "visible" wechselt, waren
+   --day-pad, --stop-pad und --band auf Desktopbreiten beim Laden undefiniert.
+   Eine undefinierte Variable macht die ganze Deklaration ungültig – Kartenpolster
+   fiel auf 0, das Einleitungsband wurde durchsichtig, und beides flackerte beim
+   Scrollen. Auf schmalen Fenstern fiel es nicht auf, weil die Medienabfrage
+   weiter unten alle drei in :root neu setzt. */
+:root[data-nav="hidden"] {
+  --tabs-top: 0.5rem;
 }
 
 * {
