@@ -90,7 +90,7 @@ function renderFacts(place) {
   return `<dl class="stop-facts">${facts.map(([label, value]) => `<div><dt>${label}</dt><dd>${esc(value)}</dd></div>`).join("")}</dl>`;
 }
 
-function renderStop(stop, previous, dayId) {
+function renderStop(stop, previous, dayId, index = 0) {
   const anchor = `${dayId}-stop-${stop.uid}`;
   const ticket = stop.ticketUrl ? `<div class="ticket"><b>Ticket:</b><a href="${esc(stop.ticketUrl)}" target="_blank" rel="noreferrer">Offizielle Buchung</a></div>` : "";
   const body = paragraphs(stop.description).map((text) => `<p>${esc(text)}</p>`).join("");
@@ -102,7 +102,9 @@ function renderStop(stop, previous, dayId) {
     stop.weather ? `<span data-weather="${esc(stop.weather)}">${esc(WEATHER_SHORT[stop.weather])}</span>` : "",
   ].join("");
   const chipRow = chips ? `<span class="stop-chips">${chips}</span>` : "";
-  return `<article class="stop-card" id="${anchor}">
+  // --i ist die Position im Tag. Damit staffelt CSS den Auftritt entlang der
+  // Zeitachse, ohne dass hier ein Zeitgeber laufen muss.
+  return `<article class="stop-card" id="${anchor}" style="--i:${index}">
     <div class="stop-rail">
       <time class="stop-time">${esc(stop.time)}</time>
       <img class="stop-mark" src="${image(stop.image, 720)}" alt="" decoding="async">
@@ -136,7 +138,7 @@ function renderStop(stop, previous, dayId) {
  */
 function renderDay(day, laufend = false) {
   let previous = "Unterkunft / Basis";
-  const stops = day.stops.map((stop) => { const html = renderStop(stop, previous, day.id); previous = stop.title; return html; }).join("");
+  const stops = day.stops.map((stop, i) => { const html = renderStop(stop, previous, day.id, i); previous = stop.title; return html; }).join("");
   const hero = laufend ? "" : `<img class="day-hero" src="${image(day.heroImage)}"${srcset(day.heroImage)} sizes="(min-width: 48rem) 60vw, 100vw" alt="${esc(day.title)}" loading="lazy" decoding="async">`;
   const kopf = laufend
     ? `<h3 class="day-title">${esc(day.title)}</h3><p class="day-note">${esc(day.note ?? "")}</p>`

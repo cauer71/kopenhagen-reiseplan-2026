@@ -30,7 +30,16 @@
      aufgeklappte Teil einer Karte denselben Wert brauchen – sonst springt
      der Text beim Öffnen um ein paar Pixel. */
   --day-pad: 1.6rem;
-  --stop-pad: 1.35rem;
+  /* Seitliches Polster im Aufklapper. Der Wert entspricht dem, was vorher hart
+     in .stop-details stand; die Lesebahn weiter unten rechnet damit. */
+  --stop-pad: 1rem;
+
+  /* Geometrie der Zeitachse: Breite der Achsenspalte und Abstand zum Text.
+     Als Variablen, weil die Lesebahn genau auf der Mitte der Achslinie enden
+     muss – eine hart geschriebene Zahl würde beim nächsten Feinschliff der
+     Achse still auseinanderlaufen. */
+  --rail: 3.6rem;
+  --rail-gap: 0.9rem;
 
   /* Farbe des randlosen Einleitungsbands. Kühl getönt, damit es sich vom warmen
      Seitenverlauf und von den hellen Karten darunter absetzt. */
@@ -327,12 +336,18 @@ p {
   display: grid;
   gap: 0;
   margin-top: 1.4rem;
+  /* Bezugsrahmen für die Containerabfrage der Lesebahn: Sie soll auf die Breite
+     der Stop-Spalte reagieren, nicht auf die des Fensters. Sonst bräuchte es
+     eine dritte Bruchstelle in der Fensterskala, und bei starkem Zoom griffe
+     die Regel nicht. */
+  container-type: inline-size;
+  container-name: stops;
 }
 
 .stop-card {
   display: grid;
-  grid-template-columns: 3.6rem minmax(0, 1fr);
-  gap: 0 0.9rem;
+  grid-template-columns: var(--rail) minmax(0, 1fr);
+  gap: 0 var(--rail-gap);
   scroll-margin-top: var(--stick);
 }
 
@@ -353,6 +368,8 @@ p {
 }
 
 .stop-mark {
+  position: relative;
+  z-index: 1;
   display: block;
   flex: none;
   width: 2.6rem;
@@ -361,7 +378,8 @@ p {
   border-radius: 50%;
   box-shadow: 0 0 0 2px rgba(20, 119, 124, 0.55);
   object-fit: cover;
-  transition: transform 220ms ease;
+  /* box-shadow mit, damit der Ring des offenen Stops mitwächst statt zu springen. */
+  transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
 .stop-card:hover .stop-mark {
@@ -370,7 +388,13 @@ p {
 
 /* flex: 1 lässt die Linie bis zum unteren Rand des Stops laufen - dadurch
    schließt sie ohne Lücke an die Bildmarke des nächsten Stops an. */
+/* Achslinie und Bildmarke liegen eine Stapelebene höher als der Inhalt: Die
+   Lesebahn steht im Dokument nach der Achse und hat eine deckende Fläche, würde
+   die Linie also überdecken. Mit z-index läuft sie sichtbar über die Bahn, und
+   der Lesetext hängt an ihr. */
 .stop-line {
+  position: relative;
+  z-index: 1;
   flex: 1;
   width: 2px;
   min-height: 0.9rem;
@@ -486,7 +510,7 @@ p {
 
 .stop-details {
   margin-top: 0.85rem;
-  padding: 0.2rem 1rem 1rem;
+  padding: 0.2rem var(--stop-pad) var(--stop-pad);
   border-radius: 0.9rem;
   background: rgba(199, 228, 229, 0.34);
 }
@@ -522,6 +546,49 @@ p {
   color: var(--muted);
   font-size: 0.97rem;
   line-height: 1.62;
+}
+
+/* ── Lesebahn ──────────────────────────────────────────────────────────────
+   Auf schmalen Fenstern bleiben dem Prosatext nur rund 196px, also etwa 26
+   Zeichen je Zeile. Drei Absätze werden dadurch so hoch, dass ein geöffneter
+   Stop über zwei Bildschirme reicht.
+
+   Allein der Prosablock verlässt deshalb die Textspalte: nach links bis genau
+   auf die Mitte der Achslinie, nach rechts bis an die Innenkante der
+   Tageskarte. Alles Kompakte – Foto, Faktenliste, Anfahrt, Karte, UID – bleibt
+   in der Spalte, weil es von Mehrbreite nicht profitiert.
+
+   Warum nicht der ganze Aufklapper ausbricht: Er müsste dann eine eigene
+   Rasterzeile werden, und die Achslinie wäre unterbrochen. So bleibt die Linie
+   unangetastet und bekommt eine zweite Aufgabe – sie ist ab hier auch der linke
+   Satzrand des Lesetexts.
+
+   Geschaltet über die Breite der Stop-Spalte, nicht die des Fensters: aktiv
+   unter 26rem Spaltenbreite, also von 320px bis rund 495px Fensterbreite und
+   ebenso bei starkem Zoom. */
+@container stops (max-width: 26rem) {
+  .stop-body {
+    /* Links bis zur Linienmitte: eigenes Polster + Spalt + halbe Achsenbreite.
+       Rechts bis zur Kartenkante: eigenes Polster + Kartenpolster. */
+    margin-inline-start: calc(-1 * (var(--stop-pad) + var(--rail-gap) + var(--rail) / 2));
+    margin-inline-end: calc(-1 * (var(--stop-pad) + var(--day-pad)));
+    padding-inline: 0.85rem var(--stop-pad);
+    /* Deckend, nicht getönt: Eine durchscheinende Fläche würde an ihren Kanten
+       Nähte zeigen, weil sie den Ton des Aufklappers doppelt. Der Wert ist
+       derselbe Ton über Kartenpapier gerechnet, deshalb sieht man den Übergang
+       nicht – nur die Linie, die darüber läuft. */
+    background: #ecf3ec;
+    background: color-mix(in srgb, var(--water) 34%, var(--card));
+    border-radius: 0.55rem 0 0 0.55rem;
+  }
+
+  /* Zeilenhöhe und Schriftgröße sind der stärkere Hebel als die Breite: 1,62
+     ist ein Wert für lange Zeilen, nicht für 34 Zeichen. Zusammen mit der Bahn
+     halbiert das die Höhe des Prosablocks nahezu. */
+  .stop-body p {
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
 }
 
 .stop-facts {
@@ -831,6 +898,10 @@ p {
 
 .day-details {
   padding: 0 var(--day-pad) var(--day-pad);
+  /* Sicherheitsnetz für die Lesebahn: Sie rechnet auf den Pixel an die
+     Kartenkante. Bei krummen Gerätepixelverhältnissen darf ein halbes Pixel
+     Überstand keine waagrechte Bildlaufleiste erzeugen. */
+  overflow-x: clip;
 }
 
 .day-label,
@@ -972,6 +1043,167 @@ time {
   }
 }
 
+/* ══ Bewegung ══════════════════════════════════════════════════════════════
+   Grundsatz: Bewegung beantwortet eine Frage – woher kam das, wohin ist es
+   gegangen, was hat sich geändert. Alles hier bewegt ausschließlich transform
+   und opacity, beide werden nach dem Layout aufgetragen und lösen keinen
+   Neuumbruch aus. Das ist bei 30 Zeichen je Zeile keine Feinheit: ein
+   animiertes Höhen- oder Breitenmaß würde den Text in jedem Bild neu brechen.
+
+   Ausgelöst wird fast alles ohne JavaScript. `[hidden]` bedeutet
+   `display: none`; taucht ein Element daraus auf, startet der Browser seine
+   Animationen von selbst neu. Tageswechsel und Aufklappen brauchen deshalb
+   keinen Zeitgeber – nur die Position im Tag kommt als --i aus app.js. */
+
+@keyframes stop-auftritt {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+@keyframes linie-waechst {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes flaeche-setzt-sich {
+  from {
+    opacity: 0;
+    transform: translateY(-0.4rem);
+  }
+}
+
+@keyframes marke-nickt {
+  50% {
+    transform: scale(0.88);
+  }
+}
+
+/* Die Stops eines Tages ziehen von oben nach unten auf, 45ms auseinander.
+   Zusammen mit der wachsenden Linie liest sich das Betreten eines Tages als
+   Aufziehen der Zeitachse – das tragende Motiv erklärt sich dadurch selbst. */
+.stop-main {
+  animation: stop-auftritt 380ms ease-out backwards;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+/* scaleY ist hier besonders sauber: flex: 1 legt die Höhe der Linie vor der
+   Animation fest, das Skalieren ändert daran nichts. transform-origin oben,
+   damit sie von der eigenen Bildmarke nach unten wächst. */
+.stop-line {
+  animation: linie-waechst 420ms ease-out backwards;
+  animation-delay: calc(var(--i, 0) * 45ms + 120ms);
+  transform-origin: top center;
+}
+
+/* Der Inhalt des Aufklappers setzt sich von oben hinein. Die Höhe springt
+   dabei bewusst: dass mehr da ist, ist die eigentliche Auskunft – bewegt wird
+   nur, was schon Platz hat. */
+.stop-details > * {
+  animation: flaeche-setzt-sich 300ms ease-out backwards;
+}
+
+.stop-details > :nth-child(2) { animation-delay: 40ms; }
+.stop-details > :nth-child(3) { animation-delay: 80ms; }
+.stop-details > :nth-child(n + 4) { animation-delay: 120ms; }
+
+/* Ein offener Stop markiert sich auf der Achse. Mehrere Stops dürfen offen
+   sein – dann sieht man an der Achse, was man schon gelesen hat. */
+.stop-card:has([aria-expanded="true"]) .stop-mark {
+  transform: scale(1.14);
+  box-shadow: 0 0 0 3px rgba(20, 119, 124, 0.75);
+}
+
+/* Der Stop, dessen Zeit gerade abgelaufen ist, tritt weich zurück und hakt sich
+   ab. markProgress läuft im Minutentakt – ohne Übergang wäre das ein Flackern
+   mitten im Lesen. */
+.stop-card .stop-main,
+.stop-card .stop-time {
+  transition: opacity 600ms ease;
+}
+
+.stop-card[data-past="true"] .stop-mark {
+  animation: marke-nickt 520ms ease-in-out;
+}
+
+/* Antwort im Moment der Berührung, bevor irgendetwas lädt oder aufklappt.
+   Unterwegs am Handy die wichtigste Bewegung der Liste, obwohl die kleinste. */
+.stop-toggle:active .stop-title,
+.day-tab:active,
+.maps-link:active,
+.today-jump:active,
+.today-more:active,
+.topnav a:active {
+  transform: scale(0.96);
+}
+
+.stop-title,
+.day-tab,
+.maps-link,
+.today-jump,
+.today-more {
+  transition: transform 120ms ease;
+}
+
+/* Die gewählte Tagespille rastet ein, statt hart umzuschalten. */
+.day-tab[aria-selected="true"] {
+  animation: marke-nickt 260ms ease-out reverse;
+}
+
+/* Das Foto ist der einzige Inhalt, der nach dem Layout eintrifft: es lädt mit
+   loading="lazy" erst beim Öffnen. Es blendet auf, statt zu erscheinen. */
+@keyframes foto-auf {
+  from {
+    opacity: 0;
+    transform: scale(1.015);
+  }
+}
+
+.stop-photo {
+  animation: foto-auf 520ms ease-out backwards;
+  animation-delay: 60ms;
+}
+
+/* Die Live-Prognose ersetzt heute stillschweigend „keine Prognose“ durch Zahlen.
+   Mit dem Attribut, das loadWeather ohnehin setzt, trifft sie sichtbar ein. */
+.weather-pill[data-live="true"] {
+  animation: flaeche-setzt-sich 420ms ease-out;
+}
+
+/* Die Heute-Karte ist unterwegs die Antwort auf „was jetzt?“ und steht an einer
+   Stelle, an die das Auge nicht von sich aus zuerst geht. */
+.today-card {
+  animation: rise 520ms ease-out both;
+  animation-delay: 80ms;
+}
+
+/* Das Titelbild kommt eine Spur zu groß herein und setzt sich – ein
+   Ankunftsbild, das ankommt. Einmalig, keine Dauerbewegung. */
+@keyframes hero-setzt-sich {
+  from {
+    transform: scale(1.06);
+  }
+}
+
+.hero-bg {
+  animation: hero-setzt-sich 1600ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+/* Wer keine Bewegung will, bekommt keine – jede Animation endet sofort in ihrem
+   Zielzustand, statt abgeschaltet zu werden. Sonst blieben Elemente mit
+   `backwards` in ihrem Anfangszustand stehen und wären unsichtbar. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+  }
+}
+
 /* Eine Skala statt vier Bruchstellen in zwei Einheiten: 48rem und 64rem.
    Vorher lagen 40rem, 760px, 900px und 60rem nebeneinander – zwischen 640 und
    760 px galt eine Mischform, die niemand entworfen hatte. */
@@ -982,7 +1214,14 @@ time {
   :root {
     --gutter: 1.25rem;
     --day-pad: 1.15rem;
-    --stop-pad: 1.05rem;
+    /* 0.8rem, nicht 1.05rem: Dieser Wert stand vorher hart in .stop-details und
+       ist jetzt die Variable. 1.05rem würde den Aufklapper enger machen und der
+       Lesebahn Breite nehmen. */
+    --stop-pad: 0.8rem;
+    /* Die Achse rückt zusammen. Als Variablen, damit die Lesebahn mitrechnet –
+       vorher stand die Geometrie in .stop-card hart und nur zufällig passend. */
+    --rail: 3rem;
+    --rail-gap: 0.7rem;
   }
 
   .section {
@@ -1076,12 +1315,7 @@ time {
     line-height: 1.4;
   }
 
-  /* Schmale Fenster: Achse rückt zusammen, die Bildmarke wird kleiner. */
-  .stop-card {
-    grid-template-columns: 3rem minmax(0, 1fr);
-    gap: 0 0.7rem;
-  }
-
+  /* Schmale Fenster: die Bildmarke wird kleiner, die Achsenbreite steht oben. */
   .stop-mark {
     width: 2.2rem;
     height: 2.2rem;
@@ -1099,9 +1333,6 @@ time {
     font-size: 0.9rem;
   }
 
-  .stop-details {
-    padding: 0.2rem 0.8rem 0.8rem;
-  }
 
   li {
     grid-template-columns: 3.05rem minmax(0, 1fr) 5.6rem;
