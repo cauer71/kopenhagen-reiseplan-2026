@@ -74,6 +74,15 @@
   display: none !important;
 }
 
+/* Beim Antippen legen mobile Browser eine blaue Fläche über das getroffene
+   Element – beim Aufklappen eines Stops blitzte dadurch der ganze zugeklappte
+   Bereich kurz blau auf. Die Rückmeldung übernimmt stattdessen die :active-Regel
+   weiter unten, die nur den Titel kurz eindrückt. */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Hinweis bei gesetztem ?heute= oder ?jetzt=. Fest am unteren Rand, damit er
    weder die Navigationsleiste noch die Sprungziele stört – und auffällig genug,
    dass eine Testansicht nicht mit der Wirklichkeit verwechselt wird. */
@@ -510,7 +519,7 @@ p {
 
 .stop-details {
   margin-top: 0.85rem;
-  padding: 0.2rem var(--stop-pad) var(--stop-pad);
+  padding: var(--stop-pad);
   border-radius: 0.9rem;
   background: rgba(199, 228, 229, 0.34);
 }
@@ -522,8 +531,7 @@ p {
   display: block;
   width: 100%;
   height: clamp(9rem, 24vw, 15rem);
-  margin-top: 0.8rem;
-  border-radius: 0.7rem;
+  border-radius: 0.55rem;
   object-fit: cover;
   background: rgba(16, 47, 70, 0.06);
 }
@@ -549,42 +557,46 @@ p {
 }
 
 /* ── Lesebahn ──────────────────────────────────────────────────────────────
-   Auf schmalen Fenstern bleiben dem Prosatext nur rund 196px, also etwa 26
-   Zeichen je Zeile. Drei Absätze werden dadurch so hoch, dass ein geöffneter
-   Stop über zwei Bildschirme reicht.
+   Auf schmalen Fenstern bleiben dem Aufklapper nur rund 196px Inhaltsbreite,
+   also etwa 22 Zeichen je Zeile. Drei Absätze werden dadurch so hoch, dass ein
+   geöffneter Stop über zwei Bildschirme reicht.
 
-   Allein der Prosablock verlässt deshalb die Textspalte: nach links bis genau
-   auf die Mitte der Achslinie, nach rechts bis an die Innenkante der
-   Tageskarte. Alles Kompakte – Foto, Faktenliste, Anfahrt, Karte, UID – bleibt
-   in der Spalte, weil es von Mehrbreite nicht profitiert.
+   Der ganze Aufklapper verlässt deshalb die Textspalte: nach links bis genau auf
+   die Mitte der Achslinie, nach rechts bis an die Innenkante der Tageskarte.
+   Eine Fläche, eine Breite, ein Ton – Foto, Beschreibung, Fakten, Anfahrt,
+   Karte und UID sitzen alle auf demselben Grund und an derselben Satzkante.
+   Vorher brach nur der Prosablock aus, und das ergab drei Breiten und zwei
+   Tönungen übereinander.
 
-   Warum nicht der ganze Aufklapper ausbricht: Er müsste dann eine eigene
-   Rasterzeile werden, und die Achslinie wäre unterbrochen. So bleibt die Linie
-   unangetastet und bekommt eine zweite Aufgabe – sie ist ab hier auch der linke
-   Satzrand des Lesetexts.
+   Warum die Verschiebung über negative Außenmaße läuft und nicht über das
+   Raster: Ein Aufklapper, der als eigene Rasterzeile über beide Spalten geht,
+   nimmt der Achse ihre Zeile – die Linie wäre unterbrochen. So bleibt sie
+   unangetastet und bekommt eine zweite Aufgabe: Sie ist ab hier auch der linke
+   Satzrand des Aufklappers.
 
    Geschaltet über die Breite der Stop-Spalte, nicht die des Fensters: aktiv
    unter 26rem Spaltenbreite, also von 320px bis rund 495px Fensterbreite und
    ebenso bei starkem Zoom. */
 @container stops (max-width: 26rem) {
-  .stop-body {
-    /* Links bis zur Linienmitte: eigenes Polster + Spalt + halbe Achsenbreite.
-       Rechts bis zur Kartenkante: eigenes Polster + Kartenpolster. */
-    margin-inline-start: calc(-1 * (var(--stop-pad) + var(--rail-gap) + var(--rail) / 2));
-    margin-inline-end: calc(-1 * (var(--stop-pad) + var(--day-pad)));
-    padding-inline: 0.85rem var(--stop-pad);
-    /* Deckend, nicht getönt: Eine durchscheinende Fläche würde an ihren Kanten
-       Nähte zeigen, weil sie den Ton des Aufklappers doppelt. Der Wert ist
-       derselbe Ton über Kartenpapier gerechnet, deshalb sieht man den Übergang
-       nicht – nur die Linie, die darüber läuft. */
+  .stop-details {
+    /* Links bis zur Linienmitte: Spalt + halbe Achsenbreite. Rechts bis zur
+       Kartenkante: Kartenpolster. Ohne --stop-pad in der Rechnung – anders als
+       ein Kind des Aufklappers ist der Aufklapper selbst nicht eingerückt. */
+    margin-inline-start: calc(-1 * (var(--rail-gap) + var(--rail) / 2));
+    margin-inline-end: calc(-1 * var(--day-pad));
+    /* Links mehr Polster, damit der Satz nicht an der Achslinie klebt. */
+    padding-inline: 0.95rem var(--stop-pad);
+    /* Deckend, nicht getönt: Eine durchscheinende Fläche über der Achslinie
+       würde die Linie durchscheinen lassen und an der linken Kante eine Naht
+       zeigen. Der Wert ist derselbe Ton über Kartenpapier gerechnet – die
+       Erscheinung bleibt gleich, nur läuft die Linie jetzt sichtbar darüber. */
     background: #ecf3ec;
     background: color-mix(in srgb, var(--water) 34%, var(--card));
     border-radius: 0.55rem 0 0 0.55rem;
   }
 
   /* Zeilenhöhe und Schriftgröße sind der stärkere Hebel als die Breite: 1,62
-     ist ein Wert für lange Zeilen, nicht für 34 Zeichen. Zusammen mit der Bahn
-     halbiert das die Höhe des Prosablocks nahezu. */
+     ist ein Wert für lange Zeilen, nicht für 36 Zeichen. */
   .stop-body p {
     font-size: 0.94rem;
     line-height: 1.5;
@@ -599,10 +611,13 @@ p {
      schrumpfen – der Kasten wurde 27px breiter als sein Platz und der Text lief
      über den Rand. Mit min() fällt die Spalte auf die verfügbare Breite zurück. */
   grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr));
-  margin: 1rem 0 0;
-  padding: 0.85rem 1rem;
-  border-radius: 1rem;
-  background: rgba(24, 122, 118, 0.07);
+  /* Kein eigener Kasten mehr: Der Aufklapper ist eine Fläche, und ein zweiter
+     getönter Kasten darin ergab drei Breiten und zwei Töne übereinander.
+     Getrennt wird jetzt mit einer Haarlinie – dieselbe Sprache wie bei der UID
+     am Fuß der Karte. */
+  margin: 1.1rem 0 0;
+  padding: 1.1rem 0 0;
+  border-top: 1px solid rgba(16, 47, 70, 0.12);
 }
 
 .stop-facts dt {
