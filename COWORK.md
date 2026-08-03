@@ -542,6 +542,20 @@ die Reihenfolge in `index.json` wird ignoriert.
   zwischengespeichert. Danach ist der Plan im Flugmodus vollständig lesbar.
   **Bilder und Live-Prognose fehlen dann** — beide liegen auf fremden Hosts, die
   der Service Worker nicht anfasst.
-- **Installierbar.** Über „Zum Homescreen hinzufügen“ läuft die Seite wie eine App.
+- **Installierbar, auch auf iPhone und iPad.** Über „Zum Home-Bildschirm
+  hinzufügen“ läuft die Seite ohne Browserleiste und erscheint eigenständig im
+  App-Umschalter. Grundlage ist `display: standalone` im Manifest, das Safari auf
+  iOS und iPadOS berücksichtigt; Service Worker laufen dort mit.
+
+  Zwei Dinge sind dafür eigens gesetzt: `apple-mobile-web-app-title` gibt den
+  Namen unter dem Icon vor — ohne das nähme iOS `document.title`, und den setzt
+  `app.js` auf den vollen Reisetitel mit über 50 Zeichen. Und
+  `apple-mobile-web-app-capable` bleibt für iOS vor 16.4, wo das Manifest-`display`
+  noch nicht griff.
+
+  **Der Start-Punkt kommt aus dem Manifest, nicht von der Seite, auf der man
+  installiert.** `start_url` steht auf `./`, also öffnet ein Icon immer die
+  Übersicht — auch wenn man es von der Rom-Seite aus angelegt hat. Wer ein Icon
+  je Reise will, braucht ein eigenes Manifest je Reise mit passender `start_url`.
 - **Live-Wetter in den Tageskarten.** Sobald die Prognose geladen ist, ersetzt sie
   über `isoDate` den statischen Hinweis in der jeweiligen Tageskarte.

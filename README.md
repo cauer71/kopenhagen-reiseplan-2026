@@ -20,7 +20,9 @@ die Darstellung bleibt unverändert.
 Die Seite funktioniert offline: Beim ersten Besuch legt ein Service Worker Seite
 und Daten ab. Unterwegs ohne Netz ist der Plan damit vollständig lesbar – Bilder
 und Live-Prognose fehlen dann, weil beide auf fremden Hosts liegen. Über „Zum
-Homescreen hinzufügen“ läuft sie wie eine App.
+Home-Bildschirm hinzufügen“ läuft sie wie eine App — auf Android ebenso wie auf
+iPhone und iPad, dort ohne Browserleiste und mit eigenem Eintrag im
+App-Umschalter.
 
 Bilder werden **verlinkt, nicht mitgeliefert**. Jede Reisedatei hat dafür einen
 `images`-Block mit URL, Alt-Text und Lizenz je Motiv, dazu den Urheber, wo die

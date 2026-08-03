@@ -17,12 +17,21 @@
 
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icons/icon-192.png" sizes="192x192" />
-    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260726-29" />
-    <link rel="stylesheet" href="./assets/styles.css?v=20260726-29" />
+    <!-- Apple: als Web App auf dem Home-Bildschirm.
+         `apple-mobile-web-app-title` ist nötig, weil app.js document.title auf den
+         vollen Reisetitel setzt – iOS nähme sonst den und kürzte ihn hart ab.
+         `mobile-web-app-capable` ist die heutige Schreibweise, die apple-Variante
+         bleibt für iOS vor 16.4, wo das Manifest-`display` noch nicht griff. -->
+    <meta name="apple-mobile-web-app-title" content="Reiseplan" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png" />
+    <link rel="stylesheet" href="./styles.css?v=20260726-30" />
+    <link rel="stylesheet" href="./assets/styles.css?v=20260726-30" />
   </head>
-  <body data-version="20260726-29">
+  <body data-version="20260726-30">
     <main id="app" aria-live="polite"></main>
-    <script type="module" src="./assets/landing.js?v=20260726-29"></script>
+    <script type="module" src="./assets/landing.js?v=20260726-30"></script>
   </body>
 </html>
