@@ -1,0 +1,731 @@
+{
+  "trip": {
+    "destination": "Kopenhagen",
+    "title": "Kopenhagen mit Silke – Architektur, Hafen und lokale Viertel",
+    "subtitle": "Vier Sommertage zwischen Christianshavns Kanälen, königlichen Sammlungen, Gegenwartsarchitektur und Orten, an denen auch Kopenhagener essen und trinken.",
+    "dates": "06.–09. Juli 2026",
+    "travellers": "Christian & Silke",
+    "heroImage": "nyhavn",
+    "introLabel": "Städtereise",
+    "introTitle": "Kopenhagen wird vom Wasser aus und Viertel für Viertel gelesen.",
+    "introText": "Die Reise beginnt in Christianshavn und verbindet historische Stadtstruktur, dänisches Design und markante Gegenwartsarchitektur. Feste Flüge, der gebuchte Rosenborg-Slot und die Gepäcklogistik bilden das Gerüst; die übrigen Stopps sind räumlich gebündelt und lassen sich bei Regen zwischen Innen- und Außenprogramm verschieben. Café Wilder, Absalon, Lille Bakery, La Banchina und Reffen setzen bewusst lokale und unkomplizierte Akzente neben den bekannten Sehenswürdigkeiten.",
+    "theme": "teal",
+    "weather": {
+      "enabled": true,
+      "latitude": 55.6761,
+      "longitude": 12.5683,
+      "timezone": "Europe/Copenhagen",
+      "startDate": "2026-07-06",
+      "endDate": "2026-07-09",
+      "notes": [
+        {
+          "date": "2026-07-06",
+          "day": "Mo",
+          "action": "Turm und Boot sind wetterabhängig; Christianshavn bleibt als kompakter Ankunftsblock flexibel."
+        },
+        {
+          "date": "2026-07-07",
+          "day": "Di",
+          "action": "Rosenborg, DAC, Designmuseum und Oper bilden einen weitgehend wetterfesten Kulturtag."
+        },
+        {
+          "date": "2026-07-08",
+          "day": "Mi",
+          "action": "CopenHill und Hafenorte bei trockenen Phasen nutzen; Copenhagen Contemporary ist der sichere Innenblock."
+        },
+        {
+          "date": "2026-07-09",
+          "day": "Do",
+          "action": "Cisternerne funktioniert bei Regen; Gepäckabholung und Flughafenpuffer bleiben unangetastet."
+        }
+      ]
+    }
+  },
+  "days": [
+    {
+      "id": "tag1",
+      "label": "Tag 1",
+      "date": "Mo 06.07.",
+      "isoDate": "2026-07-06",
+      "title": "Ankommen, Christianshavn, Turm und Wasser",
+      "tone": "teal",
+      "heroImage": "christianshavn",
+      "weather": "Wettercheck: Vor Frelsers Kirke und GoBoat nur bei brauchbarem Wind und ohne starken Regen.",
+      "note": "Nach der Landung wird das Gepäck nahe der Metro in Christianshavn abgegeben. Café Wilder und die Kanäle füllen die Zeit bis zum Check-in ohne Umweg; anschließend folgen Turm, Boot und ein klassisches Abendessen direkt im Viertel.",
+      "stops": [
+        { "uid": "01", "time": "08:40" },
+        { "uid": "02", "time": "10:45" },
+        { "uid": "03", "time": "12:00" },
+        { "uid": "04", "time": "13:20" },
+        { "uid": "05", "time": "15:00" },
+        { "uid": "06", "time": "16:10" },
+        { "uid": "07", "time": "17:30" },
+        { "uid": "08", "time": "19:15" }
+      ]
+    },
+    {
+      "id": "tag2",
+      "label": "Tag 2",
+      "date": "Di 07.07.",
+      "isoDate": "2026-07-07",
+      "title": "Königliches Kopenhagen, Architektur und Design",
+      "tone": "gold",
+      "heroImage": "blox",
+      "weather": "Wettercheck: Der Tag besteht fast vollständig aus Innenräumen; nur die Wege zwischen den Häusern liegen im Freien.",
+      "note": "Der gebuchte Rosenborg-Slot eröffnet den Tag. Rundetårn wird als kurzer Innenstadtstopp ergänzt, bevor Absalon den lokalen Gegenpol zu den Museen setzt. DAC, Designmuseum und die Oper führen anschließend von Stadtplanung über Produktdesign zur großen Kulturarchitektur am Hafen.",
+      "stops": [
+        { "uid": "09", "time": "09:10" },
+        { "uid": "10", "time": "10:55" },
+        { "uid": "11", "time": "12:00" },
+        { "uid": "12", "time": "13:30" },
+        { "uid": "13", "time": "15:45" },
+        { "uid": "14", "time": "17:45" },
+        { "uid": "15", "time": "19:30" }
+      ]
+    },
+    {
+      "id": "tag3",
+      "label": "Tag 3",
+      "date": "Mi 08.07.",
+      "isoDate": "2026-07-08",
+      "title": "CopenHill und der kreative Hafenrand",
+      "tone": "coral",
+      "heroImage": "copenhill",
+      "weather": "Wettercheck: CopenHill, La Banchina und die Hafenrunde sind Außenpunkte; Copenhagen Contemporary trägt den Regentag.",
+      "note": "Der Tag bleibt östlich der Innenstadt. Lille Bakery ist der frühe Auftakt, danach folgen CopenHill und die ehemaligen Industrieflächen von Refshaleøen. Kunst, Hafenbad und Street Food liegen dort so nah beieinander, dass keine unnötige Rückfahrt entsteht.",
+      "stops": [
+        { "uid": "16", "time": "08:30" },
+        { "uid": "17", "time": "10:00" },
+        { "uid": "18", "time": "12:00" },
+        { "uid": "19", "time": "14:00" },
+        { "uid": "20", "time": "16:00" },
+        { "uid": "21", "time": "17:30" }
+      ]
+    },
+    {
+      "id": "tag4",
+      "label": "Tag 4",
+      "date": "Do 09.07.",
+      "isoDate": "2026-07-09",
+      "title": "Cisternerne, Smørrebrød und entspannte Abreise",
+      "tone": "navy",
+      "heroImage": "cisternerne",
+      "weather": "Wettercheck: Cisternerne ist der sichere Innenblock; Nyhavn kann bei schlechtem Wetter verkürzt werden.",
+      "note": "Nach dem Check-out bleibt das Gepäck nahe der direkten Flughafenmetro. Cisternerne setzt einen atmosphärischen Schlusspunkt, danach führt die Route über klassisches Smørrebrød und Slotsholmen zurück zum Hafen. Die Abholung ist bewusst früh genug angesetzt, damit die Fahrt zum Flughafen ohne Zeitdruck bleibt.",
+      "stops": [
+        { "uid": "22", "time": "10:00" },
+        { "uid": "23", "time": "10:45" },
+        { "uid": "24", "time": "12:45" },
+        { "uid": "25", "time": "14:15" },
+        { "uid": "26", "time": "15:30" },
+        { "uid": "27", "time": "16:45" },
+        { "uid": "28", "time": "17:15" },
+        { "uid": "29", "time": "18:15" },
+        { "uid": "30", "time": "20:20" }
+      ]
+    }
+  ],
+  "places": {
+    "01": {
+      "title": "Flug FR1784 Bergamo → Kopenhagen",
+      "detail": "Der frühe Direktflug schafft einen fast vollständigen ersten Tag in Kopenhagen.",
+      "description": [
+        "Anfahrt: eigener Weg zum Milano Bergamo Airport; für Gepäckkontrolle und Boarding ausreichend Vorlauf einplanen. Der Flug startet um 08:40 Uhr und landet planmäßig um 10:45 Uhr in Kopenhagen.",
+        "Boardingpässe und Ausweisdokumente sollten zusätzlich offline verfügbar sein. Nach der Landung geht es ohne Innenstadtumweg mit der Metro in die Basis Christianshavn."
+      ],
+      "image": "airport",
+      "place": "Milano Bergamo Airport, Via Orio al Serio 49/51, 24050 Orio al Serio BG, Italien",
+      "weather": "beides",
+      "fixed": true,
+      "address": "Milano Bergamo Airport → Copenhagen Airport",
+      "duration": "2 Std. 05 Min.",
+      "price": "Gebucht.",
+      "tip": "Gate und Boardingzeit am Reisetag in der Ryanair-App prüfen.",
+      "ticketUrl": "https://www.ryanair.com/"
+    },
+    "02": {
+      "title": "Metro CPH → Christianshavn & Gepäckabgabe",
+      "detail": "Die direkte M2 verbindet Flughafen, Gepäckstelle und Unterkunft ohne Umstieg.",
+      "description": [
+        "Anfahrt: von Copenhagen Airport → Christianshavn Station · zu Fuß etwa 4–8 Min. zur Gepäckstelle · ÖPNV etwa 13–18 Min. mit Metro M2. Vor der ersten Fahrt wird der City Pass Small aktiviert.",
+        "Der konkrete LuggageHero-Partner muss aus der Buchungsbestätigung übernommen werden; entscheidend ist die Nähe zur Station Christianshavn. Dadurch bleibt am Abreisetag dieselbe direkte Metroverbindung zum Flughafen nutzbar."
+      ],
+      "image": "airport",
+      "place": "Christianshavn Station, Christianshavn Torv, 1410 København K, Dänemark",
+      "weather": "beides",
+      "fixed": true,
+      "address": "Christianshavn Station und gebuchter LuggageHero-Partner in Stationsnähe",
+      "duration": "ca. 60 Min. einschließlich Gepäckabgabe",
+      "price": "City Pass Small und Gepäcklagerung separat.",
+      "tip": "Partneradresse und Öffnungszeit in der LuggageHero-Buchung kontrollieren.",
+      "ticketUrl": "https://luggagehero.com/copenhagen/"
+    },
+    "03": {
+      "title": "Lunch – Café Wilder",
+      "detail": "Ein unkomplizierter Einstieg in Christianshavn mit Bistroküche und Stammgastgefühl.",
+      "description": [
+        "Anfahrt: von der Gepäckabgabe bei Christianshavn Station → Café Wilder · zu Fuß etwa 6–10 Min. · ÖPNV —. Die Lage in Wildersgade hält den ersten Mittag ohne zusätzliche Fahrt nah an der Unterkunft.",
+        "Das traditionsreiche Café verbindet dänische Bistroküche mit der entspannten Atmosphäre des Viertels. Es ist bewusst als lokaler Auftakt gesetzt und nicht als weiterer Food-Market-Stopp."
+      ],
+      "image": "christianshavn",
+      "place": "Café Wilder, Wildersgade 56, 1408 København K, Dänemark",
+      "weather": "beides",
+      "address": "Wildersgade 56, 1408 København K",
+      "duration": "ca. 60–75 Min.",
+      "price": "ca. 20–30 € pro Person.",
+      "tip": "Bei vollem Gastraum auf einen Tisch im hinteren Bereich warten statt den Stadtteil zu wechseln."
+    },
+    "04": {
+      "title": "Christianshavns Kanäle & Wildersgade",
+      "detail": "Der ruhige Spaziergang zeigt das maritime Raster des Viertels vor dem Check-in.",
+      "description": [
+        "Anfahrt: von Café Wilder → Christianshavns Kanal · zu Fuß etwa 2–5 Min. · ÖPNV —. Die Runde führt über Wildersgade, Overgaden und die kleinen Brücken ohne festes Besichtigungstempo.",
+        "Christianshavn wurde im 17. Jahrhundert planmäßig auf aufgeschüttetem Gelände angelegt. Kanäle, Speicherhäuser und schmale Parzellen erklären die Verbindung aus Handelsstadt, Wohnquartier und Hafen besser als ein einzelnes Monument."
+      ],
+      "image": "christianshavn",
+      "place": "Christianshavns Kanal, 1408 København K, Dänemark",
+      "weather": "aussen",
+      "duration": "ca. 75–90 Min.",
+      "price": "Kostenlos.",
+      "tip": "Bei Regen auf Overgaden und den direkten Weg zur Unterkunft verkürzen."
+    },
+    "05": {
+      "title": "Check-in – Fantastiske Christianshavn",
+      "detail": "Die Wohnung in Wildersgade ist die Basis für alle vier Tage.",
+      "description": [
+        "Anfahrt: von Christianshavns Kanal → Wildersgade 15 · zu Fuß etwa 5–10 Min. · ÖPNV —. Der Check-in beginnt laut Booking-Nachricht um 15:00 Uhr.",
+        "Die Lage zwischen Kanal, Metro und Vor Frelsers Kirke macht Christianshavn zum idealen Anker. Da keine eigene Gepäckaufbewahrung angeboten wird, bleibt LuggageHero Teil der An- und Abreiselogistik."
+      ],
+      "image": "christianshavn",
+      "place": "Fantastiske Christianshavn, Wildersgade 15, 1408 København K, Dänemark",
+      "weather": "innen",
+      "fixed": true,
+      "address": "Wildersgade 15, 1408 København K",
+      "duration": "ca. 45 Min.",
+      "price": "Gebucht.",
+      "tip": "Zugangscode und Check-in-Nachricht in Booking.com offline bereithalten."
+    },
+    "06": {
+      "title": "Vor Frelsers Kirke – Turmaufstieg",
+      "detail": "Die äußere Wendeltreppe macht den Aussichtspunkt selbst zum architektonischen Erlebnis.",
+      "description": [
+        "Anfahrt: von Fantastiske Christianshavn → Vor Frelsers Kirke · zu Fuß etwa 6–8 Min. · ÖPNV —. Der Weg bleibt vollständig im Viertel und braucht keinen Puffer für Umstiege.",
+        "Die letzten Stufen verlaufen außen um den barocken Turmhelm und öffnen weite Blicke über Dächer, Hafen und Amager. Bei starkem Wind oder Regen kann der Zugang aus Sicherheitsgründen eingeschränkt werden."
+      ],
+      "image": "vorfrelsers",
+      "place": "Vor Frelsers Kirke, Sankt Annæ Gade 29, 1416 København K, Dänemark",
+      "weather": "aussen",
+      "address": "Sankt Annæ Gade 29, 1416 København K",
+      "duration": "ca. 45–60 Min.",
+      "price": "Eintrittsticket erforderlich.",
+      "tip": "Zeitfenster vorab buchen; bei Wind am selben Tag den Betriebsstatus prüfen.",
+      "ticketUrl": "https://www.vorfrelserskirke.dk/taarn/tower/booking"
+    },
+    "07": {
+      "title": "GoBoat – Kopenhagen vom Wasser",
+      "detail": "Die selbst gesteuerte Bootsrunde übersetzt das Kanalnetz in eine entspannte Sommerperspektive.",
+      "description": [
+        "Anfahrt: von Vor Frelsers Kirke → GoBoat Islands Brygge · zu Fuß etwa 18–22 Min. · ÖPNV etwa 12–18 Min. mit Bus oder Metro und kurzem Fußweg. Für Einweisung und Übergabe vor dem gebuchten Start etwas früher eintreffen.",
+        "Vom Wasser werden Brückenhöhen, Kaikanten und die Abfolge aus Altstadt und neuer Hafenarchitektur unmittelbar lesbar. Die Aktivität bleibt wetterabhängig und wird bei starkem Wind oder Dauerregen nicht erzwungen."
+      ],
+      "image": "christianshavn",
+      "place": "GoBoat Islands Brygge, Islands Brygge 10, 2300 København S, Dänemark",
+      "weather": "aussen",
+      "address": "Islands Brygge 10, 2300 København S",
+      "duration": "ca. 75 Min. einschließlich Einweisung",
+      "price": "Preis nach Bootsgröße und Dauer.",
+      "tip": "Online reservieren und Stornierungsbedingungen wegen des Wetters beachten.",
+      "ticketUrl": "https://goboat.dk/en/copenhagen"
+    },
+    "08": {
+      "title": "Dinner – Christianshavns Færgecafé",
+      "detail": "Klassische dänische Küche am Kanal schließt den Ankunftstag ohne touristischen Food-Market ab.",
+      "description": [
+        "Anfahrt: von GoBoat Islands Brygge → Christianshavns Færgecafé · zu Fuß etwa 25–30 Min. · ÖPNV etwa 15–20 Min. mit Bus oder Metro. Danach ist die Wohnung in Wildersgade zu Fuß erreichbar.",
+        "Das historische Fährcafé ist für Smørrebrød, warme dänische Gerichte und die maritime Einrichtung bekannt. Der Ort passt zur Umgebung und bleibt traditioneller als die großen Street-Food-Hallen."
+      ],
+      "image": "christianshavn",
+      "place": "Christianshavns Færgecafé, Strandgade 50, 1401 København K, Dänemark",
+      "weather": "innen",
+      "address": "Strandgade 50, 1401 København K",
+      "duration": "ca. 90 Min.",
+      "price": "ca. 25–35 € pro Person.",
+      "tip": "Für den Abend reservieren; vegetarische Auswahl vorab in der aktuellen Karte prüfen.",
+      "ticketUrl": "https://faergecafeen.dk/en/"
+    },
+    "09": {
+      "title": "Rosenborg Slot – Kronjuwelen und Innenräume",
+      "detail": "Das gebuchte Zeitfenster um 09:10 Uhr ist der feste Anker des Museumstags.",
+      "description": [
+        "Anfahrt: von Fantastiske Christianshavn → Rosenborg Slot · zu Fuß etwa 30–35 Min. · ÖPNV etwa 20–25 Min. mit Metro und kurzem Fußweg. Für den Einlass wird ein kleiner Sicherheitspuffer eingeplant.",
+        "Das Renaissanceschloss verbindet kompakte königliche Wohnräume mit Schatzkammer, Kronjuwelen und Reichsinsignien. Gerade bei Regen liegt der Hauptwert innen; der Königsgarten bleibt ein kurzer Zusatz, wenn das Wetter passt."
+      ],
+      "image": "rosenborg",
+      "place": "Rosenborg Slot, Øster Voldgade 4A, 1350 København K, Dänemark",
+      "weather": "innen",
+      "fixed": true,
+      "address": "Øster Voldgade 4A, 1350 København K",
+      "duration": "ca. 90 Min.",
+      "price": "Gebucht.",
+      "tip": "Gebuchter Einlass 09:10 Uhr; Ticket und Ausweis bereithalten.",
+      "ticketUrl": "https://denkongeligesamling.dk/en/rosenborg-castle/tickets/"
+    },
+    "10": {
+      "title": "Rundetårn – Rampe und Dachblick",
+      "detail": "Der kurze Altstadtstopp ergänzt den spektakuläreren Turm in Christianshavn um einen historischen Innenweg.",
+      "description": [
+        "Anfahrt: von Rosenborg Slot → Rundetårn · zu Fuß etwa 10–12 Min. · ÖPNV —. Die Strecke führt ohne Richtungswechsel durch die kompakte Innenstadt.",
+        "Statt einer üblichen Treppe windet sich eine breite Rampe im Kern des Turms nach oben. Das Bauwerk gehörte zum Gelehrtenkomplex Christians IV.; die Aussicht ist weniger dramatisch als bei Vor Frelsers Kirke, der Weg durch den Bau jedoch eigenständig."
+      ],
+      "image": "rundetaarn",
+      "place": "Rundetårn, Købmagergade 52A, 1150 København K, Dänemark",
+      "weather": "beides",
+      "address": "Købmagergade 52A, 1150 København K",
+      "duration": "ca. 45–50 Min.",
+      "price": "Eintritt vor Ort.",
+      "tip": "Bei sehr knapper Zeit die Aussicht verkürzen, damit Absalon um 12:00 Uhr erreicht wird.",
+      "ticketUrl": "https://www.rundetaarn.dk/en/visit-us/"
+    },
+    "11": {
+      "title": "Lunch – Folkehuset Absalon",
+      "detail": "Das gemeinsame Mittagessen in der ehemaligen Kirche bringt bewusst lokalen Alltag in den Museumstag.",
+      "description": [
+        "Anfahrt: von Rundetårn → Folkehuset Absalon · zu Fuß etwa 25–30 Min. · ÖPNV etwa 18–25 Min. mit Bus oder Metro. Ziel ist, kurz vor 12:00 Uhr anzukommen, weil das Tagesgericht ab dann ausgegeben wird.",
+        "Absalon ist ein Nachbarschaftshaus mit langen Tischen, Veranstaltungen und gemeinschaftlichem Essen. Mittags wird an der Bar bestellt; eine klassische Restaurantreservierung ist dafür normalerweise nicht vorgesehen."
+      ],
+      "image": "absalon",
+      "place": "Folkehuset Absalon, Sønder Boulevard 73, 1720 København V, Dänemark",
+      "weather": "innen",
+      "address": "Sønder Boulevard 73, 1720 København V",
+      "duration": "ca. 60 Min.",
+      "price": "ca. 60 DKK pro Person für das Tagesgericht.",
+      "tip": "Pünktlich um 12:00 Uhr da sein; das Mittagsgericht kann später ausverkauft sein.",
+      "ticketUrl": "https://absaloncph.dk/en/food/"
+    },
+    "12": {
+      "title": "DAC im BLOX – Architekturmuseum",
+      "detail": "Ausstellungen und Gebäude erklären Kopenhagen als gestaltete Stadt statt nur als Ansammlung einzelner Sehenswürdigkeiten.",
+      "description": [
+        "Anfahrt: von Folkehuset Absalon → Danish Architecture Center im BLOX · zu Fuß etwa 25–30 Min. · ÖPNV etwa 18–25 Min. mit Bus oder Metro. Der Zugang liegt an Bryghuspladsen direkt am Hafen.",
+        "Das DAC verbindet Architektur- und Stadtentwicklungsausstellungen mit Blicken in den von OMA entworfenen BLOX-Komplex. Die Durchdringung von Straße, Wasser, Ausstellung und öffentlichem Raum ist selbst Teil des Besuchs."
+      ],
+      "image": "blox",
+      "place": "Danish Architecture Center, Bryghuspladsen 10, 1473 København K, Dänemark",
+      "weather": "innen",
+      "address": "Bryghuspladsen 10, 1473 København K",
+      "duration": "ca. 90–105 Min.",
+      "price": "Regulärer Museumseintritt; Onlinekauf häufig günstiger.",
+      "tip": "Ticket online kaufen, wenn der Besuch feststeht; aktuelle Sonderausstellungen prüfen.",
+      "ticketUrl": "https://dac.dk/en/visit/"
+    },
+    "13": {
+      "title": "Designmuseum Danmark",
+      "detail": "Dänisches Möbel-, Produkt- und Grafikdesign wird im ehemaligen Frederiks Hospital historisch eingeordnet.",
+      "description": [
+        "Anfahrt: vom DAC im BLOX → Designmuseum Danmark · zu Fuß etwa 20–25 Min. · ÖPNV etwa 12–18 Min. mit Bus und kurzem Fußweg. Der Weg kann entlang des Hafens und durch Frederiksstaden geführt werden.",
+        "Die Sammlung geht über bekannte Stuhlklassiker hinaus und zeigt, wie Material, Handwerk und industrielle Produktion das Bild des dänischen Designs geprägt haben. Auch der Hof und die lange Gebäudestruktur des früheren Hospitals sind architektonisch lesenswert."
+      ],
+      "image": "designmuseum",
+      "place": "Designmuseum Danmark, Bredgade 68, 1260 København K, Dänemark",
+      "weather": "innen",
+      "address": "Bredgade 68, 1260 København K",
+      "duration": "ca. 80–90 Min.",
+      "price": "Regulärer Museumseintritt.",
+      "tip": "Letzten Einlass prüfen und bei Museumsüberlastung eine Schwerpunktausstellung wählen.",
+      "ticketUrl": "https://designmuseum.dk/en/besog-os/opening-hours-admission/"
+    },
+    "14": {
+      "title": "Operaen – Führung durch das Opernhaus",
+      "detail": "Henning Larsens Hafenbau ist innen wegen Foyer, Lichtkunst und Zuschauerraum wesentlich stärker als nur von außen.",
+      "description": [
+        "Anfahrt: vom Designmuseum Danmark → Copenhagen Opera House · zu Fuß etwa 30–35 Min. über den Hafen · ÖPNV etwa 20–25 Min. mit Bus oder Hafenbus. Der Treffpunkt und die Vorlaufzeit richten sich nach der Buchungsbestätigung.",
+        "Die Führung erschließt die großen Foyerflächen, die Lichtinstallationen von Olafur Eliasson und den mit Ahorn verkleideten Zuschauerraum. Der genaue historische Juli-Slot und die Führungssprache konnten nachträglich nicht eindeutig bestätigt werden."
+      ],
+      "image": "opera",
+      "place": "Copenhagen Opera House, Ekvipagemestervej 10, 1438 København K, Dänemark",
+      "weather": "innen",
+      "address": "Ekvipagemestervej 10, 1438 København K",
+      "duration": "ca. 75 Min.",
+      "price": "Ticket erforderlich.",
+      "tip": "Vor Buchung Startzeit und Sprache ausdrücklich prüfen; Englisch ist wahrscheinlicher als Deutsch.",
+      "ticketUrl": "https://www.kglteater.dk/en/guided-tours/"
+    },
+    "15": {
+      "title": "Dinner – Rabes Have",
+      "detail": "Ein bodenständiger Abend in Christianshavn ersetzt nach dem Kulturtag einen weiteren touristischen Hafenmarkt.",
+      "description": [
+        "Anfahrt: von der Copenhagen Opera → Rabes Have · zu Fuß etwa 25–30 Min. · ÖPNV etwa 15–20 Min. mit Bus oder Hafenbus und kurzem Fußweg. Die Rückkehr zur Wohnung bleibt anschließend kurz.",
+        "Das alte Wirtshaus steht für klassische, unkomplizierte dänische Küche und ein deutlich lokaleres Ambiente als die großen Innenstadtachsen. Die aktuelle Speisekarte entscheidet, welche vegetarische Hauptoption verfügbar ist."
+      ],
+      "image": "christianshavn",
+      "place": "Rabes Have, Langebrogade 8, 2300 København S, Dänemark",
+      "weather": "innen",
+      "address": "Langebrogade 8, 2300 København S",
+      "duration": "ca. 90 Min.",
+      "price": "ca. 25–35 € pro Person.",
+      "tip": "Öffnungszeit und vegetarische Auswahl am selben Tag prüfen; bei Bedarf reservieren."
+    },
+    "16": {
+      "title": "Frühstück – Lille Bakery",
+      "detail": "Die Bäckerei im ehemaligen Industriegebiet füllt die Zeit sinnvoll, bevor CopenHill öffnet.",
+      "description": [
+        "Anfahrt: von Fantastiske Christianshavn → Lille Bakery auf Refshaleøen · zu Fuß etwa 35–45 Min. · ÖPNV etwa 25–35 Min. mit Bus oder Hafenbus. Danach bleibt die Route vollständig im östlichen Hafengebiet.",
+        "Die offene Backstube, Sauerteigbrote und einfache Frühstücksteller passen zum rauen Umfeld der früheren Werft. Der Stopp ist als früher, lokaler Auftakt gesetzt und nicht als langes Brunchprogramm."
+      ],
+      "image": "refshale",
+      "place": "Lille Bakery, Refshalevej 213B, 1432 København K, Dänemark",
+      "weather": "innen",
+      "address": "Refshalevej 213B, 1432 København K",
+      "duration": "ca. 60 Min.",
+      "price": "ca. 10–20 € pro Person.",
+      "tip": "Früh kommen; beliebte Backwaren können im Tagesverlauf ausverkauft sein.",
+      "ticketUrl": "https://www.lillebakery.com/"
+    },
+    "17": {
+      "title": "CopenHill – Rooftop Walk",
+      "detail": "Das Kraftwerk von BIG verbindet technische Infrastruktur mit öffentlich nutzbarer Dachlandschaft.",
+      "description": [
+        "Anfahrt: von Lille Bakery → CopenHill · zu Fuß etwa 20–25 Min. · ÖPNV etwa 15–20 Min. mit Bus. Der Dachzugang ist für 10:00 Uhr angesetzt, weil das Gelände vorher noch geschlossen sein kann.",
+        "Die geneigte Gebäudehülle nimmt Skipiste, Wanderweg und Aussichtspunkte auf einem Müllheizkraftwerk auf. Interessant ist weniger die Freizeitattraktion allein als die Frage, wie sichtbar und öffentlich städtische Infrastruktur sein darf."
+      ],
+      "image": "copenhill",
+      "place": "CopenHill, Vindmøllevej 6, 2300 København S, Dänemark",
+      "weather": "aussen",
+      "address": "Vindmøllevej 6, 2300 København S",
+      "duration": "ca. 75–90 Min.",
+      "price": "Rooftop Walk normalerweise kostenlos; Aktivitäten kosten extra.",
+      "tip": "Öffnungsstatus, Wind und Dachzugang am Morgen prüfen.",
+      "ticketUrl": "https://www.copenhill.dk/en"
+    },
+    "18": {
+      "title": "Copenhagen Contemporary",
+      "detail": "Großformatige Gegenwartskunst nutzt die Hallen der ehemaligen Werft als eigentlichen räumlichen Maßstab.",
+      "description": [
+        "Anfahrt: von CopenHill → Copenhagen Contemporary · zu Fuß etwa 20–25 Min. · ÖPNV etwa 15–20 Min. mit Bus. Der Wechsel führt ohne Rückfahrt in die Innenstadt direkt nach Refshaleøen.",
+        "Die Ausstellungen sind auf Installationen und Arbeiten ausgelegt, die in normalen Museumsräumen kaum funktionieren würden. Das Verhältnis von Kunst, Industriehalle und Hafenrand macht den Besuch auch dann interessant, wenn einzelne Werke wechseln."
+      ],
+      "image": "refshale",
+      "place": "Copenhagen Contemporary, Refshalevej 173A, 1432 København K, Dänemark",
+      "weather": "innen",
+      "address": "Refshalevej 173A, 1432 København K",
+      "duration": "ca. 90–105 Min.",
+      "price": "Museumseintritt; Ticket online oder an der Kasse.",
+      "tip": "Aktuelle Installationen vor dem Besuch prüfen; bei Regen kann der Aufenthalt verlängert werden.",
+      "ticketUrl": "https://copenhagencontemporary.org/en/visit/"
+    },
+    "19": {
+      "title": "Lunch & Hafenpause – La Banchina",
+      "detail": "Kleine Küche, Kaffee und Badeleiter verbinden den Industriekai mit sommerlichem Alltag.",
+      "description": [
+        "Anfahrt: von Copenhagen Contemporary → La Banchina · zu Fuß etwa 5–8 Min. · ÖPNV —. Der kurze Weg lässt den Zeitpunkt je nach Wetter und Museumsdauer flexibel.",
+        "Der Ort ist inzwischen bekannt, funktioniert aber weiterhin als echtes Hafencafé mit wenigen Plätzen und direktem Wasserzugang. Baden ist nur bei passender Wasserqualität und eigenem Sicherheitsgefühl vorgesehen."
+      ],
+      "image": "refshale",
+      "place": "La Banchina, Refshalevej 141A, 1432 København K, Dänemark",
+      "weather": "beides",
+      "address": "Refshalevej 141A, 1432 København K",
+      "duration": "ca. 90 Min.",
+      "price": "ca. 20–30 € pro Person.",
+      "tip": "Walk-in; Badesachen nur bei stabilem Wetter und freigegebener Wasserqualität nutzen.",
+      "ticketUrl": "https://www.labanchina.dk/cafe/"
+    },
+    "20": {
+      "title": "Refshaleøen – Werft- und Hafenrunde",
+      "detail": "Die freie Zwischenrunde zeigt den Maßstab der ehemaligen Schiffswerft jenseits der einzelnen Kulturorte.",
+      "description": [
+        "Anfahrt: von La Banchina → Refshaleøen und zurück Richtung Reffen · zu Fuß etwa 10–20 Min. · ÖPNV —. Die Runde bleibt bewusst ohne enges Ziel und kann bei Regen entfallen.",
+        "Große Hallen, provisorische Nutzungen, Werkstätten und freie Hafenflächen stehen im Kontrast zur dicht bebauten Innenstadt. Genau diese Zwischennutzungen erklären, warum Refshaleøen heute zugleich Kulturstandort, Ausgehviertel und Entwicklungsfläche ist."
+      ],
+      "image": "refshale",
+      "place": "Refshaleøen, Refshalevej, 1432 København K, Dänemark",
+      "weather": "aussen",
+      "duration": "ca. 60 Min.",
+      "price": "Kostenlos.",
+      "tip": "Bei Regen direkt zu Reffen wechseln; befestigte Wege bevorzugen."
+    },
+    "21": {
+      "title": "Dinner – Reffen Street Food",
+      "detail": "Die große Auswahl beendet den Hafentag flexibel und mit vegetarischen Optionen.",
+      "description": [
+        "Anfahrt: von der Refshaleøen-Hafenrunde → Reffen · zu Fuß etwa 8–12 Min. · ÖPNV —. Für die Rückfahrt stehen Bus und Hafenbus zur Verfügung.",
+        "Reffen ist touristischer als die kleinen Cafés des Plans, passt hier aber wegen Lage, Uhrzeit und Auswahl. Der Markt wird nicht als Geheimadresse verkauft, sondern als unkomplizierter Abschluss am Wasser mit vielen Küchen und Getränkeständen."
+      ],
+      "image": "refshale",
+      "place": "Reffen, Refshalevej 167A, 1432 København K, Dänemark",
+      "weather": "beides",
+      "address": "Refshalevej 167A, 1432 København K",
+      "duration": "ca. 90–120 Min.",
+      "price": "ca. 20–35 € pro Person.",
+      "tip": "Öffnung und Küchenzeiten der Saisonstände am selben Tag prüfen.",
+      "ticketUrl": "https://reffen.dk/en/"
+    },
+    "22": {
+      "title": "Check-out & LuggageHero Christianshavn",
+      "detail": "Das Gepäck bleibt nahe der direkten Flughafenmetro, während der letzte Reisetag frei bleibt.",
+      "description": [
+        "Anfahrt: von Fantastiske Christianshavn → gebuchter LuggageHero-Partner nahe Christianshavn Station · zu Fuß etwa 5–10 Min. · ÖPNV —. Check-out ist laut Unterkunft bis 10:00 Uhr.",
+        "Die Partneradresse muss exakt aus der Buchung übernommen werden und darf nicht durch eine allgemeine Kartenposition ersetzt werden. Die Station Christianshavn bleibt als Routenanker sinnvoll, weil die M2 später direkt zum Flughafen fährt."
+      ],
+      "image": "christianshavn",
+      "place": "Christianshavn Station, Christianshavn Torv, 1410 København K, Dänemark",
+      "weather": "beides",
+      "fixed": true,
+      "address": "Gebuchter LuggageHero-Partner nahe Christianshavn Station",
+      "duration": "ca. 30–45 Min.",
+      "price": "Gepäcklagerung nach Buchung.",
+      "tip": "Vor Abgabe die späteste Abholzeit und den Zugangscode kontrollieren.",
+      "ticketUrl": "https://luggagehero.com/copenhagen/"
+    },
+    "23": {
+      "title": "Cisternerne – unterirdische Kunsthalle",
+      "detail": "Das ehemalige Wasserreservoir ist ein räumlich außergewöhnlicher Gegenpol zu den klassischen Museen.",
+      "description": [
+        "Anfahrt: von Christianshavn Station → Cisternerne im Søndermarken · zu Fuß etwa 50–60 Min. · ÖPNV etwa 25–35 Min. mit Metro und Bus. Der Eingang liegt im Park und sollte nicht mit einem oberirdischen Museumsgebäude verwechselt werden.",
+        "Dunkelheit, Feuchtigkeit, Säulenreihen und wechselnde ortsspezifische Installationen bestimmen den Besuch. Der Raum ist im Sommer angenehm kühl und bei Regen besonders geeignet; feste Schuhe helfen auf feuchten Böden."
+      ],
+      "image": "cisternerne",
+      "place": "Cisternerne, Søndermarken, Roskildevej 25A, 2000 Frederiksberg, Dänemark",
+      "weather": "innen",
+      "address": "Søndermarken, Roskildevej 25A, 2000 Frederiksberg",
+      "duration": "ca. 75–90 Min.",
+      "price": "Museumseintritt erforderlich.",
+      "tip": "Aktuelle Installation und Einlasszeit prüfen; Jacke und rutschfeste Schuhe sind sinnvoll.",
+      "ticketUrl": "https://frederiksbergmuseerne.dk/en/cisternerne/"
+    },
+    "24": {
+      "title": "Lunch – klassisches Smørrebrød im Kanal-Caféen",
+      "detail": "Das traditionelle Mittagessen liegt sinnvoll zwischen Frederiksberg und Slotsholmen.",
+      "description": [
+        "Anfahrt: von Cisternerne → Kanal-Caféen · zu Fuß etwa 45–55 Min. · ÖPNV etwa 25–30 Min. mit Bus oder Metro und kurzem Fußweg. Die Rückkehr ins Zentrum führt direkt zum nächsten Programmpunkt.",
+        "Dunkles Roggenbrot, Fisch, Kartoffeln, Ei und saisonale Beläge werden als einzelne belegte Brote bestellt. Die Atmosphäre ist klassischer als bei modernen Markthallen; vegetarische Varianten sollten aus der Tageskarte gewählt werden."
+      ],
+      "image": "smorrebrod",
+      "place": "Kanal-Caféen, Frederiksholms Kanal 18, 1220 København K, Dänemark",
+      "weather": "innen",
+      "address": "Frederiksholms Kanal 18, 1220 København K",
+      "duration": "ca. 75–90 Min.",
+      "price": "ca. 25–35 € pro Person.",
+      "tip": "Zur Mittagszeit reservieren oder vorher telefonisch nach einem Tisch fragen."
+    },
+    "25": {
+      "title": "Christiansborg-Turm & Slotsholmen",
+      "detail": "Der kostenlose Turm ordnet Altstadt, Hafen und Regierungsviertel aus der Höhe ein.",
+      "description": [
+        "Anfahrt: vom Kanal-Caféen → Christiansborg-Turm · zu Fuß etwa 5–8 Min. · ÖPNV —. Für Sicherheitskontrolle und möglichen Andrang wird ein kleiner Puffer eingeplant.",
+        "Der Blick reicht über Dächer, Kirchtürme und Hafenachsen; unten treffen Parlament, königliche Repräsentationsräume und historische Stadtinsel aufeinander. Bei langem Warten kann der Turm ausgelassen werden, ohne die Route zu beschädigen."
+      ],
+      "image": "nyhavn",
+      "place": "Christiansborg Tower, Prins Jørgens Gård 1, 1218 København K, Dänemark",
+      "weather": "beides",
+      "address": "Prins Jørgens Gård 1, 1218 København K",
+      "duration": "ca. 60 Min.",
+      "price": "Kostenlos.",
+      "tip": "Ausweis bereithalten; Sicherheitskontrolle und Wartezeit sind möglich.",
+      "ticketUrl": "https://www.thedanishparliament.dk/en/the-tower"
+    },
+    "26": {
+      "title": "Kongens Nytorv & Nyhavn – letzte Hafenrunde",
+      "detail": "Der frühe Nachmittag nutzt das Wasser und die zentrale Platzfolge, bevor das Gepäck abgeholt wird.",
+      "description": [
+        "Anfahrt: von Christiansborg → Kongens Nytorv und Nyhavn · zu Fuß etwa 15–20 Min. · ÖPNV etwa 8–12 Min. mit Metro. Die Runde endet so, dass Christianshavn anschließend ohne Umweg erreichbar bleibt.",
+        "Kongens Nytorv verbindet die repräsentative Innenstadt mit Nyhavn und dem Hafen. Am späten Reisetag genügt ein ruhiger Spaziergang über Inderhavnsbroen; bei starkem Regen wird dieser Außenblock verkürzt."
+      ],
+      "image": "nyhavn",
+      "place": "Kongens Nytorv, 1050 København K, Dänemark",
+      "weather": "aussen",
+      "duration": "ca. 60–75 Min.",
+      "price": "Kostenlos.",
+      "tip": "Nicht bis zum letzten Moment in Nyhavn bleiben; die Gepäckabholung hat Vorrang."
+    },
+    "27": {
+      "title": "Gepäck bei LuggageHero abholen",
+      "detail": "Die frühe Abholung schützt den Flughafenpuffer und vermeidet Stress bei Partneröffnungszeiten.",
+      "description": [
+        "Anfahrt: von Kongens Nytorv/Nyhavn → LuggageHero nahe Christianshavn Station · zu Fuß etwa 10–15 Min. · ÖPNV etwa 8–12 Min. mit Metro. Die genaue Tür richtet sich nach der Buchungsbestätigung.",
+        "Vor dem Verlassen des Standorts werden beide Gepäckstücke, Dokumente und Ladegeräte kontrolliert. Danach führt die Metro M2 ohne Umstieg zum Flughafen."
+      ],
+      "image": "christianshavn",
+      "place": "Christianshavn Station, Christianshavn Torv, 1410 København K, Dänemark",
+      "weather": "beides",
+      "fixed": true,
+      "address": "Gebuchter LuggageHero-Partner nahe Christianshavn Station",
+      "duration": "ca. 25–30 Min.",
+      "price": "In der Gepäckbuchung enthalten.",
+      "tip": "Öffnungszeit und Abholcode vor Beginn des letzten Stadtblocks prüfen.",
+      "ticketUrl": "https://luggagehero.com/copenhagen/"
+    },
+    "28": {
+      "title": "Metro Christianshavn → Copenhagen Airport",
+      "detail": "Die direkte M2 bringt euch mit großem Puffer zum Terminal.",
+      "description": [
+        "Anfahrt: von der Gepäckabgabe bei Christianshavn Station → Copenhagen Airport · zu Fuß etwa 4–8 Min. zur Metro · ÖPNV etwa 13–18 Min. mit M2 Richtung Lufthavnen. Umstieg ist nicht nötig.",
+        "Der City Pass Small deckt die Zonen zwischen Zentrum und Flughafen ab, sofern seine 96 Stunden noch laufen. Der frühe Transfer lässt Zeit für Sicherheitskontrolle, Abendessen und eventuelle Gateänderungen."
+      ],
+      "image": "airport",
+      "place": "Copenhagen Airport, Lufthavnsboulevarden 6, 2770 Kastrup, Dänemark",
+      "weather": "beides",
+      "fixed": true,
+      "address": "Christianshavn Station → Copenhagen Airport",
+      "duration": "ca. 45–60 Min. einschließlich Fußwegen",
+      "price": "Im City Pass Small enthalten, sofern noch gültig.",
+      "tip": "Vor Einstieg Gültigkeit des City Pass kontrollieren; ansonsten separates Flughafenticket kaufen.",
+      "ticketUrl": "https://www.publictransport.dk/tickets/citypass"
+    },
+    "29": {
+      "title": "Dinner am Copenhagen Airport",
+      "detail": "Ein früher Imbiss am Flughafen hält Boarding und Rückflug frei von Zeitdruck.",
+      "description": [
+        "Anfahrt: von der Metrostation Flughafen → Gastronomiebereich im Terminal · zu Fuß etwa 5–10 Min. · ÖPNV —. Erst nach Sicherheitskontrolle essen, wenn das Gate bereits feststeht.",
+        "Der Stopp ist bewusst funktional und kein kulinarischer Höhepunkt. Eine warme Mahlzeit oder ein guter Burger ist sinnvoller als ein knappes Abendessen in der Stadt unmittelbar vor dem Flug."
+      ],
+      "image": "airport",
+      "place": "Copenhagen Airport, Lufthavnsboulevarden 6, 2770 Kastrup, Dänemark",
+      "weather": "innen",
+      "duration": "ca. 60 Min.",
+      "price": "ca. 15–25 € pro Person.",
+      "tip": "Gateanzeige beobachten und spätestens mit Beginn des Boardings zum Abflugbereich wechseln."
+    },
+    "30": {
+      "title": "Flug FR2991 Kopenhagen → Bergamo",
+      "detail": "Der Rückflug um 20:20 Uhr beendet die Reise mit bewusst großzügigem Flughafenpuffer.",
+      "description": [
+        "Anfahrt: vom Gastronomiebereich des Copenhagen Airport → Abfluggate · zu Fuß je nach Gate etwa 5–15 Min. · ÖPNV —. Der Flug startet planmäßig um 20:20 Uhr und landet um 22:30 Uhr in Bergamo.",
+        "Gate, Boardinggruppe und mögliche Änderungen werden in der Ryanair-App geprüft. Dokumente und Boardingpässe bleiben zusätzlich offline gespeichert."
+      ],
+      "image": "airport",
+      "place": "Copenhagen Airport, Lufthavnsboulevarden 6, 2770 Kastrup, Dänemark",
+      "weather": "beides",
+      "fixed": true,
+      "address": "Copenhagen Airport → Milano Bergamo Airport",
+      "duration": "2 Std. 10 Min.",
+      "price": "Gebucht.",
+      "tip": "Boardingzeit und Gate am Reisetag in der Ryanair-App prüfen.",
+      "ticketUrl": "https://www.ryanair.com/"
+    }
+  },
+  "images": {
+    "absalon": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Folkehuset_Absalon_2017.jpg",
+      "width": 2988,
+      "height": 5312,
+      "alt": "Speisesaal im Folkehuset Absalon",
+      "credit": "Staunited",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Folkehuset_Absalon_2017.jpg"
+    },
+    "airport": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Copenhagen_Kastrup_International_Airport.jpg",
+      "width": 4896,
+      "height": 3672,
+      "alt": "Copenhagen Airport in Kastrup",
+      "credit": "Thomas Woodtli",
+      "license": "CC BY 2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Copenhagen_Kastrup_International_Airport.jpg"
+    },
+    "blox": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Blox_03.jpg",
+      "width": 2552,
+      "height": 1910,
+      "alt": "BLOX und Danish Architecture Center am Hafen",
+      "credit": "Leif Jørgensen",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Blox_03.jpg"
+    },
+    "christianshavn": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Christianshavn_kanal.jpg",
+      "width": 3264,
+      "height": 1836,
+      "alt": "Kanal in Christianshavn",
+      "credit": "DKON0005",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Christianshavn_kanal.jpg"
+    },
+    "cisternerne": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/S%C3%B8ndermarken_-_Cisternerne.jpg",
+      "width": 2250,
+      "height": 1425,
+      "alt": "Unterirdischer Säulenraum der Cisternerne",
+      "credit": "discosour",
+      "license": "CC BY-SA 2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:S%C3%B8ndermarken_-_Cisternerne.jpg"
+    },
+    "copenhill": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Amager_Bakke.jpg",
+      "width": 2925,
+      "height": 3901,
+      "alt": "Amager Bakke und CopenHill",
+      "credit": "Orf3us",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Amager_Bakke.jpg"
+    },
+    "designmuseum": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Design_Museum_Danmark_-_Copenhagen_-_DSC07845.JPG",
+      "width": 4320,
+      "height": 3240,
+      "alt": "Hof und Fassade des Designmuseum Danmark",
+      "license": "CC0 1.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Design_Museum_Danmark_-_Copenhagen_-_DSC07845.JPG"
+    },
+    "nyhavn": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Copenhagen%2C_Nyhavn.jpg",
+      "width": 3914,
+      "height": 2935,
+      "alt": "Farbige Häuser und Schiffe in Nyhavn",
+      "license": "CC0 1.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Copenhagen,_Nyhavn.jpg"
+    },
+    "opera": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Copenhagen_Opera.jpg",
+      "width": 3390,
+      "height": 1747,
+      "alt": "Copenhagen Opera House am Hafen",
+      "credit": "DKON0005",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Copenhagen_Opera.jpg"
+    },
+    "refshale": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Copenhagen_Contemporary_Refshale%C3%B8en.jpg",
+      "width": 2988,
+      "height": 3985,
+      "alt": "Copenhagen Contemporary auf Refshaleøen",
+      "credit": "Orf3us",
+      "license": "CC BY 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Copenhagen_Contemporary_Refshale%C3%B8en.jpg"
+    },
+    "rosenborg": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Rosenborg_Castle%2C_Copenhagen.jpg",
+      "width": 3008,
+      "height": 2000,
+      "alt": "Rosenborg Slot in Kopenhagen",
+      "credit": "Cha già José",
+      "license": "CC BY-SA 2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Rosenborg_Castle,_Copenhagen.jpg"
+    },
+    "rundetaarn": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Denmark._Copenhagen_317_Rundetaarn.jpg",
+      "width": 1224,
+      "height": 1632,
+      "alt": "Rundetårn in der Kopenhagener Altstadt",
+      "license": "Public Domain",
+      "source": "https://commons.wikimedia.org/wiki/File:Denmark._Copenhagen_317_Rundetaarn.jpg"
+    },
+    "smorrebrod": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Sm%C3%B8rrebr%C3%B8d_in_Copenhagen_01.jpg",
+      "width": 5472,
+      "height": 3648,
+      "alt": "Smørrebrød mit Avocado und Kartoffeln",
+      "credit": "Kritzolina",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Sm%C3%B8rrebr%C3%B8d_in_Copenhagen_01.jpg"
+    },
+    "vorfrelsers": {
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Tower_of_the_Church_of_Our_Saviour%2C_Copenhagen.jpg",
+      "width": 5465,
+      "height": 3643,
+      "alt": "Turm der Vor Frelsers Kirke über Christianshavn",
+      "credit": "OleNeitzel",
+      "license": "CC BY 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Tower_of_the_Church_of_Our_Saviour,_Copenhagen.jpg"
+    }
+  }
+}
