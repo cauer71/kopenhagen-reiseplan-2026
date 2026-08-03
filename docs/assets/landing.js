@@ -72,13 +72,13 @@ function sortTrips(trips) {
 /* ------------------------------------------------------------ Kacheln */
 
 function tile({ entry, data, status }) {
-  const { trip, days } = data;
+  const { trip, days, images = {} } = data;
   const stops = days.reduce((sum, day) => sum + day.stops.length, 0);
   const meta = [`${days.length} Tage`, `${stops} Stops`, trip.travellers, entry.badge]
     .filter(Boolean).map(esc).join(" · ");
   const hero = entry.tileImage ?? trip.heroImage;
   return `<a class="trip-tile" href="./trips/${encodeURIComponent(entry.slug)}/" data-status="${status}">
-    <img src="${image(hero, entry.images)}" alt="${esc(entry.images?.[hero]?.alt || trip.destination)}" loading="lazy" decoding="async">
+    <img src="${image(hero, images)}" alt="${esc(images[hero]?.alt || trip.destination)}" loading="lazy" decoding="async">
     <span class="trip-tile-shade"></span>
     <div>
       <p class="trip-status">${esc(STATUS_LABEL[status])}</p>
