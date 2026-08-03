@@ -31,6 +31,14 @@ jobs:
       - name: Reisedaten validieren
         run: python3 tools/validate_trips.py
 
+      # Braucht Netz und darf deshalb nicht blockieren: ein langsamer
+      # Bildserver ist kein Grund, eine Planänderung nicht zu veröffentlichen.
+      # Ein toter Link soll aber auffallen – vorher blieb an seiner Stelle
+      # stillschweigend eine leere Fläche.
+      - name: Bild-URLs prüfen (blockiert nicht)
+        continue-on-error: true
+        run: python3 tools/check_images.py
+
   deploy:
     name: Deploy
     # Kaputte Reisedaten dürfen nicht live gehen.

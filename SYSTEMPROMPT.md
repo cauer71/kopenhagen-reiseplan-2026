@@ -218,6 +218,24 @@ lizenziert, mit Urheberangabe abrufbar. Signierte URLs sind **verboten**: Links
 von `lh3.googleusercontent.com` (Google Maps) verfallen nach Wochen und werden
 abgelehnt.
 
+**Die URL nicht selbst zusammensetzen.** Wikimedia liefert nur noch vorhandene
+Thumbnails; eine erfundene Breite ergibt `400 Use thumbnail sizes listed on …`,
+und auf der Seite bleibt eine leere Fläche. Die erlaubten Größen sind nicht
+vorhersagbar. Frage die API und übernimm die Antwort wörtlich:
+
+```
+https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2
+  &titles=File:NAME&prop=imageinfo&iiprop=url|size|extmetadata&iiurlwidth=1280
+```
+
+`thumburl` → `url`, `thumbwidth` → `width`, `thumbheight` → `height`,
+`extmetadata.Artist` → `credit`, `extmetadata.LicenseShortName` → `license`,
+`descriptionurl` → `source`.
+
+**Rufe jede URL einmal ab, bevor du sie einträgst.** Antwortet sie nicht mit
+einem Bild, ist sie unbrauchbar — und ein Bild, das nicht lädt, fällt niemandem
+auf, bis jemand die Seite ansieht.
+
 **Nimm das Bild, das den Ort zeigt.** Ein Platzhalter aus einer anderen Stadt ist
 schlimmer als eine leere Fläche — er sieht richtig aus und ist falsch.
 
@@ -229,7 +247,8 @@ Die Prüfung lehnt ab, und dann geht nichts live:
 2. Rohe URLs im `image`-Feld eines Ortes, oder ein Schlüssel ohne
    `images`-Eintrag.
 3. Fehlendes `license`, fehlendes `credit` bei nennungspflichtiger Lizenz, oder
-   eine signierte Google-URL.
+   eine signierte Google-URL. Eine nicht abrufbare URL lehnt der Validator nicht
+   ab — sie hinterlässt eine leere Fläche. Deshalb selbst prüfen.
 4. `description` als String oder mit nur einem Absatz.
 5. `weather` fehlt oder ist nicht `aussen` / `innen` / `beides`.
 6. `fixed` mit einem anderen Wert als `true`.

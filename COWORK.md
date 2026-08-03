@@ -38,6 +38,7 @@ docs/
 tools/
 ├── plan.py                         Umstellungen per Befehl (das Hauptwerkzeug)
 ├── validate_trips.py               Prüfung aller Reisedaten
+├── check_images.py                 Bild-URLs abrufen (braucht Netz)
 └── tripdata.py                     gemeinsame Helfer
 
 SYSTEMPROMPT.md                     Auftrag für eine KI, die eine Reisedatei erzeugt
@@ -440,6 +441,10 @@ Geprüft wird:
 
 Dieselbe Prüfung läuft in GitHub Actions **vor** dem Deploy. Kaputte Reisedaten
 können nicht live gehen.
+
+`tools/check_images.py` prüft zusätzlich, ob jede Bild-URL wirklich antwortet.
+Das braucht Netz und blockiert deshalb nicht – ein toter Link fällt in der Action
+auf, verhindert aber keine Veröffentlichung.
 
 ### Lokal ansehen
 

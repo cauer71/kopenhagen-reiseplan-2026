@@ -55,6 +55,7 @@ weil die Seite ihre Daten per `fetch` lädt.
 
 ```bash
 python3 tools/validate_trips.py
+python3 tools/check_images.py     # ruft jede Bild-URL ab, braucht Netz
 ```
 
 Prüft alle Reisedateien auf Vollständigkeit, eindeutige UIDs, auflösbare
