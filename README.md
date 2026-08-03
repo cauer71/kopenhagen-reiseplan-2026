@@ -70,6 +70,7 @@ docs/                      die Website (wird deployt)
 ├── data/trip.schema.json  Datenvertrag, maschinenlesbar
 ├── assets/                Template, Startseite, Design
 ├── trips/<slug>/          eigene URL je Reise
+├── test/                  fertige Testlinks (aus den Daten erzeugt)
 └── sw.js                  Offline-Cache
 
 tools/                     Python-Werkzeuge (nur Standardbibliothek)

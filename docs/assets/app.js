@@ -63,6 +63,14 @@ function renderBildnachweis() {
   return `<p class="credits" id="bildnachweis">Bilder: ${teile}</p>`;
 }
 
+/**
+ * Fußzeile ganz unten. Enthält nur den Weg zu den Testparametern — bewusst
+ * unauffällig, weil sie im Alltag niemanden interessiert, aber unterwegs vom
+ * Handy aus erreichbar sein muss.
+ */
+const renderFusszeile = () =>
+  `<p class="pagefoot"><a href="${siteRoot}test/">Testparameter</a></p>`;
+
 const maps = (place) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
 
 const esc = (value = "") => String(value).replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
@@ -283,17 +291,37 @@ function focusOf(days) {
   const iso = todayIso();
   const dated = days.filter((day) => day.isoDate);
   const heute = dated.find((day) => day.isoDate === iso);
-  if (heute) {
+  if (heute) return fokusFuerTag(heute, days);
+  const kommend = dated.find((day) => day.isoDate > iso);
+  if (kommend) return fokusFuerTag(kommend, days);
+  return fokusFuerTag(days[days.length - 1] ?? null, days);
+}
+
+/**
+ * Derselbe Status, aber für einen **bestimmten** Tag statt für den, der gerade
+ * dran ist.
+ *
+ * Nötig, weil die Karte direkt unter der Tagesleiste sitzt: sie muss den
+ * gewählten Tag beschreiben, sonst zeigt sie beim Blättern weiter Tag 1. Auf dem
+ * heutigen Tag bleibt sie trotzdem die Jetzt-Karte mit echtem Vorlauf – der
+ * Status wird aus dem Datum abgeleitet, nicht aus der Auswahl.
+ */
+function fokusFuerTag(day, days = []) {
+  if (!day) return { status: "vergangen", day: null, alleVorbei: true };
+  const iso = todayIso();
+  if (day.isoDate === iso) {
     const jetzt = nowHm();
     // `jetzt` wandert mit nach oben: die Heute-Karte rechnet daraus den Vorlauf.
-    return { status: "laufend", day: heute, jetzt, next: heute.stops.find((stop) => stop.time >= jetzt) ?? null };
+    return { status: "laufend", day, jetzt, next: day.stops.find((stop) => stop.time >= jetzt) ?? null };
   }
-  const kommend = dated.find((day) => day.isoDate > iso);
-  if (kommend) {
-    const tage = Math.round((new Date(`${kommend.isoDate}T12:00:00`) - new Date(`${iso}T12:00:00`)) / 86400000);
-    return { status: "bevorstehend", day: kommend, tage };
+  if (day.isoDate > iso) {
+    const tage = Math.round((new Date(`${day.isoDate}T12:00:00`) - new Date(`${iso}T12:00:00`)) / 86400000);
+    return { status: "bevorstehend", day, tage };
   }
-  return { status: "vergangen", day: days[0] ?? null };
+  // Ein einzelner vergangener Tag mitten in einer laufenden Reise ist etwas
+  // anderes als eine Reise, die komplett zurückliegt.
+  const alleVorbei = days.filter((d) => d.isoDate).every((d) => d.isoDate < iso);
+  return { status: "vergangen", day, alleVorbei };
 }
 
 function renderFocus(focus) {
@@ -326,10 +354,11 @@ function renderFocus(focus) {
       <p class="today-meta">${first ? `Erster Stop ${esc(first.time)} · ${esc(first.title)}` : esc(focus.day.title)}</p>
     </div>`;
   }
+  const letzter = focus.day.stops[focus.day.stops.length - 1];
   return `<div class="today-card" data-status="vergangen">
-    <p class="today-eyebrow">Diese Reise liegt zurück</p>
+    <p class="today-eyebrow">${focus.alleVorbei ? "Diese Reise liegt zurück" : "Dieser Tag liegt zurück"}</p>
     <p class="today-title">${esc(focus.day.label)} · ${esc(focus.day.date)}</p>
-    <p class="today-meta">Zum Nachlesen geöffnet – den Tag wechselst du in der Leiste.</p>
+    <p class="today-meta">${letzter ? `Letzter Stop ${esc(letzter.time)} · ${esc(letzter.title)}` : esc(focus.day.title)}</p>
   </div>`;
 }
 
@@ -354,6 +383,8 @@ function markProgress(days) {
 
 const openIds = new Set();
 let currentDay = null;
+/** Alle Tage der geladenen Reise – selectDay braucht sie für die Fokuskarte. */
+let alleTage = [];
 
 function readState() {
   try {
@@ -388,8 +419,24 @@ function selectDay(id, { scroll = false } = {}) {
     tab.setAttribute("aria-selected", String(tab.dataset.day === id));
   });
   currentDay = id;
+  fokusZeichnen(id);
   writeState();
   if (scroll) card.scrollIntoView({ block: "start", behavior: "smooth" });
+}
+
+/**
+ * Zeichnet die Karte über dem Plan für den angegebenen Tag neu.
+ *
+ * Sie wurde vorher nur einmal beim Aufbau gerendert und blieb danach auf Tag 1
+ * stehen, auch wenn man in der Leiste weiterblätterte. Da sie direkt unter der
+ * Leiste sitzt, sah das aus wie ein Fehler – und war einer.
+ */
+function fokusZeichnen(id) {
+  const ziel = document.getElementById("fokus");
+  if (!ziel) return;
+  const tag = alleTage.find((d) => d.id === id);
+  if (!tag) return;
+  ziel.innerHTML = renderFocus(fokusFuerTag(tag, alleTage));
 }
 
 function bindTabs() {
@@ -583,6 +630,7 @@ async function init() {
   // Bildverzeichnis vor dem ersten Rendern setzen — image() liest daraus.
   bilder = data.images ?? {};
   const days = joinStops(data.days, places);
+  alleTage = days;
   const focus = focusOf(days);
   const laufend = focus.status === "laufend";
 
@@ -593,12 +641,12 @@ async function init() {
   const einleitung = `<section class="section intro"><p class="eyebrow">${esc(trip.introLabel ?? "Reise")}</p><h2>${esc(trip.introTitle ?? trip.destination)}</h2><p>${esc(trip.introText ?? "")}</p></section>`;
   // Unterwegs kostet der Sektionskopf eine halbe Bildschirmhöhe vor der Leiste.
   const kopfzeile = laufend ? "" : `<div class="section-head"><p class="eyebrow">Tagespläne</p><h2>${days.length} Tage, mobil lesbar</h2></div>`;
-  const tage = `<section class="section day-section${laufend ? " is-running" : ""}" id="tage">${kopfzeile}${renderTabs(days)}${renderFocus(focus)}<div class="days">${days.map((day) => renderDay(day, laufend)).join("")}</div></section>`;
+  const tage = `<section class="section day-section${laufend ? " is-running" : ""}" id="tage">${kopfzeile}${renderTabs(days)}<div id="fokus">${renderFocus(focus)}</div><div class="days">${days.map((day) => renderDay(day, laufend)).join("")}</div></section>`;
 
   // Unterwegs zählt der Tag, davor und danach die Reise.
   root.innerHTML = (laufend
     ? `${kopf}${wetterzeilen}${tage}${einleitung}${renderWeather(trip)}`
-    : `${kopf}${einleitung}${renderWeather(trip)}${tage}`) + renderBildnachweis() + renderTestHint();
+    : `${kopf}${einleitung}${renderWeather(trip)}${tage}`) + renderBildnachweis() + renderTestHint() + renderFusszeile();
 
   readState();
   bindTabs();
@@ -613,7 +661,12 @@ async function init() {
   window.addEventListener("hashchange", openFromHash);
 
   markProgress(days);
-  setInterval(() => markProgress(days), 60000);
+  // Im Minutentakt: die Fortschrittsachse und der Vorlauf in der Jetzt-Karte.
+  // Ohne das zweite stimmt „in 25 Min." nach einer Stunde nicht mehr.
+  setInterval(() => {
+    markProgress(days);
+    if (currentDay) fokusZeichnen(currentDay);
+  }, 60000);
 
   loadWeather(trip);
   enableOffline(days);

@@ -1525,3 +1525,90 @@ time {
   color: var(--ink);
   text-decoration-color: currentColor;
 }
+
+/* Fußzeile ganz unten: nur der Weg zu den Testparametern. Bewusst noch
+   zurückhaltender als der Bildnachweis — sie interessiert im Alltag niemanden,
+   muss aber unterwegs vom Handy aus erreichbar sein. Kein display:none und
+   keine 0.01-Deckkraft: was man antippen soll, muss man sehen können. */
+.pagefoot {
+  margin: 0 auto;
+  padding: 0 var(--gutter) 1.5rem;
+  max-width: 70rem;
+  font-size: 10px;
+  line-height: 1.6;
+  text-align: right;
+}
+
+/* Unauffällig heißt nicht untreffbar: der Text bleibt 10 px, die Tippfläche
+   wächst durch Polster auf 44 px. Ohne das war das Ziel genau 10 px hoch.
+   Farbe wie beim Bildnachweis (5,26:1) – #6b7783 lag bei 4,07:1 und damit unter
+   den 4,5:1, die WCAG AA für Kleintext fordert. */
+.pagefoot a {
+  display: inline-block;
+  padding: 1.05rem 0;
+  color: #586672;
+  text-decoration-color: rgba(88, 102, 114, 0.35);
+  text-underline-offset: 2px;
+}
+
+.pagefoot a:hover,
+.pagefoot a:focus-visible {
+  color: var(--ink);
+  text-decoration-color: currentColor;
+}
+
+/* Testparameter-Seite. Reine Werkzeugseite, deshalb schmucklos und dicht. */
+.testseite {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 3rem var(--gutter) 4rem;
+}
+
+.testseite h1 { margin: 0.25rem 0 1rem; }
+.testseite h2 {
+  margin: 2.5rem 0 0.5rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--ink);
+}
+.testseite h2 .sub { font-weight: 400; color: var(--muted); font-size: 0.7em; }
+.testseite h3 { margin: 1.5rem 0 0.5rem; font-size: 1rem; }
+.testseite p { margin: 0 0 0.9rem; max-width: 62ch; }
+.testseite .vorwort { font-size: 1.05rem; }
+.testseite code {
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: var(--sand);
+  font-size: 0.9em;
+}
+
+.testseite ul { margin: 0 0 1rem; padding: 0; list-style: none; }
+.testseite li {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--line);
+}
+/* Ganze Zeile als Tippfläche, 44px Mindesthöhe – die Seite wird unterwegs
+   auf dem Handy benutzt. */
+.testseite li a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 600;
+}
+.testseite li span { display: block; color: var(--muted); font-size: 0.85rem; }
+
+.testseite table { width: 100%; border-collapse: collapse; margin: 0 0 1.5rem; }
+.testseite th, .testseite td {
+  padding: 0.5rem 0.75rem 0.5rem 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+.testseite th { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+.testseite .hinweis {
+  padding: 0.9rem 1.1rem;
+  border-left: 3px solid var(--gold);
+  background: var(--card);
+  border-radius: 0 8px 8px 0;
+}
+.testseite .zurueck { margin-top: 3rem; }

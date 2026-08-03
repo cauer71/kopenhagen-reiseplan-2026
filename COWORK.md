@@ -26,11 +26,13 @@ docs/
 ├── sw.js                           Service Worker für die Offline-Nutzung
 ├── assets/app.js                   Darstellung einer Reise (für alle Reisen gleich)
 ├── assets/landing.js               Darstellung der Startseite
+├── assets/test.js                  Testparameter-Seite
 ├── assets/styles.css               gemeinsames Design
 ├── data/trips/index.json           welche Reisen es gibt (Reihenfolge wird berechnet)
 ├── data/trips/rom.json             ← hier stehen die Inhalte
 ├── data/trip.schema.json           Datenvertrag, maschinenlesbar
 ├── icons/                          App-Icons
+├── test/index.html                 fertige Testlinks, aus den Daten erzeugt
 └── trips/<slug>/index.html         eigene URL je Reise
 
 tools/
@@ -383,6 +385,7 @@ frei.
    Bedeutung – die Startseite sortiert selbst (siehe unten). Titel, Datum und
    Untertitel **nicht** wiederholen, die liest die Startseite aus der Reisedatei.
 4. Die Reise in `SHELL` in `docs/sw.js` aufnehmen, damit sie offline verfügbar ist.
+   Die Testlinks unter `/test/` brauchen keine Pflege — sie entstehen aus den Daten.
 5. `python3 tools/validate_trips.py` und `python3 tools/plan.py bump`.
 
 ---
@@ -468,6 +471,15 @@ Deshalb lassen sich Datum und Uhrzeit über die Adresse setzen:
 Das funktioniert auch auf der Live-Seite und damit auf dem Handy, ohne Code zu
 ändern. Nur genau diese Formate werden angenommen (`JJJJ-MM-TT` und `HH:MM`); ein
 Tippfehler wird ignoriert statt stillschweigend auf einen anderen Tag zu führen.
+
+**`?heute=` wirkt auch auf der Startseite** und schaltet dort die Sortierung um
+(laufend, bevorstehend, vergangen). `?jetzt=` gilt nur auf Reiseseiten — auf der
+Startseite gibt es nichts, was auf Minuten reagiert.
+
+**Fertige Links** stehen unter [`/test/`](https://cauer71.github.io/reiseplan/test/).
+Die Seite erzeugt sie aus den echten Reisedaten, ist also nach jeder Planänderung
+von selbst aktuell. Erreichbar über den kleinen Link am Fuß jeder Seite —
+absichtlich unauffällig, aber unterwegs vom Handy aus da.
 
 Ist ein Wert gesetzt, erscheint unten ein roter Hinweis „Testansicht“ mit einem
 Link zurück zur echten Zeit. Eine Testansicht darf nicht mit der Wirklichkeit

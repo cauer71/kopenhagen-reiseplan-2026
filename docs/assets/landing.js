@@ -30,6 +30,12 @@ async function loadJson(url) {
 
 /** Heutiges Datum als JJJJ-MM-TT in lokaler Zeit (toISOString wäre UTC). */
 function today() {
+  // Dasselbe ?heute= wie auf den Reiseseiten, damit sich die Sortierung der
+  // Kacheln prüfen lässt. Ohne das wäre „laufende Reise oben" nie testbar, und
+  // genau das fällt sonst erst im Urlaub auf. Ein Tippfehler wird ignoriert
+  // statt geraten – nur genau dieses Format wird angenommen.
+  const gesetzt = new URLSearchParams(location.search).get("heute");
+  if (/^\d{4}-\d{2}-\d{2}$/.test(gesetzt ?? "")) return gesetzt;
   const now = new Date();
   const pad = (value) => String(value).padStart(2, "0");
   return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
@@ -114,6 +120,7 @@ async function init() {
       <p>Jede Reise hat ihren eigenen Bereich. Bilder, Tagespläne, Wetter und stabile Termin-UIDs bleiben je Reise getrennt.</p>
     </div>
     <div class="trip-grid">${tiles}</div>
+    <p class="pagefoot"><a href="./test/">Testparameter</a></p>
   </main>`;
 
   if ("serviceWorker" in navigator) {
