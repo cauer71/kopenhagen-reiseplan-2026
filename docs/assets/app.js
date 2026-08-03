@@ -42,22 +42,25 @@ const nennungNoetig = (lizenz) => !NENNUNG_FREI.test(String(lizenz ?? ""));
 
 /**
  * Bildnachweis — nur für Bilder, deren Lizenz die Nennung verlangt. Verlangt
- * keines davon eine, entfällt der Abschnitt vollständig.
+ * keines davon eine, entfällt er vollständig.
+ *
+ * Bewusst eine kleine Fußnote und kein Abschnitt: die Nennung ist eine
+ * Lizenzpflicht, kein Inhalt der Reise. Sie muss auffindbar und lesbar sein,
+ * nicht prominent — deshalb ein Fließtext am Seitenende statt Überschrift und
+ * Liste.
  */
 function renderBildnachweis() {
   const namen = Object.keys(bilder).sort().filter((n) => nennungNoetig(bilder[n].license));
   if (!namen.length) return "";
-  const zeilen = namen.map((n) => {
+  const teile = namen.map((n) => {
     const b = bilder[n];
-    const wer = esc(b.credit || "unbekannt");
-    const lizenz = esc(b.license || "");
+    const was = esc(b.alt || n);
+    const wer = esc([b.credit || "unbekannt", b.license].filter(Boolean).join(", "));
     return b.source
-      ? `<li><a href="${esc(b.source)}" target="_blank" rel="noreferrer">${esc(b.alt || n)}</a> · ${wer} · ${lizenz}</li>`
-      : `<li>${esc(b.alt || n)} · ${wer} · ${lizenz}</li>`;
-  }).join("");
-  return `<section class="section source-section" id="bildnachweis">`
-    + `<p class="eyebrow">Bildnachweis</p><h2>Woher die Bilder kommen</h2>`
-    + `<ul class="credits">${zeilen}</ul></section>`;
+      ? `<a href="${esc(b.source)}" target="_blank" rel="noreferrer">${was}</a> (${wer})`
+      : `${was} (${wer})`;
+  }).join(" · ");
+  return `<p class="credits" id="bildnachweis">Bilder: ${teile}</p>`;
 }
 
 const maps = (place) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;

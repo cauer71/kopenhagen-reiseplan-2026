@@ -1494,3 +1494,34 @@ time {
   font-weight: 900;
   text-decoration: none;
 }
+
+/* Bildnachweis. Lizenzpflicht, kein Inhalt der Reise: auffindbar und lesbar,
+   aber so klein wie vertretbar. 10px ist die Untergrenze — darunter wird es auf
+   dem Handy unlesbar, und eine unlesbare Namensnennung erfüllt die Pflicht nicht.
+   Zeilenhöhe bewusst großzügig, weil der Text bei dieser Größe sonst verklumpt. */
+.credits {
+  margin: 0 auto;
+  padding: 0 var(--gutter) 2.5rem;
+  max-width: 70rem;
+  font-size: 10px;
+  line-height: 1.7;
+  /* Nicht --muted (#61717e): das ergibt auf --paper nur 4,48:1 und verfehlt die
+     4,5:1, die WCAG AA für Kleintext fordert. Dieser Ton liegt bei 5,26:1 und
+     bleibt trotzdem deutlich zurückgenommen. Kleine Schrift braucht mehr
+     Kontrast, nicht weniger. */
+  color: #586672;
+  text-wrap: pretty;
+  hyphens: auto;
+}
+
+.credits a {
+  color: inherit;
+  text-decoration-color: rgba(88, 102, 114, 0.45);
+  text-underline-offset: 2px;
+}
+
+.credits a:hover,
+.credits a:focus-visible {
+  color: var(--ink);
+  text-decoration-color: currentColor;
+}
