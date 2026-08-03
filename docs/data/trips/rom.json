@@ -8,7 +8,7 @@
     "heroImage": "colosseo",
     "introLabel": "Architekturreise",
     "introTitle": "Rom wird nicht abgehakt, sondern Schicht für Schicht gelesen.",
-    "introText": "Die Reise verbindet drei sehr unterschiedliche Stadtbilder: das konstruktive Rom der Antike, die räumliche Inszenierung von Renaissance und Barock sowie ausgewählte Bauten der Moderne. Julia bekommt mit Pantheon, Kolosseum, Il Gesù, MAXXI, Centrale Montemartini, Villa Torlonia und Quartiere Coppedè einen kompakten Architekturquerschnitt. Die fest gebuchten Abend- und Bunkertermine bilden das Gerüst; Restaurants und flexible Open-Tickets sind so gesetzt, dass lange Richtungswechsel vermieden werden. Die Bildzuordnungen sind vollständig. Wo im bestehenden Fotoarchiv noch kein passendes Rom-Motiv vorhanden ist, wird vorläufig ein thematisch passendes Beispielbild aus dem bereits vorhandenen lokalen Bildbestand verwendet.",
+    "introText": "Die Reise verbindet drei sehr unterschiedliche Stadtbilder: das konstruktive Rom der Antike, die räumliche Inszenierung von Renaissance und Barock sowie ausgewählte Bauten der Moderne. Julia bekommt mit Pantheon, Kolosseum, Il Gesù, MAXXI, Centrale Montemartini, Villa Torlonia und Quartiere Coppedè einen kompakten Architekturquerschnitt. Die fest gebuchten Abend- und Bunkertermine bilden das Gerüst; Restaurants und flexible Open-Tickets sind so gesetzt, dass lange Richtungswechsel vermieden werden. Die Bilder sind als stabile, lizenzierte Links hinterlegt und werden mit Urheber- und Lizenzangabe auf der Seite ausgewiesen.",
     "theme": "coral",
     "weather": {
       "enabled": true,
@@ -506,6 +506,7 @@
       "image": "seven",
       "place": "Seven, Via Nazionale 249, 00184 Roma RM, Italien",
       "weather": "innen",
+      "fixed": true,
       "address": "Via Nazionale 249, 00184 Roma",
       "duration": "ca. 40–50 Min. inklusive Frühstücksabschluss.",
       "price": "—",
