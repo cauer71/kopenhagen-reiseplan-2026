@@ -140,8 +140,22 @@
 
     "bild": {
       "type": "object",
-      "required": ["url", "alt", "credit", "license"],
+      "required": ["url", "alt", "license"],
       "additionalProperties": false,
+      "allOf": [
+        {
+          "description": "credit ist Pflicht, sobald die Lizenz eine Namensnennung verlangt. CC0 und Gemeinfreiheit verlangen keine — dort darf das Feld fehlen, und das Bild erscheint nicht im Bildnachweis. Unbekannte Angaben gelten als nennungspflichtig: eine überflüssige Zeile ist harmlos, eine fehlende Nennung bei CC BY(-SA) ist ein Lizenzverstoß.",
+          "if": {
+            "required": ["license"],
+            "properties": {
+              "license": {
+                "not": { "pattern": "[Cc][Cc]0|[Pp]ublic ?[Dd]omain|[Pp][Dd][- ]|[Gg]emeinfrei|[Nn]o restrictions" }
+              }
+            }
+          },
+          "then": { "required": ["credit"] }
+        }
+      ],
       "properties": {
         "url": {
           "allOf": [{ "$ref": "#/$defs/httpsUrl" }],
@@ -151,7 +165,7 @@
         "width": { "type": "integer", "exclusiveMinimum": 0, "description": "Ohne width/height springt das Layout beim Nachladen." },
         "height": { "type": "integer", "exclusiveMinimum": 0 },
         "alt": { "type": "string", "minLength": 1, "description": "Beschreibend, kein Dateiname: 'Bahnhof Roma Termini', nicht 'termini'." },
-        "credit": { "type": "string", "minLength": 1, "description": "Pflicht: CC-BY-SA verlangt Namensnennung. Die Seite rendert daraus den Bildnachweis." },
+        "credit": { "type": "string", "minLength": 1, "description": "Urheber. Pflicht bei CC BY und CC BY-SA, entbehrlich bei CC0 und Gemeinfreiheit. Die Seite rendert daraus den Bildnachweis — und zeigt darin nur die Bilder, deren Lizenz die Nennung verlangt." },
         "license": { "type": "string", "minLength": 1 },
         "source": { "type": "string", "description": "Beschreibungsseite des Bildes." }
       }

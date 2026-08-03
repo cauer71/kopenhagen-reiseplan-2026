@@ -64,9 +64,10 @@ verschoben.
   Flügen, Transfers, Check-out und gebuchten Zeitfenstern.
 - Keine erfundenen Wetterzahlen. Bilder werden **verlinkt**: `image` in einem Ort
   ist ein Schlüssel in den `images`-Block, keine Datei und keine rohe URL. Jeder
-  Eintrag dort braucht `url`, `alt`, `credit` und `license` — ohne Namensnennung
-  darf ein CC-BY-SA-Bild nicht online gehen. Signierte Google-URLs verfallen und
-  werden abgelehnt.
+  Eintrag dort braucht `url`, `alt` und `license`; `credit` zusätzlich, wenn die
+  Lizenz eine Namensnennung verlangt. Der Bildnachweis auf der Seite zeigt nur
+  diese Bilder — CC0 und Gemeinfreies bleibt draußen, und verlangt keines eine
+  Nennung, entfällt der Abschnitt. Signierte Google-URLs werden abgelehnt.
 - Die Reihenfolge auf der Startseite wird berechnet (laufende Reise oben,
   bevorstehende, dann vergangene). Nicht von Hand sortieren.
 

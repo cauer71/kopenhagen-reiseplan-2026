@@ -109,7 +109,7 @@ Jede Reise ist **eine** Datei mit vier Blöcken:
       "url": "https://upload.wikimedia.org/…/Roma_termini_01.jpg",
       "width": 1440, "height": 810,   // gegen Layoutsprünge beim Nachladen
       "alt": "Bahnhof Roma Termini",  // beschreibend, kein Dateiname
-      "credit": "Nutzername",         // Pflicht: CC-BY-SA verlangt Namensnennung
+      "credit": "Nutzername",         // Pflicht bei CC BY(-SA), entbehrlich bei CC0
       "license": "CC BY-SA 4.0",
       "source": "https://commons.wikimedia.org/wiki/File:…"
     }
@@ -124,8 +124,12 @@ keine rohe URL. Der Umweg über das Verzeichnis hat drei Gründe:
 
 - Ein Motiv wird oft mehrfach benutzt — `cucina` steckt in sieben Essensstopps.
   Bricht der Link, ist es **eine** Korrektur statt sieben.
-- CC-BY-SA verlangt **Namensnennung**. Die braucht einen festen Platz, und die
-  Seite rendert daraus den Abschnitt „Bildnachweis".
+- CC BY und CC BY-SA verlangen **Namensnennung**. Die braucht einen festen Platz,
+  und die Seite rendert daraus den Abschnitt „Bildnachweis" — **aber nur für die
+  Bilder, deren Lizenz sie verlangt**. CC0 und gemeinfreie Bilder erscheinen dort
+  nicht; verlangt keines der Bilder eine Nennung, entfällt der Abschnitt ganz.
+  Bei unbekannter Lizenzangabe wird genannt: eine überflüssige Zeile ist harmlos,
+  eine fehlende Nennung bei CC BY(-SA) ist ein Lizenzverstoß.
 - Die Prüfung kann jeden Schlüssel gegen das Verzeichnis abgleichen und meldet
   unbenutzte Einträge.
 
@@ -348,8 +352,9 @@ und werden nicht in der Datei gepflegt.
 ### Neuen Ort hinzufügen
 
 1. Bild in den `images`-Block eintragen — oder einen vorhandenen Schlüssel
-   wiederverwenden, wenn das Motiv passt. Pflicht sind `url` (https), `alt`,
-   `credit` und `license`; `width`/`height` verhindern Layoutsprünge.
+   wiederverwenden, wenn das Motiv passt. Pflicht sind `url` (https), `alt` und
+   `license`, dazu `credit`, wenn die Lizenz eine Nennung verlangt;
+   `width`/`height` verhindern Layoutsprünge.
 2. Nächste freie UID ermitteln (höchster Schlüssel in `places` + 1, zweistellig).
 3. Eintrag in `places` anlegen – alle Pflichtfelder, `description` mit
    mindestens zwei Absätzen und `weather` gesetzt. `fixed: true` nur bei
@@ -394,9 +399,10 @@ frei.
    kommen live von Open-Meteo; ohne Netz zeigt die Seite bewusst „keine Prognose“
    statt Zahlen, die richtig aussehen, aber geraten sind.
 5. **Bilder nur über den `images`-Block.** Keine rohen URLs in den Orten, keine
-   mitgelieferten Dateien. Jeder Eintrag braucht `url`, `alt`, `credit` und
-   `license` — ohne Namensnennung darf ein CC-BY-SA-Bild nicht veröffentlicht
-   werden. Signierte URLs sind verboten, weil sie verfallen.
+   mitgelieferten Dateien. Jeder Eintrag braucht `url`, `alt` und `license`.
+   `credit` ist Pflicht, sobald die Lizenz eine Namensnennung verlangt — bei CC0
+   und Gemeinfreiheit darf es fehlen. Signierte URLs sind verboten, weil sie
+   verfallen.
 6. **`bump` nach Änderungen an CSS, JavaScript oder HTML**, sonst sehen Besucher
    die alte Fassung. Für reine Planänderungen ist es nicht nötig.
 7. **Kein Build-Schritt.** Es gibt bewusst kein npm, kein Bundler, kein
@@ -417,8 +423,9 @@ Geprüft wird:
 - JSON ist gültig, alle Pflichtfelder sind da
 - jede UID ist zweistellig, genau einmal eingeplant und hat einen `places`-Eintrag
 - keine verwaisten Ortsbeschreibungen
-- jeder Bildschlüssel steht im `images`-Block, jeder Eintrag hat URL, Alt-Text,
-  Urheber und Lizenz, und kein Eintrag ist unbenutzt
+- jeder Bildschlüssel steht im `images`-Block, jeder Eintrag hat URL, Alt-Text
+  und Lizenz, bei nennungspflichtiger Lizenz auch den Urheber, und kein Eintrag
+  ist unbenutzt
 - Uhrzeiten sind `HH:MM` und innerhalb eines Tages aufsteigend
 - `isoDate` ist ein echtes Datum und liegt nach dem Vortag
 - `tone` ist einer der vier erlaubten Werte

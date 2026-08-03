@@ -196,15 +196,19 @@ abgelehnt.
 `image` in einem Ort ist ein **Schlüssel in diesen Block** — keine Datei, keine
 rohe URL. Bilder werden verlinkt, nicht mitgeliefert.
 
-Pflicht je Eintrag: `url` (muss `https://` sein), `alt`, `credit`, `license`.
-Dringend empfohlen: `width`, `height` — ohne sie springt das Layout beim Laden.
-`source` verlinkt die Beschreibungsseite.
+Pflicht je Eintrag: `url` (muss `https://` sein), `alt`, `license`. Dazu
+`credit`, **sobald die Lizenz eine Namensnennung verlangt** — bei CC0 und
+Gemeinfreiheit darf es fehlen. Dringend empfohlen: `width`, `height` — ohne sie
+springt das Layout beim Laden. `source` verlinkt die Beschreibungsseite.
 
 - **`alt` ist beschreibend**, kein Dateiname: „Bahnhof Roma Termini", nicht
   „termini".
-- **`credit` und `license` sind Pflicht, weil CC-BY-SA Namensnennung verlangt.**
-  Die Seite rendert daraus einen Bildnachweis. Ein Bild ohne diese Angaben darf
-  nicht veröffentlicht werden.
+- **`license` ist immer Pflicht.** `credit` ist Pflicht bei CC BY und CC BY-SA,
+  weil diese Lizenzen die Nennung verlangen. Bei CC0 und gemeinfreien Bildern
+  darf es fehlen — sie erscheinen dann auch nicht im Bildnachweis, und verlangt
+  keines der Bilder einer Reise eine Nennung, entfällt der Abschnitt ganz.
+  Ist die Lizenz unklar, gib `credit` trotzdem an: eine überflüssige Zeile ist
+  harmlos, eine fehlende Nennung bei CC BY(-SA) ist ein Lizenzverstoß.
 - **Motive wiederverwenden.** Ein Schlüssel wie `cucina` darf in mehreren
   Essensstopps stehen. Bricht der Link, ist es eine Korrektur statt sieben.
 - **Kein Eintrag ohne Benutzer.** Unbenutzte Schlüssel werden abgelehnt.
@@ -224,7 +228,8 @@ Die Prüfung lehnt ab, und dann geht nichts live:
 1. Prognosezahlen in `weather.notes`.
 2. Rohe URLs im `image`-Feld eines Ortes, oder ein Schlüssel ohne
    `images`-Eintrag.
-3. Fehlendes `credit` oder `license`, oder eine signierte Google-URL.
+3. Fehlendes `license`, fehlendes `credit` bei nennungspflichtiger Lizenz, oder
+   eine signierte Google-URL.
 4. `description` als String oder mit nur einem Absatz.
 5. `weather` fehlt oder ist nicht `aussen` / `innen` / `beides`.
 6. `fixed` mit einem anderen Wert als `true`.

@@ -28,11 +28,24 @@ const masse = (name) => {
 const bildAlt = (name, ersatz = "") => esc(bilder[name]?.alt || ersatz);
 
 /**
- * Bildnachweis. CC-BY-SA verlangt Namensnennung, deshalb steht sie auf der
- * Seite und nicht nur im JSON.
+ * Verlangt diese Lizenz eine Namensnennung?
+ *
+ * CC0 und Gemeinfreiheit verlangen keine — solche Bilder erscheinen im Nachweis
+ * nicht. CC BY und CC BY-SA verlangen sie als Lizenzbedingung.
+ *
+ * Unbekannte Angaben werden **genannt**, nicht weggelassen: eine überflüssige
+ * Zeile ist harmlos, eine fehlende Namensnennung bei CC BY(-SA) ist ein
+ * Lizenzverstoß.
+ */
+const NENNUNG_FREI = /\b(cc0|public\s*domain|pd[-\s]|gemeinfrei|no\s+restrictions)/i;
+const nennungNoetig = (lizenz) => !NENNUNG_FREI.test(String(lizenz ?? ""));
+
+/**
+ * Bildnachweis — nur für Bilder, deren Lizenz die Nennung verlangt. Verlangt
+ * keines davon eine, entfällt der Abschnitt vollständig.
  */
 function renderBildnachweis() {
-  const namen = Object.keys(bilder).sort();
+  const namen = Object.keys(bilder).sort().filter((n) => nennungNoetig(bilder[n].license));
   if (!namen.length) return "";
   const zeilen = namen.map((n) => {
     const b = bilder[n];
@@ -44,7 +57,6 @@ function renderBildnachweis() {
   }).join("");
   return `<section class="section source-section" id="bildnachweis">`
     + `<p class="eyebrow">Bildnachweis</p><h2>Woher die Bilder kommen</h2>`
-    + `<p>Alle Bilder sind verlinkt, nicht mitgeliefert — ohne Netz bleibt an ihrer Stelle eine Fläche.</p>`
     + `<ul class="credits">${zeilen}</ul></section>`;
 }
 

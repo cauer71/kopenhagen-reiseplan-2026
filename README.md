@@ -23,8 +23,9 @@ und Live-Prognose fehlen dann, weil beide auf fremden Hosts liegen. Über „Zum
 Homescreen hinzufügen“ läuft sie wie eine App.
 
 Bilder werden **verlinkt, nicht mitgeliefert**. Jede Reisedatei hat dafür einen
-`images`-Block mit URL, Alt-Text, Urheber und Lizenz je Motiv; daraus rendert die
-Seite den Bildnachweis.
+`images`-Block mit URL, Alt-Text und Lizenz je Motiv, dazu den Urheber, wo die
+Lizenz eine Nennung verlangt. Der Bildnachweis auf der Seite zeigt genau diese
+Bilder — CC0 und Gemeinfreies bleibt draußen.
 
 ## Inhalte ändern
 
@@ -57,7 +58,8 @@ python3 tools/validate_trips.py
 ```
 
 Prüft alle Reisedateien auf Vollständigkeit, eindeutige UIDs, auflösbare
-Bildschlüssel samt Lizenzangabe, aufsteigende Uhrzeiten und gültige Datumsangaben. Dieselbe Prüfung
+Bildschlüssel samt Lizenz- und, wo nötig, Urheberangabe, aufsteigende Uhrzeiten
+und gültige Datumsangaben. Dieselbe Prüfung
 läuft in GitHub Actions vor jedem Deploy, damit fehlerhafte Daten nicht live gehen.
 
 ## Struktur

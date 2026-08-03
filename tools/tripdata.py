@@ -21,8 +21,20 @@ TONES = {"teal", "gold", "coral", "navy"}
 #   * `cucina` kommt siebenmal vor — ein defekter Link wäre sieben Korrekturen,
 #   * CC-BY-SA verlangt Namensnennung, und die braucht einen festen Platz,
 #   * die Prüfung kann Schlüssel gegen Verzeichnis abgleichen.
-IMAGE_REQUIRED = ("url", "alt", "credit", "license")
+IMAGE_REQUIRED = ("url", "alt", "license")
 IMAGE_ORDER = ("url", "width", "height", "alt", "credit", "license", "source")
+
+# Lizenzen, die keine Namensnennung verlangen. Solche Bilder erscheinen nicht im
+# Bildnachweis, und `credit` darf dort fehlen.
+#
+# Alles andere – auch eine unbekannte Angabe – gilt als nennungspflichtig. Das
+# ist die vorsichtige Richtung: eine überflüssige Zeile im Nachweis ist harmlos,
+# eine fehlende Namensnennung bei CC BY(-SA) ist ein Lizenzverstoß.
+NENNUNG_FREI = re.compile(r"\b(cc0|public\s*domain|pd[-\s]|gemeinfrei|no\s+restrictions)", re.I)
+
+
+def nennung_noetig(lizenz: str | None) -> bool:
+    return not NENNUNG_FREI.search(str(lizenz or ""))
 
 # Wettertauglichkeit eines Ortes. Grundlage für Umplanungen bei Wetterwechsel.
 WEATHER_VALUES = {
@@ -150,6 +162,10 @@ def _images_block_problems(slug: str, images: dict) -> list[str]:
         for feld in IMAGE_REQUIRED:
             if not bild.get(feld):
                 problems.append(f"{wo}.{feld} fehlt")
+        # `credit` nur dort verlangen, wo die Lizenz die Nennung fordert.
+        if nennung_noetig(bild.get("license")) and not bild.get("credit"):
+            problems.append(f"{wo}.credit fehlt – '{bild.get('license')}' verlangt "
+                            f"Namensnennung. Bei CC0 oder Gemeinfreiheit darf das Feld fehlen.")
         url = str(bild.get("url", ""))
         if url and not url.startswith("https://"):
             problems.append(f"{wo}.url ist keine https-Adresse")
