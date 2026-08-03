@@ -24,6 +24,16 @@ TONES = {"teal", "gold", "coral", "navy"}
 IMAGE_REQUIRED = ("url", "alt", "license")
 IMAGE_ORDER = ("url", "width", "height", "alt", "credit", "license", "source")
 
+# Zielbreite für Bilder und die Grenze, ab der geprüft wird. 1280 px reichen für
+# jedes Handy: das Layout ist rund 400 px breit, bei dreifacher Pixeldichte also
+# 1200 px. Alles darüber sind Daten für Pixel, die niemand sieht.
+#
+# Die Grenze ist keine Theorie. Eine Reisedatei kam mit Originaldateien über
+# `Special:Redirect` – ein einzelnes Bild 16,8 MB, die Reise 66 MB. Nach der
+# Umstellung auf Thumbnails: 5,2 MB.
+ZIEL_BILDBREITE = 1280
+MAX_BILDBREITE = 1600
+
 # Lizenzen, die keine Namensnennung verlangen. Solche Bilder erscheinen nicht im
 # Bildnachweis, und `credit` darf dort fehlen.
 #
@@ -173,8 +183,20 @@ def _images_block_problems(slug: str, images: dict) -> list[str]:
         if "googleusercontent" in url or "lh3.google" in url:
             problems.append(f"{wo}.url ist eine signierte Google-URL und verfällt – "
                             f"stabile Quelle verwenden (Wikimedia Commons o. Ä.)")
+        # Special:Redirect liefert die Originaldatei in voller Auflösung. Ein
+        # einzelnes Bild kam so auf 16,8 MB, eine Reise auf 66 MB. Dazu kostet
+        # die Umleitung Zeit und wird von manchen Vorschau-Diensten nicht gefolgt.
+        if "Special:Redirect" in url:
+            problems.append(f"{wo}.url ist eine Special:Redirect-Adresse und liefert das "
+                            f"Original in voller Auflösung – thumburl der API verwenden")
         if not bild.get("width") or not bild.get("height"):
             problems.append(f"{wo}: width/height fehlen – ohne sie springt das Layout beim Laden")
+        # Breite als Bremse gegen Originale: 1280 px reichen für jedes Handy,
+        # darüber zahlt der Reisende Daten für Pixel, die er nie sieht.
+        breite = bild.get("width")
+        if isinstance(breite, int) and breite > MAX_BILDBREITE:
+            problems.append(f"{wo}: width {breite} px überschreitet {MAX_BILDBREITE} px – "
+                            f"mit iiurlwidth={ZIEL_BILDBREITE} neu abfragen")
     return problems
 
 

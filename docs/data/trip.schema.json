@@ -4,170 +4,416 @@
   "title": "Reisedatei",
   "description": "Datenvertrag einer Reise unter docs/data/trips/<slug>.json. Erklärt in COWORK.md, als Auftrag für eine KI in SYSTEMPROMPT.md. Verbindlich bleibt tools/tripdata.py — dort laufen zusätzlich die Querprüfungen, die ein Schema nicht ausdrücken kann (UID-Verweise, Zeitfolge, verwaiste Einträge).",
   "type": "object",
-  "required": ["trip", "days", "places", "images"],
+  "required": [
+    "trip",
+    "days",
+    "places",
+    "images"
+  ],
   "additionalProperties": false,
   "properties": {
-    "trip": { "$ref": "#/$defs/trip" },
-    "days": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/day" } },
+    "trip": {
+      "$ref": "#/$defs/trip"
+    },
+    "days": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/day"
+      }
+    },
     "places": {
       "type": "object",
       "minProperties": 1,
-      "propertyNames": { "pattern": "^\\d{2}$" },
-      "additionalProperties": { "$ref": "#/$defs/place" }
+      "propertyNames": {
+        "pattern": "^\\d{2}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/place"
+      }
     },
     "images": {
       "type": "object",
       "minProperties": 1,
       "description": "Bildverzeichnis. Bilder werden verlinkt, nicht mitgeliefert.",
-      "additionalProperties": { "$ref": "#/$defs/bild" }
+      "additionalProperties": {
+        "$ref": "#/$defs/bild"
+      }
     }
   },
-
   "$defs": {
     "tone": {
-      "enum": ["teal", "gold", "coral", "navy"],
+      "enum": [
+        "teal",
+        "gold",
+        "coral",
+        "navy"
+      ],
       "description": "Tagesfarbe. Genau diese vier Werte sind erlaubt."
     },
-    "isoDatum": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
-    "uhrzeit": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$" },
-    "httpsUrl": { "type": "string", "pattern": "^https://" },
-
+    "isoDatum": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "uhrzeit": {
+      "type": "string",
+      "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+    },
+    "httpsUrl": {
+      "type": "string",
+      "pattern": "^https://"
+    },
     "trip": {
       "type": "object",
-      "required": ["destination", "title", "subtitle", "dates", "travellers", "heroImage"],
+      "required": [
+        "destination",
+        "title",
+        "subtitle",
+        "dates",
+        "travellers",
+        "heroImage"
+      ],
       "properties": {
-        "destination": { "type": "string", "minLength": 1 },
-        "title": { "type": "string", "minLength": 1 },
-        "subtitle": { "type": "string", "minLength": 1 },
-        "dates": { "type": "string", "minLength": 1, "description": "Anzeigeform, z. B. '05.–08. September 2026'." },
-        "travellers": { "type": "string", "minLength": 1 },
-        "heroImage": { "type": "string", "minLength": 1, "description": "Schlüssel in images." },
-        "introLabel": { "type": "string" },
-        "introTitle": { "type": "string" },
-        "introText": { "type": "string" },
-        "theme": { "$ref": "#/$defs/tone" },
-        "weather": { "$ref": "#/$defs/wetter" }
+        "destination": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subtitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dates": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Anzeigeform, z. B. '05.–08. September 2026'."
+        },
+        "travellers": {
+          "type": "string",
+          "minLength": 1
+        },
+        "heroImage": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Schlüssel in images."
+        },
+        "introLabel": {
+          "type": "string"
+        },
+        "introTitle": {
+          "type": "string"
+        },
+        "introText": {
+          "type": "string"
+        },
+        "theme": {
+          "$ref": "#/$defs/tone"
+        },
+        "weather": {
+          "$ref": "#/$defs/wetter"
+        }
       }
     },
-
     "wetter": {
       "type": "object",
       "description": "Koordinaten für die Live-Prognose plus Planungshinweise je Tag.",
       "properties": {
-        "enabled": { "type": "boolean" },
-        "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
-        "longitude": { "type": "number", "minimum": -180, "maximum": 180 },
-        "timezone": { "type": "string", "description": "IANA-Name, z. B. Europe/Rome." },
-        "startDate": { "$ref": "#/$defs/isoDatum" },
-        "endDate": { "$ref": "#/$defs/isoDatum" },
-        "notes": { "type": "array", "items": { "$ref": "#/$defs/wetterhinweis" } }
+        "enabled": {
+          "type": "boolean"
+        },
+        "latitude": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitude": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "timezone": {
+          "type": "string",
+          "description": "IANA-Name, z. B. Europe/Rome."
+        },
+        "startDate": {
+          "$ref": "#/$defs/isoDatum"
+        },
+        "endDate": {
+          "$ref": "#/$defs/isoDatum"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/wetterhinweis"
+          }
+        }
       },
-      "if": { "properties": { "enabled": { "const": true } }, "required": ["enabled"] },
-      "then": { "required": ["latitude", "longitude", "timezone", "startDate", "endDate"] }
+      "if": {
+        "properties": {
+          "enabled": {
+            "const": true
+          }
+        },
+        "required": [
+          "enabled"
+        ]
+      },
+      "then": {
+        "required": [
+          "latitude",
+          "longitude",
+          "timezone",
+          "startDate",
+          "endDate"
+        ]
+      }
     },
-
     "wetterhinweis": {
       "type": "object",
-      "required": ["date"],
+      "required": [
+        "date"
+      ],
       "additionalProperties": false,
       "description": "Datum, Wochentag und die Konsequenz — niemals Prognosezahlen. Die kommen live von Open-Meteo; erfundene Zahlen sehen richtig aus und sind geraten.",
       "properties": {
-        "date": { "$ref": "#/$defs/isoDatum" },
-        "day": { "type": "string" },
-        "action": { "type": "string" }
+        "date": {
+          "$ref": "#/$defs/isoDatum"
+        },
+        "day": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        }
       }
     },
-
     "day": {
       "type": "object",
-      "required": ["id", "label", "date", "isoDate", "title", "tone", "heroImage", "stops"],
+      "required": [
+        "id",
+        "label",
+        "date",
+        "isoDate",
+        "title",
+        "tone",
+        "heroImage",
+        "stops"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": { "type": "string", "pattern": "^tag\\d+$", "description": "Anker für Deep-Links." },
-        "label": { "type": "string", "minLength": 1 },
-        "date": { "type": "string", "minLength": 1, "description": "Anzeigeform, z. B. 'Sa 05.09.'." },
-        "isoDate": { "$ref": "#/$defs/isoDatum" },
-        "title": { "type": "string", "minLength": 1 },
-        "tone": { "$ref": "#/$defs/tone" },
-        "heroImage": { "type": "string", "minLength": 1 },
-        "weather": { "type": "string", "description": "Statischer Planungshinweis, keine Zahlen." },
-        "note": { "type": "string" },
-        "stops": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stop" } }
+        "id": {
+          "type": "string",
+          "pattern": "^tag\\d+$",
+          "description": "Anker für Deep-Links."
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Anzeigeform, z. B. 'Sa 05.09.'."
+        },
+        "isoDate": {
+          "$ref": "#/$defs/isoDatum"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tone": {
+          "$ref": "#/$defs/tone"
+        },
+        "heroImage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "weather": {
+          "type": "string",
+          "description": "Statischer Planungshinweis, keine Zahlen."
+        },
+        "note": {
+          "type": "string"
+        },
+        "stops": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/stop"
+          }
+        }
       }
     },
-
     "stop": {
       "type": "object",
-      "required": ["uid", "time"],
+      "required": [
+        "uid",
+        "time"
+      ],
       "additionalProperties": false,
       "description": "Nur Reihenfolge und Uhrzeit. Beschreibungen gehören nach places — deshalb bewegt Umsortieren eine Zeile und keinen Textblock. Zusätzliche Felder werden abgelehnt.",
       "properties": {
-        "uid": { "type": "string", "pattern": "^\\d{2}$" },
-        "time": { "$ref": "#/$defs/uhrzeit" }
+        "uid": {
+          "type": "string",
+          "pattern": "^\\d{2}$"
+        },
+        "time": {
+          "$ref": "#/$defs/uhrzeit"
+        }
       }
     },
-
     "place": {
       "type": "object",
-      "required": ["title", "detail", "description", "image", "place", "weather"],
+      "required": [
+        "title",
+        "detail",
+        "description",
+        "image",
+        "place",
+        "weather"
+      ],
       "additionalProperties": false,
       "properties": {
-        "title": { "type": "string", "minLength": 1 },
-        "detail": { "type": "string", "minLength": 1, "description": "Ein Satz als Aufhänger." },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Ein Satz als Aufhänger."
+        },
         "description": {
           "type": "array",
           "minItems": 2,
-          "items": { "type": "string", "minLength": 1 },
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
           "description": "Mindestens zwei Absätze. Ein String ist nicht erlaubt."
         },
-        "image": { "type": "string", "minLength": 1, "description": "Schlüssel in images, keine URL und kein Dateiname." },
-        "place": { "type": "string", "minLength": 1, "description": "Suchbegriff für den Google-Maps-Link, möglichst vollständige Adresse." },
+        "image": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Schlüssel in images, keine URL und kein Dateiname."
+        },
+        "place": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Suchbegriff für den Google-Maps-Link, möglichst vollständige Adresse."
+        },
         "weather": {
-          "enum": ["aussen", "innen", "beides"],
+          "enum": [
+            "aussen",
+            "innen",
+            "beides"
+          ],
           "description": "Wettertauglichkeit. Grundlage für das Umplanen bei Regen."
         },
         "fixed": {
           "const": true,
           "description": "Schutzschaltung gegen Umsortieren. Nur bei Flügen, Transfers, Check-out und gebuchten Zeitfenstern — keine Kennzeichnung für 'wichtig'. Entweder true oder das Feld fehlt."
         },
-        "address": { "type": "string" },
-        "duration": { "type": "string" },
-        "price": { "type": "string", "description": "Freitext mit Einheit: 'ca. 25–35 € pro Person', 'Gebucht.', 'Kostenlos.'" },
-        "tip": { "type": "string", "description": "Was man vorher wissen muss: Reservierung, Ausweis, letzte Einlasszeit." },
-        "ticketUrl": { "$ref": "#/$defs/httpsUrl" }
+        "address": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string",
+          "description": "Freitext mit Einheit: 'ca. 25–35 € pro Person', 'Gebucht.', 'Kostenlos.'"
+        },
+        "tip": {
+          "type": "string",
+          "description": "Was man vorher wissen muss: Reservierung, Ausweis, letzte Einlasszeit."
+        },
+        "ticketUrl": {
+          "$ref": "#/$defs/httpsUrl"
+        }
       }
     },
-
     "bild": {
       "type": "object",
-      "required": ["url", "alt", "license"],
+      "required": [
+        "url",
+        "alt",
+        "license"
+      ],
       "additionalProperties": false,
       "allOf": [
         {
           "description": "credit ist Pflicht, sobald die Lizenz eine Namensnennung verlangt. CC0 und Gemeinfreiheit verlangen keine — dort darf das Feld fehlen, und das Bild erscheint nicht im Bildnachweis. Unbekannte Angaben gelten als nennungspflichtig: eine überflüssige Zeile ist harmlos, eine fehlende Nennung bei CC BY(-SA) ist ein Lizenzverstoß.",
           "if": {
-            "required": ["license"],
+            "required": [
+              "license"
+            ],
             "properties": {
               "license": {
-                "not": { "pattern": "[Cc][Cc]0|[Pp]ublic ?[Dd]omain|[Pp][Dd][- ]|[Gg]emeinfrei|[Nn]o restrictions" }
+                "not": {
+                  "pattern": "[Cc][Cc]0|[Pp]ublic ?[Dd]omain|[Pp][Dd][- ]|[Gg]emeinfrei|[Nn]o restrictions"
+                }
               }
             }
           },
-          "then": { "required": ["credit"] }
+          "then": {
+            "required": [
+              "credit"
+            ]
+          }
         }
       ],
       "properties": {
         "url": {
-          "allOf": [{ "$ref": "#/$defs/httpsUrl" }],
-          "not": { "pattern": "googleusercontent|lh3\\.google" },
-          "description": "Signierte URLs sind verboten: Google-Maps-Fotolinks verfallen nach Wochen. Stabil sind Wikimedia Commons oder eigener Speicher."
+          "allOf": [
+            {
+              "$ref": "#/$defs/httpsUrl"
+            }
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "pattern": "googleusercontent|lh3\\.google"
+              },
+              {
+                "pattern": "Special:Redirect"
+              }
+            ]
+          },
+          "description": "Immer die thumburl der Commons-API mit iiurlwidth=1280. Verboten: signierte Google-URLs (verfallen), Special:Redirect (liefert das Original in voller Auflösung – eine Reise kam so auf 66 MB) und selbst gesetzte Thumbnail-Breiten (Wikimedia antwortet mit 400, die erlaubten Größen sind nicht vorhersagbar)."
         },
-        "width": { "type": "integer", "exclusiveMinimum": 0, "description": "Ohne width/height springt das Layout beim Nachladen." },
-        "height": { "type": "integer", "exclusiveMinimum": 0 },
-        "alt": { "type": "string", "minLength": 1, "description": "Beschreibend, kein Dateiname: 'Bahnhof Roma Termini', nicht 'termini'." },
-        "credit": { "type": "string", "minLength": 1, "description": "Urheber. Pflicht bei CC BY und CC BY-SA, entbehrlich bei CC0 und Gemeinfreiheit. Die Seite rendert daraus den Bildnachweis — und zeigt darin nur die Bilder, deren Lizenz die Nennung verlangt." },
-        "license": { "type": "string", "minLength": 1 },
-        "source": { "type": "string", "description": "Beschreibungsseite des Bildes." }
+        "width": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 1600,
+          "description": "Aus thumbwidth. Höchstens 1600 px – 1280 reichen für jedes Handy."
+        },
+        "height": {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        "alt": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Beschreibend, kein Dateiname: 'Bahnhof Roma Termini', nicht 'termini'."
+        },
+        "credit": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Urheber. Pflicht bei CC BY und CC BY-SA, entbehrlich bei CC0 und Gemeinfreiheit. Die Seite rendert daraus den Bildnachweis — und zeigt darin nur die Bilder, deren Lizenz die Nennung verlangt."
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "description": "Beschreibungsseite des Bildes."
+        }
       }
     }
   }

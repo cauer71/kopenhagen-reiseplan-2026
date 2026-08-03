@@ -32,6 +32,15 @@ def main() -> int:
         return 1
 
     problems: list[str] = []
+
+    # Eine Reisedatei, die nicht in index.json steht, ist unsichtbar: die
+    # Startseite zeigt sie nicht, es gibt keine Unterseite, und diese Prüfung
+    # würde sie nie ansehen. Genau das ist passiert – die Datei lag im Repo und
+    # niemand bemerkte sie. Deshalb hier melden statt schweigen.
+    vorhanden = {p.stem for p in tripdata.DATA.glob("*.json") if p.stem != "index"}
+    for verwaist in sorted(vorhanden - set(slugs)):
+        problems.append(f"{verwaist}.json steht nicht in index.json und ist damit unsichtbar – "
+                        f"Eintrag ergänzen, docs/trips/{verwaist}/index.html anlegen")
     for slug in slugs:
         try:
             data = tripdata.load(slug)

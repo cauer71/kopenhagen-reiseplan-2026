@@ -15,6 +15,12 @@
 
 const CACHE_VERSION = "reiseplan-v5";
 
+/**
+ * Der feste Teil. Die Reisen kommen nicht hierher, sondern werden bei der
+ * Installation aus `data/trips/index.json` gelesen – sonst müsste man diese
+ * Liste bei jeder neuen Reise nachpflegen, und genau das wurde einmal vergessen:
+ * die Reise war da, im Offline-Cache fehlte sie.
+ */
 const SHELL = [
   "./",
   "./index.html",
@@ -24,9 +30,21 @@ const SHELL = [
   "./assets/app.js",
   "./assets/landing.js",
   "./data/trips/index.json",
-  "./data/trips/rom.json",
-  "./trips/rom/",
 ];
+
+/** Reisedatei und Unterseite je Slug aus index.json. */
+async function reisePfade() {
+  try {
+    const antwort = await fetch(new URL("./data/trips/index.json", self.location.href).href,
+                               { cache: "reload" });
+    if (!antwort.ok) return [];
+    const index = await antwort.json();
+    return (index.trips ?? []).flatMap(({ slug }) =>
+      slug ? [`./data/trips/${slug}.json`, `./trips/${slug}/`] : []);
+  } catch {
+    return [];   // ohne Netz gibt es beim ersten Besuch ohnehin nichts zu cachen
+  }
+}
 
 const isImage = (url) => /\.(?:jpg|jpeg|png|svg|webp)$/i.test(url.pathname);
 
@@ -55,8 +73,9 @@ async function store(cache, url) {
 self.addEventListener("install", (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_VERSION);
+    const alles = [...SHELL, ...(await reisePfade())];
     // Einzeln: ein fehlender Eintrag soll die Installation nicht kippen.
-    await Promise.all(SHELL.map((url) => store(cache, new URL(url, self.location.href).href)));
+    await Promise.all(alles.map((url) => store(cache, new URL(url, self.location.href).href)));
     await self.skipWaiting();
   })());
 });

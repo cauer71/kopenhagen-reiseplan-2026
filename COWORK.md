@@ -145,6 +145,40 @@ Zwei Konsequenzen, die man kennen muss:
   (`lh3.googleusercontent.com`) sind nach Wochen tot — die Prüfung lehnt sie ab.
   Stabil sind Wikimedia Commons oder eigener Speicher.
 
+#### Bild-URLs nie selbst zusammensetzen
+
+Immer von der Commons-API holen und wörtlich übernehmen:
+
+```bash
+curl -s "https://commons.wikimedia.org/w/api.php?action=query&format=json\
+&formatversion=2&titles=File:NAME&prop=imageinfo\
+&iiprop=url|size|extmetadata&iiurlwidth=1280"
+```
+
+`thumburl` → `url`, `thumbwidth` → `width`, `thumbheight` → `height`,
+`Artist` → `credit`, `LicenseShortName` → `license`, `descriptionurl` → `source`.
+
+**Beide denkbaren Abkürzungen sind schon schiefgegangen**, und zwar
+unterschiedlich:
+
+*Selbst gesetzte Breite.* Eine URL mit `1337px-` antwortete mit
+`400 Use thumbnail sizes listed on …` — Wikimedia erzeugt keine Thumbnails in
+beliebigen Breiten mehr. Der Schlüssel stand korrekt im Block, der Validator war
+zufrieden, und auf der Seite blieb eine leere Fläche. Die erlaubten Größen sind
+**nicht vorhersagbar**: bei jener Datei ging ausschließlich 1280 px, auch 320,
+640, 800 und 1024 wurden abgelehnt.
+
+*`Special:Redirect/file/…`.* Diese Adressen laden sichtbar — aber das **Original
+in voller Auflösung**. Eine Reisedatei kam so auf **66 MB**, ein einzelnes Bild
+auf 16,8 MB. Nach der Umstellung auf Thumbnails bei 1280 px: **5,2 MB**.
+
+Der Validator lehnt jetzt beides ab: `Special:Redirect` und `width` über 1600 px.
+1280 px reichen für jedes Handy — das Layout ist rund 400 px breit, bei
+dreifacher Pixeldichte also 1200 px. Darüber zahlt der Reisende Daten für Pixel,
+die er nie sieht, unterwegs womöglich Roaming.
+
+Ob eine URL wirklich antwortet, sagt nur `python3 tools/check_images.py`.
+
 `title`, `detail`, `description`, `image`, `place` und `weather` sind Pflicht.
 `address`, `duration`, `price` und `tip` erscheinen als Faktenblock unter der
 Beschreibung; fehlende Felder werden übersprungen.
@@ -402,11 +436,11 @@ frei.
    Datum, Wochentag und ein Planungshinweis. Temperaturen und Regenwahr­schein­lich­keiten
    kommen live von Open-Meteo; ohne Netz zeigt die Seite bewusst „keine Prognose“
    statt Zahlen, die richtig aussehen, aber geraten sind.
-5. **Bilder nur über den `images`-Block.** Keine rohen URLs in den Orten, keine
-   mitgelieferten Dateien. Jeder Eintrag braucht `url`, `alt` und `license`.
-   `credit` ist Pflicht, sobald die Lizenz eine Namensnennung verlangt — bei CC0
-   und Gemeinfreiheit darf es fehlen. Signierte URLs sind verboten, weil sie
-   verfallen.
+5. **Bilder nur über den `images`-Block, URL immer von der API.** Keine rohen
+   URLs in den Orten, keine mitgelieferten Dateien, keine selbst gebaute
+   Thumbnail-Breite und kein `Special:Redirect`. Jeder Eintrag braucht `url`,
+   `alt` und `license`; `credit`, sobald die Lizenz eine Namensnennung verlangt.
+   `width` höchstens 1600 px.
 6. **`bump` nach Änderungen an CSS, JavaScript oder HTML**, sonst sehen Besucher
    die alte Fassung. Für reine Planänderungen ist es nicht nötig.
 7. **Kein Build-Schritt.** Es gibt bewusst kein npm, kein Bundler, kein

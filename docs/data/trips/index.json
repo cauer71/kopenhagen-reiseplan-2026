@@ -5,6 +5,10 @@
       "slug": "rom",
       "tileImage": "colosseo",
       "badge": "Architekturreise"
+    },
+    {
+      "slug": "kopenhagen",
+      "tileImage": "nyhavn"
     }
   ]
 }

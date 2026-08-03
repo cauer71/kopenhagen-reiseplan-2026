@@ -213,28 +213,77 @@ springt das Layout beim Laden. `source` verlinkt die Beschreibungsseite.
   Essensstopps stehen. Bricht der Link, ist es eine Korrektur statt sieben.
 - **Kein Eintrag ohne Benutzer.** Unbenutzte Schlüssel werden abgelehnt.
 
-**Woher die Bilder:** Wikimedia Commons ist die erste Wahl — dauerhaft,
-lizenziert, mit Urheberangabe abrufbar. Signierte URLs sind **verboten**: Links
-von `lh3.googleusercontent.com` (Google Maps) verfallen nach Wochen und werden
-abgelehnt.
+### Bilder beschaffen — genau so und nicht anders
 
-**Die URL nicht selbst zusammensetzen.** Wikimedia liefert nur noch vorhandene
-Thumbnails; eine erfundene Breite ergibt `400 Use thumbnail sizes listed on …`,
-und auf der Seite bleibt eine leere Fläche. Die erlaubten Größen sind nicht
-vorhersagbar. Frage die API und übernimm die Antwort wörtlich:
+Wikimedia Commons ist die Quelle: dauerhaft, lizenziert, mit Urheberangabe
+abrufbar.
+
+**Baue niemals eine Bild-URL selbst zusammen.** Frage die API und übernimm die
+Antwort wörtlich. Das ist keine Empfehlung, sondern die einzige Methode, die
+funktioniert — beide denkbaren Abkürzungen sind schon schiefgegangen.
+
+#### Schritt 1: Datei suchen
 
 ```
 https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2
-  &titles=File:NAME&prop=imageinfo&iiprop=url|size|extmetadata&iiurlwidth=1280
+  &list=search&srnamespace=6&srlimit=8&srsearch=SUCHBEGRIFF filetype:bitmap
 ```
 
-`thumburl` → `url`, `thumbwidth` → `width`, `thumbheight` → `height`,
-`extmetadata.Artist` → `credit`, `extmetadata.LicenseShortName` → `license`,
-`descriptionurl` → `source`.
+Nimm die Datei, die **den Ort zeigt**. Ein thematisch ähnliches Bild aus einer
+anderen Stadt ist schlimmer als eine leere Fläche: es sieht richtig aus und ist
+falsch.
 
-**Rufe jede URL einmal ab, bevor du sie einträgst.** Antwortet sie nicht mit
-einem Bild, ist sie unbrauchbar — und ein Bild, das nicht lädt, fällt niemandem
-auf, bis jemand die Seite ansieht.
+#### Schritt 2: URL und Angaben holen
+
+```
+https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2
+  &titles=File:DATEINAME&prop=imageinfo&iiprop=url|size|extmetadata&iiurlwidth=1280
+```
+
+`iiurlwidth=1280` ist verbindlich. Übernimm dann **wörtlich**:
+
+| Antwortfeld | Zielfeld |
+|---|---|
+| `imageinfo[0].thumburl` | `url` |
+| `imageinfo[0].thumbwidth` | `width` |
+| `imageinfo[0].thumbheight` | `height` |
+| `extmetadata.Artist` (HTML-Tags entfernen) | `credit` |
+| `extmetadata.LicenseShortName` | `license` |
+| `imageinfo[0].descriptionurl` | `source` |
+
+Fehlt `thumburl`, ist die Datei schmaler als 1280 px. Dann sind `url`, `width`
+und `height` die Werte ohne `thumb`-Präfix — das ist in Ordnung, weil ein kleines
+Original klein bleibt.
+
+#### Schritt 3: abrufen
+
+Rufe jede URL einmal ab. Kommt kein Bild zurück, ist sie unbrauchbar. Ein Bild,
+das nicht lädt, fällt niemandem auf, bis jemand die Seite ansieht.
+
+#### Diese vier URL-Formen werden abgelehnt
+
+| Form | Warum |
+|---|---|
+| `…/wiki/Special:Redirect/file/NAME.jpg` | liefert das **Original in voller Auflösung**. Eine Reisedatei kam so auf 66 MB, ein einzelnes Bild auf 16,8 MB. Dazu kostet die Umleitung Zeit und Vorschau-Dienste folgen ihr nicht. |
+| `…/commons/a/ab/NAME.jpg` (ohne `/thumb/`) | dasselbe Problem: das Original. |
+| selbst gesetzte Breite, z. B. `…/1337px-NAME.jpg` | Wikimedia erzeugt keine Thumbnails in beliebigen Breiten mehr und antwortet mit `400 Use thumbnail sizes listed on …`. Die erlaubten Größen sind **nicht vorhersagbar**: bei einer Datei ging ausschließlich 1280 px, auch 320, 640, 800 und 1024 wurden abgelehnt. |
+| `lh3.googleusercontent.com/…` (Google Maps) | signiert, verfällt nach Wochen. |
+
+Richtig sieht eine URL so aus — mit `/thumb/` **und** einer Breite, die von der
+API kam:
+
+```
+https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/NAME.jpg/1280px-NAME.jpg
+```
+
+**`width` darf 1600 px nicht überschreiten.** Der Validator lehnt mehr ab. 1280
+reichen für jedes Handy: das Layout ist rund 400 px breit, bei dreifacher
+Pixeldichte also 1200 px. Darüber zahlt der Reisende Daten für Pixel, die er nie
+sieht — und unterwegs womöglich Roaming.
+
+Als Größenordnung: ein Bild sollte unter 1 MB liegen, eine ganze Reise unter
+10 MB. Zum Vergleich zwei echte Stände derselben Reise: **66 MB** mit Originalen,
+**5,2 MB** mit Thumbnails bei 1280 px.
 
 **Nimm das Bild, das den Ort zeigt.** Ein Platzhalter aus einer anderen Stadt ist
 schlimmer als eine leere Fläche — er sieht richtig aus und ist falsch.
@@ -246,18 +295,20 @@ Die Prüfung lehnt ab, und dann geht nichts live:
 1. Prognosezahlen in `weather.notes`.
 2. Rohe URLs im `image`-Feld eines Ortes, oder ein Schlüssel ohne
    `images`-Eintrag.
-3. Fehlendes `license`, fehlendes `credit` bei nennungspflichtiger Lizenz, oder
-   eine signierte Google-URL. Eine nicht abrufbare URL lehnt der Validator nicht
-   ab — sie hinterlässt eine leere Fläche. Deshalb selbst prüfen.
-4. `description` als String oder mit nur einem Absatz.
-5. `weather` fehlt oder ist nicht `aussen` / `innen` / `beides`.
-6. `fixed` mit einem anderen Wert als `true`.
-7. UID nicht zweistellig, doppelt eingeplant, verwaist oder ohne Beschreibung.
-8. Uhrzeiten innerhalb eines Tages nicht aufsteigend.
-9. `isoDate` kein Datum oder nicht nach dem Vortag.
-10. `tone` außerhalb von `teal`, `gold`, `coral`, `navy`.
-11. Zusätzliche Felder in `days[].stops`.
-12. `ticketUrl` ohne `https://`.
+3. Fehlendes `license`, oder fehlendes `credit` bei nennungspflichtiger Lizenz.
+4. Eine Bild-URL mit `Special:Redirect`, ohne `/thumb/`, mit selbst gesetzter
+   Breite oder von `lh3.googleusercontent.com`. Ebenso `width` über 1600 px.
+   Eine URL, die **gar nicht antwortet**, lehnt der Validator dagegen nicht ab —
+   sie hinterlässt stillschweigend eine leere Fläche. Deshalb selbst abrufen.
+5. `description` als String oder mit nur einem Absatz.
+6. `weather` fehlt oder ist nicht `aussen` / `innen` / `beides`.
+7. `fixed` mit einem anderen Wert als `true`.
+8. UID nicht zweistellig, doppelt eingeplant, verwaist oder ohne Beschreibung.
+9. Uhrzeiten innerhalb eines Tages nicht aufsteigend.
+10. `isoDate` kein Datum oder nicht nach dem Vortag.
+11. `tone` außerhalb von `teal`, `gold`, `coral`, `navy`.
+12. Zusätzliche Felder in `days[].stops`.
+13. `ticketUrl` ohne `https://`.
 
 ## Ton der Texte
 
