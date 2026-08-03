@@ -51,14 +51,15 @@
       "tone": "coral",
       "heroImage": "maxxi",
       "weather": "Wettercheck: MAXXI ist der sichere Indoor-Block; der Weg zur Ara Pacis bleibt auch bei Regen kurz planbar.",
-      "note": "Nach der Zugankunft wird das Gepäck sofort im Seven abgegeben. Der Nachmittag gehört ganz dem MAXXI und seiner Architektur, bevor Open Baladin Craft Beer und vegetarische Küche zusammenführt. Der gebuchte Abendtermin an der Ara Pacis ist nicht verschiebbar.",
+      "note": "Nach der Zugankunft wird das Gepäck sofort im Seven abgegeben. Der Nachmittag gehört ganz dem MAXXI und seiner Architektur, bevor Open Baladin Craft Beer und vegetarische Küche zusammenführt. Der gebuchte Abendtermin an der Ara Pacis ist nicht verschiebbar; der anschließende Bierstopp in Trastevere bleibt optional.",
       "stops": [
         { "uid": "13", "time": "06:42" },
         { "uid": "14", "time": "11:55" },
         { "uid": "15", "time": "12:20" },
         { "uid": "10", "time": "16:00" },
         { "uid": "12", "time": "19:00" },
-        { "uid": "16", "time": "21:00" }
+        { "uid": "16", "time": "21:00" },
+        { "uid": "38", "time": "22:05" }
       ]
     },
     {
@@ -626,6 +627,23 @@
       "price": "Gebucht.",
       "tip": "Wagen 2, Platz 29. Spätestens 30–40 Min. vor Abfahrt am Bahnhof sein.",
       "ticketUrl": "https://www.italotreno.com/"
+    },
+    "38": {
+      "title": "Craft Beer – Ma Che Siete Venuti A Fà (optional)",
+      "detail": "Später Bierstopp in Trastevere mit 16 wechselnden Zapfhähnen und nationalen wie internationalen Craft-Bieren.",
+      "description": [
+        "Anfahrt: vom Museo dell’Ara Pacis → Ma Che Siete Venuti A Fà · zu Fuß etwa 25–30 Min. · ÖPNV etwa 20–30 Min. mit Bus und kurzem Fußweg. Der Spaziergang führt nach der Abendveranstaltung über den Tiber nach Trastevere.",
+        "Der kleine Pub gehört seit 2001 zur römischen Craft-Beer-Szene und schenkt 16 sorgfältig ausgewählte Biere vom Fass aus. Die Auswahl verbindet italienische Brauereien mit internationalen Gästen und wechselnden Veranstaltungen rund um Brauer und Mikrobrauereien.",
+        "Der Stopp ist bewusst optional: Nach dem langen Ankunftstag entscheidet ihr vor Ort, ob noch Energie für Trastevere bleibt. Der Pub ist täglich bis 02:00 Uhr geöffnet und nimmt keine Reservierungen an."
+      ],
+      "image": "mache",
+      "place": "Ma Che Siete Venuti A Fà, Via Benedetta 25, 00153 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Benedetta 25, 00153 Roma",
+      "duration": "ca. 1 Std. 10 Min.",
+      "price": "Kein Eintritt; Getränke nach Verbrauch.",
+      "tip": "Keine Reservierung möglich. Bei Müdigkeit auslassen, damit der frühe Museumsstart am Sonntag realistisch bleibt.",
+      "ticketUrl": "https://www.football-pub.com/"
     }
   },
   "images": {
@@ -709,6 +727,15 @@
       "credit": "Diego Delso",
       "license": "CC BY-SA 4.0",
       "source": "https://commons.wikimedia.org/wiki/File:Iglesia_del_Ges%C3%B9,_Roma,_Italia,_2022-09-16,_DD_112-114_HDR.jpg"
+    },
+    "mache": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Via_Benedetta_in_Rome.jpg/1337px-Via_Benedetta_in_Rome.jpg",
+      "width": 1337,
+      "height": 2048,
+      "alt": "Via Benedetta in Trastevere, Standort des Pubs",
+      "credit": "Krzysztof Golik (Tournasol7)",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Via_Benedetta_in_Rome.jpg"
     },
     "maxxi": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/MAXXI_Museum_interior_09.JPG/1920px-MAXXI_Museum_interior_09.JPG",
