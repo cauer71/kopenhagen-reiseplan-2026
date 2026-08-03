@@ -4,14 +4,16 @@
  * Strategie:
  * - Seiten, Skripte, Styles und Reisedaten: network-first mit Cache-Fallback.
  *   Online bekommt man dadurch immer die aktuelle Fassung, offline die letzte gesehene.
- * - Bilder: cache-first, weil sie sich nie ändern (neue Bilder heißen anders).
- * - Fremde Hosts (z. B. die Wetter-API) werden bewusst nicht angefasst; ohne Netz
- *   scheitert der Abruf und die Seite zeigt ihre Planungshinweise.
+ * - Eigene Bilder: cache-first, weil sie sich nie ändern (neue heißen anders).
+ * - Fremde Hosts werden bewusst nicht angefasst. Das betrifft die Wetter-API und
+ *   seit der Umstellung auf verlinkte Bilder auch diese: sie liegen auf fremden
+ *   Servern und lassen sich nicht vorhalten. Ohne Netz bleibt an ihrer Stelle
+ *   eine Fläche — der Plan selbst ist vollständig lesbar.
  *
  * CACHE_VERSION bei Änderungen an dieser Datei oder am Shell-Umfang erhöhen.
  */
 
-const CACHE_VERSION = "reiseplan-v4";
+const CACHE_VERSION = "reiseplan-v5";
 
 const SHELL = [
   "./",
@@ -22,9 +24,7 @@ const SHELL = [
   "./assets/app.js",
   "./assets/landing.js",
   "./data/trips/index.json",
-  "./data/trips/kopenhagen.json",
   "./data/trips/rom.json",
-  "./trips/kopenhagen/",
   "./trips/rom/",
 ];
 

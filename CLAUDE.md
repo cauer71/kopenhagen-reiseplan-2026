@@ -12,7 +12,7 @@ Wartezeit.
 Kommt ein Auftrag wie **„es regnet heute, sortier den Tag um"**:
 
 ```bash
-python3 tools/plan.py wetter kopenhagen tag1
+python3 tools/plan.py wetter rom tag1
 ```
 
 Das ändert nichts, sondern liefert die betroffenen Außenpunkte, überdachte Kandidaten
@@ -34,7 +34,8 @@ verschoben.
 
 - Statische Website ohne Build-Schritt. `docs/` ist die Seite und wird von
   GitHub Actions unverändert nach Pages deployt. Kein npm, kein Bundler.
-- Inhalte liegen ausschließlich in `docs/data/trips/*.json`.
+- Inhalte liegen ausschließlich in `docs/data/trips/*.json`. Der Datenvertrag steht
+  maschinenlesbar in `docs/data/trip.schema.json`, erklärt in [COWORK.md](COWORK.md).
 - **Reihenfolge und Inhalt sind getrennt:** `days[].stops` enthält nur
   `{ uid, time }`, die Beschreibungen stehen in `places` nach UID. Verschieben
   bewegt eine Zeile, keinen Textblock.
@@ -43,12 +44,12 @@ verschoben.
   prüft vor dem Schreiben und schreibt nur, wenn die Datei stimmig bleibt:
 
   ```bash
-  python3 tools/plan.py show   kopenhagen
-  python3 tools/plan.py wetter kopenhagen tag1
-  python3 tools/plan.py move   kopenhagen 05 tag2 --time 10:30
-  python3 tools/plan.py order  kopenhagen tag1 01,02,04,03,05,06,07
-  python3 tools/plan.py swap   kopenhagen 11 24
-  python3 tools/plan.py time   kopenhagen 11 09:30
+  python3 tools/plan.py show   rom
+  python3 tools/plan.py wetter rom tag1
+  python3 tools/plan.py move   rom 05 tag2 --time 10:30
+  python3 tools/plan.py order  rom tag1 01,02,04,03,05,06,07
+  python3 tools/plan.py swap   rom 11 24
+  python3 tools/plan.py time   rom 11 09:30
   ```
 
   Heißt der Interpreter nicht `python3`, dann `python` versuchen oder direkt
@@ -61,7 +62,17 @@ verschoben.
   CI den Deploy.
 - Jeder Ort braucht `weather` (`aussen` | `innen` | `beides`). `fixed: true` nur bei
   Flügen, Transfers, Check-out und gebuchten Zeitfenstern.
-- Keine erfundenen Wetterzahlen und keine externen Bild-URLs. Bilder gehören nach
-  `docs/photos/web/` in **beiden** Breiten (`-720.jpg` und `-1200.jpg`).
+- Keine erfundenen Wetterzahlen. Bilder werden **verlinkt**: `image` in einem Ort
+  ist ein Schlüssel in den `images`-Block, keine Datei und keine rohe URL. Jeder
+  Eintrag dort braucht `url`, `alt`, `credit` und `license` — ohne Namensnennung
+  darf ein CC-BY-SA-Bild nicht online gehen. Signierte Google-URLs verfallen und
+  werden abgelehnt.
 - Die Reihenfolge auf der Startseite wird berechnet (laufende Reise oben,
   bevorstehende, dann vergangene). Nicht von Hand sortieren.
+
+## Eine Reisedatei von einer anderen KI erzeugen lassen
+
+`SYSTEMPROMPT.md` ist der fertige Auftrag dafür. Er beschreibt das Datenmodell
+vollständig, sodass die erzeugende Anwendung dieses Repo nicht kennen muss. Was
+sie liefert, muss `python3 tools/validate_trips.py` fehlerfrei durchlaufen —
+dieselbe Prüfung blockiert in CI den Deploy.

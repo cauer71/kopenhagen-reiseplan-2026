@@ -49,7 +49,7 @@
       "isoDate": "2026-09-05",
       "title": "Ankommen, Zaha Hadid und nächtliche Ara Pacis",
       "tone": "coral",
-      "heroImage": "copenhill",
+      "heroImage": "maxxi",
       "weather": "Wettercheck: MAXXI ist der sichere Indoor-Block; der Weg zur Ara Pacis bleibt auch bei Regen kurz planbar.",
       "note": "Nach der Zugankunft wird das Gepäck sofort im Seven abgegeben. Der Nachmittag gehört ganz dem MAXXI und seiner Architektur, bevor Open Baladin Craft Beer und vegetarische Küche zusammenführt. Der gebuchte Abendtermin an der Ara Pacis ist nicht verschiebbar.",
       "stops": [
@@ -68,7 +68,7 @@
       "isoDate": "2026-09-06",
       "title": "Maschinen, Jugendstil, Bunker und Coppedè",
       "tone": "navy",
-      "heroImage": "cisternerne",
+      "heroImage": "montemartini",
       "weather": "Wettercheck: Gasometro und Coppedè sind Außenpunkte; Centrale, Casina und Bunker funktionieren bei Regen.",
       "note": "Der Tag beginnt im ehemaligen Elektrizitätswerk an der Via Ostiense und bleibt zunächst im Industrieviertel. Nach dem veganen Mittagessen führt die Metro ohne Altstadtumweg zur Villa Torlonia. Die gebuchte Bunkerführung um 17:00 Uhr hat Vorrang vor allen anderen Sonntagsstopps.",
       "stops": [
@@ -110,7 +110,7 @@
       "isoDate": "2026-09-08",
       "title": "Fiumicino, Julias Abflug und Christians Rückreise",
       "tone": "teal",
-      "heroImage": "aerial",
+      "heroImage": "flughafen",
       "weather": "Wettercheck: Der Flughafenpuffer bleibt unangetastet; Christians Nachmittagsrunde kann bei Bedarf vollständig entfallen.",
       "note": "Die Kofferlogistik wird am Morgen erledigt. Christian begleitet Julia mit dem Leonardo Express nach Fiumicino und fährt erst nach ihrem Abflug zurück. Mittagessen, Monti und Gepäckabholung liegen danach im direkten Umfeld von Termini und der Unterkunft.",
       "stops": [
@@ -185,7 +185,7 @@
         "Zaha Hadid behandelt das Museum nicht als neutrale Schachtel, sondern als ein Geflecht aus Betonbändern, Rampen, Brücken, gekrümmten Wänden und überlagerten Blickachsen. Die schwarze Treppenlandschaft und die linearen Oberlichter lenken Bewegung und Licht; gerade die Konflikte zwischen spektakulärer Wegeführung und klassischer Ausstellungshängung machen den Bau für eine Architekturstudentin besonders ergiebig.",
         "The Large Glass, kuratiert von Alex Da Corte, verbindet Werke aus Kunst, Architektur und Fotografie mit den räumlichen Eigenschaften des Hauses. Vitalità dell’architettura italiana 1946–2026 spannt den Bogen von der Nachkriegszeit bis zur Gegenwart und beginnt mit Stimmen unter anderem von Renzo Piano, Massimiliano Fuksas, Stefano Boeri und Paola Viganò. Karten werden wie gewünscht erst an der Kasse gekauft."
       ],
-      "image": "copenhill",
+      "image": "maxxi",
       "place": "MAXXI, Via Guido Reni 4A, 00196 Roma RM, Italien",
       "weather": "innen",
       "address": "Via Guido Reni 4A, 00196 Roma",
@@ -218,7 +218,7 @@
         "Abfahrt in Bozen ist am Samstag um 06:42 Uhr. Der Italo 8953 erreicht Roma Termini planmäßig um 11:40 Uhr. Christian und Julia sitzen in Wagen 4 auf den Plätzen 77 und 78 in Smart.",
         "Die Zugfahrt ist der erste feste Termin der Reise und darf bei späteren Umplanungen nicht verschoben werden. Nach der Ankunft führt der schnellste Weg zu Fuß zur Unterkunft; für die letzten Meter über Via Nazionale ist kein zusätzlicher ÖPNV-Wechsel sinnvoll."
       ],
-      "image": "aerial",
+      "image": "termini",
       "place": "Stazione di Bolzano, Piazza della Stazione 1, 39100 Bolzano BZ, Italien",
       "weather": "beides",
       "fixed": true,
@@ -236,7 +236,7 @@
         "Das Zimmer ist ab 15:00 Uhr verfügbar. Nach dem Mittagessen bleibt ein kurzer Rückweg für Check-in und Frischmachen, bevor es zum MAXXI geht. Die Unterkunft ist für die gesamte Reise ein guter Verkehrsknoten: Termini, Repubblica, Monti und mehrere Buslinien liegen in kurzer Gehweite.",
         "Der Zugangscode ist sicherheitsrelevant und wird absichtlich nicht in dieser öffentlichen Reisedatei gespeichert. Er muss aus der privaten Booking-Nachricht beziehungsweise einer separaten privaten Notiz verfügbar sein und bei der Eingabe mit dem dort angegebenen Bestätigungszeichen abgeschlossen werden."
       ],
-      "image": "christiansborg",
+      "image": "seven",
       "place": "Seven, Via Nazionale 249, 00184 Roma RM, Italien",
       "weather": "innen",
       "address": "Via Nazionale 249, 00184 Roma",
@@ -269,7 +269,7 @@
         "Die rund 40-minütige Inszenierung rekonstruiert den historischen und farblichen Kontext des Ara-Pacis-Altars. Projektionen, Licht und räumliche Erzählung helfen dabei, die Reliefs nicht nur als helle Marmoroberfläche, sondern als Teil der politischen Bildsprache des Augustus zu lesen.",
         "Für Julia ist auch Richard Meiers Museumshülle wichtig: Tageslicht, Travertin, Glasflächen und die bewusste Konfrontation eines modernen Schutzbaus mit dem historischen Zentrum. Die Tickets sind zeitgebunden; bei Verspätung gibt es laut Bedingungen keine Umbuchung."
       ],
-      "image": "pantheon",
+      "image": "arapacis",
       "place": "Museo dell’Ara Pacis, Lungotevere in Augusta, 00186 Roma RM, Italien",
       "weather": "innen",
       "fixed": true,
@@ -287,7 +287,7 @@
         "Die Centrale Montemartini ist keine bloße Ausstellung in einem Industriegebäude. Weiße antike Skulpturen stehen vor schwarzen Dieselmotoren, Turbinen und Schaltanlagen; Maßstab, Material und historische Funktion der beiden Sammlungen kommentieren einander. Der Bau macht außerdem die frühe Elektrifizierung Roms und die Entwicklung der Via Ostiense als Produktionsachse lesbar.",
         "Der 6. September ist der erste Sonntag des Monats. Für die kommunalen Museen ist daher ein kostenloser Eintritt vorgesehen; kurz vor der Reise soll die konkrete Septembermitteilung nochmals geprüft werden. Frühes Erscheinen reduziert auch hier den Andrang."
       ],
-      "image": "copenhill",
+      "image": "montemartini",
       "place": "Centrale Montemartini, Via Ostiense 106, 00154 Roma RM, Italien",
       "weather": "innen",
       "address": "Via Ostiense 106, 00154 Roma",
@@ -304,7 +304,7 @@
         "Ostiense zeigt ein Rom jenseits von Travertin und Barockfassaden. Gasometer, ehemalige Kraftwerks- und Speicherbauten, Bahn- und Hafeninfrastruktur bilden ein großmaßstäbliches industrielles Stadtfragment. Der Gasometro selbst ist heute vor allem als Stahlskelett präsent und funktioniert als weit sichtbare Landmarke.",
         "Der Rundgang ist bewusst locker und kann bei Hitze oder Regen gekürzt werden. Wichtig ist weniger ein einzelnes Gebäude als das Verhältnis zwischen Produktionsgeschichte, Umnutzung, Street Art und der heutigen Entwicklung des Quartiers."
       ],
-      "image": "copenhill",
+      "image": "gasometro",
       "place": "Gasometro Ostiense, Via del Commercio, 00154 Roma RM, Italien",
       "weather": "aussen",
       "address": "Via del Commercio, 00154 Roma",
@@ -337,7 +337,7 @@
         "Die Casina delle Civette entwickelte sich aus einer ländlich-schweizerisch gedachten Hütte zu einem eklektischen Wohnhaus des frühen 20. Jahrhunderts. Spitzdächer, Erker, Loggien, Majolika, Holz, Schmiedeeisen und vor allem die farbigen Glasfenster ergeben kein einheitliches Stilprogramm, sondern eine bewusst fantastische Collage zwischen Mittelalterbild und Jugendstil.",
         "Der Museumsbesuch endet spätestens gegen 16:10 Uhr, damit genügend Zeit für den Weg zum Casino Nobile, Toilette und Einlasskontrolle der Bunkerführung bleibt. Bei langen Gratis-Sonntagswarteschlangen wird die Casina verkürzt; der gebuchte Bunkertermin ist unantastbar."
       ],
-      "image": "rosenborg",
+      "image": "civette",
       "place": "Casina delle Civette, Villa Torlonia, Via Nomentana 70, 00161 Roma RM, Italien",
       "weather": "beides",
       "address": "Villa Torlonia, Via Nomentana 70, 00161 Roma",
@@ -354,7 +354,7 @@
         "Die Führung verbindet die Nutzung der Villa Torlonia durch Mussolini mit der Entwicklung verschiedener Schutzanlagen während des Zweiten Weltkriegs. Zu sehen sind verstärkte Bereiche, Luftschutzräume und der unvollendete eigentliche Bunker. Die baulichen Unterschiede zeigen, wie schnell auf die zunehmende Bedrohung durch Luftangriffe reagiert wurde.",
         "Der Rundgang dauert etwa 50 Minuten, führt über steile Treppen und endet an einem anderen Punkt im Park als der Eingang. Große Gegenstände, Speisen und Getränke sind nicht erlaubt; im Rundgang gibt es keine Toilette. Die zwei italienischen Führungen sind auf den 6. September um 17:00 Uhr korrigiert und fest gebucht."
       ],
-      "image": "cisternerne",
+      "image": "civette",
       "place": "Bunker e Rifugi Antiaerei di Villa Torlonia, Via Nomentana 70, 00161 Roma RM, Italien",
       "weather": "innen",
       "fixed": true,
@@ -372,7 +372,7 @@
         "Gino Coppedè entwarf das Quartier ab 1915 als Ensemble, nicht als einzelne Sehenswürdigkeit. Torbogen, Palazzi, Villini, Mosaike, Tierfiguren, Säulen, Loggien und übersteigerte Dekoration greifen historische Formen auf, ohne sich einer Stilreinheit zu unterwerfen. Piazza Mincio und die Fontana delle Rane bilden den räumlichen Mittelpunkt.",
         "Der Rundgang konzentriert sich auf wenige Straßen und dauert ungefähr 45 Minuten. Das weichere Abendlicht eignet sich gut für Fassadendetails; danach liegt Berberè in kurzer Gehweite, sodass kein weiterer Verkehrswechsel nötig ist."
       ],
-      "image": "rosenborg",
+      "image": "coppede",
       "place": "Quartiere Coppedè, Piazza Mincio, 00198 Roma RM, Italien",
       "weather": "aussen",
       "address": "Piazza Mincio, 00198 Roma",
@@ -405,7 +405,7 @@
         "Vignolas Grundriss bündelt die Aufmerksamkeit in einem breiten, tonnengewölbten Langhaus mit seitlichen Kapellen und klarer Sicht auf den Altar. Giacomo della Portas Fassade übersetzt die unterschiedliche Breite von Mittelschiff und Kapellen in zwei Geschosse mit Voluten und wurde zum Vorbild zahlreicher Jesuiten- und Gegenreformationskirchen.",
         "Im Inneren steigert Baciccias Trionfo del Nome di Gesù die Architektur durch Malerei, Stuck und Figuren, die scheinbar aus dem Deckenrahmen in den Raum treten. Im Sommer ist die Kirche montags vormittags geöffnet, doch die Besichtigung wird vor der Messe um 11:00 Uhr abgeschlossen."
       ],
-      "image": "saviour",
+      "image": "gesu",
       "place": "Chiesa del Gesù, Piazza del Gesù, 00186 Roma RM, Italien",
       "weather": "innen",
       "address": "Piazza del Gesù, 00186 Roma",
@@ -439,7 +439,7 @@
         "Nicola Salvis Brunnen verwandelt die schmale Piazza in eine theatralische Fassade aus Travertin, Wasser und bewegten Figuren. Der Palazzo Poli wird zur Hintergrundarchitektur; Oceanus, Felsen und Kaskaden scheinen den Stadtraum vollständig zu besetzen.",
         "Seit 2026 kostet der Zugang zum inneren Bereich für Nichtresidenten 2 €. Eure beiden Open-Tickets sind nicht an eine bestimmte Uhrzeit gebunden. Montags beginnt der reguläre Zugang um 11:30 Uhr, daher passt der geplante Besuch am Nachmittag problemlos."
       ],
-      "image": "pantheon",
+      "image": "trevi",
       "place": "Fontana di Trevi, Piazza di Trevi, 00187 Roma RM, Italien",
       "weather": "aussen",
       "address": "Piazza di Trevi, 00187 Roma",
@@ -456,7 +456,7 @@
         "Die Scalinata di Trinità dei Monti verbindet die tiefer liegende Piazza di Spagna mit Kirche und Kloster auf dem Pincio. Rampen, Podeste und wechselnde Blickrichtungen machen die Treppe zu einem eigenständigen Stadtraum und nicht nur zu einer Höhendifferenz. Berninis Fontana della Barcaccia bildet den Gegenpol am Fuß.",
         "Der Stopp bleibt kurz und dient zugleich als Übergang zurück Richtung Via Nazionale. Auf den Stufen zu sitzen ist nicht gestattet; für eine ruhigere Wahrnehmung lohnt der Blick von seitlichen Absätzen und vom oberen Niveau."
       ],
-      "image": "rosenborg",
+      "image": "spagna",
       "place": "Piazza di Spagna, 00187 Roma RM, Italien",
       "weather": "aussen",
       "address": "Piazza di Spagna, 00187 Roma",
@@ -488,7 +488,7 @@
         "Anfahrt: von Piazza di Spagna → Seven · zu Fuß etwa 15–20 Min. · Metro A von Spagna nach Repubblica plus kurzer Fußweg etwa 10–15 Min. Bei müden Beinen ist die Metro die bessere Variante.",
         "Die Pause ist kein verlorener Programmpunkt, sondern hält den dichten Montag realistisch. Nach Pantheon, Kirche und etwa drei Stunden Antike werden Schuhe gewechselt, Geräte geladen und die Open-Tickets sowie Reisedokumente für den Abreisetag geordnet."
       ],
-      "image": "christiansborg",
+      "image": "seven",
       "place": "Seven, Via Nazionale 249, 00184 Roma RM, Italien",
       "weather": "innen",
       "address": "Via Nazionale 249, 00184 Roma",
@@ -503,7 +503,7 @@
         "Der Morgen beginnt in der Unterkunft. Der Check-out wird gegen 08:15 Uhr erledigt; Christians Gepäck bleibt bis zum späten Nachmittag dort. Julias Fluggepäck geht mit zum Flughafen.",
         "Vor dem Verlassen werden Pass, Boardingpass, Ryanair-Gepäckregeln und die Rückfahrtickets kontrolliert. Die Unterkunft wird gegen 09:05 Uhr verlassen, damit Roma Termini ohne Zeitdruck zu Fuß erreicht wird."
       ],
-      "image": "christiansborg",
+      "image": "seven",
       "place": "Seven, Via Nazionale 249, 00184 Roma RM, Italien",
       "weather": "innen",
       "address": "Via Nazionale 249, 00184 Roma",
@@ -518,7 +518,7 @@
         "Anfahrt: von Seven → Roma Termini · zu Fuß etwa 10–15 Min. · ÖPNV —. Vorgesehen ist ein Leonardo Express gegen 09:35 Uhr; die konkrete Verbindung wird kurz vor der Reise im aktuellen Fahrplan bestätigt.",
         "Der Leonardo Express fährt ohne Zwischenhalt in ungefähr 32 Minuten bis zum Bahnhof im Flughafen. Bei einer Ankunft um etwa 10:07 Uhr bleiben rund zweieinhalb Stunden bis zum Abflug um 12:40 Uhr. Das ist der gewünschte Sicherheitsabstand für Ryanair, Gepäckabgabe, Sicherheitskontrolle und Terminalwege."
       ],
-      "image": "aerial",
+      "image": "termini",
       "place": "Roma Termini, Piazza dei Cinquecento, 00185 Roma RM, Italien",
       "weather": "beides",
       "fixed": true,
@@ -535,7 +535,7 @@
         "Julia fliegt am Dienstag mit Ryanair FR8983 von Rom-Fiumicino nach Mahón/Menorca. Der bestätigte Abflug ist um 12:40 Uhr, die planmäßige Ankunft um 14:15 Uhr.",
         "Die frühe Flughafenankunft lässt Zeit für Gepäckabgabe und Sicherheitskontrolle. Terminal, Gate und mögliche Flugplanänderungen werden am Vorabend und nochmals in der Ryanair-App kontrolliert. Christian bleibt bis zur Verabschiedung am Flughafen und fährt danach nach Termini zurück."
       ],
-      "image": "aerial",
+      "image": "flughafen",
       "place": "Aeroporto di Roma Fiumicino Leonardo da Vinci, 00054 Fiumicino RM, Italien",
       "weather": "beides",
       "fixed": true,
@@ -552,7 +552,7 @@
         "Anfahrt: vom Abflugbereich → Bahnhof Fiumicino Aeroporto · zu Fuß innerhalb des Terminals etwa 10–20 Min. Vorgesehen ist eine Verbindung kurz nach 13:00 Uhr, beispielsweise gegen 13:08 Uhr; der exakte Zug wird am Reisetag gewählt.",
         "Die Nonstop-Fahrt benötigt etwa 32 Minuten. Nach der Rückkehr nach Termini liegen Mittagessen, Monti, Unterkunft und späterer Italo-Bahnsteig in einem engen Radius. Dadurch bleibt der letzte Nachmittag stressarm und kann bei Flug- oder Zugverspätung problemlos gekürzt werden."
       ],
-      "image": "aerial",
+      "image": "flughafen",
       "place": "Fiumicino Aeroporto railway station, 00054 Fiumicino RM, Italien",
       "weather": "beides",
       "address": "Fiumicino Aeroporto → Roma Termini",
@@ -586,7 +586,7 @@
         "Monti ist als flexibler Puffer gedacht: Piazza della Madonna dei Monti, Via del Boschetto, kleine Läden und ein letzter Kaffee. Es gibt keinen Eintritt und keine Mindestdauer. Bei Müdigkeit, Hitze oder einer verspäteten Rückkehr vom Flughafen entfällt der Block vollständig, ohne andere Termine zu gefährden.",
         "Spätestens gegen 16:20 Uhr beginnt der Rückweg zur Unterkunft. So bleibt genügend Zeit für Gepäckabholung und einen ruhigen Gang zum Bahnsteig des Italo-Zugs."
       ],
-      "image": "norrebro",
+      "image": "monti",
       "place": "Rione Monti, Piazza della Madonna dei Monti, 00184 Roma RM, Italien",
       "weather": "aussen",
       "address": "Piazza della Madonna dei Monti, 00184 Roma",
@@ -601,7 +601,7 @@
         "Anfahrt: von Monti → Seven · zu Fuß etwa 10–15 Min. · ÖPNV —. Die Abholung ist für ungefähr 16:40 Uhr geplant.",
         "Nach der Gepäckübernahme bleiben rund 80 Minuten bis zur Zugabfahrt. Dieser Puffer deckt Zugang, Bahnsteiganzeige, mögliche lange Wege in Termini und einen kleinen Einkauf für die Rückfahrt ab."
       ],
-      "image": "christiansborg",
+      "image": "seven",
       "place": "Seven, Via Nazionale 249, 00184 Roma RM, Italien",
       "weather": "innen",
       "address": "Via Nazionale 249, 00184 Roma",
@@ -616,7 +616,7 @@
         "Anfahrt: von Seven → Roma Termini · zu Fuß etwa 10–15 Min. · ÖPNV —. Der Bahnsteig wird frühzeitig auf den Anzeigetafeln geprüft; die Türen schließen laut Ticket kurz vor Abfahrt.",
         "Italo 8966 fährt am Dienstag um 18:25 Uhr in Roma Termini ab und erreicht Bozen planmäßig um 23:23 Uhr. Christian reist allein in Prima Business, Wagen 2, Platz 29. Dieses aktualisierte Ticket ersetzt die frühere Sitzplatzangabe."
       ],
-      "image": "aerial",
+      "image": "termini",
       "place": "Roma Termini, Piazza dei Cinquecento, 00185 Roma RM, Italien",
       "weather": "beides",
       "fixed": true,
@@ -625,6 +625,161 @@
       "price": "Gebucht.",
       "tip": "Wagen 2, Platz 29. Spätestens 30–40 Min. vor Abfahrt am Bahnhof sein.",
       "ticketUrl": "https://www.italotreno.com/"
+    }
+  },
+  "images": {
+    "arapacis": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Museo_dell%27Ara_Pacis%2C_retro.tif/lossy-page1-1920px-Museo_dell%27Ara_Pacis%2C_retro.tif.jpg",
+      "width": 1400,
+      "height": 918,
+      "alt": "Museum des Ara Pacis von Richard Meier",
+      "credit": "MaT12Vi",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Museo_dell%27Ara_Pacis,_retro.tif"
+    },
+    "civette": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Casina_Delle_Civette%2C_Villa_Torlonia%2C_Rome_01.JPG",
+      "width": 1024,
+      "height": 768,
+      "alt": "Casina delle Civette in der Villa Torlonia",
+      "credit": "Sergio de Ferra",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Casina_Delle_Civette,_Villa_Torlonia,_Rome_01.JPG"
+    },
+    "colosseo": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Colosseum_of_Rome_and_Roman_forum.jpg/1920px-Colosseum_of_Rome_and_Roman_forum.jpg",
+      "width": 1400,
+      "height": 829,
+      "alt": "Kolosseum und Forum Romanum von oben",
+      "credit": "Wilfredor",
+      "license": "CC0",
+      "source": "https://commons.wikimedia.org/wiki/File:Colosseum_of_Rome_and_Roman_forum.jpg"
+    },
+    "coppede": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lampadario_Quartiere_copped%C3%A8.jpg/1920px-Lampadario_Quartiere_copped%C3%A8.jpg",
+      "width": 1400,
+      "height": 1571,
+      "alt": "Verzierter Bogen im Quartiere Coppedè",
+      "credit": "Livioandronico2013",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Lampadario_Quartiere_copped%C3%A8.jpg"
+    },
+    "cucina": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Spaghetti%2C_cacio_e_pepe_%26_bitter_leaf_salad_-_Tutto_2024-04-04.jpg/1920px-Spaghetti%2C_cacio_e_pepe_%26_bitter_leaf_salad_-_Tutto_2024-04-04.jpg",
+      "width": 1400,
+      "height": 1050,
+      "alt": "Cacio e pepe mit Salat",
+      "credit": "Andy Li",
+      "license": "CC0",
+      "source": "https://commons.wikimedia.org/wiki/File:Spaghetti,_cacio_e_pepe_%26_bitter_leaf_salad_-_Tutto_2024-04-04.jpg"
+    },
+    "flughafen": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Nuns_in_Fiumicino_Airport%2C_Rome_-_3611.jpg/1920px-Nuns_in_Fiumicino_Airport%2C_Rome_-_3611.jpg",
+      "width": 1400,
+      "height": 979,
+      "alt": "Terminal des Flughafens Rom-Fiumicino",
+      "credit": "Jorge Royan",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Nuns_in_Fiumicino_Airport,_Rome_-_3611.jpg"
+    },
+    "forum": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Forum_romanum_6k_%285760x2097%29.jpg/1920px-Forum_romanum_6k_%285760x2097%29.jpg",
+      "width": 1400,
+      "height": 510,
+      "alt": "Panorama des Forum Romanum",
+      "credit": "BeBo86",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Forum_romanum_6k_(5760x2097).jpg"
+    },
+    "gasometro": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Gazometro_via_Ostiense_%28Rome%29.JPG/1920px-Gazometro_via_Ostiense_%28Rome%29.JPG",
+      "width": 1400,
+      "height": 1050,
+      "alt": "Gasometer an der Via Ostiense",
+      "credit": "Notafly2",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Gazometro_via_Ostiense_(Rome).JPG"
+    },
+    "gesu": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Iglesia_del_Ges%C3%B9%2C_Roma%2C_Italia%2C_2022-09-16%2C_DD_112-114_HDR.jpg/1920px-Iglesia_del_Ges%C3%B9%2C_Roma%2C_Italia%2C_2022-09-16%2C_DD_112-114_HDR.jpg",
+      "width": 1400,
+      "height": 933,
+      "alt": "Innenraum der Kirche Il Gesù",
+      "credit": "Diego Delso",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Iglesia_del_Ges%C3%B9,_Roma,_Italia,_2022-09-16,_DD_112-114_HDR.jpg"
+    },
+    "maxxi": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/MAXXI_Museum_interior_09.JPG/1920px-MAXXI_Museum_interior_09.JPG",
+      "width": 1400,
+      "height": 933,
+      "alt": "Innenraum des MAXXI von Zaha Hadid",
+      "credit": "Commonurbock23",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:MAXXI_Museum_interior_09.JPG"
+    },
+    "montemartini": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Centrale_Montemartini%2C_Rome_%2822172805771%29.jpg/1920px-Centrale_Montemartini%2C_Rome_%2822172805771%29.jpg",
+      "width": 1400,
+      "height": 927,
+      "alt": "Antike Skulpturen zwischen Turbinen der Centrale Montemartini",
+      "credit": "Carole Raddato from FRANKFURT, Germany",
+      "license": "CC BY-SA 2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Centrale_Montemartini,_Rome_(22172805771).jpg"
+    },
+    "monti": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Rione_I_Monti%2C_Roma%2C_Italy_-_panoramio_%2825%29.jpg",
+      "width": 1067,
+      "height": 1600,
+      "alt": "Gasse im Rione Monti",
+      "credit": "Vadim Zhivotovsky",
+      "license": "CC BY 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Rione_I_Monti,_Roma,_Italy_-_panoramio_(25).jpg"
+    },
+    "pantheon": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Interior_oculus_of_the_Rome_Pantheon.jpg/1920px-Interior_oculus_of_the_Rome_Pantheon.jpg",
+      "width": 1400,
+      "height": 788,
+      "alt": "Opaion in der Kuppel des Pantheon",
+      "credit": "T. Le Berre",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Interior_oculus_of_the_Rome_Pantheon.jpg"
+    },
+    "seven": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Via_Nazionale_%28Rome%29_in_2021.01.jpg/1920px-Via_Nazionale_%28Rome%29_in_2021.01.jpg",
+      "width": 1400,
+      "height": 1050,
+      "alt": "Via Nazionale in Rom",
+      "credit": "CAPTAIN RAJU",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Via_Nazionale_(Rome)_in_2021.01.jpg"
+    },
+    "spagna": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Vue_Piazza_di_Spagna_2019.jpg/1920px-Vue_Piazza_di_Spagna_2019.jpg",
+      "width": 1400,
+      "height": 788,
+      "alt": "Piazza di Spagna mit der Spanischen Treppe",
+      "credit": "Chin844",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Vue_Piazza_di_Spagna_2019.jpg"
+    },
+    "termini": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/85/Roma_termini_01.jpg",
+      "width": 1440,
+      "height": 810,
+      "alt": "Bahnhof Roma Termini",
+      "credit": "Hide1228",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Roma_termini_01.jpg"
+    },
+    "trevi": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fontana_di_Trevi_by_TC.jpg/1920px-Fontana_di_Trevi_by_TC.jpg",
+      "width": 1400,
+      "height": 2100,
+      "alt": "Fontana di Trevi",
+      "credit": "Tomascastelazo",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Fontana_di_Trevi_by_TC.jpg"
     }
   }
 }

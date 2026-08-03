@@ -13,9 +13,10 @@ const query = version ? `?v=${encodeURIComponent(version)}` : "";
 
 const esc = (value = "") => String(value).replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
 
-const image = (name, size = 1200) => (String(name).startsWith("http") ? name : `./photos/web/${name}-${size}.jpg`);
+/** Schluessel -> URL aus dem images-Block der jeweiligen Reisedatei. */
+const image = (name, bilder = {}) => (String(name).startsWith("http") ? name : bilder[name]?.url ?? "");
 
-const srcset = (name) => (String(name).startsWith("http") ? "" : ` srcset="${image(name, 720)} 720w, ${image(name, 1200)} 1200w"`);
+const srcset = () => "";   // ein verlinktes Bild je Motiv, keine Breitenauswahl
 
 async function loadJson(url) {
   // no-cache: Rückfrage per ETag statt zehn Minuten blindem Cache, damit eine
@@ -77,7 +78,7 @@ function tile({ entry, data, status }) {
     .filter(Boolean).map(esc).join(" · ");
   const hero = entry.tileImage ?? trip.heroImage;
   return `<a class="trip-tile" href="./trips/${encodeURIComponent(entry.slug)}/" data-status="${status}">
-    <img src="${image(hero)}"${srcset(hero)} sizes="(min-width: 60rem) 33vw, 100vw" alt="${esc(trip.destination)}" loading="lazy" decoding="async">
+    <img src="${image(hero, entry.images)}" alt="${esc(entry.images?.[hero]?.alt || trip.destination)}" loading="lazy" decoding="async">
     <span class="trip-tile-shade"></span>
     <div>
       <p class="trip-status">${esc(STATUS_LABEL[status])}</p>

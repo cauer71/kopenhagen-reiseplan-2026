@@ -28,10 +28,8 @@ docs/
 ├── assets/landing.js               Darstellung der Startseite
 ├── assets/styles.css               gemeinsames Design
 ├── data/trips/index.json           welche Reisen es gibt (Reihenfolge wird berechnet)
-├── data/trips/kopenhagen.json      ← hier stehen die Inhalte
 ├── data/trips/rom.json             ← hier stehen die Inhalte
-├── photos/web/<name>-720.jpg       Bilder, immer in zwei Breiten
-├── photos/web/<name>-1200.jpg
+├── data/trip.schema.json           Datenvertrag, maschinenlesbar
 ├── icons/                          App-Icons
 └── trips/<slug>/index.html         eigene URL je Reise
 
@@ -39,6 +37,8 @@ tools/
 ├── plan.py                         Umstellungen per Befehl (das Hauptwerkzeug)
 ├── validate_trips.py               Prüfung aller Reisedaten
 └── tripdata.py                     gemeinsame Helfer
+
+SYSTEMPROMPT.md                     Auftrag für eine KI, die eine Reisedatei erzeugt
 ```
 
 Für **Inhaltsänderungen** ist ausschließlich `docs/data/trips/` relevant. `assets/`
@@ -53,13 +53,14 @@ Das ist der Grund für diese Wahl, siehe Abschnitt 4.
 
 ## 2. Das Datenmodell
 
-Jede Reise ist **eine** Datei mit drei Blöcken:
+Jede Reise ist **eine** Datei mit vier Blöcken:
 
 | Block | Inhalt | Ändert sich |
 |---|---|---|
 | `trip` | Titel, Datum, Reisende, Einleitung, Wetterkoordinaten | selten |
 | `days` | Tagesabschnitte und **nur** die Reihenfolge: `{ uid, time }` | oft |
 | `places` | die Ortsbeschreibungen, nach UID sortiert | wenn Inhalte dazukommen |
+| `images` | je Bildschlüssel einmal URL, Alt-Text, Urheber und Lizenz | mit neuen Bildern |
 
 ```jsonc
 {
@@ -91,8 +92,8 @@ Jede Reise ist **eine** Datei mit drei Blöcken:
         "Erster Absatz der ausführlichen Beschreibung.",
         "Zweiter Absatz: Geschichte, was man konkret sieht, worauf es ankommt."
       ],
-      "image": "aerial",             // Dateiname ohne -720/-1200 und ohne .jpg
-      "place": "Copenhagen Airport", // Suchbegriff für den Google-Maps-Link
+      "image": "termini",            // Schlüssel in "images", kein Dateiname und keine URL
+      "place": "Roma Termini",       // Suchbegriff für den Google-Maps-Link
       "weather": "beides",           // aussen | innen | beides – Pflicht
       "fixed": true,                 // optional: nicht verschiebbar
       "address": "…",                // optional
@@ -101,9 +102,41 @@ Jede Reise ist **eine** Datei mit drei Blöcken:
       "tip": "…",                    // optional
       "ticketUrl": "https://…"       // optional
     }
+  },
+
+  "images": {
+    "termini": {
+      "url": "https://upload.wikimedia.org/…/Roma_termini_01.jpg",
+      "width": 1440, "height": 810,   // gegen Layoutsprünge beim Nachladen
+      "alt": "Bahnhof Roma Termini",  // beschreibend, kein Dateiname
+      "credit": "Nutzername",         // Pflicht: CC-BY-SA verlangt Namensnennung
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:…"
+    }
   }
 }
 ```
+
+### Bilder sind verlinkt, nicht mitgeliefert
+
+`image` in einem Ort ist ein **Schlüssel** in den `images`-Block, keine Datei und
+keine rohe URL. Der Umweg über das Verzeichnis hat drei Gründe:
+
+- Ein Motiv wird oft mehrfach benutzt — `cucina` steckt in sieben Essensstopps.
+  Bricht der Link, ist es **eine** Korrektur statt sieben.
+- CC-BY-SA verlangt **Namensnennung**. Die braucht einen festen Platz, und die
+  Seite rendert daraus den Abschnitt „Bildnachweis".
+- Die Prüfung kann jeden Schlüssel gegen das Verzeichnis abgleichen und meldet
+  unbenutzte Einträge.
+
+Zwei Konsequenzen, die man kennen muss:
+
+- **Keine Bilder ohne Netz.** Der Service Worker fasst fremde Hosts bewusst nicht
+  an. Ohne Verbindung bleibt an ihrer Stelle eine Fläche; der Plan selbst ist
+  vollständig lesbar.
+- **Signierte URLs verfallen.** Google-Maps-Fotolinks
+  (`lh3.googleusercontent.com`) sind nach Wochen tot — die Prüfung lehnt sie ab.
+  Stabil sind Wikimedia Commons oder eigener Speicher.
 
 `title`, `detail`, `description`, `image`, `place` und `weather` sind Pflicht.
 `address`, `duration`, `price` und `tip` erscheinen als Faktenblock unter der
@@ -158,19 +191,19 @@ kann so nicht entstehen.
 > gilt – also in der Cowork-Cloud, die der Regelfall ist. Auf einem Windows-Rechner
 > heißt der Befehl `python`; `python3` ist dort ein Platzhalter, der mit einem Hinweis
 > auf den Microsoft Store abbricht. Falls beides fehlschlägt, sind die Skripte
-> ausführbar: `./tools/plan.py show kopenhagen`.
+> ausführbar: `./tools/plan.py show rom`.
 
 ### Ansehen
 
 ```bash
-python3 tools/plan.py show kopenhagen
+python3 tools/plan.py show rom
 ```
 
 Zeigt alle Tagesabschnitte mit UID, Uhrzeit und Titel. Mit einem Tag als zweitem
 Argument nur diesen:
 
 ```bash
-python3 tools/plan.py show kopenhagen tag2
+python3 tools/plan.py show rom tag2
 ```
 
 Am Ende listet `show` Ortsbeschreibungen auf, die keinem Tag zugeordnet sind.
@@ -179,7 +212,7 @@ Das ist der erste Befehl bei jedem Auftrag – ohne die UIDs geht nichts.
 ### Stop in einen anderen Tag verschieben
 
 ```bash
-python3 tools/plan.py move kopenhagen 05 tag2 --time 10:30
+python3 tools/plan.py move rom 05 tag2 --time 10:30
 ```
 
 Nimmt UID 05 aus seinem bisherigen Tag heraus und setzt ihn in `tag2` an der
@@ -188,7 +221,7 @@ zeitlich passenden Stelle ein. Ohne `--time` behält der Stop seine Uhrzeit.
 ### Uhrzeit ändern
 
 ```bash
-python3 tools/plan.py time kopenhagen 11 09:30
+python3 tools/plan.py time rom 11 09:30
 ```
 
 Der Stop rutscht dabei automatisch an die richtige Position im Tag.
@@ -196,7 +229,7 @@ Der Stop rutscht dabei automatisch an die richtige Position im Tag.
 ### Reihenfolge innerhalb eines Tages umstellen
 
 ```bash
-python3 tools/plan.py order kopenhagen tag1 01,02,04,03,05,06,07
+python3 tools/plan.py order rom tag1 01,02,04,03,05,06,07
 ```
 
 Die Liste muss **genau** die UIDs dieses Tages enthalten – nicht mehr und nicht
@@ -208,7 +241,7 @@ innerhalb eines Tages anders sein soll.
 ### Regentag analysieren
 
 ```bash
-python3 tools/plan.py wetter kopenhagen tag1
+python3 tools/plan.py wetter rom tag1
 ```
 
 Ändert **nichts**, sondern beantwortet die Frage „was tue ich, wenn es heute
@@ -225,7 +258,7 @@ landet sonst ein Mittagessen um 16 Uhr.
 ### Zwei Stops tauschen
 
 ```bash
-python3 tools/plan.py swap kopenhagen 11 24
+python3 tools/plan.py swap rom 11 24
 ```
 
 Tauscht Platz **und** Uhrzeit – auch über Tagesgrenzen hinweg. Der typische
@@ -272,12 +305,12 @@ zu Hause ist aus.
 
 | Auftrag am Telefon | Befehl |
 |---|---|
-| **„Es regnet heute"** | `plan.py wetter kopenhagen tag1` – liefert fertige Tauschvorschläge |
-| „Mach den Tausch aus Vorschlag 2" | `plan.py swap kopenhagen 05 24` |
-| „Zieh das Designmuseum auf den Vormittag" | `plan.py time kopenhagen 11 09:45` |
-| „Verschieb GoBoat auf Tag 3, nachmittags" | `plan.py move kopenhagen 06 tag3 --time 15:30` |
-| „Dreh die Reihenfolge von Tag 1: erst die Kanäle, dann Lunch" | `plan.py order kopenhagen tag1 01,02,04,03,05,06,07` |
-| „Was ist heute geplant?" | `plan.py show kopenhagen tag1` |
+| **„Es regnet heute"** | `plan.py wetter rom tag1` – liefert fertige Tauschvorschläge |
+| „Mach den Tausch aus Vorschlag 2" | `plan.py swap rom 05 24` |
+| „Zieh das MAXXI auf den Vormittag" | `plan.py time rom 11 09:45` |
+| „Verschieb Coppedè auf Tag 3, nachmittags" | `plan.py move rom 06 tag3 --time 15:30` |
+| „Dreh die Reihenfolge von Tag 1: erst das MAXXI, dann Lunch" | `plan.py order rom tag1 01,02,04,03,05,06,07` |
+| „Was ist heute geplant?" | `plan.py show rom tag1` |
 
 Bei „es regnet" ist `wetter` immer der erste Befehl – er zeigt in einem Durchgang,
 was betroffen ist und welche Tausche in Frage kommen. Danach nur noch den
@@ -314,8 +347,9 @@ und werden nicht in der Datei gepflegt.
 
 ### Neuen Ort hinzufügen
 
-1. Bild in **zwei** Breiten nach `docs/photos/web/` legen:
-   `<name>-720.jpg` und `<name>-1200.jpg`. Ohne beide schlägt die Prüfung fehl.
+1. Bild in den `images`-Block eintragen — oder einen vorhandenen Schlüssel
+   wiederverwenden, wenn das Motiv passt. Pflicht sind `url` (https), `alt`,
+   `credit` und `license`; `width`/`height` verhindern Layoutsprünge.
 2. Nächste freie UID ermitteln (höchster Schlüssel in `places` + 1, zweistellig).
 3. Eintrag in `places` anlegen – alle Pflichtfelder, `description` mit
    mindestens zwei Absätzen und `weather` gesetzt. `fixed: true` nur bei
@@ -359,8 +393,10 @@ frei.
    Datum, Wochentag und ein Planungshinweis. Temperaturen und Regenwahr­schein­lich­keiten
    kommen live von Open-Meteo; ohne Netz zeigt die Seite bewusst „keine Prognose“
    statt Zahlen, die richtig aussehen, aber geraten sind.
-5. **Keine externen Bild-URLs.** Bilder liegen in `docs/photos/web/` in 720 und
-   1200 Pixel Breite. Hotlinks brechen und funktionieren offline nicht.
+5. **Bilder nur über den `images`-Block.** Keine rohen URLs in den Orten, keine
+   mitgelieferten Dateien. Jeder Eintrag braucht `url`, `alt`, `credit` und
+   `license` — ohne Namensnennung darf ein CC-BY-SA-Bild nicht veröffentlicht
+   werden. Signierte URLs sind verboten, weil sie verfallen.
 6. **`bump` nach Änderungen an CSS, JavaScript oder HTML**, sonst sehen Besucher
    die alte Fassung. Für reine Planänderungen ist es nicht nötig.
 7. **Kein Build-Schritt.** Es gibt bewusst kein npm, kein Bundler, kein
@@ -381,7 +417,8 @@ Geprüft wird:
 - JSON ist gültig, alle Pflichtfelder sind da
 - jede UID ist zweistellig, genau einmal eingeplant und hat einen `places`-Eintrag
 - keine verwaisten Ortsbeschreibungen
-- jedes Bild existiert in **beiden** Breiten
+- jeder Bildschlüssel steht im `images`-Block, jeder Eintrag hat URL, Alt-Text,
+  Urheber und Lizenz, und kein Eintrag ist unbenutzt
 - Uhrzeiten sind `HH:MM` und innerhalb eines Tages aufsteigend
 - `isoDate` ist ein echtes Datum und liegt nach dem Vortag
 - `tone` ist einer der vier erlaubten Werte
@@ -436,7 +473,7 @@ Ohne Parameter verhält sich die Seite unverändert.
 
 ```bash
 git add -A
-git commit -m "Kopenhagen: Designmuseum wegen Regen vorgezogen"
+git commit -m "Rom: Centrale Montemartini wegen Regen vorgezogen"
 git push
 ```
 
@@ -477,9 +514,10 @@ die Reihenfolge in `index.json` wird ignoriert.
   selbst in die Adressleiste.
 - **Zustand bleibt.** Offene Karten überleben einen Reload (pro Reise, in der
   `sessionStorage` des Browsers).
-- **Offline.** Beim ersten Besuch werden Seite, Daten und die Bilder der
-  geöffneten Reise im Hintergrund zwischengespeichert. Danach ist der Plan im
-  Flugmodus vollständig lesbar; nur die Live-Prognose fehlt dann.
+- **Offline.** Beim ersten Besuch werden Seite und Daten im Hintergrund
+  zwischengespeichert. Danach ist der Plan im Flugmodus vollständig lesbar.
+  **Bilder und Live-Prognose fehlen dann** — beide liegen auf fremden Hosts, die
+  der Service Worker nicht anfasst.
 - **Installierbar.** Über „Zum Homescreen hinzufügen“ läuft die Seite wie eine App.
 - **Live-Wetter in den Tageskarten.** Sobald die Prognose geladen ist, ersetzt sie
   über `isoDate` den statischen Hinweis in der jeweiligen Tageskarte.

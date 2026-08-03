@@ -12,10 +12,17 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "docs" / "data" / "trips"
-PHOTOS = ROOT / "docs" / "photos" / "web"
-IMAGE_SIZES = (720, 1200)
 
 TONES = {"teal", "gold", "coral", "navy"}
+
+# Bilder werden verlinkt, nicht mitgeliefert. Jede Reisedatei hat dafür einen
+# `images`-Block, in dem jeder Bildschlüssel einmal mit URL, Alt-Text, Urheber
+# und Lizenz steht. Gründe für den Block statt roher URLs in jedem Ort:
+#   * `cucina` kommt siebenmal vor — ein defekter Link wäre sieben Korrekturen,
+#   * CC-BY-SA verlangt Namensnennung, und die braucht einen festen Platz,
+#   * die Prüfung kann Schlüssel gegen Verzeichnis abgleichen.
+IMAGE_REQUIRED = ("url", "alt", "credit", "license")
+IMAGE_ORDER = ("url", "width", "height", "alt", "credit", "license", "source")
 
 # Wettertauglichkeit eines Ortes. Grundlage für Umplanungen bei Wetterwechsel.
 WEATHER_VALUES = {
@@ -72,6 +79,11 @@ def dumps(data: dict) -> str:
         uid: {k: place[k] for k in PLACE_ORDER if k in place}
         for uid, place in sorted(data["places"].items())
     }
+    if isinstance(data.get("images"), dict):
+        data["images"] = {
+            name: {k: bild[k] for k in IMAGE_ORDER if k in bild}
+            for name, bild in sorted(data["images"].items())
+        }
     text = json.dumps(data, ensure_ascii=False, indent=2)
     text = re.sub(r'\{\s*"uid": "(\d+)",\s*"time": "([^"]+)"\s*\}',
                   r'{ "uid": "\1", "time": "\2" }', text)
@@ -114,13 +126,40 @@ def insert_by_time(day: dict, stop: dict) -> int:
 
 # -------------------------------------------------------------------- Prüfung
 
-def _image_problems(name: str, where: str) -> list[str]:
+def _image_problems(name: str, where: str, images: dict) -> list[str]:
+    """Ein Bildverweis ist ein Schlüssel in den `images`-Block, keine URL."""
     if not isinstance(name, str) or not name:
         return [f"{where}: Bildname fehlt"]
     if name.startswith("http"):
-        return [f"{where}: externe Bildquelle '{name}' – Bilder gehören nach docs/photos/web/"]
-    missing = [f"{name}-{size}.jpg" for size in IMAGE_SIZES if not (PHOTOS / f"{name}-{size}.jpg").exists()]
-    return [f"{where}: Bild '{f}' fehlt in docs/photos/web/" for f in missing]
+        return [f"{where}: rohe URL '{name[:48]}…' – Bilder über den images-Block "
+                f"verlinken, damit Lizenz und Namensnennung mitlaufen"]
+    if name not in images:
+        bekannt = ", ".join(sorted(images)[:8]) or "keine"
+        return [f"{where}: Bildschlüssel '{name}' fehlt im images-Block (vorhanden: {bekannt})"]
+    return []
+
+
+def _images_block_problems(slug: str, images: dict) -> list[str]:
+    """Der images-Block selbst: URL, Alt-Text, Urheber, Lizenz."""
+    problems: list[str] = []
+    for name, bild in sorted(images.items()):
+        wo = f"{slug}: images['{name}']"
+        if not isinstance(bild, dict):
+            problems.append(f"{wo} ist kein Objekt")
+            continue
+        for feld in IMAGE_REQUIRED:
+            if not bild.get(feld):
+                problems.append(f"{wo}.{feld} fehlt")
+        url = str(bild.get("url", ""))
+        if url and not url.startswith("https://"):
+            problems.append(f"{wo}.url ist keine https-Adresse")
+        # Signierte URLs verfallen nach Wochen – dann steht dort ein Platzhalter.
+        if "googleusercontent" in url or "lh3.google" in url:
+            problems.append(f"{wo}.url ist eine signierte Google-URL und verfällt – "
+                            f"stabile Quelle verwenden (Wikimedia Commons o. Ä.)")
+        if not bild.get("width") or not bild.get("height"):
+            problems.append(f"{wo}: width/height fehlen – ohne sie springt das Layout beim Laden")
+    return problems
 
 
 def validate(slug: str, data: dict) -> list[str]:
@@ -133,7 +172,13 @@ def validate(slug: str, data: dict) -> list[str]:
     for field in TRIP_REQUIRED:
         if not trip.get(field):
             problems.append(f"{slug}: trip.{field} fehlt")
-    problems += _image_problems(trip.get("heroImage", ""), f"{slug}: trip.heroImage")
+
+    images = data.get("images")
+    if not isinstance(images, dict) or not images:
+        return problems + [f"{slug}: Block 'images' fehlt – dort stehen URL, Alt-Text, "
+                           f"Urheber und Lizenz je Bildschlüssel"]
+    problems += _images_block_problems(slug, images)
+    problems += _image_problems(trip.get("heroImage", ""), f"{slug}: trip.heroImage", images)
 
     weather = trip.get("weather") or {}
     if weather.get("enabled"):
@@ -180,7 +225,7 @@ def validate(slug: str, data: dict) -> list[str]:
         else:
             previous_iso = iso
 
-        problems += _image_problems(day.get("heroImage", ""), f"{slug}/{label}: heroImage")
+        problems += _image_problems(day.get("heroImage", ""), f"{slug}/{label}: heroImage", images)
 
         previous_time = ""
         for stop in day.get("stops", []):
@@ -226,10 +271,15 @@ def validate(slug: str, data: dict) -> list[str]:
         if "fixed" in place and place["fixed"] is not True:
             problems.append(f"{slug}: places['{uid}'].fixed darf nur true sein oder fehlen "
                             f"(gefunden: {place['fixed']!r})")
-        problems += _image_problems(place.get("image", ""), f"{slug}: places['{uid}'].image")
+        problems += _image_problems(place.get("image", ""), f"{slug}: places['{uid}'].image", images)
         for field in ("ticketUrl",):
             value = place.get(field)
             if value and not str(value).startswith("https://"):
                 problems.append(f"{slug}: places['{uid}'].{field} ist keine https-Adresse")
+
+    benutzt = {trip.get("heroImage")} | {d.get("heroImage") for d in days}
+    benutzt |= {p.get("image") for p in places.values()}
+    for name in sorted(set(images) - benutzt):
+        problems.append(f"{slug}: images['{name}'] wird von keinem Ort und keinem Tag benutzt")
 
     return problems

@@ -4,10 +4,49 @@ const tripSource = document.body.dataset.trip ?? "./data/trip.json";
 const stateKey = `reiseplan:${tripSource.split("?")[0]}`;
 
 const isRemote = (name) => String(name).startsWith("http");
-const image = (name, size = 1200) => (isRemote(name) ? name : `${siteRoot}photos/web/${name}-${size}.jpg`);
 
-/** srcset über die beiden vorhandenen Bildbreiten; externe URLs bleiben unverändert. */
-const srcset = (name) => (isRemote(name) ? "" : ` srcset="${image(name, 720)} 720w, ${image(name, 1200)} 1200w"`);
+/**
+ * Bildverzeichnis der geladenen Reise: Schlüssel → { url, width, height, alt,
+ * credit, license, source }. Bilder werden verlinkt, nicht mitgeliefert.
+ * Wird in init() aus `data.images` gesetzt.
+ */
+let bilder = {};
+
+/** Schlüssel → URL. Rohe URLs bleiben unverändert (Altbestand). */
+const image = (name) => (isRemote(name) ? name : bilder[name]?.url ?? "");
+
+/** Einzelne verlinkte Datei je Motiv, also keine Breitenauswahl. */
+const srcset = () => "";
+
+/** Maße gegen Layoutsprünge beim Nachladen. */
+const masse = (name) => {
+  const b = bilder[name];
+  return b?.width && b?.height ? ` width="${b.width}" height="${b.height}"` : "";
+};
+
+/** Alt-Text aus dem Verzeichnis, sonst der mitgegebene. */
+const bildAlt = (name, ersatz = "") => esc(bilder[name]?.alt || ersatz);
+
+/**
+ * Bildnachweis. CC-BY-SA verlangt Namensnennung, deshalb steht sie auf der
+ * Seite und nicht nur im JSON.
+ */
+function renderBildnachweis() {
+  const namen = Object.keys(bilder).sort();
+  if (!namen.length) return "";
+  const zeilen = namen.map((n) => {
+    const b = bilder[n];
+    const wer = esc(b.credit || "unbekannt");
+    const lizenz = esc(b.license || "");
+    return b.source
+      ? `<li><a href="${esc(b.source)}" target="_blank" rel="noreferrer">${esc(b.alt || n)}</a> · ${wer} · ${lizenz}</li>`
+      : `<li>${esc(b.alt || n)} · ${wer} · ${lizenz}</li>`;
+  }).join("");
+  return `<section class="section source-section" id="bildnachweis">`
+    + `<p class="eyebrow">Bildnachweis</p><h2>Woher die Bilder kommen</h2>`
+    + `<p>Alle Bilder sind verlinkt, nicht mitgeliefert — ohne Netz bleibt an ihrer Stelle eine Fläche.</p>`
+    + `<ul class="credits">${zeilen}</ul></section>`;
+}
 
 const maps = (place) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
 
@@ -107,7 +146,7 @@ function renderStop(stop, previous, dayId, index = 0) {
   return `<article class="stop-card" id="${anchor}" style="--i:${index}">
     <div class="stop-rail">
       <time class="stop-time">${esc(stop.time)}</time>
-      <img class="stop-mark" src="${image(stop.image, 720)}" alt="" decoding="async">
+      <img class="stop-mark" src="${image(stop.image)}" alt="" loading="lazy" decoding="async">
       <span class="stop-line" aria-hidden="true"></span>
     </div>
     <div class="stop-main">
@@ -117,7 +156,7 @@ function renderStop(stop, previous, dayId, index = 0) {
         ${chipRow}
       </button>
       <div class="stop-details" id="${anchor}-details" hidden>
-      <img class="stop-photo" src="${image(stop.image, 1200)}"${srcset(stop.image)} sizes="(min-width: 48rem) 62rem, 90vw" alt="${esc(stop.title)}" loading="lazy" decoding="async">
+      <img class="stop-photo" src="${image(stop.image)}"${masse(stop.image)} alt="${bildAlt(stop.image, stop.title)}" loading="lazy" decoding="async">
       <div class="stop-body">${body}</div>
       ${renderFacts(stop)}
       <p class="route">Von ${esc(previous)} · zu Fuß / ÖPNV nach ${esc(stop.title)}</p>
@@ -139,7 +178,7 @@ function renderStop(stop, previous, dayId, index = 0) {
 function renderDay(day, laufend = false) {
   let previous = "Unterkunft / Basis";
   const stops = day.stops.map((stop, i) => { const html = renderStop(stop, previous, day.id, i); previous = stop.title; return html; }).join("");
-  const hero = laufend ? "" : `<img class="day-hero" src="${image(day.heroImage)}"${srcset(day.heroImage)} sizes="(min-width: 48rem) 60vw, 100vw" alt="${esc(day.title)}" loading="lazy" decoding="async">`;
+  const hero = laufend ? "" : `<img class="day-hero" src="${image(day.heroImage)}"${masse(day.heroImage)} alt="${bildAlt(day.heroImage, day.title)}" loading="lazy" decoding="async">`;
   const kopf = laufend
     ? `<h3 class="day-title">${esc(day.title)}</h3><p class="day-note">${esc(day.note ?? "")}</p>`
     : `<p class="day-label">${esc(day.label)} · ${esc(day.date)}</p><h3 class="day-title">${esc(day.title)}</h3><p class="weather-pill" data-iso="${esc(day.isoDate ?? "")}">${esc(day.weather ?? "")}</p><p class="day-note">${esc(day.note ?? "")}</p>`;
@@ -170,7 +209,7 @@ function renderTabs(days) {
  */
 function renderHero(trip, days, focus) {
   const nav = `<nav class="topnav" aria-label="Reiseabschnitte"><a href="${siteRoot}">Alle Reisen</a><a href="#tage">Tage</a>${trip.weather?.enabled ? '<a href="#wetter">Wetter</a>' : ""}</nav>`;
-  const bild = `<img src="${image(trip.heroImage)}"${srcset(trip.heroImage)} sizes="100vw" alt="${esc(trip.destination)}" class="hero-bg" fetchpriority="high"><div class="hero-shade"></div>`;
+  const bild = `<img src="${image(trip.heroImage)}" alt="${bildAlt(trip.heroImage, trip.destination)}" class="hero-bg" fetchpriority="high" decoding="async"><div class="hero-shade"></div>`;
 
   if (focus.status !== "laufend") {
     return `<section class="hero" id="top">${bild}${nav}<div class="hero-copy"><p class="eyebrow">${esc(trip.dates)} · ${esc(trip.travellers)}</p><h1>${esc(trip.title)}</h1><p>${esc(trip.subtitle)}</p><div class="hero-stats"><span><b>${days.length}</b>Tage</span><span><b>${days.reduce((sum, day) => sum + day.stops.length, 0)}</b>Stops</span></div></div></section>`;
@@ -489,10 +528,13 @@ async function enableOffline(days) {
     const registration = await navigator.serviceWorker.ready;
 
     // Absolute URLs: im Worker würden relative Pfade gegen dessen Scope aufgelöst.
+    // Nur eigene Dateien vorwaermen. Verlinkte Bilder liegen auf fremden Hosts,
+    // die der Service Worker bewusst nicht anfasst - ohne Netz bleibt an ihrer
+    // Stelle eine Flaeche, der Plan selbst bleibt lesbar.
     const urls = [...new Set(
       days.flatMap((day) => [day.heroImage, ...day.stops.map((stop) => stop.image)])
-        .filter((name) => name && !isRemote(name))
-        .flatMap((name) => [image(name, 720), image(name, 1200)])
+        .map((name) => image(name))
+        .filter((url) => url && !isRemote(url))
         .map((url) => new URL(url, location.href).href)
     )];
 
@@ -523,6 +565,8 @@ async function init() {
   if (!response.ok) throw new Error(`Reisedaten nicht erreichbar (${response.status})`);
   const data = await response.json();
   const { trip, places = {} } = data;
+  // Bildverzeichnis vor dem ersten Rendern setzen — image() liest daraus.
+  bilder = data.images ?? {};
   const days = joinStops(data.days, places);
   const focus = focusOf(days);
   const laufend = focus.status === "laufend";
@@ -539,7 +583,7 @@ async function init() {
   // Unterwegs zählt der Tag, davor und danach die Reise.
   root.innerHTML = (laufend
     ? `${kopf}${wetterzeilen}${tage}${einleitung}${renderWeather(trip)}`
-    : `${kopf}${einleitung}${renderWeather(trip)}${tage}`) + renderTestHint();
+    : `${kopf}${einleitung}${renderWeather(trip)}${tage}`) + renderBildnachweis() + renderTestHint();
 
   readState();
   bindTabs();

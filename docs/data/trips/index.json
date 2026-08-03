@@ -1,7 +1,10 @@
 {
   "_hinweis": "Nur die Liste der vorhandenen Reisen. Die Reihenfolge hier ist ohne Bedeutung: die Startseite sortiert selbst nach den isoDate-Angaben – laufende Reise oben, dann bevorstehende (nächste zuerst), darunter vergangene (jüngste zuerst). Titel, Datum und Untertitel kommen aus der jeweiligen Reisedatei und werden hier NICHT wiederholt.",
   "trips": [
-    { "slug": "kopenhagen", "tileImage": "aerial" },
-    { "slug": "rom", "tileImage": "colosseo", "badge": "Testaufenthalt" }
+    {
+      "slug": "rom",
+      "tileImage": "colosseo",
+      "badge": "Testaufenthalt"
+    }
   ]
 }
