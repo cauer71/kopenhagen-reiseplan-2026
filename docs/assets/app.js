@@ -408,6 +408,61 @@ function setExpanded(toggle, expanded) {
   if (expanded) openIds.add(details.id); else openIds.delete(details.id);
 }
 
+/**
+ * Wie weit die klebenden Leisten oben reichen – **gemessen**, nicht geraten.
+ *
+ * Vorher rechnete `scroll-margin-top: var(--stick)` mit festen 8,6 rem. Das
+ * stimmt nur bei einer Schriftgröße und ohne Safe Area; auf einem Gerät mit
+ * Notch oder größerer Systemschrift sind die Leisten höher, und dann verschwindet
+ * der Inhalt darunter. Die echte Unterkante kennt nur der Browser.
+ */
+function leistenUnterkante() {
+  let unten = 0;
+  for (const sel of [".topnav", ".day-tabs"]) {
+    const el = document.querySelector(sel);
+    if (!el) continue;
+    const cs = getComputedStyle(el);
+    if (cs.position !== "sticky" && cs.position !== "fixed") continue;
+    // Die Topnav wird beim Herunterscrollen weggeschoben und ist dann
+    // durchsichtig – sie belegt keinen Platz mehr.
+    if (cs.visibility === "hidden" || Number(cs.opacity) === 0) continue;
+    // `top` aus dem Stylesheet plus Höhe, **nicht** die aktuelle Position:
+    // solange nicht gescrollt ist, steht eine sticky-Leiste noch an ihrer Stelle
+    // im Dokumentfluss, oft tausende Pixel weiter unten. Damit gerechnet ergab
+    // sich ein Ziel von 12 px – die Seite scrollte praktisch nach oben.
+    const klebtBei = Number.parseFloat(cs.top) || 0;
+    unten = Math.max(unten, klebtBei + el.getBoundingClientRect().height);
+  }
+  return Math.max(0, unten);
+}
+
+const SCROLL_LUFT = 14;   // etwas Platz, damit es nicht klebt
+
+/**
+ * Scrollt ein Element unter die Leisten statt dahinter.
+ *
+ * `scrollIntoView` kennt nur `scroll-margin-top` und damit die feste Zahl; hier
+ * wird die Strecke selbst gerechnet, nach einem Bildaufbau, damit die Höhen nach
+ * dem Umschalten des Tages schon stimmen.
+ */
+function scrolleUnterLeisten(el) {
+  if (!el) return;
+  requestAnimationFrame(() => {
+    const ziel = el.getBoundingClientRect().top + window.scrollY
+               - leistenUnterkante() - SCROLL_LUFT;
+    window.scrollTo({ top: Math.max(0, ziel), behavior: "smooth" });
+  });
+}
+
+/**
+ * Der obere Rand des Tagesblocks. Das ist **nicht** die Tageskarte, sondern die
+ * Karte darüber („Noch 33 Tage …", unterwegs „Als nächstes …"). Sie gehört zum
+ * gewählten Tag und muss vollständig sichtbar sein – scrollt man auf die
+ * Tageskarte, rutscht sie hinter die Leiste.
+ */
+const tagesBlockAnfang = (id) =>
+  document.getElementById("fokus") ?? document.getElementById(id);
+
 /** Wechselt den sichtbaren Tag. Genau einer ist immer offen. */
 function selectDay(id, { scroll = false } = {}) {
   const card = id ? document.getElementById(id) : null;
@@ -421,7 +476,7 @@ function selectDay(id, { scroll = false } = {}) {
   currentDay = id;
   fokusZeichnen(id);
   writeState();
-  if (scroll) card.scrollIntoView({ block: "start", behavior: "smooth" });
+  if (scroll) scrolleUnterLeisten(tagesBlockAnfang(id));
 }
 
 /**
@@ -470,8 +525,10 @@ function restoreStops() {
 /**
  * Öffnet das Ziel eines Deep-Links: `#tag2` wählt den Tag,
  * `#tag2-stop-08` zusätzlich den Stop, und scrollt anschließend hin.
- * Der Abstand nach oben kommt aus `scroll-margin-top`, damit die Überschrift
- * nicht unter der festen Leiste verschwindet.
+ *
+ * Der Abstand kommt aus `scrolleUnterLeisten()`, also aus den gemessenen
+ * Leistenhöhen. Zeigt der Link nur auf einen Tag, ist das Ziel der Anfang des
+ * Tagesblocks – sonst verschwindet die Karte darüber hinter der Leiste.
  */
 function openFromHash() {
   const id = decodeURIComponent(location.hash.replace(/^#/, ""));
@@ -489,7 +546,7 @@ function openFromHash() {
     if (toggle) setExpanded(toggle, true);
   }
   writeState();
-  target.scrollIntoView({ block: "start", behavior: "smooth" });
+  scrolleUnterLeisten(stop ? target : tagesBlockAnfang(day?.id ?? id));
   return true;
 }
 
