@@ -95,6 +95,10 @@
           "type": "string",
           "minLength": 1
         },
+        "timezone": {
+          "type": "string",
+          "description": "IANA-Name der Zeitzone am Reiseort, z. B. Europe/Rome. Die Website braucht sie nicht, der Google-Kalender schon: ohne Zeitzone ist eine Uhrzeit nicht eindeutig. Muss mit trip.weather.timezone übereinstimmen, wenn beide gesetzt sind."
+        },
         "heroImage": {
           "type": "string",
           "minLength": 1,
@@ -328,7 +332,14 @@
           "type": "string"
         },
         "duration": {
-          "type": "string"
+          "type": "string",
+          "description": "Dauer als Text für den Faktenblock: 'ca. 45–50 Min.', '4 Std. 58 Min.'. Darf Zusätze tragen, die eine Zahl nicht ausdrückt ('als erster Teil einer 2,5-stündigen Führung')."
+        },
+        "minutes": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 1440,
+          "description": "Dieselbe Dauer als Zahl in Minuten – für den Google-Kalender, der daraus das Ende des Termins rechnet. Aus 'duration' lässt sich das nicht ableiten, weil dort Prosa steht. Bei einer Spanne die obere Grenze nehmen: ein zu kurzer Termin verdeckt den nächsten."
         },
         "price": {
           "type": "string",

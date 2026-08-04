@@ -231,6 +231,26 @@ Wichtigkeit — nur von Unverschiebbarkeit.
 > Zeitfenster. Solche Punkte sind bei Regen das eigentliche Problem und lassen
 > sich nicht tauschen.
 
+### Der zweite Abnehmer: der Google-Kalender
+
+Die Reisedatei speist nicht nur die Website, sondern auch **Termine im
+Google-Kalender**, einen je Stop. Drei Felder gibt es allein dafür — die Seite
+braucht sie nicht, und deshalb fällt ihr Fehlen dort nicht auf:
+
+| Feld | Wofür |
+|---|---|
+| `trip.timezone` | IANA-Name wie `Europe/Rome`. Ohne Zeitzone ist `09:30` nicht eindeutig. Lag früher nur unter `trip.weather` und fehlte damit ganz, sobald das Wetter abgeschaltet war. |
+| `places[].minutes` | Dauer als **Zahl**, damit der Termin ein Ende hat. `duration` daneben bleibt Prosa für den Faktenblock („ca. 60–75 Min. als erster Teil einer Führung") — daraus rechnet keine Maschine. Bei einer Spanne die obere Grenze. |
+| `places[].address` | wird das Ortsfeld des Termins |
+
+Der Bau **meldet** fehlende Angaben, blockiert aber nicht: eine Reise ohne sie ist
+als Website vollständig. Der Hinweis steht unter „Hinweise für den
+Google-Kalender“ im Protokoll der Action.
+
+Die Kennung eines Termins ist `[REISE-<slug>] [UID:05] Titel`. Sie macht einen
+zweiten Durchlauf zu einer Aktualisierung statt zu einer Verdopplung — und ist der
+Grund, warum UIDs unveränderlich sind.
+
 ### Die UID ist die Klammer
 
 Jeder Ort hat eine stabile zweistellige UID. Sie verbindet die Website mit dem

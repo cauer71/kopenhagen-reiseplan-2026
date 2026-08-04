@@ -23,6 +23,40 @@ einzige Inhalt einer bestehenden Webseite; die Darstellung ist fertig und wird
 nicht verändert. Liefere ausschließlich die JSON-Datei, keinen erklärenden Text
 darum herum.
 
+## Wohin die Datei gehört — und was du niemals anlegst
+
+Eine Datei, ein Ort:
+
+```
+docs/data/trips/<slug>.json
+```
+
+Der Dateiname **wird die Adresse**: `rom.json` → `/trips/rom/`. Deshalb nur
+Kleinbuchstaben, Ziffern und Bindestriche, keine Umlaute, keine Leerzeichen.
+`Rom Kopie.json` und `Rom.json` werden abgelehnt.
+
+Das ist alles. Kachel auf der Startseite, Unterseite der Reise, Reiseliste,
+Offline-Vorrat und Testlinks entstehen daraus **auf dem Server**.
+
+> **Diese Pfade legst du nicht an und änderst du nicht.** Sie werden bei jedem
+> Deploy neu erzeugt; eine Fassung von dir wird überschrieben, bleibt aber als
+> toter Ballast im Repository liegen und weicht mit der Zeit von den Reisedaten
+> ab. Genau dieser Fehler wurde gerade beseitigt.
+>
+> | Pfad | warum nicht |
+> |---|---|
+> | `docs/data/trips/index.json` | erzeugt aus den vorhandenen Reisedateien |
+> | `docs/trips/<slug>/index.html` | erzeugt aus `trip` der Reisedatei |
+> | `docs/assets/*`, `docs/styles.css`, `docs/sw.js`, `docs/index.html` | Darstellung, nicht Inhalt |
+> | `tools/*` | das Bauwerkzeug |
+>
+> **Wichtig, falls du über die GitHub-API arbeitest:** die API beachtet
+> `.gitignore` **nicht**. Ein Commit auf einen dieser Pfade landet also
+> tatsächlich im Repository, obwohl er dort nicht hingehört.
+
+Es gibt auch **keine Cache-Version anzuheben** und **keinen `?v=`-Parameter** zu
+pflegen. Beides existiert nicht mehr.
+
 ## Was du zuerst klärst
 
 Frage nach, solange etwas davon fehlt — erfinde es nicht:
@@ -314,6 +348,70 @@ Die Prüfung lehnt ab, und dann geht nichts live:
 11. `tone` außerhalb von `teal`, `gold`, `coral`, `navy`.
 12. Zusätzliche Felder in `days[].stops`.
 13. `ticketUrl` ohne `https://`.
+14. Ein Dateiname mit Großbuchstaben, Umlauten oder Leerzeichen.
+15. `theme` außerhalb von `teal`, `gold`, `coral`, `navy`.
+
+## Zweite Verwendung: der Google-Kalender
+
+Aus derselben Datei entstehen **Kalendereinträge**, einer je Stop. Die Datei hat
+also zwei Abnehmer, und der Kalender braucht drei Angaben, die die Website nicht
+braucht. Fehlen sie, ist die Reise als Website vollständig und als Kalender
+unbrauchbar — das fällt erst am Reisetag auf.
+
+| Feld | Wo | Warum der Kalender es braucht |
+|---|---|---|
+| `trip.timezone` | im `trip`-Block, IANA-Name wie `Europe/Rome` | Ohne Zeitzone ist `09:30` nicht eindeutig. Setze denselben Wert wie in `trip.weather.timezone`. |
+| `places[].minutes` | ganze Zahl, Minuten | Der Termin braucht ein **Ende**. Aus `duration` lässt es sich nicht ableiten, dort steht Prosa. |
+| `places[].address` | vollständige Adresse | Wird das Ortsfeld des Termins. Ohne sie muss der Reisende suchen. |
+
+**`minutes` und `duration` sind kein Widerspruch, sondern zwei Leser.**
+`duration` ist der Text für den Menschen und darf Zusätze tragen; `minutes` ist
+die Zahl für die Maschine:
+
+```jsonc
+"duration": "ca. 60–75 Min. als erster Teil einer 2,5–3-stündigen Führung",
+"minutes": 75
+```
+
+Bei einer Spanne nimm die **obere** Grenze. Ein zu kurz angesetzter Termin sieht
+im Kalender aus wie freie Zeit, die es nicht gibt.
+
+### Die UID ist die Klammer zwischen beiden Ausgaben
+
+Jeder Kalendereintrag trägt die Reise und die UID im Titel, damit ein zweiter
+Durchlauf ihn **aktualisiert statt zu verdoppeln**:
+
+```
+[REISE-rom] [UID:05] Centrale Montemartini
+```
+
+`REISE-<slug>` ist der Dateiname ohne `.json`. Deshalb sind UIDs unveränderlich:
+wird eine Nummer neu vergeben, hängt der alte Termin am neuen Ort.
+
+Verschiebt sich ein Stop, ändert sich **nur** Datum und Uhrzeit des Termins, nie
+seine Kennung. Wird ein Stop entfernt, wird der Termin gelöscht — nicht
+umgewidmet.
+
+## Wenn du eine bestehende Reise änderst
+
+Lies die Datei zuerst vollständig und behalte sie als Ganzes im Blick — sie ist
+ein Vertrag, kein Textdokument.
+
+- **UIDs bleiben.** Ein Stop wird verschoben, zeitlich verlegt oder entfernt; seine
+  Nummer bleibt dieselbe und wird nach dem Entfernen nicht neu vergeben. Sie
+  verbindet die Seite mit dem Kalendereintrag.
+- **Umsortieren heißt Zeilen bewegen.** Nur `days[].stops` anfassen, nie die
+  Beschreibungen in `places`. Danach müssen die Uhrzeiten innerhalb jedes Tages
+  wieder aufsteigend sein.
+- **`fixed: true` wird nicht verschoben.** Flüge, Transfers, Check-out und
+  gebuchte Zeitfenster sind das Gerüst. Ein umsortierter Tag, der den Rückflug
+  mitnimmt, ist der teuerste Fehler, den dieses Format zulässt.
+- **Einen Ort entfernen** heißt: Zeile aus `days[].stops` **und** Eintrag aus
+  `places` löschen. Nur eines von beiden wird abgelehnt.
+- **Einen Ort ergänzen** heißt: Bild in `images` eintragen oder einen passenden
+  Schlüssel wiederverwenden, nächste freie UID nehmen, `places`-Eintrag mit allen
+  Pflichtfeldern anlegen, Zeile an der zeitlich richtigen Stelle einfügen.
+- **Eine ganze Reise entfernen** heißt: die eine Datei löschen. Sonst nichts.
 
 ## Ton der Texte
 
@@ -327,7 +425,21 @@ Keine Superlative ohne Grund. Kein „unbedingt", kein „Geheimtipp".
 
 ## Am Ende
 
-Prüfe deine eigene Datei gegen die Liste oben, bevor du sie ausgibst. Nenne
-danach in zwei oder drei Sätzen, was noch offen ist — ein Ticket, das gebucht
-werden muss, eine Öffnungszeit, die du nicht bestätigen konntest, ein Bild, für
-das du kein passendes Motiv gefunden hast. Verschweige Lücken nicht.
+Prüfe deine eigene Datei gegen die Liste oben, bevor du sie ausgibst.
+
+Schreibst du sie selbst ins Repository, ist die Arbeit mit dem Commit **nicht**
+fertig. Warte das Ergebnis der GitHub-Action ab:
+
+- **Grün:** die Seite ist nach etwa einer Minute aktuell. Ruf sie auf und sieh
+  nach, dass die Reise da ist.
+- **Rot:** es wurde **nichts** veröffentlicht, die vorige Fassung ist noch online.
+  Lies die Ausgabe des Schritts „Reisedaten prüfen“ — sie nennt jedes Problem
+  einzeln, mit Reise, Feld und Grund. Behebe es in der Reisedatei und committe
+  erneut. Rate nicht und committe nicht mehrmals blind.
+- Der Schritt **„Bild-URLs prüfen“ darf fehlschlagen**, ohne dass etwas kaputt
+  ist — er braucht Netz und blockiert absichtlich nicht. Seine Meldungen sind
+  trotzdem echt: ein toter Link hinterlässt auf der Seite eine leere Fläche.
+
+Nenne danach in zwei oder drei Sätzen, was noch offen ist — ein Ticket, das
+gebucht werden muss, eine Öffnungszeit, die du nicht bestätigen konntest, ein
+Bild, für das du kein passendes Motiv gefunden hast. Verschweige Lücken nicht.

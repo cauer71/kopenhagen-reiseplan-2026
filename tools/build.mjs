@@ -285,6 +285,53 @@ function pruefeReise(slug, data) {
   return funde;
 }
 
+/**
+ * Was der zweite Abnehmer der Reisedatei braucht: der Google-Kalender.
+ *
+ * Die Website ist nicht die einzige Verwendung — aus derselben Datei entstehen
+ * Kalendereinträge, je Stop einer, wiedererkennbar über `[REISE-<slug>] [UID:xx]`.
+ * Dafür fehlen zwei Angaben, die die Seite selbst nicht braucht:
+ *
+ *   `minutes`  – die Dauer als Zahl. `duration` ist Prosa („ca. 60–75 Min. als
+ *                erster Teil einer 2,5–3-stündigen Führung") und für Menschen
+ *                richtig, aber daraus lässt sich kein Ende berechnen.
+ *   `timezone` – ohne sie ist eine Uhrzeit nicht eindeutig. Sie stand nur unter
+ *                `trip.weather`; ist das Wetter abgeschaltet, fehlte sie ganz.
+ *
+ * Das **blockiert nicht**. Eine Reise ohne diese Felder ist als Website
+ * vollständig — nur als Kalender unvollständig. Wer sie erst später nachträgt,
+ * soll deshalb nicht am Veröffentlichen gehindert werden. Gemeldet wird es
+ * trotzdem: eine stille Lücke wird nie gefüllt.
+ */
+function kalenderHinweise(slug, data) {
+  const hinweise = [];
+  const zone = data.trip?.timezone;
+  const wetterZone = data.trip?.weather?.timezone;
+  if (!zone && !wetterZone) {
+    hinweise.push(`${slug}: trip.timezone fehlt – ohne Zeitzone ist eine Uhrzeit `
+                + `nicht eindeutig, Kalendereinträge landen auf der falschen Stunde`);
+  } else if (zone && wetterZone && zone !== wetterZone) {
+    hinweise.push(`${slug}: trip.timezone ('${zone}') und trip.weather.timezone `
+                + `('${wetterZone}') widersprechen sich`);
+  }
+
+  const orte = data.places ?? {};
+  const ohne = Object.keys(orte).filter((uid) => !Number.isInteger(orte[uid].minutes)).sort();
+  if (ohne.length) {
+    hinweise.push(`${slug}: ${ohne.length} von ${Object.keys(orte).length} Orten ohne `
+                + `'minutes' (${ohne.slice(0, 6).join(", ")}${ohne.length > 6 ? " …" : ""}) – `
+                + `ohne Dauer als Zahl hat der Kalendereintrag kein Ende`);
+  }
+  for (const uid of Object.keys(orte).sort()) {
+    const m = orte[uid].minutes;
+    if (m !== undefined && (!Number.isInteger(m) || m <= 0 || m > 1440)) {
+      hinweise.push(`${slug}: places['${uid}'].minutes ist ${JSON.stringify(m)} – `
+                  + `erwartet eine ganze Zahl von 1 bis 1440`);
+    }
+  }
+  return hinweise;
+}
+
 /* ─────────────────────────────────────────────────────────────────────── Erzeugen */
 
 const esc = (wert = "") => String(wert)
@@ -499,6 +546,15 @@ async function main() {
     console.error("\nNichts wurde erzeugt. Der Datenvertrag steht in docs/data/trip.schema.json,");
     console.error("der Auftrag für die erzeugende KI in SYSTEMPROMPT.md.");
     return 1;
+  }
+
+  // Nach der blockierenden Prüfung, damit die Reihenfolge der Ausgabe stimmt:
+  // erst was verhindert, dann was nur fehlt.
+  const hinweise = reisen.flatMap(({ slug, data }) => kalenderHinweise(slug, data));
+  if (hinweise.length) {
+    console.log(`\n${hinweise.length} Hinweis(e) für den Google-Kalender `
+              + `(die Website ist davon nicht betroffen):`);
+    for (const hinweis of hinweise) console.log(`  ! ${hinweis}`);
   }
 
   if (schreiben) {
