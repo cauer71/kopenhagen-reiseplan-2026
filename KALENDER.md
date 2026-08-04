@@ -27,6 +27,31 @@ Der in `Assistent.md` festgelegte Urlaubskalender — **nicht** der Hauptkalende
 öffentlich (siehe COWORK.md, Abschnitt 6); die Kennung eines privaten Kalenders
 gehört nicht hinein. Sie steht in `Assistent.md`, und die liegt nicht im Repo.
 
+### Technische Vorgaben für den Google-Kalender-Konnektor
+
+Beim Anlegen oder Aktualisieren eines Termins im Urlaubskalender müssen immer
+folgende Werte verwendet werden:
+
+- `calendar_id`: ausschließlich die ID des festgelegten Urlaubskalenders, niemals
+  `primary`.
+- `attendees`: immer eine leere Liste `[]`.
+- `self_attendance`: zwingend `"omit"`.
+- `add_google_meet`: `false`.
+
+`self_attendance` darf weder auf `"accepted"`, `"tentative"` noch auf
+`"declined"` gesetzt und auch nicht weggelassen werden. Der Konnektor verwendet
+sonst standardmäßig `"accepted"` und trägt das angemeldete Google-Konto als
+Teilnehmer ein. Dadurch erscheint derselbe Termin zusätzlich im persönlichen
+Hauptkalender.
+
+Nach dem ersten angelegten Termin muss geprüft werden:
+
+1. Der Termin ist im Urlaubskalender vorhanden.
+2. Der Termin erscheint nicht im Hauptkalender.
+3. Der Termin enthält keine Teilnehmer.
+
+Erst danach dürfen die übrigen Termine der Reise angelegt werden.
+
 ## Ein Stop, ein Termin
 
 Für jeden Eintrag in `days[].stops` entsteht **genau ein** Termin — auch für An-
@@ -189,9 +214,13 @@ Beschreibung steht — bewusst in Kauf genommen.
 
 ## Was nicht gemacht wird
 
-- **Keine Einladungen.** Keine Teilnehmer hinzufügen, auch nicht die Mitreisenden.
-  Ein Reiseplan ist keine Besprechung, und eine versehentliche Einladung an eine
-  falsche Adresse verschickt die komplette Reise mit allen Adressen und Zeiten.
+- **Keine Einladungen und keine Selbstteilnahme.** Keine Teilnehmer hinzufügen,
+  auch nicht das angemeldete Google-Konto oder die Mitreisenden. Beim
+  Google-Kalender-Konnektor deshalb immer `attendees: []` und
+  `self_attendance: "omit"` setzen; `self_attendance` darf nicht weggelassen
+  werden. Ein Reiseplan ist keine Besprechung, und eine versehentliche Einladung
+  trägt die Termine zusätzlich in den Hauptkalender ein oder verschickt die
+  komplette Reise mit allen Adressen und Zeiten.
 - **Keine Erinnerungen** über die Voreinstellung des Kalenders hinaus. 61 Termine
   mit eigener Erinnerung sind 61 Benachrichtigungen.
 - **Keine ICS-Datei**, außer sie wird ausdrücklich verlangt.
