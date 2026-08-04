@@ -21,6 +21,10 @@ bei Regen passiert dort. `SYSTEMPROMPT.md` ist der Auftrag für die erzeugende
 Anwendung; er beschreibt das Datenmodell vollständig, sodass sie dieses Repo nicht
 kennen muss.
 
+Aus derselben Reisedatei entstehen **Termine im Google-Kalender** — der zweite
+Abnehmer. `KALENDER.md` beschreibt, was daraus ein Termin wird. Geschrieben wird
+über den Google-Kalender-Konnektor der erzeugenden Anwendung, nicht von hier.
+
 ## Was am eigenen Rechner läuft: nichts
 
 Es gibt genau ein Werkzeug, und es läuft in der GitHub-Action:

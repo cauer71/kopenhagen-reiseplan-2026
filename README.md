@@ -89,7 +89,13 @@ docs/                      die Website (wird deployt)
 tools/build.mjs            prüft und baut (läuft in der Action)
 COWORK.md                  Anleitung zum Pflegen der Inhalte
 SYSTEMPROMPT.md            Auftrag für eine KI, die eine Reisedatei erzeugt
+KALENDER.md                wie aus einem Stop ein Google-Kalender-Termin wird
 ```
+
+Aus derselben Reisedatei entstehen zwei Dinge: diese Website und **Termine im
+Google-Kalender**, einer je Stop, wiedererkennbar über `[REISE-rom] [UID:05]`.
+Geschrieben werden sie über den Kalender-Konnektor der erzeugenden Anwendung;
+[KALENDER.md](KALENDER.md) beschreibt die Regeln.
 
 Bilder: verlinkt, je Reise im `images`-Block mit Urheber und Lizenz — derzeit
 [Wikimedia Commons](https://commons.wikimedia.org/). Wetter:

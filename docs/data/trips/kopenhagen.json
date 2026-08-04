@@ -138,6 +138,7 @@
       "weather": "beides",
       "address": "Købmagergade 52A, 1150 København K",
       "duration": "ca. 45–50 Min.",
+      "minutes": 50,
       "price": "Eintritt vor Ort.",
       "tip": "Bei sehr knapper Zeit die Aussicht verkürzen, damit Absalon um 12:00 Uhr erreicht wird.",
       "ticketUrl": "https://www.rundetaarn.dk/en/visit-us/"
@@ -154,6 +155,7 @@
       "weather": "innen",
       "address": "Sønder Boulevard 73, 1720 København V",
       "duration": "ca. 60 Min.",
+      "minutes": 60,
       "price": "ca. 60 DKK pro Person für das Tagesgericht.",
       "tip": "Pünktlich um 12:00 Uhr da sein; das Mittagsgericht kann später ausverkauft sein.",
       "ticketUrl": "https://absaloncph.dk/en/food/"
@@ -170,6 +172,7 @@
       "weather": "innen",
       "address": "Bryghuspladsen 10, 1473 København K",
       "duration": "ca. 90–105 Min.",
+      "minutes": 105,
       "price": "Regulärer Museumseintritt; Onlinekauf häufig günstiger.",
       "tip": "Ticket online kaufen, wenn der Besuch feststeht; aktuelle Sonderausstellungen prüfen.",
       "ticketUrl": "https://dac.dk/en/visit/"
@@ -186,6 +189,7 @@
       "weather": "innen",
       "address": "Bredgade 68, 1260 København K",
       "duration": "ca. 80–90 Min.",
+      "minutes": 90,
       "price": "Regulärer Museumseintritt.",
       "tip": "Letzten Einlass prüfen und bei Museumsüberlastung eine Schwerpunktausstellung wählen.",
       "ticketUrl": "https://designmuseum.dk/en/besog-os/opening-hours-admission/"
@@ -202,6 +206,7 @@
       "weather": "innen",
       "address": "Ekvipagemestervej 10, 1438 København K",
       "duration": "ca. 75 Min.",
+      "minutes": 75,
       "price": "Ticket erforderlich.",
       "tip": "Vor Buchung Startzeit und Sprache ausdrücklich prüfen; Englisch ist wahrscheinlicher als Deutsch.",
       "ticketUrl": "https://www.kglteater.dk/en/guided-tours/"
@@ -218,6 +223,7 @@
       "weather": "innen",
       "address": "Langebrogade 8, 2300 København S",
       "duration": "ca. 90 Min.",
+      "minutes": 90,
       "price": "ca. 25–35 € pro Person.",
       "tip": "Öffnungszeit und vegetarische Auswahl am selben Tag prüfen; bei Bedarf reservieren."
     },
@@ -233,6 +239,7 @@
       "weather": "innen",
       "address": "Refshalevej 213B, 1432 København K",
       "duration": "ca. 60 Min.",
+      "minutes": 60,
       "price": "ca. 10–20 € pro Person.",
       "tip": "Früh kommen; beliebte Backwaren können im Tagesverlauf ausverkauft sein.",
       "ticketUrl": "https://www.lillebakery.com/"
@@ -249,6 +256,7 @@
       "weather": "aussen",
       "address": "Vindmøllevej 6, 2300 København S",
       "duration": "ca. 75–90 Min.",
+      "minutes": 90,
       "price": "Rooftop Walk normalerweise kostenlos; Aktivitäten kosten extra.",
       "tip": "Öffnungsstatus, Wind und Dachzugang am Morgen prüfen.",
       "ticketUrl": "https://www.copenhill.dk/en"
@@ -265,6 +273,7 @@
       "weather": "innen",
       "address": "Refshalevej 173A, 1432 København K",
       "duration": "ca. 90–105 Min.",
+      "minutes": 105,
       "price": "Museumseintritt; Ticket online oder an der Kasse.",
       "tip": "Aktuelle Installationen vor dem Besuch prüfen; bei Regen kann der Aufenthalt verlängert werden.",
       "ticketUrl": "https://copenhagencontemporary.org/en/visit/"
@@ -281,6 +290,7 @@
       "weather": "beides",
       "address": "Refshalevej 141A, 1432 København K",
       "duration": "ca. 90 Min.",
+      "minutes": 90,
       "price": "ca. 20–30 € pro Person.",
       "tip": "Walk-in; Badesachen nur bei stabilem Wetter und freigegebener Wasserqualität nutzen.",
       "ticketUrl": "https://www.labanchina.dk/cafe/"
@@ -296,6 +306,7 @@
       "place": "Refshaleøen, Refshalevej, 1432 København K, Dänemark",
       "weather": "aussen",
       "duration": "ca. 60 Min.",
+      "minutes": 60,
       "price": "Kostenlos.",
       "tip": "Bei Regen direkt zu Reffen wechseln; befestigte Wege bevorzugen."
     },
@@ -311,6 +322,7 @@
       "weather": "beides",
       "address": "Refshalevej 167A, 1432 København K",
       "duration": "ca. 90–120 Min.",
+      "minutes": 120,
       "price": "ca. 20–35 € pro Person.",
       "tip": "Öffnung und Küchenzeiten der Saisonstände am selben Tag prüfen.",
       "ticketUrl": "https://reffen.dk/en/"
@@ -328,6 +340,7 @@
       "fixed": true,
       "address": "Gebuchter LuggageHero-Partner nahe Christianshavn Station",
       "duration": "ca. 30–45 Min.",
+      "minutes": 45,
       "price": "Gepäcklagerung nach Buchung.",
       "tip": "Vor Abgabe die späteste Abholzeit und den Zugangscode kontrollieren.",
       "ticketUrl": "https://luggagehero.com/copenhagen/"
@@ -344,6 +357,7 @@
       "weather": "innen",
       "address": "Søndermarken, Roskildevej 25A, 2000 Frederiksberg",
       "duration": "ca. 75–90 Min.",
+      "minutes": 90,
       "price": "Museumseintritt erforderlich.",
       "tip": "Aktuelle Installation und Einlasszeit prüfen; Jacke und rutschfeste Schuhe sind sinnvoll.",
       "ticketUrl": "https://frederiksbergmuseerne.dk/en/cisternerne/"
@@ -360,6 +374,7 @@
       "weather": "innen",
       "address": "Frederiksholms Kanal 18, 1220 København K",
       "duration": "ca. 75–90 Min.",
+      "minutes": 90,
       "price": "ca. 25–35 € pro Person.",
       "tip": "Zur Mittagszeit reservieren oder vorher telefonisch nach einem Tisch fragen."
     },
@@ -375,6 +390,7 @@
       "weather": "beides",
       "address": "Prins Jørgens Gård 1, 1218 København K",
       "duration": "ca. 60 Min.",
+      "minutes": 60,
       "price": "Kostenlos.",
       "tip": "Ausweis bereithalten; Sicherheitskontrolle und Wartezeit sind möglich.",
       "ticketUrl": "https://www.thedanishparliament.dk/en/the-tower"
@@ -390,6 +406,7 @@
       "place": "Kongens Nytorv, 1050 København K, Dänemark",
       "weather": "aussen",
       "duration": "ca. 60–75 Min.",
+      "minutes": 75,
       "price": "Kostenlos.",
       "tip": "Nicht bis zum letzten Moment in Nyhavn bleiben; die Gepäckabholung hat Vorrang."
     },
@@ -406,6 +423,7 @@
       "fixed": true,
       "address": "Gebuchter LuggageHero-Partner nahe Christianshavn Station",
       "duration": "ca. 25–30 Min.",
+      "minutes": 30,
       "price": "In der Gepäckbuchung enthalten.",
       "tip": "Öffnungszeit und Abholcode vor Beginn des letzten Stadtblocks prüfen.",
       "ticketUrl": "https://luggagehero.com/copenhagen/"
@@ -423,6 +441,7 @@
       "fixed": true,
       "address": "Christianshavn Station → Copenhagen Airport",
       "duration": "ca. 45–60 Min. einschließlich Fußwegen",
+      "minutes": 60,
       "price": "Im City Pass Small enthalten, sofern noch gültig.",
       "tip": "Vor Einstieg Gültigkeit des City Pass kontrollieren; ansonsten separates Flughafenticket kaufen.",
       "ticketUrl": "https://www.publictransport.dk/tickets/citypass"
@@ -438,6 +457,7 @@
       "place": "Copenhagen Airport, Lufthavnsboulevarden 6, 2770 Kastrup, Dänemark",
       "weather": "innen",
       "duration": "ca. 60 Min.",
+      "minutes": 60,
       "price": "ca. 15–25 € pro Person.",
       "tip": "Gateanzeige beobachten und spätestens mit Beginn des Boardings zum Abflugbereich wechseln."
     },
@@ -454,6 +474,7 @@
       "fixed": true,
       "address": "Copenhagen Airport → Milano Bergamo Airport",
       "duration": "2 Std. 10 Min.",
+      "minutes": 130,
       "price": "Gebucht.",
       "tip": "Boardingzeit und Gate am Reisetag in der Ryanair-App prüfen.",
       "ticketUrl": "https://www.ryanair.com/"
@@ -471,6 +492,7 @@
       "fixed": true,
       "address": "Milano Bergamo Airport → Copenhagen Airport",
       "duration": "2 Std. 05 Min.",
+      "minutes": 125,
       "price": "Gebucht.",
       "tip": "Gate und Boardingzeit am Reisetag in der Ryanair-App prüfen.",
       "ticketUrl": "https://www.ryanair.com/"
@@ -488,6 +510,7 @@
       "fixed": true,
       "address": "Christianshavn Station und gebuchter LuggageHero-Partner in Stationsnähe",
       "duration": "ca. 60 Min. einschließlich Gepäckabgabe",
+      "minutes": 60,
       "price": "City Pass Small und Gepäcklagerung separat.",
       "tip": "Partneradresse und Öffnungszeit in der LuggageHero-Buchung kontrollieren.",
       "ticketUrl": "https://luggagehero.com/copenhagen/"
@@ -504,6 +527,7 @@
       "weather": "beides",
       "address": "Wildersgade 56, 1408 København K",
       "duration": "ca. 60–75 Min.",
+      "minutes": 75,
       "price": "ca. 20–30 € pro Person.",
       "tip": "Bei vollem Gastraum auf einen Tisch im hinteren Bereich warten statt den Stadtteil zu wechseln."
     },
@@ -518,6 +542,7 @@
       "place": "Christianshavns Kanal, 1408 København K, Dänemark",
       "weather": "aussen",
       "duration": "ca. 75–90 Min.",
+      "minutes": 90,
       "price": "Kostenlos.",
       "tip": "Bei Regen auf Overgaden und den direkten Weg zur Unterkunft verkürzen."
     },
@@ -534,6 +559,7 @@
       "fixed": true,
       "address": "Wildersgade 15, 1408 København K",
       "duration": "ca. 45 Min.",
+      "minutes": 45,
       "price": "Gebucht.",
       "tip": "Zugangscode und Check-in-Nachricht in Booking.com offline bereithalten."
     },
@@ -549,6 +575,7 @@
       "weather": "aussen",
       "address": "Sankt Annæ Gade 29, 1416 København K",
       "duration": "ca. 45–60 Min.",
+      "minutes": 60,
       "price": "Eintrittsticket erforderlich.",
       "tip": "Zeitfenster vorab buchen; bei Wind am selben Tag den Betriebsstatus prüfen.",
       "ticketUrl": "https://www.vorfrelserskirke.dk/taarn/tower/booking"
@@ -565,6 +592,7 @@
       "weather": "aussen",
       "address": "Islands Brygge 10, 2300 København S",
       "duration": "ca. 75 Min. einschließlich Einweisung",
+      "minutes": 75,
       "price": "Preis nach Bootsgröße und Dauer.",
       "tip": "Online reservieren und Stornierungsbedingungen wegen des Wetters beachten.",
       "ticketUrl": "https://goboat.dk/en/copenhagen"
@@ -581,6 +609,7 @@
       "weather": "innen",
       "address": "Strandgade 50, 1401 København K",
       "duration": "ca. 90 Min.",
+      "minutes": 90,
       "price": "ca. 25–35 € pro Person.",
       "tip": "Für den Abend reservieren; vegetarische Auswahl vorab in der aktuellen Karte prüfen.",
       "ticketUrl": "https://faergecafeen.dk/en/"
@@ -598,6 +627,7 @@
       "fixed": true,
       "address": "Øster Voldgade 4A, 1350 København K",
       "duration": "ca. 90 Min.",
+      "minutes": 90,
       "price": "Gebucht.",
       "tip": "Gebuchter Einlass 09:10 Uhr; Ticket und Ausweis bereithalten.",
       "ticketUrl": "https://denkongeligesamling.dk/en/rosenborg-castle/tickets/"

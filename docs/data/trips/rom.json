@@ -140,6 +140,7 @@
       "weather": "innen",
       "address": "Via Guido Reni 4A, 00196 Roma",
       "duration": "ca. 2 Std. 20 Min.",
+      "minutes": 140,
       "price": "Kasse: 15 € regulär, 12 € ermäßigt für Berechtigte.",
       "tip": "Samstag 16:00–18:20. Zuerst das Gebäude bewusst lesen, danach Vitalità und The Large Glass. Montags geschlossen.",
       "ticketUrl": "https://www.maxxi.art/orari-e-biglietteria/"
@@ -157,6 +158,7 @@
       "weather": "innen",
       "address": "Via degli Specchi 6, 00186 Roma",
       "duration": "ca. 1 Std. 15 Min.",
+      "minutes": 75,
       "price": "ca. 25–35 € pro Person inklusive Bier.",
       "tip": "Tisch für 19:00 Uhr reservieren; spätestens 20:15 Uhr aufbrechen. Zur Ara Pacis zu Fuß etwa 20–25 Min.",
       "ticketUrl": "https://pubs.baladin.it/it/restaurant-hamburger-birra-artigianale/via-degli-specchi-6-roma/"
@@ -174,6 +176,7 @@
       "fixed": true,
       "address": "Bozen → Roma Termini",
       "duration": "4 Std. 58 Min.",
+      "minutes": 298,
       "price": "Gebucht.",
       "tip": "Spätestens 15 Min. vor Abfahrt am Bahnsteig sein. Smart-Gepäckgrenze des Tickets beachten.",
       "ticketUrl": "https://www.italotreno.com/"
@@ -191,6 +194,7 @@
       "weather": "innen",
       "address": "Via Nazionale 249, 00184 Roma",
       "duration": "Gepäckabgabe ca. 10–15 Min.; Check-in ab 15:00 Uhr.",
+      "minutes": 15,
       "price": "Gebucht.",
       "tip": "Zugangscode nur privat bereithalten und nicht auf der öffentlichen Website veröffentlichen."
     },
@@ -207,6 +211,7 @@
       "weather": "innen",
       "address": "Via Giovanni Giolitti 36, 00185 Roma",
       "duration": "ca. 60–70 Min.",
+      "minutes": 70,
       "price": "ca. 15–25 € pro Person.",
       "tip": "Täglich 07:30–23:30 geöffnet; keine Reservierung nötig. Vegetarische Auswahl direkt an den Ständen prüfen.",
       "ticketUrl": "https://www.mercatocentrale.it/roma/info/"
@@ -225,6 +230,7 @@
       "fixed": true,
       "address": "Lungotevere in Augusta, Ecke Via Tomacelli, 00186 Roma",
       "duration": "ca. 40 Min.",
+      "minutes": 40,
       "price": "Gebucht: 16 € regulär und 14 € ermäßigt inklusive Vorverkauf.",
       "tip": "Kopfhörer mitnehmen. Spätestens 20:45 Uhr am Zugang sein; kleine Tasche bevorzugen.",
       "ticketUrl": "https://www.arapacis.it/it/mostra-evento/l-ara-si-rivela"
@@ -242,6 +248,7 @@
       "weather": "innen",
       "address": "Via Ostiense 106, 00154 Roma",
       "duration": "ca. 2 Std. 15 Min.",
+      "minutes": 135,
       "price": "Am ersten Sonntag des Monats voraussichtlich kostenlos; sonst regulär 11 €.",
       "tip": "Direkt zur Öffnung um 09:00 Uhr. Mögliche Zuschläge für Sonderausstellungen kurz vor der Reise prüfen.",
       "ticketUrl": "https://www.centralemontemartini.org/it/informazioni_pratiche/orari_e_indirizzi"
@@ -259,6 +266,7 @@
       "weather": "aussen",
       "address": "Via del Commercio, 00154 Roma",
       "duration": "ca. 60–70 Min.",
+      "minutes": 70,
       "price": "Kostenlos.",
       "tip": "Außenbesichtigung; bei starker Hitze auf 30 Min. kürzen. Anschließend zu Fuß etwa 10–15 Min. zu Romeow."
     },
@@ -275,6 +283,7 @@
       "weather": "innen",
       "address": "Via Francesco Negri 15, 00154 Roma",
       "duration": "ca. 1 Std. 15 Min.",
+      "minutes": 75,
       "price": "ca. 25–40 € pro Person.",
       "tip": "Reservierung für Sonntag 13:00 Uhr verpflichtend; den Katzen nicht nachlaufen oder sie wecken.",
       "ticketUrl": "https://www.romeowcatbistrot.com/orari-e-informazioni-importanti/"
@@ -292,6 +301,7 @@
       "weather": "beides",
       "address": "Villa Torlonia, Via Nomentana 70, 00161 Roma",
       "duration": "ca. 60–70 Min.",
+      "minutes": 70,
       "price": "Am ersten Sonntag des Monats voraussichtlich kostenlos.",
       "tip": "Spätestens 16:10 Uhr beenden. Eintrittslage am Gratis-Sonntag vor Ort prüfen; Bunker hat Vorrang.",
       "ticketUrl": "https://www.museivillatorlonia.it/it/orari-indirizzi/musei-di-villa-torlonia"
@@ -310,6 +320,7 @@
       "fixed": true,
       "address": "Casino Nobile, Villa Torlonia, Via Nomentana 70, 00161 Roma",
       "duration": "ca. 50 Min.",
+      "minutes": 50,
       "price": "Gebucht: 2 × 13 € inklusive Vorverkauf.",
       "tip": "Bequeme Schuhe, keine großen Taschen; vorher Toilette benutzen. Ein- und Ausgang sind nicht identisch.",
       "ticketUrl": "https://www.museivillatorlonia.it/node/1018227"
@@ -327,6 +338,7 @@
       "weather": "aussen",
       "address": "Piazza Mincio, 00198 Roma",
       "duration": "ca. 45–50 Min.",
+      "minutes": 50,
       "price": "Kostenlos.",
       "tip": "Schwerpunkt: Arco dei Palazzi degli Ambasciatori, Piazza Mincio und Fontana delle Rane."
     },
@@ -343,6 +355,7 @@
       "weather": "innen",
       "address": "Via Mantova 5, 00198 Roma",
       "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
       "price": "ca. 20–30 € pro Person.",
       "tip": "Für Sonntag 19:30 Uhr reservieren; vegetarische Tagespizza und Bierauswahl vor Ort prüfen.",
       "ticketUrl": "https://www.berberepizza.it/berbere-roma-porta-pia/"
@@ -360,6 +373,7 @@
       "weather": "innen",
       "address": "Piazza del Gesù, 00186 Roma",
       "duration": "ca. 30–35 Min.",
+      "minutes": 35,
       "price": "Eintritt frei; Spende möglich.",
       "tip": "Ruhig verhalten und Gottesdienste respektieren. Spätestens 10:35–10:40 Uhr weitergehen.",
       "ticketUrl": "https://www.chiesadelgesu.org/"
@@ -377,6 +391,7 @@
       "weather": "innen",
       "address": "Corso Vittorio Emanuele II 107A, 00186 Roma",
       "duration": "ca. 55–60 Min.",
+      "minutes": 60,
       "price": "ca. 18–30 € pro Person.",
       "tip": "Leicht essen und spätestens 11:50 Uhr aufbrechen; Tourtreffpunkt nach Buchung nochmals gegenprüfen.",
       "ticketUrl": "https://buddyroma.com/contatti/"
@@ -394,6 +409,7 @@
       "weather": "aussen",
       "address": "Piazza di Trevi, 00187 Roma",
       "duration": "ca. 30–35 Min.",
+      "minutes": 35,
       "price": "Gebucht: 2 € pro Person.",
       "tip": "Open-Ticket bereithalten; Montag 11:30–22:00 Uhr, letzter Einlass 21:00 Uhr.",
       "ticketUrl": "https://fontanaditrevi.roma.it/"
@@ -411,6 +427,7 @@
       "weather": "aussen",
       "address": "Piazza di Spagna, 00187 Roma",
       "duration": "ca. 35–40 Min.",
+      "minutes": 40,
       "price": "Kostenlos.",
       "tip": "Nicht auf den Stufen sitzen. Danach zu Fuß etwa 15–20 Min. zurück zum Seven."
     },
@@ -427,6 +444,7 @@
       "weather": "innen",
       "address": "Via Torino 46, 00184 Roma",
       "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
       "price": "ca. 25–35 € pro Person.",
       "tip": "Tisch für 19:30 Uhr reservieren; vegane und vegetarische Optionen sind auf der Karte gekennzeichnet.",
       "ticketUrl": "https://www.timotyristorante.it/"
@@ -443,6 +461,7 @@
       "weather": "innen",
       "address": "Via Nazionale 249, 00184 Roma",
       "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
       "price": "—",
       "tip": "Kopien der Flug- und Zugtickets offline speichern; Zugangscode nur in privater Notiz aufbewahren."
     },
@@ -459,6 +478,7 @@
       "fixed": true,
       "address": "Via Nazionale 249, 00184 Roma",
       "duration": "ca. 40–50 Min. inklusive Frühstücksabschluss.",
+      "minutes": 50,
       "price": "—",
       "tip": "Gepäckaufbewahrung bestätigen. Zugangscode und Abholmodalität privat bereithalten."
     },
@@ -475,6 +495,7 @@
       "fixed": true,
       "address": "Roma Termini → Fiumicino Aeroporto",
       "duration": "32 Min. reine Fahrzeit; insgesamt ca. 50 Min. mit Bahnsteigwegen.",
+      "minutes": 50,
       "price": "14 € pro Person und Strecke.",
       "tip": "Konkrete Abfahrt und Terminal am Vortag prüfen. Metrebus-Tickets gelten im Leonardo Express nicht.",
       "ticketUrl": "https://www.trenitalia.com/it/regionale/collegamenti-regionale/leonardo-express.html"
@@ -492,6 +513,7 @@
       "fixed": true,
       "address": "FCO → MAH",
       "duration": "1 Std. 35 Min. planmäßige Flugzeit.",
+      "minutes": 95,
       "price": "Gebucht.",
       "tip": "Ryanair FR8983 · Abflug 12:40 · Ankunft 14:15. Boardingpass offline speichern und Terminal prüfen.",
       "ticketUrl": "https://www.ryanair.com/"
@@ -508,6 +530,7 @@
       "weather": "beides",
       "address": "Fiumicino Aeroporto → Roma Termini",
       "duration": "32 Min. reine Fahrzeit.",
+      "minutes": 32,
       "price": "14 €.",
       "tip": "Erst nach Julias Verabschiedung festlegen; Abfahrten normalerweise etwa alle 15 Min.",
       "ticketUrl": "https://www.trenitalia.com/it/regionale/collegamenti-regionale/leonardo-express.html"
@@ -525,6 +548,7 @@
       "weather": "innen",
       "address": "Via Volturno 39/41, 00185 Roma",
       "duration": "ca. 1 Std. 10 Min.",
+      "minutes": 70,
       "price": "ca. 25–35 €.",
       "tip": "Dienstagsöffnung und Tischzeit vorab bestätigen; liegt nur wenige Minuten von Termini entfernt.",
       "ticketUrl": "https://www.rifugioromano.com/"
@@ -542,6 +566,7 @@
       "weather": "aussen",
       "address": "Piazza della Madonna dei Monti, 00184 Roma",
       "duration": "flexibel, maximal ca. 1 Std. 10 Min.",
+      "minutes": 70,
       "price": "Kostenlos; Kaffee oder Einkauf nach Bedarf.",
       "tip": "Reiner Pufferblock. Bei Verzögerung sofort kürzen oder streichen."
     },
@@ -557,6 +582,7 @@
       "weather": "innen",
       "address": "Via Nazionale 249, 00184 Roma",
       "duration": "ca. 10–15 Min.",
+      "minutes": 15,
       "price": "—",
       "tip": "Abholmodalität und privaten Zugangscode bereithalten; danach zu Fuß 10–15 Min. nach Termini."
     },
@@ -573,6 +599,7 @@
       "fixed": true,
       "address": "Roma Termini → Bozen",
       "duration": "4 Std. 58 Min.",
+      "minutes": 298,
       "price": "Gebucht.",
       "tip": "Wagen 2, Platz 29. Spätestens 30–40 Min. vor Abfahrt am Bahnhof sein.",
       "ticketUrl": "https://www.italotreno.com/"
@@ -590,6 +617,7 @@
       "weather": "innen",
       "address": "Via Benedetta 25, 00153 Roma",
       "duration": "ca. 1 Std. 10 Min.",
+      "minutes": 70,
       "price": "Kein Eintritt; Getränke nach Verbrauch.",
       "tip": "Keine Reservierung möglich. Bei Müdigkeit auslassen, damit der frühe Museumsstart am Sonntag realistisch bleibt.",
       "ticketUrl": "https://www.football-pub.com/"
@@ -607,6 +635,7 @@
       "weather": "aussen",
       "address": "Piazza del Colosseo 1, 00184 Roma",
       "duration": "ca. 60–75 Min. als erster Teil einer 2,5–3-stündigen Führung",
+      "minutes": 65,
       "price": "Noch zu buchen; Preis und deutscher Slot im Buchungskalender prüfen.",
       "tip": "Personalausweise mitnehmen; nominative Eintrittskarten. Mindestens 15 Min. vor dem Treffpunkt sein.",
       "ticketUrl": "https://www.getyourguide.com/de-at/kolosseum-l2619/kolosseum-und-forum-romanum-gefuhrte-tour-mit-bevorzugtem-zugang-t195566/"
@@ -624,6 +653,7 @@
       "weather": "aussen",
       "address": "Via della Salara Vecchia 5/6, 00186 Roma",
       "duration": "ca. 80–90 Min. als zweiter Teil der Führung",
+      "minutes": 90,
       "price": "Im gemeinsamen Führungsticket mit dem Kolosseum enthalten.",
       "tip": "Wasserflasche, Sonnenschutz und rutschfeste Schuhe mitnehmen; Tourreihenfolge kann variieren.",
       "ticketUrl": "https://www.getyourguide.com/de-at/kolosseum-l2619/kolosseum-und-forum-romanum-gefuhrte-tour-mit-bevorzugtem-zugang-t195566/"
@@ -641,6 +671,7 @@
       "weather": "innen",
       "address": "Piazza della Rotonda, 00186 Roma",
       "duration": "45–50 Min.",
+      "minutes": 50,
       "price": "7 € regulär; 2 € ermäßigt für berechtigte EU-Bürger von 18 bis 25 Jahren.",
       "tip": "Offiziellen 09:00-Uhr-Slot buchen; Schultern und Knie bedeckt halten. Danach 8–10 Min. zu Fuß zu Il Gesù.",
       "ticketUrl": "https://portale.museiitaliani.it/b2c/#/"
