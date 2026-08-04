@@ -399,7 +399,87 @@ Bei einem Pull Request läuft nur die Prüfung, nichts wird veröffentlicht.
 
 ---
 
-## 6. Ansehen und der Unterwegs-Zustand
+## 6. Was nicht in dieses Repo gehört
+
+**Dieses Repo ist öffentlich, und die Seite hat kein Passwort.** Wer die Adresse
+kennt, liest alles — auch ohne GitHub-Konto, auch über Suchmaschinen und
+Link-Vorschauen. Das ist bewusst so gewählt und dafür gilt:
+
+Alles in einer Reisedatei ist damit veröffentlicht. Unterkunft mit Adresse, Namen
+der Reisenden, Uhrzeiten, an denen niemand zu Hause ist. Das ist für diese Reisen
+in Kauf genommen — aber es ist eine Entscheidung, die bei jeder neuen Angabe neu
+zu treffen ist, nicht eine, die schon getroffen wurde.
+
+**Ohne ausdrückliche Freigabe kommt nichts davon hinein:**
+
+- Tickets und Buchungsbelege, insbesondere als PDF oder Bild. **Ein QR-Code, der
+  öffentlich erreichbar ist, kann von jedem eingelöst werden** — auch von jemandem,
+  der zufällig darauf stößt. Ein unratbarer Dateiname schützt nicht: Vorschaudienste
+  und Crawler finden ihn. `ticketUrl` verweist deshalb auf den Anbieter, nie auf eine
+  Datei im Repo.
+- Buchungsnummern, Reservierungscodes, Sitzplatznummern, Namen auf Bordkarten.
+- Telefonnummern, Mailadressen, private Kontaktdaten Dritter.
+- Zugangsdaten jeder Art. `.env*` und `*.pem` stehen in der `.gitignore`, aber
+  darauf ist kein Verlass — sie gehören gar nicht erst in den Ordner.
+
+**Keine Umgehung** über einen anderen Pfad, einen anderen Branch, eine temporäre
+Kopie oder einen Commit, der später wieder entfernt wird. **Was einmal gepusht
+wurde, bleibt im Verlauf** und ist über die API abrufbar, auch wenn der nächste
+Commit es löscht. Ein Geheimnis, das im Verlauf steht, ist verbrannt — es muss
+beim Anbieter gewechselt werden, nicht im Repo gelöscht.
+
+Im Zweifel: nicht committen, sondern fragen.
+
+---
+
+## 7. Wann nichts geändert wird
+
+Nichts ändern, nichts committen und **keinen Erfolg melden**, wenn:
+
+- `COWORK.md` oder eine andere benötigte Datei nicht lesbar ist
+- der aktuelle Stand des Repositorys nicht geprüft werden kann
+- die Datenstruktur unklar ist
+- eine Änderung einen als `fixed` gekennzeichneten Termin verschieben würde
+- die Zuordnung einer UID unklar ist
+- persönliche Daten ohne Freigabe veröffentlicht würden (siehe Abschnitt 6)
+- die Prüfung `node tools/build.mjs --check` fehlschlägt
+- die GitHub-Action fehlschlägt
+- die veröffentlichte Seite nicht zuverlässig geprüft werden kann
+
+In diesen Fällen den **konkreten** Grund nennen, dass der Stand unverändert ist,
+und den nächsten sinnvollen Schritt. Nicht raten und nicht mehrfach blind
+committen: die Prüfung nennt jedes Problem einzeln mit Feld und Grund.
+
+Der aktuelle Stand im Repository ist immer maßgeblich. Ein alter Checkout, eine
+hochgeladene Kopie oder ein früherer Gesprächsinhalt ist **keine** Quelle für den
+Stand einer Datei.
+
+---
+
+## 8. Was am Ende gemeldet wird
+
+Nach erfolgreicher Arbeit knapp:
+
+- was geändert wurde und warum
+- welche Dateien betroffen sind
+- der Commit-Link
+- der Status der GitHub-Action
+- der Link auf die veröffentlichte Seite
+- welche Ansichten geprüft wurden (Desktop, Handy, Interaktion)
+- was offen geblieben ist
+
+Bei Änderungen an der Darstellung gilt die Arbeit erst als erfolgreich, wenn die
+**veröffentlichte** Seite den neuen Stand wirklich ausliefert — nicht schon, wenn
+der Commit durch ist. Zwischen Commit und ausgelieferter Seite liegen die Action
+und der Cache.
+
+Offene Punkte nicht verschweigen. Ein ungebuchtes Ticket, eine unbestätigte
+Öffnungszeit, ein Bild ohne passendes Motiv: das gehört in die Meldung, auch wenn
+alles andere gelungen ist.
+
+---
+
+## 9. Ansehen und der Unterwegs-Zustand
 
 Die Seite lädt ihre Daten per `fetch`; ein `file://`-Aufruf funktioniert deshalb
 nicht. Vor dem Push braucht es einen Server nur, wenn man das Ergebnis wirklich
@@ -443,7 +523,7 @@ Ohne Parameter verhält sich die Seite unverändert.
 
 ---
 
-## 7. Reihenfolge auf der Startseite
+## 10. Reihenfolge auf der Startseite
 
 Die Kacheln werden **berechnet** sortiert, nicht gepflegt. Grundlage sind die
 `isoDate`-Angaben der Tagesabschnitte: der erste ist der Reisebeginn, der letzte
@@ -468,7 +548,7 @@ die Reihenfolge in der erzeugten Reiseliste wird ignoriert.
 
 ---
 
-## 8. Was die Seite außerdem kann
+## 11. Was die Seite außerdem kann
 
 - **Deep-Links.** `#tag2` klappt einen Tag auf, `#tag2-stop-11` zusätzlich den
   Stop und scrollt hin. Diese Links sind stabil und eignen sich für
