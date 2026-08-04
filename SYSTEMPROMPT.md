@@ -425,24 +425,34 @@ die Zahl für die Maschine:
 "minutes": 75
 ```
 
-Bei einer Spanne nimm die **obere** Grenze. Ein zu kurz angesetzter Termin sieht
-im Kalender aus wie freie Zeit, die es nicht gibt.
+Bei einer Spanne nimm die **obere** Grenze — mit einer Ausnahme: hängt der Punkt
+mit dem nächsten zusammen (Führung in zwei Teilen), dann höchstens der Abstand bis
+dorthin. Sonst überlappt der Termin seinen Nachfolger. Ein zu kurz angesetzter
+Termin sieht dagegen im Kalender aus wie freie Zeit, die es nicht gibt.
 
 ### Die UID ist die Klammer zwischen beiden Ausgaben
 
-Jeder Kalendereintrag trägt die Reise und die UID im Titel, damit ein zweiter
-Durchlauf ihn **aktualisiert statt zu verdoppeln**:
+Jeder Kalendereintrag trägt Reise-Tag und UID in der **letzten Zeile der
+Beschreibung** — nicht im Titel:
 
 ```
-[REISE-rom] [UID:05] Centrale Montemartini
+[REISE-ROM-2026-09] [UID:13]
 ```
 
-`REISE-<slug>` ist der Dateiname ohne `.json`. Deshalb sind UIDs unveränderlich:
-wird eine Nummer neu vergeben, hängt der alte Termin am neuen Ort.
+Der Reise-Tag entsteht aus `trip.destination` (Großbuchstaben, ohne Umlaute und
+Sonderzeichen) und dem frühesten `isoDate`. Die UID ist **wörtlich der Schlüssel
+aus `places`**, keine eigene Zählung — sie sind nicht fortlaufend, weil gelöschte
+Nummern frei bleiben.
+
+Deshalb sind UIDs unveränderlich: wird eine Nummer neu vergeben, hängt der alte
+Termin am neuen Ort, und der Link von dort auf die Reiseseite zeigt auf den
+falschen Stop.
 
 Verschiebt sich ein Stop, ändert sich **nur** Datum und Uhrzeit des Termins, nie
 seine Kennung. Wird ein Stop entfernt, wird der Termin gelöscht — nicht
 umgewidmet.
+
+Die vollständigen Kalenderregeln stehen in `KALENDER.md` im Repository.
 
 ## Wenn du eine bestehende Reise änderst
 

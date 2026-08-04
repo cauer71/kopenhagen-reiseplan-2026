@@ -274,9 +274,12 @@ braucht sie nicht, und deshalb fällt ihr Fehlen dort nicht auf:
 Der Bau **meldet** fehlende Angaben, blockiert aber nicht: eine Reise ohne sie ist
 als Website vollständig. Der Hinweis steht im Protokoll der Action.
 
-Die Kennung eines Termins ist `[REISE-<slug>] [UID:05] Titel`. Sie macht einen
-zweiten Durchlauf zu einer Aktualisierung statt zu einer Verdopplung — und ist der
-Grund, warum UIDs unveränderlich sind.
+Die Kennung eines Termins steht in der **letzten Zeile der Beschreibung**, nicht im
+Titel: `[REISE-ROM-2026-09] [UID:05]`. Reise-Tag und UID sind aus der Reisedatei
+ableitbar — der Tag aus `trip.destination` und dem frühesten `isoDate`, die UID
+wörtlich aus dem `places`-Schlüssel. Sie macht einen zweiten Durchlauf zu einer
+Aktualisierung statt zu einer Verdopplung und ist der Grund, warum UIDs
+unveränderlich sind.
 
 **→ [KALENDER.md](KALENDER.md)** beschreibt vollständig, was aus einem Stop ein
 Termin wird: Felder, Beschreibung, Deep-Link, Aktualisieren statt Verdoppeln, und

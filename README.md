@@ -93,7 +93,8 @@ KALENDER.md                wie aus einem Stop ein Google-Kalender-Termin wird
 ```
 
 Aus derselben Reisedatei entstehen zwei Dinge: diese Website und **Termine im
-Google-Kalender**, einer je Stop, wiedererkennbar über `[REISE-rom] [UID:05]`.
+Google-Kalender**, einer je Stop, wiedererkennbar über `[REISE-ROM-2026-09] [UID:05]`
+in der letzten Zeile der Terminbeschreibung.
 Geschrieben werden sie über den Kalender-Konnektor der erzeugenden Anwendung;
 [KALENDER.md](KALENDER.md) beschreibt die Regeln.
 
