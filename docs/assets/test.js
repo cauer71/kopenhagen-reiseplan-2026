@@ -27,8 +27,21 @@ async function json(url) {
   return r.json();
 }
 
+/**
+ * Eine Zeile der Linkliste.
+ *
+ * Der Hinweis liegt **innerhalb** des Links, nicht daneben. Vorher war nur die
+ * erste Zeile antippbar und die Erklärung darunter toter Text — auf dem Handy
+ * trifft man aber die ganze Zeile.
+ */
 const link = (href, text, hinweis = "") =>
-  `<li><a href="${esc(href)}">${esc(text)}</a>${hinweis ? ` <span>${esc(hinweis)}</span>` : ""}</li>`;
+  `<li><a href="${esc(href)}"><span class="was">${esc(text)}</span>`
+  + `${hinweis ? `<span class="wie">${esc(hinweis)}</span>` : ""}</a></li>`;
+
+/** Aus einem Titel eine Ankermarke machen. */
+const anker = (text) => String(text).toLowerCase()
+  .replace(/[äöüß]/g, (c) => ({ "ä": "ae", "ö": "oe", "ü": "ue", "ß": "ss" }[c]))
+  .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 function reiseBlock(entry, daten) {
   const tage = (daten.days ?? []).filter((d) => d.isoDate);
@@ -59,8 +72,10 @@ function reiseBlock(entry, daten) {
     return uid ? link(`${basis}#${t.id}-stop-${uid}`, `${t.label}, erster Stop aufgeklappt`, `#${t.id}-stop-${uid}`) : "";
   }).filter(Boolean).join("");
 
-  return `<section>
-    <h2>${esc(daten.trip?.destination ?? entry.slug)} <span class="sub">${esc(daten.trip?.dates ?? "")}</span></h2>
+  const ort = daten.trip?.destination ?? entry.slug;
+  return `<section id="${anker(ort)}">
+    <h2>${esc(ort)}</h2>
+    <p class="sub">${esc(daten.trip?.dates ?? "")} · ${tage.length} Tage · ${esc(entry.slug)}.json</p>
     <h3>Zustände</h3><ul>${zustaende}</ul>
     <h3>Jeden Tag als laufenden Tag</h3><ul>${perTag}</ul>
     ${tief ? `<h3>Deep-Links</h3><ul>${tief}</ul>` : ""}
@@ -89,9 +104,19 @@ async function init() {
     }),
   ].join("");
 
+  // Sprungmarken: die Seite ist mit zwei Reisen über 4000 px lang. Ohne sie
+  // scrollt man auf dem Handy an allem vorbei, was man sucht.
+  const sprung = geladen.map(({ entry, daten }) => {
+    const ort = daten.trip?.destination ?? entry.slug;
+    return `<a href="#${anker(ort)}">${esc(ort)}</a>`;
+  }).join("");
+
   root.innerHTML = `<main class="testseite">
     <p class="eyebrow">Reiseplaner</p>
     <h1>Testparameter</h1>
+    <nav class="sprung" aria-label="Auf dieser Seite">
+      <a href="#startseite">Startseite</a>${sprung}<a href="#sonstiges">Sonstiges</a>
+    </nav>
     <p class="vorwort">Der Unterwegs-Zustand der Seite ist im Alltag <strong>unsichtbar</strong> —
       ein Fehler darin fiele erst im Urlaub auf. Deshalb lassen sich Datum und Uhrzeit
       über die Adresse setzen. Das funktioniert auch auf der Live-Seite und damit
@@ -113,14 +138,14 @@ async function init() {
       Ist ein Wert gesetzt, erscheint unten ein roter Hinweis „Testansicht“ mit einem
       Link zurück.</p>
 
-    <section>
+    <section id="startseite">
       <h2>Startseite</h2>
       <h3>Sortierung prüfen</h3><ul>${start}</ul>
     </section>
 
     ${geladen.map(({ entry, daten }) => reiseBlock(entry, daten)).join("")}
 
-    <section>
+    <section id="sonstiges">
       <h2>Was hier nicht steht</h2>
       <p>Es gibt keinen <code>?v=</code>-Parameter mehr und keine Cache-Version, die
         von Hand anzuheben wäre. Der Service Worker fragt bei jeder Datei nach, ob

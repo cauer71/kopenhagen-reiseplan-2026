@@ -968,23 +968,17 @@ p {
   color: var(--muted);
 }
 
-ol {
-  display: grid;
-  gap: 0.7rem;
-  margin: 1.2rem 0 0;
-  padding: 0;
-  list-style: none;
-}
+/* Hier standen `ol` und `li` als nackte Elementselektoren: ein dreispaltiges
+   Grid für die Stop-Liste aus dem Design-Entwurf. Die Umsetzung rendert Stops
+   längst als `.stop-card`-Divs — im ganzen Projekt gibt es kein einziges `<ol>`
+   und kein `<li>` außer auf der Testseite.
 
-li {
-  display: grid;
-  grid-template-columns: 3.7rem minmax(0, 1fr) auto;
-  gap: 0.75rem;
-  align-items: center;
-  padding: 0.82rem;
-  border-radius: 1.1rem;
-  background: rgba(16, 47, 70, 0.045);
-}
+   Damit hatten die beiden Regeln keine Aufgabe mehr, richteten aber Schaden an:
+   jedes `<li>` der Testseite wurde zum Grid, und der Link landete in der ersten
+   Spalte — auf dem Handy 3,05 rem breit. Jeder Linktitel brach dort auf drei bis
+   vier Zeilen um, Zeilen wurden 177 px hoch, die Seite fast 7000 px lang.
+   Deshalb gelöscht statt überschrieben: ein nackter Elementselektor für ein
+   Bauteil erwischt irgendwann eine Stelle, für die er nie gedacht war. */
 
 time {
   padding-top: 0.18rem;
@@ -1348,12 +1342,8 @@ time {
     font-size: 0.9rem;
   }
 
-
-  li {
-    grid-template-columns: 3.05rem minmax(0, 1fr) 5.6rem;
-    padding: 0.75rem;
-    gap: 0.55rem;
-  }
+  /* Die `li`-Regel, die hier die Spalten für schmale Fenster verengte, ist mit
+     dem nackten `li`-Selektor entfallen — siehe die Erklärung dort. */
 
   .maps-link {
     width: 5.6rem;
@@ -1503,8 +1493,6 @@ time {
   margin: 0 auto;
   padding: 0 var(--gutter) 2.5rem;
   max-width: 70rem;
-  font-size: 10px;
-  line-height: 1.7;
   /* Nicht --muted (#61717e): das ergibt auf --paper nur 4,48:1 und verfehlt die
      4,5:1, die WCAG AA für Kleintext fordert. Dieser Ton liegt bei 5,26:1 und
      bleibt trotzdem deutlich zurückgenommen. Kleine Schrift braucht mehr
@@ -1512,6 +1500,44 @@ time {
   color: #586672;
   text-wrap: pretty;
   hyphens: auto;
+}
+
+/* Die Beschriftung des zugeklappten Nachweises. Sie ist der einzige Weg zur
+   Nennung und darf deshalb nicht so klein sein wie der Nachweis selbst — was man
+   finden soll, muss man lesen können. 12px, und die ganze Zeile ist 44px hoch. */
+.credits > summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  list-style: none;          /* eigenes Zeichen, siehe ::after */
+}
+
+.credits > summary::-webkit-details-marker { display: none; }
+
+/* Ein Zeichen, das den Zustand zeigt. Ohne das sieht der zugeklappte Nachweis
+   wie eine gewöhnliche Zeile aus, und niemand tippt darauf. */
+.credits > summary::after {
+  content: "＋";
+  margin-left: 0.45rem;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.credits[open] > summary::after { content: "－"; }
+
+.credits > summary:hover,
+.credits > summary:focus-visible { color: var(--ink); }
+
+/* Der Nachweis selbst bleibt sehr klein — er ist eine Fußnote, kein Inhalt. */
+.credits > p {
+  margin: 0;
+  padding-bottom: 0.4rem;
+  font-size: 10px;
+  line-height: 1.7;
 }
 
 .credits a {
@@ -1565,15 +1591,65 @@ time {
 }
 
 .testseite h1 { margin: 0.25rem 0 1rem; }
+
+/* Anker unter die Sprungleiste statt dahinter. */
+.testseite section { scroll-margin-top: 1.5rem; }
+
 .testseite h2 {
-  margin: 2.5rem 0 0.5rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 2px solid var(--ink);
+  margin: 2.75rem 0 0.35rem;
+  padding-bottom: 0.35rem;
+  /* Vorher 2px in --ink: eine schwarze Linie quer über die Seite, schwerer als
+     die Überschrift darüber. Ein Strich soll gliedern, nicht dominieren. */
+  border-bottom: 1px solid var(--line);
 }
-.testseite h2 .sub { font-weight: 400; color: var(--muted); font-size: 0.7em; }
 .testseite h3 { margin: 1.5rem 0 0.5rem; font-size: 1rem; }
 .testseite p { margin: 0 0 0.9rem; max-width: 62ch; }
 .testseite .vorwort { font-size: 1.05rem; }
+
+/* Datum und Umfang unter dem Reisetitel. Vorher stand das als `0.7em` im h2 und
+   wurde damit 25px groß — fast so groß wie der Ortsname daneben. Eine
+   Nebenangabe in Titelgröße liest sich wie eine zweite Überschrift. */
+.testseite .sub {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #586672;
+}
+
+/* Sprungleiste. Die Seite ist mit zwei Reisen über 4000px lang; ohne sie
+   scrollt man auf dem Handy an allem vorbei. Waagrecht rollbar, damit sie bei
+   vielen Reisen nicht umbricht und die Seite nicht breiter macht. */
+.testseite .sprung {
+  display: flex;
+  gap: 0.4rem;
+  margin: 0 0 2rem;
+  padding-bottom: 0.4rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.testseite .sprung a {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.testseite .sprung a:hover,
+.testseite .sprung a:focus-visible {
+  border-color: var(--teal);
+  color: var(--teal);
+}
 .testseite code {
   padding: 0.1em 0.35em;
   border-radius: 4px;
@@ -1582,19 +1658,41 @@ time {
 }
 
 .testseite ul { margin: 0 0 1rem; padding: 0; list-style: none; }
-.testseite li {
-  padding: 0.45rem 0;
-  border-bottom: 1px solid var(--line);
-}
-/* Ganze Zeile als Tippfläche, 44px Mindesthöhe – die Seite wird unterwegs
-   auf dem Handy benutzt. */
+.testseite li { border-bottom: 1px solid var(--line); }
+
+/* Die **ganze** Zeile ist die Tippfläche, Titel und Hinweis zusammen. Vorher lag
+   der Hinweis neben dem Link statt darin: antippbar war nur die erste Zeile, die
+   Erklärung darunter war toter Text. Auf dem Handy trifft man aber die Zeile. */
 .testseite li a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.75rem;
-  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.1rem;
+  min-height: 3rem;
+  padding: 0.4rem 0;
+  color: var(--ink);
+  text-decoration: none;
 }
-.testseite li span { display: block; color: var(--muted); font-size: 0.85rem; }
+
+.testseite li a .was {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(16, 47, 70, 0.3);
+  text-underline-offset: 2px;
+}
+
+/* Nicht --muted (#61717e): das sind auf --paper nur 4,48:1 und verfehlt die
+   4,5:1, die WCAG AA unter 24px fordert — hier bei 13,6px. 5,26:1 statt dessen. */
+.testseite li a .wie {
+  font-size: 0.85rem;
+  color: #586672;
+}
+
+.testseite li a:hover .was,
+.testseite li a:focus-visible .was {
+  color: var(--teal);
+  text-decoration-color: currentColor;
+}
 
 .testseite table { width: 100%; border-collapse: collapse; margin: 0 0 1.5rem; }
 .testseite th, .testseite td {
@@ -1611,4 +1709,12 @@ time {
   background: var(--card);
   border-radius: 0 8px 8px 0;
 }
+/* 44px Tippfläche statt 16px Textzeile — der Rückweg wird unterwegs benutzt. */
 .testseite .zurueck { margin-top: 3rem; }
+.testseite .zurueck a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 1rem 0 0;
+  font-weight: 700;
+}

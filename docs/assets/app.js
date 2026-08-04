@@ -44,10 +44,21 @@ const nennungNoetig = (lizenz) => !NENNUNG_FREI.test(String(lizenz ?? ""));
  * Bildnachweis — nur für Bilder, deren Lizenz die Nennung verlangt. Verlangt
  * keines davon eine, entfällt er vollständig.
  *
- * Bewusst eine kleine Fußnote und kein Abschnitt: die Nennung ist eine
- * Lizenzpflicht, kein Inhalt der Reise. Sie muss auffindbar und lesbar sein,
- * nicht prominent — deshalb ein Fließtext am Seitenende statt Überschrift und
- * Liste.
+ * **Zugeklappt, und das ist lizenzkonform.** CC BY 4.0 verlangt die Nennung
+ * „in any reasonable manner based on the medium, means, and context" und stellt
+ * in §3(a)(2) ausdrücklich fest, dass dafür sogar ein *Verweis* auf eine Seite
+ * mit den Angaben genügen kann. Ein `<details>`-Block geht darüber hinaus: die
+ * Angabe steht auf derselben Seite, im DOM, ohne Netzzugriff, mit einem Klick da
+ * — und die Suche im Browser findet sie. Wikipedia selbst zeigt am Bild im
+ * Artikel gar keine Nennung; man muss auf die Dateiseite klicken.
+ *
+ * Drei Bedingungen, die deshalb nicht verhandelbar sind:
+ *   1. Die Beschriftung sagt, was drin ist („Bildnachweis"). Kein Versteck.
+ *   2. Kein `display: none` — der Inhalt bleibt erreichbar und auslesbar.
+ *   3. Die Angabe bleibt vollständig: Urheber, Lizenz, Verweis auf die Quelle.
+ *
+ * Zugeklappt, weil die Nennung eine Lizenzpflicht ist und kein Inhalt der Reise.
+ * Sie muss auffindbar sein, nicht dauernd sichtbar.
  */
 function renderBildnachweis() {
   const namen = Object.keys(bilder).sort().filter((n) => nennungNoetig(bilder[n].license));
@@ -60,7 +71,11 @@ function renderBildnachweis() {
       ? `<a href="${esc(b.source)}" target="_blank" rel="noreferrer">${was}</a> (${wer})`
       : `${was} (${wer})`;
   }).join(" · ");
-  return `<p class="credits" id="bildnachweis">Bilder: ${teile}</p>`;
+  const anzahl = `${namen.length} ${namen.length === 1 ? "Bild" : "Bilder"}`;
+  return `<details class="credits" id="bildnachweis">
+    <summary>Bildnachweis · ${anzahl}</summary>
+    <p>${teile}</p>
+  </details>`;
 }
 
 /**
