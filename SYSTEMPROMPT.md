@@ -110,6 +110,7 @@ UID. Damit bewegt ein Umsortieren eine Zeile und keinen Textblock.
     "subtitle": "Ein Satz, der die Reise beschreibt.",
     "dates": "05.–08. September 2026",
     "travellers": "Christian & Julia",
+    "timezone": "Europe/Rome",
     "heroImage": "colosseo",
     "introLabel": "Architekturreise",
     "introTitle": "Überschrift der Einleitung",
@@ -159,6 +160,7 @@ UID. Damit bewegt ein Umsortieren eine Zeile und keinen Textblock.
       "fixed": true,
       "address": "Bozen → Roma Termini",
       "duration": "4 Std. 58 Min.",
+      "minutes": 298,
       "price": "Gebucht.",
       "tip": "Spätestens 15 Min. vor Abfahrt am Bahnsteig sein.",
       "ticketUrl": "https://www.italotreno.com/"
@@ -167,8 +169,8 @@ UID. Damit bewegt ein Umsortieren eine Zeile und keinen Textblock.
 
   "images": {
     "termini": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/…/Roma_termini_01.jpg",
-      "width": 1440, "height": 810,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/…/960px-Roma_termini_01.jpg",
+      "width": 960, "height": 640,
       "alt": "Bahnhof Roma Termini",
       "credit": "Nutzername",
       "license": "CC BY-SA 4.0",
@@ -276,23 +278,67 @@ falsch.
 
 ```
 https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2
-  &titles=File:DATEINAME&prop=imageinfo&iiprop=url|size|extmetadata&iiurlwidth=1280
+  &titles=File:DATEINAME&prop=imageinfo&iiprop=url|size|extmetadata&iiurlwidth=BREITE
 ```
 
-`iiurlwidth=1280` ist verbindlich. Übernimm dann **wörtlich**:
+**Nimm die kleinste Breite, die die Seite wirklich zeigt** — und benutze
+ausschließlich diese zwei Werte:
+
+| Bild | `iiurlwidth` | warum |
+|---|---|---|
+| `trip.heroImage` | **1280** | füllt den Bildschirm |
+| `days[].heroImage` und jedes `places[].image` | **960** | höchstens Spaltenbreite, rund 416 px |
+
+Ein Ortsbild erscheint zweimal: als kleiner Kreis in der Zeitachse (42 px) und in
+voller Spaltenbreite, wenn die Karte offen ist. 1280 wären dafür das Dreifache
+des Nötigen. Diese Bytes zahlt der Reisende, unterwegs womöglich mit Roaming.
+
+> ### Warum genau 960 und keine andere Zahl
+>
+> Commons hält Thumbnails nur in **bestimmten Stufen** vor. Fragst du eine Breite
+> dazwischen an, bekommst du eine Adresse der nächsthöheren Stufe — `thumbwidth`
+> meldet dir aber die **angefragte** Breite. Die Angabe passt dann nicht zum Bild.
+>
+> Nachgemessen an zwei Dateien:
+>
+> | `iiurlwidth` | `thumbwidth` sagt | Adresse liefert | |
+> |---|---|---|---|
+> | 800 | 800 | **960** | ✗ |
+> | 960 | 960 | 960 | ✓ |
+> | 1024 | 1024 | **1280** | ✗ |
+> | 1280 | 1280 | 1280 | ✓ |
+>
+> Genau so entstanden falsche Maße in einer echten Reisedatei: 1400 angefragt und
+> eingetragen, 1920 geliefert. Damit war auch die Obergrenze von 1600 px umgangen,
+> und die Maße, die Layoutsprünge verhindern sollen, verursachten welche.
+
+Übernimm dann:
 
 | Antwortfeld | Zielfeld |
 |---|---|
-| `imageinfo[0].thumburl` | `url` |
-| `imageinfo[0].thumbwidth` | `width` |
+| `imageinfo[0].thumburl`, **ohne `?`-Anhang** | `url` |
+| die Breite **aus der Adresse** (`…/960px-NAME.jpg` → `960`) | `width` |
 | `imageinfo[0].thumbheight` | `height` |
 | `extmetadata.Artist` (HTML-Tags entfernen) | `credit` |
 | `extmetadata.LicenseShortName` | `license` |
 | `imageinfo[0].descriptionurl` | `source` |
 
-Fehlt `thumburl`, ist die Datei schmaler als 1280 px. Dann sind `url`, `width`
-und `height` die Werte ohne `thumb`-Präfix — das ist in Ordnung, weil ein kleines
-Original klein bleibt.
+Zwei Fallen in dieser Tabelle, beide schon eingetreten:
+
+**Die Breite steht in der Adresse, nicht in `thumbwidth`.** Aus den oben genannten
+Gründen. Weichen beide voneinander ab, hast du eine Breite dazwischen angefragt —
+frag mit 960 oder 1280 neu. Die Höhe rechne dann aus dem Seitenverhältnis nach:
+`height = width × Originalhöhe ÷ Originalbreite`.
+
+**Schneide den Anhang ab.** Die API hängt an `thumburl` inzwischen
+`?utm_source=…&utm_campaign=imageinfo&utm_content=thumbnail`. Das ist
+Zählwerk der Wikimedia-Statistik und gehört nicht in die Reisedatei. Alles ab dem
+`?` streichen.
+
+Fehlt `thumburl`, ist die Datei schmaler als die gewünschte Breite. Dann sind
+`url`, `width` und `height` die Werte ohne `thumb`-Präfix — das ist in Ordnung,
+weil ein kleines Original klein bleibt. **Ein schmaleres Bild ist kein Mangel.**
+Suche keinen Ersatz nur wegen der Auflösung; die Motivtreue zählt mehr.
 
 #### Schritt 3: abrufen
 
@@ -305,7 +351,7 @@ das nicht lädt, fällt niemandem auf, bis jemand die Seite ansieht.
 |---|---|
 | `…/wiki/Special:Redirect/file/NAME.jpg` | liefert das **Original in voller Auflösung**. Eine Reisedatei kam so auf 66 MB, ein einzelnes Bild auf 16,8 MB. Dazu kostet die Umleitung Zeit und Vorschau-Dienste folgen ihr nicht. |
 | `…/commons/a/ab/NAME.jpg` (ohne `/thumb/`) | dasselbe Problem: das Original. |
-| selbst gesetzte Breite, z. B. `…/1337px-NAME.jpg` | Wikimedia erzeugt keine Thumbnails in beliebigen Breiten mehr und antwortet mit `400 Use thumbnail sizes listed on …`. Die erlaubten Größen sind **nicht vorhersagbar**: bei einer Datei ging ausschließlich 1280 px, auch 320, 640, 800 und 1024 wurden abgelehnt. |
+| selbst gesetzte Breite, z. B. `…/1337px-NAME.jpg` | Wikimedia liefert keine Thumbnails in beliebigen Breiten und antwortet mit `400 Use thumbnail sizes listed on …`. Die vorhandenen Stufen sind **nicht vorhersagbar**: bei einer Datei ging bei Handarbeit ausschließlich 1280 px, auch 320, 640, 800 und 1024 wurden abgelehnt. Über `iiurlwidth` gehen 960 und 1280 zuverlässig — aber nur, weil die API die Adresse selbst bildet. |
 | `lh3.googleusercontent.com/…` (Google Maps) | signiert, verfällt nach Wochen. |
 
 Richtig sieht eine URL so aus — mit `/thumb/` **und** einer Breite, die von der
@@ -315,14 +361,18 @@ API kam:
 https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/NAME.jpg/1280px-NAME.jpg
 ```
 
-**`width` darf 1600 px nicht überschreiten.** Der Validator lehnt mehr ab. 1280
-reichen für jedes Handy: das Layout ist rund 400 px breit, bei dreifacher
-Pixeldichte also 1200 px. Darüber zahlt der Reisende Daten für Pixel, die er nie
-sieht — und unterwegs womöglich Roaming.
+**`width` darf 1600 px nicht überschreiten** — mehr lehnt die Prüfung ab. Das ist
+aber nur die Notbremse, nicht das Ziel: gewünscht sind 960 px, beim Titelbild
+1280. Wer breiter liefert, wird im Protokoll gemeldet, ebenso wer eine Breite
+angibt, die nicht zur Adresse passt.
 
-Als Größenordnung: ein Bild sollte unter 1 MB liegen, eine ganze Reise unter
-10 MB. Zum Vergleich zwei echte Stände derselben Reise: **66 MB** mit Originalen,
-**5,2 MB** mit Thumbnails bei 1280 px.
+Als Größenordnung: ein Bild **unter 400 KB**, eine ganze Reise **unter 5 MB**. Zum
+Vergleich drei echte Stände derselben Reise: **66 MB** mit Originalen, **5,2 MB**
+mit Thumbnails bei 1280 px, und **3,7 MB** bei 960 px.
+
+Findest du nur eine sehr große Datei, ist das kein Problem — `iiurlwidth`
+verkleinert sie. Lade **niemals** die Originaldatei und gib niemals ihre Adresse
+an, nur weil das Motiv passt.
 
 **Nimm das Bild, das den Ort zeigt.** Ein Platzhalter aus einer anderen Stadt ist
 schlimmer als eine leere Fläche — er sieht richtig aus und ist falsch.
@@ -337,8 +387,10 @@ Die Prüfung lehnt ab, und dann geht nichts live:
 3. Fehlendes `license`, oder fehlendes `credit` bei nennungspflichtiger Lizenz.
 4. Eine Bild-URL mit `Special:Redirect`, ohne `/thumb/`, mit selbst gesetzter
    Breite oder von `lh3.googleusercontent.com`. Ebenso `width` über 1600 px.
-   Eine URL, die **gar nicht antwortet**, lehnt der Validator dagegen nicht ab —
+   Eine URL, die **gar nicht antwortet**, lehnt die Prüfung dagegen nicht ab —
    sie hinterlässt stillschweigend eine leere Fläche. Deshalb selbst abrufen.
+   Breiter als 960 px (Titelbild: 1280) wird gemeldet, aber nicht abgelehnt —
+   ebenso eine Breitenangabe, die nicht zur Adresse passt, und ein `?`-Anhang.
 5. `description` als String oder mit nur einem Absatz.
 6. `weather` fehlt oder ist nicht `aussen` / `innen` / `beides`.
 7. `fixed` mit einem anderen Wert als `true`.

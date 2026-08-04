@@ -61,11 +61,26 @@ const TAG_PFLICHT = ["id", "label", "date", "isoDate", "title", "tone", "heroIma
 const ORT_PFLICHT = ["title", "detail", "description", "image", "place", "weather"];
 const BILD_PFLICHT = ["url", "alt", "license"];
 
-// 1280 px reichen für jedes Handy: das Layout ist rund 400 px breit, bei
-// dreifacher Pixeldichte also 1200 px. Die Grenze ist keine Theorie – eine
-// Reisedatei kam mit Originaldateien über `Special:Redirect`, ein einzelnes Bild
-// 16,8 MB, die Reise 66 MB. Nach der Umstellung auf Thumbnails: 5,2 MB.
-const ZIEL_BILDBREITE = 1280;
+// Zielbreiten nach Rolle des Bildes, gemessen am Layout und nicht geraten:
+//
+//   trip.heroImage    füllt den Bildschirm            -> 1280 px
+//   alles andere      höchstens Spaltenbreite ~416 px ->  960 px
+//
+// Ein Ortsbild erscheint zweimal: als 2,6-rem-Kreis in der Zeitachse (42 px) und
+// in voller Spaltenbreite, wenn die Karte offen ist. Bei doppelter Pixeldichte
+// sind das 832 px — 1280 wären das Dreifache des Nötigen.
+//
+// Warum 960 und nicht 800: Commons hält Thumbnails nur in bestimmten Stufen. Wird
+// eine Breite dazwischen angefragt, rundet die Adresse auf die nächste Stufe auf,
+//  meldet aber die *angefragte* Breite. Genau daraus entstanden die
+// falschen Maße in der Rom-Datei: 1400 angefragt und eingetragen, 1920 geliefert.
+// Belegt an zwei Dateien — 800 -> URL 960, 1024 -> URL 1280, 960 und 1280 stimmen.
+//
+// Die harte Grenze ist keine Theorie. Eine Reisedatei kam mit Originaldateien
+// über `Special:Redirect`, ein einzelnes Bild 16,8 MB, die Reise 66 MB. Nach der
+// Umstellung auf Thumbnails: 5,2 MB.
+const ZIEL_BILDBREITE = 960;
+const HERO_BILDBREITE = 1280;
 const MAX_BILDBREITE = 1600;
 
 // Lizenzen ohne Pflicht zur Namensnennung. Solche Bilder erscheinen nicht im
@@ -132,7 +147,7 @@ function bilderblock(slug, bilder) {
     }
     if (Number.isInteger(bild.width) && bild.width > MAX_BILDBREITE) {
       funde.push(`${wo}: width ${bild.width} px überschreitet ${MAX_BILDBREITE} px – `
-               + `mit iiurlwidth=${ZIEL_BILDBREITE} neu abfragen`);
+               + `mit iiurlwidth=${HERO_BILDBREITE} neu abfragen`);
     }
   }
   return funde;
@@ -303,6 +318,49 @@ function pruefeReise(slug, data) {
  * soll deshalb nicht am Veröffentlichen gehindert werden. Gemeldet wird es
  * trotzdem: eine stille Lücke wird nie gefüllt.
  */
+/**
+ * Bilder, die breiter geliefert werden als die Seite sie zeigt.
+ *
+ * Blockiert nicht — ein zu großes Bild ist richtig, nur teuer. Gemeldet wird es
+ * trotzdem, weil die Kosten beim Reisenden anfallen und unterwegs womöglich
+ * Roaming sind.
+ */
+function breitenHinweise(slug, data) {
+  const bilder = data.images ?? {};
+  const hero = data.trip?.heroImage;
+
+  // Die Breite steht bei Wikimedia-Thumbnails in der Adresse selbst. Weicht die
+  // Angabe davon ab, ist sie erfunden – und dann ist auch `height` falsch. Genau
+  // das war der Fall: 13 Rom-Bilder lieferten 1920 px, die Datei behauptete 1400.
+  // Damit war die 1600er-Grenze umgangen, und die Maße, die gerade Layoutsprünge
+  // verhindern sollen, sorgten für welche.
+  const falsch = [];
+  for (const name of Object.keys(bilder).sort()) {
+    const inUrl = /\/(\d+)px-/.exec(String(bilder[name].url ?? ""))?.[1];
+    if (inUrl && Number(inUrl) !== bilder[name].width) {
+      falsch.push(`${name} (URL ${inUrl}, angegeben ${bilder[name].width})`);
+    }
+  }
+  const zuBreit = Object.keys(bilder).sort().filter((name) => {
+    const erlaubt = name === hero ? HERO_BILDBREITE : ZIEL_BILDBREITE;
+    return Number.isInteger(bilder[name].width) && bilder[name].width > erlaubt;
+  });
+  const hinweise = [];
+  if (falsch.length) {
+    hinweise.push(`${slug}: ${falsch.length} Bild(er) mit falscher Breitenangabe `
+                + `– ${falsch.slice(0, 4).join(", ")}${falsch.length > 4 ? " …" : ""}. `
+                + `Die Adresse nennt die wahre Breite; width und height wörtlich aus `
+                + `der API übernehmen, sonst springt das Layout doch`);
+  }
+  if (zuBreit.length) {
+    hinweise.push(`${slug}: ${zuBreit.length} Bild(er) breiter als nötig `
+                + `(${zuBreit.slice(0, 6).join(", ")}${zuBreit.length > 6 ? " …" : ""}) – `
+                + `${ZIEL_BILDBREITE} px genügen überall außer beim Titelbild `
+                + `(${HERO_BILDBREITE} px); mit iiurlwidth neu abfragen spart rund 40 %`);
+  }
+  return hinweise;
+}
+
 function kalenderHinweise(slug, data) {
   const hinweise = [];
   const zone = data.trip?.timezone;
@@ -476,7 +534,7 @@ async function bilderPruefen(reisen) {
     for (const k of kaputt) console.error(`  ✗ ${k}`);
     console.error("\nURL nicht selbst zusammensetzen – von der Commons-API übernehmen:");
     console.error("  …/w/api.php?action=query&format=json&formatversion=2&titles=File:NAME");
-    console.error("    &prop=imageinfo&iiprop=url|size|extmetadata&iiurlwidth=1280");
+    console.error("    &prop=imageinfo&iiprop=url|size|extmetadata&iiurlwidth=800");
     return 1;
   }
   console.log("\nAlle Bild-URLs sind erreichbar.");
@@ -550,10 +608,11 @@ async function main() {
 
   // Nach der blockierenden Prüfung, damit die Reihenfolge der Ausgabe stimmt:
   // erst was verhindert, dann was nur fehlt.
-  const hinweise = reisen.flatMap(({ slug, data }) => kalenderHinweise(slug, data));
+  const hinweise = reisen.flatMap(({ slug, data }) =>
+    [...breitenHinweise(slug, data), ...kalenderHinweise(slug, data)]);
   if (hinweise.length) {
-    console.log(`\n${hinweise.length} Hinweis(e) für den Google-Kalender `
-              + `(die Website ist davon nicht betroffen):`);
+    console.log(`\n${hinweise.length} Hinweis(e) – blockieren nicht, `
+              + `die Seite ist damit vollständig:`);
     for (const hinweis of hinweise) console.log(`  ! ${hinweis}`);
   }
 

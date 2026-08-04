@@ -130,8 +130,8 @@ und im Diff sofort lesbar.
 
   "images": {
     "termini": {
-      "url": "https://upload.wikimedia.org/…/1280px-Roma_termini_01.jpg",
-      "width": 1280, "height": 810,   // gegen Layoutsprünge beim Nachladen
+      "url": "https://upload.wikimedia.org/…/960px-Roma_termini_01.jpg",
+      "width": 960, "height": 640,    // muss zur Breite in der Adresse passen
       "alt": "Bahnhof Roma Termini",  // beschreibend, kein Dateiname
       "credit": "Nutzername",         // Pflicht bei CC BY(-SA), entbehrlich bei CC0
       "license": "CC BY-SA 4.0",
@@ -182,10 +182,11 @@ Immer von der Commons-API holen und wörtlich übernehmen:
 ```bash
 curl -s "https://commons.wikimedia.org/w/api.php?action=query&format=json\
 &formatversion=2&titles=File:NAME&prop=imageinfo\
-&iiprop=url|size|extmetadata&iiurlwidth=1280"
+&iiprop=url|size|extmetadata&iiurlwidth=960"
 ```
 
-`thumburl` → `url`, `thumbwidth` → `width`, `thumbheight` → `height`,
+`thumburl` → `url` (ohne `?`-Anhang), die Breite **aus der Adresse** → `width`,
+`thumbheight` → `height`,
 `Artist` → `credit`, `LicenseShortName` → `license`, `descriptionurl` → `source`.
 
 **Beide denkbaren Abkürzungen sind schon schiefgegangen**, und zwar
@@ -202,10 +203,37 @@ sind **nicht vorhersagbar**: bei jener Datei ging ausschließlich 1280 px, auch
 in voller Auflösung**. Eine Reisedatei kam so auf **66 MB**, ein einzelnes Bild
 auf 16,8 MB. Nach der Umstellung auf Thumbnails bei 1280 px: **5,2 MB**.
 
-Die Prüfung lehnt jetzt beides ab: `Special:Redirect` und `width` über 1600 px.
-1280 px reichen für jedes Handy — das Layout ist rund 400 px breit, bei
-dreifacher Pixeldichte also 1200 px. Darüber zahlt der Reisende Daten für Pixel,
-die er nie sieht, unterwegs womöglich Roaming.
+Die Prüfung lehnt beides ab: `Special:Redirect` und `width` über 1600 px.
+
+1600 ist aber nur die Notbremse. **Gewünscht ist die kleinste Breite, die die
+Seite wirklich zeigt** — und das sind zwei Werte:
+
+| Bild | Breite | warum |
+|---|---|---|
+| `trip.heroImage` | 1280 px | füllt den Bildschirm |
+| `days[].heroImage`, jedes `places[].image` | 960 px | höchstens Spaltenbreite, rund 416 px |
+
+Ein Ortsbild erscheint zweimal: als 2,6-rem-Kreis in der Zeitachse (42 px) und in
+voller Spaltenbreite, wenn die Karte offen ist. Bei doppelter Pixeldichte sind das
+832 px; 1280 wären das Dreifache des Nötigen. Diese Bytes zahlt der Reisende,
+unterwegs womöglich mit Roaming.
+
+**Warum 960 und nicht 800:** Commons hält Thumbnails nur in bestimmten Stufen vor.
+Wird eine Breite dazwischen angefragt, liefert die Adresse die nächsthöhere Stufe,
+`thumbwidth` meldet aber die angefragte — und dann passt die Angabe nicht zum Bild.
+Belegt an zwei Dateien: 800 ergibt eine 960er-Adresse, 1024 eine 1280er; 960 und
+1280 stimmen. **Genau daraus entstand ein echter Fehler:** 13 Rom-Bilder trugen
+`width: 1400` und lieferten 1920 px. Damit war die 1600er-Grenze umgangen, und die
+Maße, die Layoutsprünge verhindern sollen, verursachten welche. Die Prüfung
+vergleicht deshalb jetzt die Angabe mit der Breite in der Adresse.
+
+Breitere Bilder werden **gemeldet, nicht abgelehnt**: zu groß ist richtig, nur
+teuer. Der Hinweis steht im Protokoll der Action.
+
+> Über die API ist die Breite **frei wählbar** — sie erzeugt das Thumbnail bei
+> Bedarf. Nur eine selbst in die URL geschriebene Breite scheitert. Geprüft an
+> jener Datei, die bei Handarbeit ausschließlich 1280 px annahm: über
+> `iiurlwidth=960` liefert sie anstandslos 960 px.
 
 Ob eine URL wirklich antwortet, sagt nur der Schritt „Bild-URLs prüfen“ in der
 Action (`node tools/build.mjs --bilder`).

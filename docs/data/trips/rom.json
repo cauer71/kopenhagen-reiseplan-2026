@@ -127,57 +127,6 @@
     }
   ],
   "places": {
-    "01": {
-      "title": "Kolosseum – deutschsprachige Führung",
-      "detail": "Das Amphitheater als konstruktiver Höhepunkt; bevorzugt mit Arenaboden und gemeinsamem Antike-Ticket.",
-      "description": [
-        "Anfahrt: von Buddy am Corso Vittorio Emanuele II zum endgültigen Treffpunkt rund um Via dei Fori Imperiali oder Largo Gaetana Agnesi · zu Fuß etwa 20–25 Min. · ÖPNV etwa 15–25 Min. Der Voucher des Veranstalters entscheidet über den tatsächlichen Treffpunkt; dafür wird ein zusätzlicher Puffer eingeplant.",
-        "Das Flavische Amphitheater wurde ab 72 n. Chr. unter Vespasian errichtet und 80 n. Chr. unter Titus eröffnet. Für Julia ist weniger die ikonische Silhouette als die innere Organisation entscheidend: Travertinpfeiler, radial angelegte Gewölbe, nummerierte Zugänge und die konsequente Trennung der Besucherströme machten aus dem Bau eine leistungsfähige Großmaschine für zehntausende Menschen.",
-        "Vorgesehen ist eine deutschsprachige GetYourGuide-Führung durch Kolosseum, Forum und Palatin, möglichst mit Arenaboden. Der genaue Startzeitpunkt und die tatsächliche Reihenfolge der drei Bereiche sind noch nicht gebucht. Nach der Buchung wird dieser Stopp mit fixed: true geschützt."
-      ],
-      "image": "colosseo",
-      "place": "Colosseo, Piazza del Colosseo 1, 00184 Roma RM, Italien",
-      "weather": "aussen",
-      "address": "Piazza del Colosseo 1, 00184 Roma",
-      "duration": "ca. 60–75 Min. als erster Teil einer 2,5–3-stündigen Führung",
-      "price": "Noch zu buchen; Preis und deutscher Slot im Buchungskalender prüfen.",
-      "tip": "Personalausweise mitnehmen; nominative Eintrittskarten. Mindestens 15 Min. vor dem Treffpunkt sein.",
-      "ticketUrl": "https://www.getyourguide.com/de-at/kolosseum-l2619/kolosseum-und-forum-romanum-gefuhrte-tour-mit-bevorzugtem-zugang-t195566/"
-    },
-    "02": {
-      "title": "Forum Romanum und Palatin – Führung",
-      "detail": "Stadtraum, Topografie und kaiserliche Palastarchitektur als zweiter Teil derselben Antike-Führung.",
-      "description": [
-        "Anfahrt: direkt aus dem Kolosseum beziehungsweise gemeinsam mit der gebuchten Führungsgruppe · zu Fuß wenige Minuten · ÖPNV —. Je nach Veranstalter beginnt die Tour auch zuerst im Forum; die Uhrzeit ist deshalb als Planungsmarke und nicht als zweites separates Ticket zu verstehen.",
-        "Das Forum war kein in einem Zug entworfener Platz, sondern eine über Jahrhunderte verdichtete Stadtmitte aus Basiliken, Tempeln, Triumphbögen, Rednertribünen und Prozessionswegen. Der Palatin darüber zeigt den Sprung vom republikanischen Wohnhügel zum zusammenhängenden kaiserlichen Palastbezirk. Besonders lesbar sind die Beziehungen zwischen Via Sacra, Titusbogen, Domus Flavia, Domus Augustana und den Terrassen über dem Tal.",
-        "Der Palatin bietet mehr Vegetation und Aussicht als das Forum. Im September sind Trinkwasser, Sonnenschutz und feste Schuhe wichtiger als ein minutiöses Abarbeiten jeder Ruine. Die Führung endet voraussichtlich gegen 15:00 Uhr; danach führt der Weg ohne großen Umweg zur Fontana di Trevi."
-      ],
-      "image": "forum",
-      "place": "Foro Romano, Via della Salara Vecchia 5/6, 00186 Roma RM, Italien",
-      "weather": "aussen",
-      "address": "Via della Salara Vecchia 5/6, 00186 Roma",
-      "duration": "ca. 80–90 Min. als zweiter Teil der Führung",
-      "price": "Im gemeinsamen Führungsticket mit dem Kolosseum enthalten.",
-      "tip": "Wasserflasche, Sonnenschutz und rutschfeste Schuhe mitnehmen; Tourreihenfolge kann variieren.",
-      "ticketUrl": "https://www.getyourguide.com/de-at/kolosseum-l2619/kolosseum-und-forum-romanum-gefuhrte-tour-mit-bevorzugtem-zugang-t195566/"
-    },
-    "04": {
-      "title": "Pantheon – früher Montagsslot",
-      "detail": "Die größte unbewehrte Betonkuppel der Welt möglichst gleich zur Öffnung und ohne Gratis-Sonntagsandrang.",
-      "description": [
-        "Anfahrt: von Seven, Via Nazionale 249 → Pantheon · zu Fuß etwa 20–25 Min. · ÖPNV etwa 20–30 Min. mit Bus und kurzem Fußweg. Am frühen Morgen ist der direkte Spaziergang zuverlässiger als der Stadtverkehr; Abmarsch ist gegen 08:15 Uhr vorgesehen.",
-        "Der heutige Bau entstand um 126 n. Chr. und überlebt nicht als Ruine, sondern als bis heute genutzter Innenraum. Durchmesser und Scheitelhöhe liegen jeweils bei ungefähr 43 Metern, sodass sich eine vollständige Kugel in den Raum denken lässt. Die Kuppelschale wird nach oben dünner und leichter; Kassettierung, abgestufte Zuschläge und der fast neun Meter breite Oculus reduzieren Gewicht und erzeugen zugleich die prägende Lichtdramaturgie.",
-        "Der Montag wurde bewusst dem kostenlosen ersten Sonntag vorgezogen: Die Eintrittskosten sind niedrig, dafür ist ein früher offizieller Slot planbarer. Eine echte Skip-the-line-Garantie gibt es nicht; der 09:00-Uhr-Termin bleibt trotzdem die beste Chance auf einen vergleichsweise ruhigen Raumeindruck."
-      ],
-      "image": "pantheon",
-      "place": "Pantheon, Piazza della Rotonda, 00186 Roma RM, Italien",
-      "weather": "innen",
-      "address": "Piazza della Rotonda, 00186 Roma",
-      "duration": "45–50 Min.",
-      "price": "7 € regulär; 2 € ermäßigt für berechtigte EU-Bürger von 18 bis 25 Jahren.",
-      "tip": "Offiziellen 09:00-Uhr-Slot buchen; Schultern und Knie bedeckt halten. Danach 8–10 Min. zu Fuß zu Il Gesù.",
-      "ticketUrl": "https://portale.museiitaliani.it/b2c/#/"
-    },
     "10": {
       "title": "MAXXI – Zaha Hadid und zwei Ausstellungen",
       "detail": "Das Gebäude ist das Hauptobjekt: dazu The Large Glass und Vitalità dell’architettura italiana 1946–2026.",
@@ -644,166 +593,217 @@
       "price": "Kein Eintritt; Getränke nach Verbrauch.",
       "tip": "Keine Reservierung möglich. Bei Müdigkeit auslassen, damit der frühe Museumsstart am Sonntag realistisch bleibt.",
       "ticketUrl": "https://www.football-pub.com/"
+    },
+    "01": {
+      "title": "Kolosseum – deutschsprachige Führung",
+      "detail": "Das Amphitheater als konstruktiver Höhepunkt; bevorzugt mit Arenaboden und gemeinsamem Antike-Ticket.",
+      "description": [
+        "Anfahrt: von Buddy am Corso Vittorio Emanuele II zum endgültigen Treffpunkt rund um Via dei Fori Imperiali oder Largo Gaetana Agnesi · zu Fuß etwa 20–25 Min. · ÖPNV etwa 15–25 Min. Der Voucher des Veranstalters entscheidet über den tatsächlichen Treffpunkt; dafür wird ein zusätzlicher Puffer eingeplant.",
+        "Das Flavische Amphitheater wurde ab 72 n. Chr. unter Vespasian errichtet und 80 n. Chr. unter Titus eröffnet. Für Julia ist weniger die ikonische Silhouette als die innere Organisation entscheidend: Travertinpfeiler, radial angelegte Gewölbe, nummerierte Zugänge und die konsequente Trennung der Besucherströme machten aus dem Bau eine leistungsfähige Großmaschine für zehntausende Menschen.",
+        "Vorgesehen ist eine deutschsprachige GetYourGuide-Führung durch Kolosseum, Forum und Palatin, möglichst mit Arenaboden. Der genaue Startzeitpunkt und die tatsächliche Reihenfolge der drei Bereiche sind noch nicht gebucht. Nach der Buchung wird dieser Stopp mit fixed: true geschützt."
+      ],
+      "image": "colosseo",
+      "place": "Colosseo, Piazza del Colosseo 1, 00184 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza del Colosseo 1, 00184 Roma",
+      "duration": "ca. 60–75 Min. als erster Teil einer 2,5–3-stündigen Führung",
+      "price": "Noch zu buchen; Preis und deutscher Slot im Buchungskalender prüfen.",
+      "tip": "Personalausweise mitnehmen; nominative Eintrittskarten. Mindestens 15 Min. vor dem Treffpunkt sein.",
+      "ticketUrl": "https://www.getyourguide.com/de-at/kolosseum-l2619/kolosseum-und-forum-romanum-gefuhrte-tour-mit-bevorzugtem-zugang-t195566/"
+    },
+    "02": {
+      "title": "Forum Romanum und Palatin – Führung",
+      "detail": "Stadtraum, Topografie und kaiserliche Palastarchitektur als zweiter Teil derselben Antike-Führung.",
+      "description": [
+        "Anfahrt: direkt aus dem Kolosseum beziehungsweise gemeinsam mit der gebuchten Führungsgruppe · zu Fuß wenige Minuten · ÖPNV —. Je nach Veranstalter beginnt die Tour auch zuerst im Forum; die Uhrzeit ist deshalb als Planungsmarke und nicht als zweites separates Ticket zu verstehen.",
+        "Das Forum war kein in einem Zug entworfener Platz, sondern eine über Jahrhunderte verdichtete Stadtmitte aus Basiliken, Tempeln, Triumphbögen, Rednertribünen und Prozessionswegen. Der Palatin darüber zeigt den Sprung vom republikanischen Wohnhügel zum zusammenhängenden kaiserlichen Palastbezirk. Besonders lesbar sind die Beziehungen zwischen Via Sacra, Titusbogen, Domus Flavia, Domus Augustana und den Terrassen über dem Tal.",
+        "Der Palatin bietet mehr Vegetation und Aussicht als das Forum. Im September sind Trinkwasser, Sonnenschutz und feste Schuhe wichtiger als ein minutiöses Abarbeiten jeder Ruine. Die Führung endet voraussichtlich gegen 15:00 Uhr; danach führt der Weg ohne großen Umweg zur Fontana di Trevi."
+      ],
+      "image": "forum",
+      "place": "Foro Romano, Via della Salara Vecchia 5/6, 00186 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Via della Salara Vecchia 5/6, 00186 Roma",
+      "duration": "ca. 80–90 Min. als zweiter Teil der Führung",
+      "price": "Im gemeinsamen Führungsticket mit dem Kolosseum enthalten.",
+      "tip": "Wasserflasche, Sonnenschutz und rutschfeste Schuhe mitnehmen; Tourreihenfolge kann variieren.",
+      "ticketUrl": "https://www.getyourguide.com/de-at/kolosseum-l2619/kolosseum-und-forum-romanum-gefuhrte-tour-mit-bevorzugtem-zugang-t195566/"
+    },
+    "04": {
+      "title": "Pantheon – früher Montagsslot",
+      "detail": "Die größte unbewehrte Betonkuppel der Welt möglichst gleich zur Öffnung und ohne Gratis-Sonntagsandrang.",
+      "description": [
+        "Anfahrt: von Seven, Via Nazionale 249 → Pantheon · zu Fuß etwa 20–25 Min. · ÖPNV etwa 20–30 Min. mit Bus und kurzem Fußweg. Am frühen Morgen ist der direkte Spaziergang zuverlässiger als der Stadtverkehr; Abmarsch ist gegen 08:15 Uhr vorgesehen.",
+        "Der heutige Bau entstand um 126 n. Chr. und überlebt nicht als Ruine, sondern als bis heute genutzter Innenraum. Durchmesser und Scheitelhöhe liegen jeweils bei ungefähr 43 Metern, sodass sich eine vollständige Kugel in den Raum denken lässt. Die Kuppelschale wird nach oben dünner und leichter; Kassettierung, abgestufte Zuschläge und der fast neun Meter breite Oculus reduzieren Gewicht und erzeugen zugleich die prägende Lichtdramaturgie.",
+        "Der Montag wurde bewusst dem kostenlosen ersten Sonntag vorgezogen: Die Eintrittskosten sind niedrig, dafür ist ein früher offizieller Slot planbarer. Eine echte Skip-the-line-Garantie gibt es nicht; der 09:00-Uhr-Termin bleibt trotzdem die beste Chance auf einen vergleichsweise ruhigen Raumeindruck."
+      ],
+      "image": "pantheon",
+      "place": "Pantheon, Piazza della Rotonda, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Piazza della Rotonda, 00186 Roma",
+      "duration": "45–50 Min.",
+      "price": "7 € regulär; 2 € ermäßigt für berechtigte EU-Bürger von 18 bis 25 Jahren.",
+      "tip": "Offiziellen 09:00-Uhr-Slot buchen; Schultern und Knie bedeckt halten. Danach 8–10 Min. zu Fuß zu Il Gesù.",
+      "ticketUrl": "https://portale.museiitaliani.it/b2c/#/"
     }
   },
   "images": {
     "arapacis": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Museo_dell%27Ara_Pacis%2C_retro.tif/lossy-page1-1920px-Museo_dell%27Ara_Pacis%2C_retro.tif.jpg",
-      "width": 1400,
-      "height": 918,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Museo_dell%27Ara_Pacis%2C_retro.tif/lossy-page1-960px-Museo_dell%27Ara_Pacis%2C_retro.tif.jpg",
+      "width": 960,
+      "height": 630,
       "alt": "Museum des Ara Pacis von Richard Meier",
       "credit": "MaT12Vi",
       "license": "CC BY-SA 4.0",
       "source": "https://commons.wikimedia.org/wiki/File:Museo_dell%27Ara_Pacis,_retro.tif"
     },
     "civette": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Casina_Delle_Civette%2C_Villa_Torlonia%2C_Rome_01.JPG",
-      "width": 1024,
-      "height": 768,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Casina_Delle_Civette%2C_Villa_Torlonia%2C_Rome_01.JPG/960px-Casina_Delle_Civette%2C_Villa_Torlonia%2C_Rome_01.JPG",
+      "width": 960,
+      "height": 720,
       "alt": "Casina delle Civette in der Villa Torlonia",
       "credit": "Sergio de Ferra",
       "license": "CC BY-SA 3.0",
       "source": "https://commons.wikimedia.org/wiki/File:Casina_Delle_Civette,_Villa_Torlonia,_Rome_01.JPG"
     },
     "colosseo": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Colosseum_of_Rome_and_Roman_forum.jpg/1920px-Colosseum_of_Rome_and_Roman_forum.jpg",
-      "width": 1400,
-      "height": 829,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Colosseum_of_Rome_and_Roman_forum.jpg/1280px-Colosseum_of_Rome_and_Roman_forum.jpg",
+      "width": 1280,
+      "height": 758,
       "alt": "Kolosseum und Forum Romanum von oben",
       "credit": "Wilfredor",
       "license": "CC0",
       "source": "https://commons.wikimedia.org/wiki/File:Colosseum_of_Rome_and_Roman_forum.jpg"
     },
     "coppede": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lampadario_Quartiere_copped%C3%A8.jpg/1920px-Lampadario_Quartiere_copped%C3%A8.jpg",
-      "width": 1400,
-      "height": 1571,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lampadario_Quartiere_copped%C3%A8.jpg/960px-Lampadario_Quartiere_copped%C3%A8.jpg",
+      "width": 960,
+      "height": 1077,
       "alt": "Verzierter Bogen im Quartiere Coppedè",
       "credit": "Livioandronico2013",
       "license": "CC BY-SA 4.0",
       "source": "https://commons.wikimedia.org/wiki/File:Lampadario_Quartiere_copped%C3%A8.jpg"
     },
     "cucina": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Spaghetti%2C_cacio_e_pepe_%26_bitter_leaf_salad_-_Tutto_2024-04-04.jpg/1920px-Spaghetti%2C_cacio_e_pepe_%26_bitter_leaf_salad_-_Tutto_2024-04-04.jpg",
-      "width": 1400,
-      "height": 1050,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Spaghetti%2C_cacio_e_pepe_%26_bitter_leaf_salad_-_Tutto_2024-04-04.jpg/960px-Spaghetti%2C_cacio_e_pepe_%26_bitter_leaf_salad_-_Tutto_2024-04-04.jpg",
+      "width": 960,
+      "height": 720,
       "alt": "Cacio e pepe mit Salat",
       "credit": "Andy Li",
       "license": "CC0",
       "source": "https://commons.wikimedia.org/wiki/File:Spaghetti,_cacio_e_pepe_%26_bitter_leaf_salad_-_Tutto_2024-04-04.jpg"
     },
     "flughafen": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Nuns_in_Fiumicino_Airport%2C_Rome_-_3611.jpg/1920px-Nuns_in_Fiumicino_Airport%2C_Rome_-_3611.jpg",
-      "width": 1400,
-      "height": 979,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Nuns_in_Fiumicino_Airport%2C_Rome_-_3611.jpg/960px-Nuns_in_Fiumicino_Airport%2C_Rome_-_3611.jpg",
+      "width": 960,
+      "height": 671,
       "alt": "Terminal des Flughafens Rom-Fiumicino",
       "credit": "Jorge Royan",
       "license": "CC BY-SA 3.0",
       "source": "https://commons.wikimedia.org/wiki/File:Nuns_in_Fiumicino_Airport,_Rome_-_3611.jpg"
     },
     "forum": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Forum_romanum_6k_%285760x2097%29.jpg/1920px-Forum_romanum_6k_%285760x2097%29.jpg",
-      "width": 1400,
-      "height": 510,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Forum_romanum_6k_%285760x2097%29.jpg/960px-Forum_romanum_6k_%285760x2097%29.jpg",
+      "width": 960,
+      "height": 350,
       "alt": "Panorama des Forum Romanum",
       "credit": "BeBo86",
       "license": "CC BY-SA 3.0",
       "source": "https://commons.wikimedia.org/wiki/File:Forum_romanum_6k_(5760x2097).jpg"
     },
     "gasometro": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Gazometro_via_Ostiense_%28Rome%29.JPG/1920px-Gazometro_via_Ostiense_%28Rome%29.JPG",
-      "width": 1400,
-      "height": 1050,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Gazometro_via_Ostiense_%28Rome%29.JPG/960px-Gazometro_via_Ostiense_%28Rome%29.JPG",
+      "width": 960,
+      "height": 720,
       "alt": "Gasometer an der Via Ostiense",
       "credit": "Notafly2",
       "license": "CC BY-SA 4.0",
       "source": "https://commons.wikimedia.org/wiki/File:Gazometro_via_Ostiense_(Rome).JPG"
     },
     "gesu": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Iglesia_del_Ges%C3%B9%2C_Roma%2C_Italia%2C_2022-09-16%2C_DD_112-114_HDR.jpg/1920px-Iglesia_del_Ges%C3%B9%2C_Roma%2C_Italia%2C_2022-09-16%2C_DD_112-114_HDR.jpg",
-      "width": 1400,
-      "height": 933,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Iglesia_del_Ges%C3%B9%2C_Roma%2C_Italia%2C_2022-09-16%2C_DD_112-114_HDR.jpg/960px-Iglesia_del_Ges%C3%B9%2C_Roma%2C_Italia%2C_2022-09-16%2C_DD_112-114_HDR.jpg",
+      "width": 960,
+      "height": 640,
       "alt": "Innenraum der Kirche Il Gesù",
       "credit": "Diego Delso",
       "license": "CC BY-SA 4.0",
       "source": "https://commons.wikimedia.org/wiki/File:Iglesia_del_Ges%C3%B9,_Roma,_Italia,_2022-09-16,_DD_112-114_HDR.jpg"
     },
     "mache": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Via_Benedetta_in_Rome.jpg/1280px-Via_Benedetta_in_Rome.jpg",
-      "width": 1280,
-      "height": 1961,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Via_Benedetta_in_Rome.jpg/960px-Via_Benedetta_in_Rome.jpg",
+      "width": 960,
+      "height": 1471,
       "alt": "Via Benedetta in Trastevere, Standort des Pubs",
       "credit": "Krzysztof Golik",
       "license": "CC BY-SA 4.0",
       "source": "https://commons.wikimedia.org/wiki/File:Via_Benedetta_in_Rome.jpg"
     },
     "maxxi": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/MAXXI_Museum_interior_09.JPG/1920px-MAXXI_Museum_interior_09.JPG",
-      "width": 1400,
-      "height": 933,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/MAXXI_Museum_interior_09.JPG/960px-MAXXI_Museum_interior_09.JPG",
+      "width": 960,
+      "height": 640,
       "alt": "Innenraum des MAXXI von Zaha Hadid",
       "credit": "Commonurbock23",
       "license": "CC BY-SA 3.0",
       "source": "https://commons.wikimedia.org/wiki/File:MAXXI_Museum_interior_09.JPG"
     },
     "montemartini": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Centrale_Montemartini%2C_Rome_%2822172805771%29.jpg/1920px-Centrale_Montemartini%2C_Rome_%2822172805771%29.jpg",
-      "width": 1400,
-      "height": 927,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Centrale_Montemartini%2C_Rome_%2822172805771%29.jpg/960px-Centrale_Montemartini%2C_Rome_%2822172805771%29.jpg",
+      "width": 960,
+      "height": 636,
       "alt": "Antike Skulpturen zwischen Turbinen der Centrale Montemartini",
       "credit": "Carole Raddato from FRANKFURT, Germany",
       "license": "CC BY-SA 2.0",
       "source": "https://commons.wikimedia.org/wiki/File:Centrale_Montemartini,_Rome_(22172805771).jpg"
     },
     "monti": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Rione_I_Monti%2C_Roma%2C_Italy_-_panoramio_%2825%29.jpg",
-      "width": 1067,
-      "height": 1600,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Rione_I_Monti%2C_Roma%2C_Italy_-_panoramio_%2825%29.jpg/960px-Rione_I_Monti%2C_Roma%2C_Italy_-_panoramio_%2825%29.jpg",
+      "width": 960,
+      "height": 1440,
       "alt": "Gasse im Rione Monti",
       "credit": "Vadim Zhivotovsky",
       "license": "CC BY 3.0",
       "source": "https://commons.wikimedia.org/wiki/File:Rione_I_Monti,_Roma,_Italy_-_panoramio_(25).jpg"
     },
     "pantheon": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Interior_oculus_of_the_Rome_Pantheon.jpg/1920px-Interior_oculus_of_the_Rome_Pantheon.jpg",
-      "width": 1400,
-      "height": 788,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Interior_oculus_of_the_Rome_Pantheon.jpg/960px-Interior_oculus_of_the_Rome_Pantheon.jpg",
+      "width": 960,
+      "height": 540,
       "alt": "Opaion in der Kuppel des Pantheon",
       "credit": "T. Le Berre",
       "license": "CC BY-SA 4.0",
       "source": "https://commons.wikimedia.org/wiki/File:Interior_oculus_of_the_Rome_Pantheon.jpg"
     },
     "seven": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Via_Nazionale_%28Rome%29_in_2021.01.jpg/1920px-Via_Nazionale_%28Rome%29_in_2021.01.jpg",
-      "width": 1400,
-      "height": 1050,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Via_Nazionale_%28Rome%29_in_2021.01.jpg/960px-Via_Nazionale_%28Rome%29_in_2021.01.jpg",
+      "width": 960,
+      "height": 720,
       "alt": "Via Nazionale in Rom",
       "credit": "CAPTAIN RAJU",
       "license": "CC BY-SA 4.0",
       "source": "https://commons.wikimedia.org/wiki/File:Via_Nazionale_(Rome)_in_2021.01.jpg"
     },
     "spagna": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Vue_Piazza_di_Spagna_2019.jpg/1920px-Vue_Piazza_di_Spagna_2019.jpg",
-      "width": 1400,
-      "height": 788,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Vue_Piazza_di_Spagna_2019.jpg/960px-Vue_Piazza_di_Spagna_2019.jpg",
+      "width": 960,
+      "height": 540,
       "alt": "Piazza di Spagna mit der Spanischen Treppe",
       "credit": "Chin844",
       "license": "CC BY-SA 4.0",
       "source": "https://commons.wikimedia.org/wiki/File:Vue_Piazza_di_Spagna_2019.jpg"
     },
     "termini": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/8/85/Roma_termini_01.jpg",
-      "width": 1440,
-      "height": 810,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Roma_termini_01.jpg/960px-Roma_termini_01.jpg",
+      "width": 960,
+      "height": 540,
       "alt": "Bahnhof Roma Termini",
       "credit": "Hide1228",
       "license": "CC BY-SA 4.0",
       "source": "https://commons.wikimedia.org/wiki/File:Roma_termini_01.jpg"
     },
     "trevi": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fontana_di_Trevi_by_TC.jpg/1920px-Fontana_di_Trevi_by_TC.jpg",
-      "width": 1400,
-      "height": 2100,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fontana_di_Trevi_by_TC.jpg/960px-Fontana_di_Trevi_by_TC.jpg",
+      "width": 960,
+      "height": 1440,
       "alt": "Fontana di Trevi",
       "credit": "Tomascastelazo",
       "license": "CC BY-SA 4.0",

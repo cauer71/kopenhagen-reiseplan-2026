@@ -401,13 +401,13 @@
               }
             ]
           },
-          "description": "Immer die thumburl der Commons-API mit iiurlwidth=1280. Verboten: signierte Google-URLs (verfallen), Special:Redirect (liefert das Original in voller Auflösung – eine Reise kam so auf 66 MB) und selbst gesetzte Thumbnail-Breiten (Wikimedia antwortet mit 400, die erlaubten Größen sind nicht vorhersagbar)."
+          "description": "Immer die thumburl der Commons-API - iiurlwidth=960, beim Titelbild 1280. Verboten: signierte Google-URLs (verfallen), Special:Redirect (liefert das Original in voller Auflösung – eine Reise kam so auf 66 MB) und selbst gesetzte Thumbnail-Breiten (Wikimedia antwortet mit 400, die erlaubten Größen sind nicht vorhersagbar)."
         },
         "width": {
           "type": "integer",
           "exclusiveMinimum": 0,
           "maximum": 1600,
-          "description": "Aus thumbwidth. Höchstens 1600 px – 1280 reichen für jedes Handy."
+          "description": "Aus thumbwidth. Höchstens 1600 px, das ist die Notbremse. Gewünscht sind 960 px für Tages- und Ortsbilder (sie werden höchstens spaltenbreit gezeigt, rund 416 px) und 1280 px nur für trip.heroImage, das den Bildschirm füllt. Breiteres wird gemeldet, nicht abgelehnt: Die Breite muss zu der in der Adresse passen: Commons rundet auf vorhandene Stufen auf (960, 1280), meldet in thumbwidth aber die angefragte Breite - daraus entstanden Angaben von 1400 bei tatsaechlich 1920 px."
         },
         "height": {
           "type": "integer",
