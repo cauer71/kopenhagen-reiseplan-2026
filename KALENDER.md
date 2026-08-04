@@ -38,7 +38,7 @@ Sammeltermine, keine Ganztagstermine außer für tatsächlich ganztägige Inhalt
 | Beginn | `days[].isoDate` + `days[].stops[].time`, in `trip.timezone` |
 | Ende | Beginn + `places[<uid>].minutes` |
 | Titel | `places[<uid>].title` — **ohne** Tag und UID |
-| Ort | `places[<uid>].address`, sonst `places[<uid>].place` |
+| Ort | `places[<uid>].place` — **nicht** `address`, siehe unten |
 | Beschreibung | siehe unten |
 
 ### Der Reise-Tag wird abgeleitet, nicht erfunden
@@ -78,6 +78,21 @@ hinge jeder Termin am falschen Ort.
 > Deshalb bleiben UIDs unveränderlich und werden nach dem Löschen nicht neu
 > vergeben — in der Reisedatei **und** im Kalender.
 
+### Der Ort kommt aus `place`, nicht aus `address`
+
+`place` ist laut Datenvertrag der Suchbegriff für den Kartenlink und enthält die
+möglichst vollständige Adresse. `address` ist ein **Anzeigefeld** und darf etwas
+anderes sein — bei Transfers ist es eine Route:
+
+| UID | `address` | `place` |
+|---|---|---|
+| 13 | `Bozen → Roma Termini` | `Stazione di Bolzano, Piazza della Stazione 1, 39100 Bolzano` |
+| 32 | `FCO → MAH` | Flughafen Rom-Fiumicino, vollständig |
+
+Ein Kartenlink aus `address` führt bei diesen fünf Rom- und drei
+Kopenhagen-Einträgen ins Nichts. Deshalb: Ortsfeld und Google-Maps-Link **immer**
+aus `place`.
+
 ### Die Zeitzone ist Pflicht
 
 `trip.timezone` (IANA-Name, z. B. `Europe/Rome`). Ohne sie ist `09:30` nicht
@@ -104,32 +119,41 @@ woher jeder Teil kommt:
 
 | # | Zeile | Quelle |
 |---|---|---|
-| 1 | `Anfahrt: von <vorher> → <jetzt> · zu Fuß <Zeit> · ÖPNV <Zeit und Linie>` | **nicht in der Reisedatei**, siehe unten |
+| 1 | `Anfahrt: von <vorher> → <jetzt> · zu Fuß <Zeit> · ÖPNV <Zeit und Linie>` | **`description[0]`**, siehe unten |
 | 2 | Leerzeile | |
-| 3 | zwei bis vier Sätze | `places[].detail` und die Absätze aus `places[].description`, sinnvoll gekürzt |
+| 3 | zwei bis vier Sätze | `places[].detail` und die **übrigen** Absätze aus `description`, sinnvoll gekürzt |
 | 4 | Leerzeile, dann `Tickets/Reservierung: …` | `places[].tip`, ergänzt um `places[].price` wenn relevant |
 | 5 | offizieller Buchungslink | `places[].ticketUrl` |
-| 6 | Google-Maps-Link | aus `places[].place` bzw. `address` |
+| 6 | Google-Maps-Link | aus `places[].place` |
 | 7 | Link auf die Reiseseite | siehe unten |
 | 8 | letzte Zeile: `[REISE-…] [UID:XX]` | abgeleitet |
 
-### Die Anfahrtszeile hat keine Quelle in der Reisedatei
+### Die Anfahrtszeile steht schon in der Reisedatei
 
-Die Reisedatei enthält **keine** Wege- und ÖPNV-Zeiten. Es gibt kein Feld dafür,
-und es ist keines geplant: die Zeiten hängen vom Fahrplan ab und veralten
-schneller als die Datei.
+Sie ist **der erste Absatz von `description`** und beginnt mit `Anfahrt:`. Der
+erzeugende Prompt schreibt sie dort hin: bei 28 von 31 Rom-Orten und bei allen 30
+Kopenhagen-Orten, immer an Position 0.
 
-Zwei zulässige Wege:
+Deshalb:
 
-1. Die Zeiten beim Schreiben recherchieren, wie in `Assistent.md` §8 beschrieben —
-   dann steht die Zeile vollständig da. Reihenfolge und vorheriger Stopp ergeben
-   sich aus `days[].stops`; der erste Stopp des Tages beginnt an der Unterkunft.
-2. Die Zeile weglassen, wenn keine verlässliche Angabe zu bekommen ist. **Keine
-   geschätzten Minuten hinschreiben**, die niemand geprüft hat — eine erfundene
-   ÖPNV-Verbindung ist schlimmer als keine Angabe.
+1. Beginnt `description[0]` mit `Anfahrt:`, **übernimm den Absatz wörtlich** als
+   Zeile 1 und stelle **keine zweite** davor. Sonst steht die Anfahrt zweimal im
+   Termin.
+2. Die **übrigen** Absätze sind der Beschreibungstext für Punkt 3.
+3. Fehlt der Absatz, entweder die Zeiten beim Schreiben recherchieren wie in
+   `Assistent.md` §8, oder die Zeile weglassen. **Keine ungeprüfte Schätzung** —
+   eine erfundene Metrolinie ist schlimmer als keine Angabe.
 
 Wird geschätzt, dann als Spanne und als Schätzung erkennbar. `zu Fuß`, niemals
 nur `Fuß`. Keine Taxis, außer ausdrücklich verlangt.
+
+> **Nebenwirkung, die man kennen muss.** Weil die Anfahrt in `description` steckt,
+> zählt sie bei der Prüfung „mindestens zwei Absätze" mit. Alle 30
+> Kopenhagen-Orte haben genau zwei Einträge — einer davon ist die Anfahrt. Es
+> bleibt also **ein** Absatz echte Beschreibung, wo zwei gemeint waren. Sauber
+> wäre ein eigenes Feld für die Anfahrt; solange es das nicht gibt, sollte
+> `description` bei neuen Reisen **drei** Einträge haben: Anfahrt plus zwei
+> Absätze. Die Rom-Orte machen das schon so.
 
 ### Der Link auf die Reiseseite
 
