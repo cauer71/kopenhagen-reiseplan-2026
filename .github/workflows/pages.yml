@@ -1,5 +1,8 @@
 name: Deploy Reiseplan to GitHub Pages
 
+# Eine neue Reise braucht nichts als eine .json in docs/data/trips/. Dieser
+# Ablauf prüft sie, erzeugt daraus die Reiseliste und die Unterseite und
+# veröffentlicht. Am eigenen Rechner ist nichts auszuführen.
 on:
   push:
     branches: [main]
@@ -16,33 +19,37 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  validate:
+  pruefen:
     name: Reisedaten prüfen
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Set up Python
-        uses: actions/setup-python@v7
+      # Node ist auf den Runnern vorinstalliert; die feste Fassung hält den Bau
+      # über Jahre reproduzierbar. build.mjs benutzt nur die Standardbibliothek –
+      # es gibt kein package.json und nichts zu installieren.
+      - name: Node einrichten
+        uses: actions/setup-node@v6
         with:
-          python-version: "3.12"
+          node-version: "22"
 
-      - name: Reisedaten validieren
-        run: python3 tools/validate_trips.py
+      - name: Reisedaten prüfen
+        run: node tools/build.mjs --check
 
-      # Braucht Netz und darf deshalb nicht blockieren: ein langsamer
-      # Bildserver ist kein Grund, eine Planänderung nicht zu veröffentlichen.
-      # Ein toter Link soll aber auffallen – vorher blieb an seiner Stelle
-      # stillschweigend eine leere Fläche.
+      # Braucht Netz und darf deshalb nicht blockieren: ein langsamer Bildserver
+      # ist kein Grund, eine Planänderung nicht zu veröffentlichen. Ein toter
+      # Link soll aber auffallen – vorher blieb an seiner Stelle stillschweigend
+      # eine leere Fläche.
       - name: Bild-URLs prüfen (blockiert nicht)
         continue-on-error: true
-        run: python3 tools/check_images.py
+        run: node tools/build.mjs --bilder
 
-  deploy:
-    name: Deploy
-    # Kaputte Reisedaten dürfen nicht live gehen.
-    needs: validate
+  veroeffentlichen:
+    name: Bauen und veröffentlichen
+    # Kaputte Reisedaten dürfen nicht live gehen. Die vorige Fassung bleibt dann
+    # online: eine halbe Reise ist schlimmer als eine alte.
+    needs: pruefen
     if: github.event_name != 'pull_request'
     environment:
       name: github-pages
@@ -52,8 +59,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
+      - name: Node einrichten
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
       - name: Configure Pages
+        id: pages
         uses: actions/configure-pages@v6
+
+      # Erzeugt data/trips/index.json und docs/trips/<slug>/index.html. Beides
+      # steht nicht im Repo, sondern entsteht hier aus den Reisedateien.
+      - name: Seite bauen
+        env:
+          # Für og:url und die Vorschau geteilter Links. Fehlt die Ausgabe,
+          # greift die Voreinstellung in build.mjs.
+          SITE_URL: ${{ steps.pages.outputs.base_url }}
+        run: node tools/build.mjs
 
       - name: Upload static site
         uses: actions/upload-pages-artifact@v5

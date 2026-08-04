@@ -4,10 +4,15 @@ Dieser Text ist der Auftrag für eine KI-Anwendung, die eine fertige Reisedatei
 für <https://cauer71.github.io/reiseplan/> schreibt. Er ist so gefasst, dass die
 Anwendung **dieses Repository nicht kennen muss**.
 
-Alles ab der Trennlinie ist der Prompt. Vorher zwei Hinweise für den Menschen:
+Alles ab der Trennlinie ist der Prompt. Vorher drei Hinweise für den Menschen:
 
-- **Ergebnis prüfen:** `python3 tools/validate_trips.py`. Dieselbe Prüfung
-  blockiert in GitHub Actions den Deploy — was sie ablehnt, geht nicht live.
+- **Einspielen:** die Datei nach `docs/data/trips/<slug>.json` legen, committen,
+  pushen. Der Dateiname wird Teil der Adresse (`rom.json` → `/trips/rom/`), also
+  nur Kleinbuchstaben, Ziffern und Bindestriche. Sonst ist nichts zu tun — Kachel,
+  Unterseite und Reiseliste entstehen daraus auf dem Server.
+- **Ergebnis prüfen:** `node tools/build.mjs --check`. Dieselbe Prüfung blockiert
+  in GitHub Actions den Deploy — was sie ablehnt, geht nicht live. Der Schritt
+  danach ruft mit `--bilder` jede Bild-URL wirklich ab.
 - **Maschinenlesbar:** `docs/data/trip.schema.json` beschreibt dasselbe als JSON
   Schema und lässt sich der Anwendung mitgeben.
 

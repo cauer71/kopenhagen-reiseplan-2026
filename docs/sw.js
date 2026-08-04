@@ -10,10 +10,15 @@
  *   Servern und lassen sich nicht vorhalten. Ohne Netz bleibt an ihrer Stelle
  *   eine Fläche — der Plan selbst ist vollständig lesbar.
  *
- * CACHE_VERSION bei Änderungen an dieser Datei oder am Shell-Umfang erhöhen.
+ * Der Name des Caches ist fest. Er trug früher eine Versionsnummer, die bei jeder
+ * Änderung von Hand anzuheben war – zweimal vergessen, und der Browser lieferte
+ * denselben `?v=` mit altem Inhalt. Stattdessen holt `networkFirst` jede Antwort
+ * mit einer Rückfrage beim Server: ist sie unverändert, kommt ein 304 und kostet
+ * fast nichts; ist sie neu, kommt sie neu. Damit braucht es weder eine Version in
+ * den Adressen noch einen Handgriff nach dem Ändern.
  */
 
-const CACHE_VERSION = "reiseplan-v5";
+const CACHE_NAME = "reiseplan";
 
 /**
  * Der feste Teil. Die Reisen kommen nicht hierher, sondern werden bei der
@@ -72,7 +77,7 @@ async function store(cache, url) {
 
 self.addEventListener("install", (event) => {
   event.waitUntil((async () => {
-    const cache = await caches.open(CACHE_VERSION);
+    const cache = await caches.open(CACHE_NAME);
     const alles = [...SHELL, ...(await reisePfade())];
     // Einzeln: ein fehlender Eintrag soll die Installation nicht kippen.
     await Promise.all(alles.map((url) => store(cache, new URL(url, self.location.href).href)));
@@ -83,7 +88,7 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil((async () => {
     const names = await caches.keys();
-    await Promise.all(names.filter((name) => name !== CACHE_VERSION).map((name) => caches.delete(name)));
+    await Promise.all(names.filter((name) => name !== CACHE_NAME).map((name) => caches.delete(name)));
     await self.clients.claim();
   })());
 });
@@ -92,7 +97,7 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("message", (event) => {
   if (event.data?.type !== "warm" || !Array.isArray(event.data.urls)) return;
   event.waitUntil((async () => {
-    const cache = await caches.open(CACHE_VERSION);
+    const cache = await caches.open(CACHE_NAME);
     for (const url of event.data.urls) {
       // Nacheinander statt parallel, um die Verbindung nicht zu belegen.
       if (!(await cache.match(url))) await store(cache, url);
@@ -111,7 +116,7 @@ self.addEventListener("fetch", (event) => {
 });
 
 async function cacheFirst(request) {
-  const cache = await caches.open(CACHE_VERSION);
+  const cache = await caches.open(CACHE_NAME);
   const hit = await cache.match(request, { ignoreSearch: true });
   if (hit) return hit;
   const response = await fetch(request);
@@ -120,15 +125,24 @@ async function cacheFirst(request) {
 }
 
 async function networkFirst(request) {
-  const cache = await caches.open(CACHE_VERSION);
+  const cache = await caches.open(CACHE_NAME);
   // Ohne Fragment ablegen: `/trips/rom/#tag1` und `/trips/rom/` sind dieselbe Seite.
   const key = stripHash(request);
   try {
-    const response = await fetch(request);
+    // `no-cache` heißt nicht „kein Cache“, sondern „nachfragen“: der Browser
+    // schickt seinen ETag mit, unveränderte Dateien kommen als 304 zurück. Das
+    // ersetzt den früheren `?v=`-Parameter. GitHub Pages liefert Dateien mit zehn
+    // Minuten Gültigkeit aus; ohne die Rückfrage zeigte das Handy nach einer
+    // Änderung bis zu zehn Minuten die alte Fassung.
+    //
+    // Über die Adresse statt über `request`: aus einem Navigations-Request lässt
+    // sich kein neuer mit anderem Cache-Modus bauen, das wirft. Für eigene
+    // GET-Dateien ist die Adresse gleichwertig.
+    const response = await fetch(new Request(request.url, { cache: "no-cache" }));
     if (response.ok) cache.put(key, response.clone());
     return response;
   } catch (error) {
-    // ignoreSearch, damit ein neuer ?v=-Parameter den Offline-Treffer nicht verhindert.
+    // ignoreSearch, damit ein Parameter wie `?heute=` den Treffer nicht verhindert.
     const hit = await cache.match(key, { ignoreSearch: true });
     if (hit) return hit;
     if (request.mode === "navigate") {

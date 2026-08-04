@@ -5,10 +5,15 @@ Thumbs.db
 # lokale Vorschau
 docs-server.log
 
-# Python-Werkzeuge
-__pycache__/
-*.pyc
-
 # Zugangsdaten
 .env*
 *.pem
+
+# Vom Server erzeugt – siehe tools/build.mjs.
+#
+# Beides steht absichtlich nicht im Repo. Es ergibt sich restlos aus den
+# Reisedateien, und solange es mit eingecheckt war, konnte es davon abweichen:
+# eine Reisedatei lag im Ordner, fehlte aber in index.json – und war unsichtbar,
+# ohne dass irgendetwas fehlschlug. Was erzeugt wird, kann nicht veralten.
+/docs/data/trips/index.json
+/docs/trips/

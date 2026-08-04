@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://cauer71.github.io/reiseplan/data/trip.schema.json",
   "title": "Reisedatei",
-  "description": "Datenvertrag einer Reise unter docs/data/trips/<slug>.json. Erklärt in COWORK.md, als Auftrag für eine KI in SYSTEMPROMPT.md. Verbindlich bleibt tools/tripdata.py — dort laufen zusätzlich die Querprüfungen, die ein Schema nicht ausdrücken kann (UID-Verweise, Zeitfolge, verwaiste Einträge).",
+  "description": "Datenvertrag einer Reise unter docs/data/trips/<slug>.json. Der Dateiname wird der Slug und damit Teil der Adresse (rom.json → /trips/rom/): nur Kleinbuchstaben, Ziffern und Bindestriche. Eine Datei dort genügt, damit die Reise erscheint; Reiseliste und Unterseite erzeugt tools/build.mjs. Erklärt in COWORK.md, als Auftrag für eine KI in SYSTEMPROMPT.md. Verbindlich bleibt tools/build.mjs — dort laufen zusätzlich die Querprüfungen, die ein Schema nicht ausdrücken kann (UID-Verweise, Zeitfolge, verwaiste Einträge).",
   "type": "object",
   "required": [
     "trip",
@@ -98,10 +98,16 @@
         "heroImage": {
           "type": "string",
           "minLength": 1,
-          "description": "Schlüssel in images."
+          "description": "Schlüssel in images. Titelbild der Reiseseite und Vorschaubild eines geteilten Links."
+        },
+        "tileImage": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Optional. Schlüssel in images für die Kachel auf der Startseite. Fehlt das Feld, nimmt die Kachel heroImage."
         },
         "introLabel": {
-          "type": "string"
+          "type": "string",
+          "description": "Einordnung der Reise, z. B. 'Architekturreise'. Steht über der Einleitung und erscheint zusätzlich als Kennzeichnung auf der Kachel der Startseite – deshalb nur hier und nicht noch woanders."
         },
         "introTitle": {
           "type": "string"

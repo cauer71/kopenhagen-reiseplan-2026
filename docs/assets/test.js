@@ -122,10 +122,15 @@ async function init() {
 
     <section>
       <h2>Was hier nicht steht</h2>
-      <p><code>?v=</code> ist kein Testparameter, sondern die Cache-Version aus
-        <code>tools/plan.py bump</code>. Sie wird nach Änderungen an CSS, JavaScript
-        oder HTML erhöht; Planänderungen brauchen sie nicht.</p>
-      <p>Beim Testen im Browser stört der Service Worker: in den DevTools unter
+      <p>Es gibt keinen <code>?v=</code>-Parameter mehr und keine Cache-Version, die
+        von Hand anzuheben wäre. Der Service Worker fragt bei jeder Datei nach, ob
+        sie sich geändert hat; unverändertes kommt als 304 zurück. Eine neue
+        Reisedatei ist damit sofort sichtbar.</p>
+      <p>Auch keine Liste der Reisen: was in <code>docs/data/trips/</code> als
+        <code>.json</code> liegt, erscheint. Eine Datei mehr heißt eine Reise mehr,
+        eine gelöschte Datei eine Reise weniger.</p>
+      <p>Beim Testen im Browser kann der Service Worker trotzdem stören, wenn er aus
+        einer älteren Fassung stammt: in den DevTools unter
         <em>Application → Service Workers</em> „Update on reload“ aktivieren oder mit
         Strg+Shift+R neu laden.</p>
     </section>

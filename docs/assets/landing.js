@@ -1,15 +1,17 @@
 /**
  * Startseite mit Reisekacheln.
  *
- * Titel, Datum, Untertitel und Reisende werden aus den Reisedateien gelesen –
- * hier steht bewusst nichts doppelt. Zu pflegen ist nur die Liste der Reisen in
- * `data/trips/index.json`; die Reihenfolge auf der Seite ergibt sich aus den
- * Reisedaten (siehe `sortTrips`).
+ * Alles Angezeigte kommt aus den Reisedateien: Titel, Datum, Untertitel,
+ * Reisende, Bild und die Einordnung als Architektur- oder Städtereise. Hier steht
+ * bewusst nichts doppelt.
+ *
+ * Zu pflegen ist gar nichts. `data/trips/index.json` sagt nur, welche Reisen es
+ * gibt, und wird von `tools/build.mjs` aus den vorhandenen Dateien erzeugt – eine
+ * .json mehr im Ordner heißt eine Kachel mehr. Die Reihenfolge auf der Seite
+ * ergibt sich aus den Reisedaten selbst (siehe `sortTrips`).
  */
 
 const root = document.querySelector("#app");
-const version = document.body.dataset.version ?? "";
-const query = version ? `?v=${encodeURIComponent(version)}` : "";
 
 const esc = (value = "") => String(value).replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
 
@@ -80,9 +82,13 @@ function sortTrips(trips) {
 function tile({ entry, data, status }) {
   const { trip, days, images = {} } = data;
   const stops = days.reduce((sum, day) => sum + day.stops.length, 0);
-  const meta = [`${days.length} Tage`, `${stops} Stops`, trip.travellers, entry.badge]
+  // `introLabel` ist die Einordnung der Reise („Architekturreise“, „Städtereise“)
+  // und stand vorher zusätzlich als `badge` in index.json. Zwei Felder für
+  // dieselbe Angabe an zwei Orten – eines davon wäre irgendwann das falsche.
+  const meta = [`${days.length} Tage`, `${stops} Stops`, trip.travellers, trip.introLabel]
     .filter(Boolean).map(esc).join(" · ");
-  const hero = entry.tileImage ?? trip.heroImage;
+  // Eigenes Kachelbild nur, wenn die Reisedatei eines nennt; sonst das Titelbild.
+  const hero = trip.tileImage ?? trip.heroImage;
   return `<a class="trip-tile" href="./trips/${encodeURIComponent(entry.slug)}/" data-status="${status}">
     <img src="${image(hero, images)}" alt="${esc(images[hero]?.alt || trip.destination)}" loading="lazy" decoding="async">
     <span class="trip-tile-shade"></span>
@@ -98,13 +104,13 @@ function tile({ entry, data, status }) {
 
 async function init() {
   document.title = "Meine Reisen";
-  const index = await loadJson(`./data/trips/index.json${query}`);
+  const index = await loadJson("./data/trips/index.json");
   const entries = index.trips ?? [];
 
   const now = today();
   const loaded = await Promise.all(entries.map(async (entry) => {
     try {
-      const data = await loadJson(`./data/trips/${entry.slug}.json${query}`);
+      const data = await loadJson(`./data/trips/${entry.slug}.json`);
       const { start, end } = span(data);
       return { entry, data, start, end, status: statusOf({ start, end }, now) };
     } catch {

@@ -1,21 +1,24 @@
-# Reisepläne aus Cowork pflegen
+# Reisepläne pflegen
 
-Diese Anleitung ist die verbindliche Beschreibung, wie die Inhalte dieser Website
-geändert werden. Sie richtet sich an Cowork bzw. Claude Code – und an jeden
-Menschen, der dieselben Änderungen von Hand machen will.
+Diese Anleitung beschreibt verbindlich, wie die Inhalte dieser Website geändert
+werden.
 
-**Grundsatz:** Reihenfolge und Inhalt sind getrennt gespeichert. Einen Stop zu
-verschieben oder eine Tagesreihenfolge umzustellen bewegt genau **eine Zeile** –
-niemals einen Textblock. Deshalb sind Umstellungen billig, gut überprüfbar und im
-Diff sofort lesbar.
+**Grundsatz: die Seite zeigt nur, was in den Reisedateien steht.** Eine `.json`
+nach `docs/data/trips/` legen heißt eine Reise mehr; sie löschen heißt eine Reise
+weniger. Alles andere — die Liste der Reisen, die Unterseite je Reise, Titel,
+Farbe und Vorschaubild — entsteht daraus auf dem Server. Am eigenen Rechner ist
+nichts auszuführen.
+
+Die Reisedateien selbst werden **außerhalb dieses Repos** erzeugt. Auch das
+Umsortieren bei Regen passiert dort. Dieses Repo stellt dar und prüft.
 
 ---
 
 ## 1. Was dieses Repo ist
 
-Eine statische Website ohne Build-Schritt. Alles unter `docs/` ist die Seite; die
-GitHub-Action `.github/workflows/pages.yml` lädt diesen Ordner bei jedem Push auf
-`main` unverändert nach GitHub Pages.
+Eine statische Website ohne Abhängigkeiten. Alles unter `docs/` ist die Seite; die
+GitHub-Action `.github/workflows/pages.yml` prüft die Reisedaten, erzeugt die zwei
+fehlenden Stücke und lädt den Ordner nach GitHub Pages.
 
 Live: <https://cauer71.github.io/reiseplan/>
 
@@ -28,29 +31,30 @@ docs/
 ├── assets/landing.js               Darstellung der Startseite
 ├── assets/test.js                  Testparameter-Seite
 ├── assets/styles.css               gemeinsames Design
-├── data/trips/index.json           welche Reisen es gibt (Reihenfolge wird berechnet)
 ├── data/trips/rom.json             ← hier stehen die Inhalte
 ├── data/trip.schema.json           Datenvertrag, maschinenlesbar
 ├── icons/                          App-Icons
-├── test/index.html                 fertige Testlinks, aus den Daten erzeugt
-└── trips/<slug>/index.html         eigene URL je Reise
+└── test/index.html                 fertige Testlinks, aus den Daten erzeugt
 
-tools/
-├── plan.py                         Umstellungen per Befehl (das Hauptwerkzeug)
-├── validate_trips.py               Prüfung aller Reisedaten
-├── check_images.py                 Bild-URLs abrufen (braucht Netz)
-└── tripdata.py                     gemeinsame Helfer
-
-SYSTEMPROMPT.md                     Auftrag für eine KI, die eine Reisedatei erzeugt
+tools/build.mjs                     prüft und baut (läuft in der Action)
+SYSTEMPROMPT.md                     Auftrag für die KI, die eine Reisedatei erzeugt
 ```
 
-Für **Inhaltsänderungen** ist ausschließlich `docs/data/trips/` relevant. `assets/`
-muss dafür nie angefasst werden.
+Zwei Dinge fehlen in dieser Liste, weil sie **erzeugt und nicht eingecheckt** sind:
 
-Die Werkzeuge sind in Python geschrieben und nutzen ausschließlich die
-Standardbibliothek. Deshalb laufen sie ohne `npm install`, ohne Build und ohne
-jede Vorbereitung – auch in einer frisch geklonten Cowork-Sitzung vom Handy aus.
-Das ist der Grund für diese Wahl, siehe Abschnitt 4.
+| Erzeugt | Wozu |
+|---|---|
+| `docs/data/trips/index.json` | welche Reisen es gibt — GitHub Pages kann einen Ordner nicht auflisten, die Startseite braucht die Liste als Datei |
+| `docs/trips/<slug>/index.html` | die Hülle je Reise, mit Titel, Themenfarbe und Vorschaubild aus der Reisedatei |
+
+Beides stand früher im Repo und wurde von Hand gepflegt. Genau das ging schief:
+eine Reisedatei lag im Ordner, fehlte aber in `index.json` — und war unsichtbar,
+ohne dass irgendetwas fehlschlug. Ein `og:image` zeigte noch auf gelöschte
+Bilddateien, die Vorschau eines geteilten Links lief auf 404. Und die Themenfarbe
+war bei jeder Reise die von Kopenhagen. **Was erzeugt wird, kann nicht veralten.**
+
+`tools/build.mjs` benutzt nur die Node-Standardbibliothek. Es gibt kein
+`package.json`, nichts zu installieren, keinen Bundler.
 
 ---
 
@@ -65,16 +69,33 @@ Jede Reise ist **eine** Datei mit vier Blöcken:
 | `places` | die Ortsbeschreibungen, nach UID sortiert | wenn Inhalte dazukommen |
 | `images` | je Bildschlüssel einmal URL, Alt-Text, Urheber und Lizenz | mit neuen Bildern |
 
+Reihenfolge und Inhalt sind getrennt gespeichert. Einen Stop zu verschieben bewegt
+genau **eine Zeile** — niemals einen Textblock. Deshalb sind Umstellungen billig
+und im Diff sofort lesbar.
+
 ```jsonc
 {
-  "trip": { … },
+  "trip": {
+    "destination": "Rom",            // kurz, für Kachel, Tab und Home-Bildschirm
+    "title": "Rom mit Julia – Architektur in allen Schichten",
+    "subtitle": "…",                 // ein Satz, auch für die Link-Vorschau
+    "dates": "05.–08. September 2026",
+    "travellers": "Christian & Julia",
+    "heroImage": "colosseo",         // Schlüssel in "images"
+    "introLabel": "Architekturreise", // Einordnung; erscheint auch auf der Kachel
+    "introTitle": "…",
+    "introText": "…",
+    "theme": "coral",                // teal | gold | coral | navy – Themenfarbe der Seite
+    "tileImage": "forum",            // optional: eigenes Kachelbild statt heroImage
+    "weather": { … }
+  },
 
   "days": [
     {
       "id": "tag1",                  // stabile Anker-ID, auch für Deep-Links
       "label": "Tag 1",
       "date": "Mo 06.07.",           // Anzeige
-      "isoDate": "2026-07-06",       // maschinenlesbar, für die Wetterzuordnung
+      "isoDate": "2026-07-06",       // maschinenlesbar, für Wetter und Sortierung
       "title": "Ankommen, Christianshavn, Turm und Wasser",
       "tone": "teal",                // teal | gold | coral | navy
       "heroImage": "christianshavn",
@@ -109,8 +130,8 @@ Jede Reise ist **eine** Datei mit vier Blöcken:
 
   "images": {
     "termini": {
-      "url": "https://upload.wikimedia.org/…/Roma_termini_01.jpg",
-      "width": 1440, "height": 810,   // gegen Layoutsprünge beim Nachladen
+      "url": "https://upload.wikimedia.org/…/1280px-Roma_termini_01.jpg",
+      "width": 1280, "height": 810,   // gegen Layoutsprünge beim Nachladen
       "alt": "Bahnhof Roma Termini",  // beschreibend, kein Dateiname
       "credit": "Nutzername",         // Pflicht bei CC BY(-SA), entbehrlich bei CC0
       "license": "CC BY-SA 4.0",
@@ -120,6 +141,15 @@ Jede Reise ist **eine** Datei mit vier Blöcken:
 }
 ```
 
+`title`, `detail`, `description`, `image`, `place` und `weather` sind in jedem Ort
+Pflicht. `address`, `duration`, `price` und `tip` erscheinen als Faktenblock unter
+der Beschreibung; fehlende Felder werden übersprungen.
+
+**Nichts davon steht zweimal.** Titel, Datum und Untertitel liest die Startseite
+aus der Reisedatei, nicht aus einer Liste; `introLabel` ist gleichzeitig die
+Einordnung auf der Kachel. Ein Feld, das an zwei Orten steht, ist irgendwann an
+einem davon falsch.
+
 ### Bilder sind verlinkt, nicht mitgeliefert
 
 `image` in einem Ort ist ein **Schlüssel** in den `images`-Block, keine Datei und
@@ -128,7 +158,7 @@ keine rohe URL. Der Umweg über das Verzeichnis hat drei Gründe:
 - Ein Motiv wird oft mehrfach benutzt — `cucina` steckt in sieben Essensstopps.
   Bricht der Link, ist es **eine** Korrektur statt sieben.
 - CC BY und CC BY-SA verlangen **Namensnennung**. Die braucht einen festen Platz,
-  und die Seite rendert daraus den Abschnitt „Bildnachweis" — **aber nur für die
+  und die Seite rendert daraus den Abschnitt „Bildnachweis“ — **aber nur für die
   Bilder, deren Lizenz sie verlangt**. CC0 und gemeinfreie Bilder erscheinen dort
   nicht; verlangt keines der Bilder eine Nennung, entfällt der Abschnitt ganz.
   Bei unbekannter Lizenzangabe wird genannt: eine überflüssige Zeile ist harmlos,
@@ -163,25 +193,22 @@ unterschiedlich:
 
 *Selbst gesetzte Breite.* Eine URL mit `1337px-` antwortete mit
 `400 Use thumbnail sizes listed on …` — Wikimedia erzeugt keine Thumbnails in
-beliebigen Breiten mehr. Der Schlüssel stand korrekt im Block, der Validator war
-zufrieden, und auf der Seite blieb eine leere Fläche. Die erlaubten Größen sind
-**nicht vorhersagbar**: bei jener Datei ging ausschließlich 1280 px, auch 320,
-640, 800 und 1024 wurden abgelehnt.
+beliebigen Breiten mehr. Der Schlüssel stand korrekt im Block, die Datenprüfung
+war zufrieden, und auf der Seite blieb eine leere Fläche. Die erlaubten Größen
+sind **nicht vorhersagbar**: bei jener Datei ging ausschließlich 1280 px, auch
+320, 640, 800 und 1024 wurden abgelehnt.
 
 *`Special:Redirect/file/…`.* Diese Adressen laden sichtbar — aber das **Original
 in voller Auflösung**. Eine Reisedatei kam so auf **66 MB**, ein einzelnes Bild
 auf 16,8 MB. Nach der Umstellung auf Thumbnails bei 1280 px: **5,2 MB**.
 
-Der Validator lehnt jetzt beides ab: `Special:Redirect` und `width` über 1600 px.
+Die Prüfung lehnt jetzt beides ab: `Special:Redirect` und `width` über 1600 px.
 1280 px reichen für jedes Handy — das Layout ist rund 400 px breit, bei
 dreifacher Pixeldichte also 1200 px. Darüber zahlt der Reisende Daten für Pixel,
 die er nie sieht, unterwegs womöglich Roaming.
 
-Ob eine URL wirklich antwortet, sagt nur `python3 tools/check_images.py`.
-
-`title`, `detail`, `description`, `image`, `place` und `weather` sind Pflicht.
-`address`, `duration`, `price` und `tip` erscheinen als Faktenblock unter der
-Beschreibung; fehlende Felder werden übersprungen.
+Ob eine URL wirklich antwortet, sagt nur der Schritt „Bild-URLs prüfen“ in der
+Action (`node tools/build.mjs --bilder`).
 
 ### Wettertauglichkeit und feste Termine
 
@@ -194,311 +221,147 @@ Zwei Felder steuern, was beim Umplanen passieren darf:
 | | `beides` | wetterunabhängig oder gemischt |
 | `fixed` | `true` oder fehlt | fester Termin: Flug, Transfer, Check-out, gebuchtes Zeitfenster |
 
-`weather` ist die Grundlage für `plan.py wetter` – damit lässt sich der Auftrag
-„es regnet heute" beantworten, ohne die Beschreibungen zu lesen.
+`fixed` ist eine **Schutzschaltung** für die Software, die umsortiert: sie
+verhindert den teuren Fehler, einen umgestellten Tag zu bauen, der den Rückflug
+mitnimmt. Auf der Seite erscheint der Ort dafür mit „Termin: Fest – nicht
+verschieben“ im Faktenblock. Die Kennzeichnung ist **kein** Ausdruck von
+Wichtigkeit — nur von Unverschiebbarkeit.
 
-`fixed` ist eine **Schutzschaltung**. `move`, `time`, `swap` und `order`
-verweigern die Änderung eines festen Termins und nennen den Grund. Das verhindert
-den teuren Fehler beim Umplanen: einen umsortierten Tag, der den Rückflug
-mitnimmt. Wirklich nötige Ausnahmen brauchen ausdrücklich `--force`.
-
-> Ein Ort kann `aussen` **und** `fixed` sein – etwa das Kolosseum mit gebuchtem
+> Ein Ort kann `aussen` **und** `fixed` sein — etwa das Kolosseum mit gebuchtem
 > Zeitfenster. Solche Punkte sind bei Regen das eigentliche Problem und lassen
-> sich nicht tauschen; `plan.py wetter` weist eigens darauf hin.
+> sich nicht tauschen.
 
 ### Die UID ist die Klammer
 
 Jeder Ort hat eine stabile zweistellige UID. Sie verbindet die Website mit dem
-Google-Kalender­eintrag (`[REISE-…] [UID:05]`) und ist der Schlüssel in `places`.
+Google-Kalendereintrag (`[REISE-…] [UID:05]`) und ist der Schlüssel in `places`.
 
 Auf der Seite steht sie unauffällig am **Fuß der geöffneten Stop-Karte**. In der
-zugeklappten Übersicht erscheint sie bewusst nicht: dort zählt die Reise­information,
-nicht der technische Schlüssel.
+zugeklappten Übersicht erscheint sie bewusst nicht: dort zählt die
+Reiseinformation, nicht der technische Schlüssel.
 
 > **Eine UID wird nie geändert und nie neu vergeben.** Ein Stop wird verschoben,
-> umsortiert, zeitlich verlegt oder entfernt – seine UID bleibt dieselbe. Eine
+> umsortiert, zeitlich verlegt oder entfernt — seine UID bleibt dieselbe. Eine
 > gelöschte UID wird nicht wiederverwendet; neue Orte bekommen die nächste freie
 > Nummer.
 
 ---
 
-## 3. Die Befehle
+## 3. Eine Reise veröffentlichen
 
-Alle Befehle laufen im Repo-Wurzelverzeichnis. Jeder schreibende Befehl prüft die
-Datei **vorher** und schreibt nur, wenn sie stimmig bleibt – eine kaputte Datei
-kann so nicht entstehen.
+Eine `.json` nach `docs/data/trips/` legen, committen, pushen. Das ist alles.
 
-> **Interpreter-Name.** Die Beispiele nutzen `python3`, weil das in Linux-Umgebungen
-> gilt – also in der Cowork-Cloud, die der Regelfall ist. Auf einem Windows-Rechner
-> heißt der Befehl `python`; `python3` ist dort ein Platzhalter, der mit einem Hinweis
-> auf den Microsoft Store abbricht. Falls beides fehlschlägt, sind die Skripte
-> ausführbar: `./tools/plan.py show rom`.
-
-### Ansehen
-
-```bash
-python3 tools/plan.py show rom
+```text
+docs/data/trips/rom.json       →  https://cauer71.github.io/reiseplan/trips/rom/
+docs/data/trips/mailand.json   →  https://cauer71.github.io/reiseplan/trips/mailand/
 ```
 
-Zeigt alle Tagesabschnitte mit UID, Uhrzeit und Titel. Mit einem Tag als zweitem
-Argument nur diesen:
+Der Dateiname wird der Slug und damit Teil der Adresse. Deshalb nur
+Kleinbuchstaben, Ziffern und Bindestriche — `Rom Kopie.json` wird abgelehnt, mit
+Angabe des Grundes.
 
-```bash
-python3 tools/plan.py show rom tag2
-```
+**Eine Reise entfernen:** die Datei löschen. Kachel, Unterseite und Eintrag in der
+Reiseliste verschwinden mit ihr. Der Bau leert `docs/trips/` vor jedem Durchlauf,
+damit keine Waise mit leerem Inhalt stehen bleibt.
 
-Am Ende listet `show` Ortsbeschreibungen auf, die keinem Tag zugeordnet sind.
-Das ist der erste Befehl bei jedem Auftrag – ohne die UIDs geht nichts.
+Nichts weiter ist zu tun. Insbesondere **nicht**:
 
-### Stop in einen anderen Tag verschieben
+- kein Eintrag in einer Liste,
+- keine Unterseite anlegen oder kopieren,
+- keine Änderung an `sw.js` — der Service Worker liest die Reisen bei der
+  Installation aus der erzeugten Reiseliste,
+- keine Testlinks pflegen — `/test/` erzeugt sie aus den echten Daten,
+- keine Cache-Version anheben. Es gibt keine mehr, siehe unten.
 
-```bash
-python3 tools/plan.py move rom 05 tag2 --time 10:30
-```
+### Warum es keinen `?v=`-Parameter mehr gibt
 
-Nimmt UID 05 aus seinem bisherigen Tag heraus und setzt ihn in `tag2` an der
-zeitlich passenden Stelle ein. Ohne `--time` behält der Stop seine Uhrzeit.
+Früher trug jede Adresse eine Versionsnummer, die nach Änderungen an CSS,
+JavaScript oder HTML von Hand anzuheben war. Zweimal vergessen, und der Browser
+lieferte denselben `?v=` mit altem Inhalt — ein Fehler, der wie ein Fehler im Code
+aussieht.
 
-### Uhrzeit ändern
-
-```bash
-python3 tools/plan.py time rom 11 09:30
-```
-
-Der Stop rutscht dabei automatisch an die richtige Position im Tag.
-
-### Reihenfolge innerhalb eines Tages umstellen
-
-```bash
-python3 tools/plan.py order rom tag1 01,02,04,03,05,06,07
-```
-
-Die Liste muss **genau** die UIDs dieses Tages enthalten – nicht mehr und nicht
-weniger. Die Uhrzeiten des Tages bleiben stehen und werden auf die neue
-Reihenfolge verteilt: der erste genannte Stop bekommt die früheste Uhrzeit, der
-zweite die nächste und so weiter. Genau das braucht man, wenn nur die Abfolge
-innerhalb eines Tages anders sein soll.
-
-### Regentag analysieren
-
-```bash
-python3 tools/plan.py wetter rom tag1
-```
-
-Ändert **nichts**, sondern beantwortet die Frage „was tue ich, wenn es heute
-regnet". Die Ausgabe nennt:
-
-- fest gebuchte Außentermine, die sich nicht tauschen lassen (nur Regenschutz hilft)
-- die tauschbaren Außenpunkte des Tages samt Hinweis
-- überdachte Kandidaten aus den anderen Tagen
-- einen Vorschlag, gepaart nach **ähnlicher Tageszeit**, mit fertigen `swap`-Befehlen
-
-Die Tageszeit ist wichtig, weil `swap` die Uhrzeiten mit tauscht: ohne Paarung
-landet sonst ein Mittagessen um 16 Uhr.
-
-### Zwei Stops tauschen
-
-```bash
-python3 tools/plan.py swap rom 11 24
-```
-
-Tauscht Platz **und** Uhrzeit – auch über Tagesgrenzen hinweg. Der typische
-Wetter­tausch: der Innenraum kommt in den Regentag, der Außenpunkt in den
-schönen Tag.
-
-### Cache-Version anheben
-
-```bash
-python3 tools/plan.py bump
-```
-
-Erhöht den `?v=`-Parameter in allen HTML-Dateien. Mit `--version 20260726-4`
-lässt sich ein Wert erzwingen.
-
-**Nötig nach Änderungen an CSS, JavaScript oder HTML.** Für reine
-Planänderungen ist es **nicht** nötig: die Reisedaten werden mit
-`cache: "no-cache"` geladen, also per ETag zurückgefragt statt zehn Minuten
-blind gecacht. Eine verschobene Attraktion ist damit sofort nach dem Deploy
-sichtbar – wichtig, wenn man unterwegs nur das Handy hat und nicht warten kann.
+Stattdessen fragt der Service Worker bei jeder Datei nach, ob sie sich geändert
+hat (`cache: "no-cache"`). Unverändertes kommt als 304 zurück und kostet fast
+nichts. Damit ist eine neue Reisedatei sofort sichtbar, und es gibt keinen
+Handgriff, den man vergessen kann.
 
 ---
 
-## 4. Notfall am Reiseort – nur mit dem Handy
+## 4. Was der Bau prüft
 
-**Das ist der wichtigste Anwendungsfall dieses Repos.** Das Wetter kippt, der Plan
-muss heute anders aussehen, und zur Verfügung steht nur ein Telefon. Der Rechner
-zu Hause ist aus.
-
-### Ablauf
-
-1. Cowork auf dem Handy öffnen und eine Sitzung auf `cauer71/reiseplan` starten.
-   Die Umgebung klont frisch; es muss nichts installiert werden, weil die
-   Werkzeuge reine Python-Standardbibliothek sind.
-2. In eigenen Worten sagen, was sich ändern soll (Beispiele unten).
-3. Ergebnis mit `show` gegenlesen, committen, pushen.
-4. Die Action prüft und deployt. Nach etwa einer Minute ist
-   <https://cauer71.github.io/reiseplan/> aktuell – ohne `bump`, weil die
-   Reisedaten per ETag zurückgefragt werden.
-
-**Für Planänderungen ist `bump` nicht nötig.** Ein Befehl, ein Commit, fertig.
-
-### Was gesagt wird und was zu tun ist
-
-| Auftrag am Telefon | Befehl |
-|---|---|
-| **„Es regnet heute"** | `plan.py wetter rom tag1` – liefert fertige Tauschvorschläge |
-| „Mach den Tausch aus Vorschlag 2" | `plan.py swap rom 05 24` |
-| „Zieh das MAXXI auf den Vormittag" | `plan.py time rom 11 09:45` |
-| „Verschieb Coppedè auf Tag 3, nachmittags" | `plan.py move rom 06 tag3 --time 15:30` |
-| „Dreh die Reihenfolge von Tag 1: erst das MAXXI, dann Lunch" | `plan.py order rom tag1 01,02,04,03,05,06,07` |
-| „Was ist heute geplant?" | `plan.py show rom tag1` |
-
-Bei „es regnet" ist `wetter` immer der erste Befehl – er zeigt in einem Durchgang,
-was betroffen ist und welche Tausche in Frage kommen. Danach nur noch den
-vorgeschlagenen `swap` ausführen.
-
-Für alles andere gilt: zuerst `show`. Es kennzeichnet jeden Stop mit `außen`,
-`innen` oder `FEST`, sodass die Lage ohne Lesen der Beschreibungen erkennbar ist.
-
-### Regeln für den Notfall
-
-- **Nur `days[].stops` anfassen.** Beschreibungen, Bilder und UIDs bleiben, wie
-  sie sind – es geht ausschließlich um Reihenfolge und Uhrzeit.
-- **Nichts löschen.** Ein Stop, der heute nicht passt, wird verschoben, nicht
-  entfernt.
-- **Feste Termine bleiben stehen.** Flüge, Transfers, Check-out und gebuchte
-  Zeitfenster sind mit `fixed` markiert; das Werkzeug verweigert sie von selbst.
-  `--force` nur, wenn der Reisende das ausdrücklich verlangt hat.
-- **Nach dem Push kurz prüfen**, dass die Action grün ist. Sie ist die einzige
-  Rückmeldung, ob die Datei stimmig blieb.
-
-> **Einmal vor der Reise testen.** Der Weg funktioniert nur mit Netz und nur,
-> wenn die Cowork-Sitzung Schreibrechte auf das Repository hat. Das sollte man
-> einmal vom Handy aus durchgespielt haben, bevor man es im Regen braucht.
-
----
-
-## 5. Weitere typische Aufträge
-
-### „Ändere den Wetterhinweis eines Tages“
-
-Nur der Text `days[].weather` in der JSON-Datei. Das ist der **statische
-Planungshinweis** („Wettercheck: …“); die Zahlen daneben kommen live von der API
-und werden nicht in der Datei gepflegt.
-
-### Neuen Ort hinzufügen
-
-1. Bild in den `images`-Block eintragen — oder einen vorhandenen Schlüssel
-   wiederverwenden, wenn das Motiv passt. Pflicht sind `url` (https), `alt` und
-   `license`, dazu `credit`, wenn die Lizenz eine Nennung verlangt;
-   `width`/`height` verhindern Layoutsprünge.
-2. Nächste freie UID ermitteln (höchster Schlüssel in `places` + 1, zweistellig).
-3. Eintrag in `places` anlegen – alle Pflichtfelder, `description` mit
-   mindestens zwei Absätzen und `weather` gesetzt. `fixed: true` nur bei
-   Flügen, Transfers oder gebuchten Zeitfenstern.
-4. `{ "uid": "28", "time": "14:00" }` an der zeitlich richtigen Stelle in das
-   `stops`-Array des gewünschten Tages einfügen.
-5. Prüfen und Version anheben:
-
-```bash
-python3 tools/validate_trips.py
-python3 tools/plan.py bump
-```
-
-### Ort entfernen
-
-Die Zeile aus `days[].stops` **und** den Eintrag aus `places` löschen – die
-Prüfung meldet sonst eine verwaiste Beschreibung. Die freigewordene UID bleibt
-frei.
-
-### Neue Reise anlegen
-
-1. `docs/data/trips/<slug>.json` aus einer bestehenden Reise ableiten.
-2. `docs/trips/<slug>/index.html` kopieren und darin `data-trip`, `title`,
-   `description` und die vier `og:`-Angaben anpassen.
-3. Slug in `docs/data/trips/index.json` ergänzen. Die Reihenfolge dort ist ohne
-   Bedeutung – die Startseite sortiert selbst (siehe unten). Titel, Datum und
-   Untertitel **nicht** wiederholen, die liest die Startseite aus der Reisedatei.
-4. Die Reise in `SHELL` in `docs/sw.js` aufnehmen, damit sie offline verfügbar ist.
-   Die Testlinks unter `/test/` brauchen keine Pflege — sie entstehen aus den Daten.
-5. `python3 tools/validate_trips.py` und `python3 tools/plan.py bump`.
-
----
-
-## 6. Regeln, die nicht gebrochen werden
-
-1. **UIDs sind unveränderlich** und werden nach dem Löschen nicht wiederverwendet.
-2. **Beschreibungen gehören nach `places`.** In `days[].stops` stehen
-   ausschließlich `uid` und `time`; alles andere lehnt die Prüfung ab.
-3. **Stops sind zeitlich aufsteigend sortiert.** Die Array-Reihenfolge ist die
-   Anzeigereihenfolge – `plan.py` hält das automatisch ein.
-4. **Keine erfundenen Prognosezahlen.** In `trip.weather.notes` stehen nur
-   Datum, Wochentag und ein Planungshinweis. Temperaturen und Regenwahr­schein­lich­keiten
-   kommen live von Open-Meteo; ohne Netz zeigt die Seite bewusst „keine Prognose“
-   statt Zahlen, die richtig aussehen, aber geraten sind.
-5. **Bilder nur über den `images`-Block, URL immer von der API.** Keine rohen
-   URLs in den Orten, keine mitgelieferten Dateien, keine selbst gebaute
-   Thumbnail-Breite und kein `Special:Redirect`. Jeder Eintrag braucht `url`,
-   `alt` und `license`; `credit`, sobald die Lizenz eine Namensnennung verlangt.
-   `width` höchstens 1600 px.
-6. **`bump` nach Änderungen an CSS, JavaScript oder HTML**, sonst sehen Besucher
-   die alte Fassung. Für reine Planänderungen ist es nicht nötig.
-7. **Kein Build-Schritt.** Es gibt bewusst kein npm, kein Bundler, kein
-   Framework. Wer eine Abhängigkeit einführen will, braucht einen guten Grund.
-
----
-
-## 7. Prüfen, ansehen, veröffentlichen
-
-### Prüfen
-
-```bash
-python3 tools/validate_trips.py
-```
+`node tools/build.mjs` bricht ab, sobald eine Reisedatei nicht stimmt. Dann wird
+**nichts** veröffentlicht und die vorige Fassung bleibt online: eine halbe Reise
+ist schlimmer als eine alte.
 
 Geprüft wird:
 
-- JSON ist gültig, alle Pflichtfelder sind da
+- JSON ist gültig (auch mit Byte-Order-Mark am Anfang), alle Pflichtfelder sind da
+- der Dateiname taugt als Adressbestandteil
 - jede UID ist zweistellig, genau einmal eingeplant und hat einen `places`-Eintrag
 - keine verwaisten Ortsbeschreibungen
 - jeder Bildschlüssel steht im `images`-Block, jeder Eintrag hat URL, Alt-Text
   und Lizenz, bei nennungspflichtiger Lizenz auch den Urheber, und kein Eintrag
   ist unbenutzt
+- keine rohen URLs als Bildverweis, kein `Special:Redirect`, keine signierte
+  Google-URL, keine fehlenden Maße, `width` höchstens 1600 px
 - Uhrzeiten sind `HH:MM` und innerhalb eines Tages aufsteigend
 - `isoDate` ist ein echtes Datum und liegt nach dem Vortag
-- `tone` ist einer der vier erlaubten Werte
+- `tone` und `theme` sind einer der vier erlaubten Werte
 - `description` ist eine Liste mit mindestens zwei Absätzen
 - `weather` ist gesetzt und einer von `aussen`, `innen`, `beides`
 - `fixed` ist entweder `true` oder fehlt
 - `trip.weather.notes` enthält keine Prognosezahlen
 - `ticketUrl` ist eine `https`-Adresse
 
-Dieselbe Prüfung läuft in GitHub Actions **vor** dem Deploy. Kaputte Reisedaten
-können nicht live gehen.
+Der zweite Schritt in der Action ruft jede Bild-URL wirklich ab. Er **blockiert
+nicht**: ein langsamer Bildserver ist kein Grund, eine Planänderung nicht zu
+veröffentlichen. Ein toter Link fällt im Protokoll auf.
 
-`tools/check_images.py` prüft zusätzlich, ob jede Bild-URL wirklich antwortet.
-Das braucht Netz und blockiert deshalb nicht – ein toter Link fällt in der Action
-auf, verhindert aber keine Veröffentlichung.
+Bei einem Pull Request läuft nur die Prüfung, nichts wird veröffentlicht.
 
-### Lokal ansehen
+---
 
-```bash
-python -m http.server 8099 --directory docs
-```
+## 5. Regeln, die nicht gebrochen werden
 
-Dann <http://localhost:8099/> öffnen. Ein `file://`-Aufruf funktioniert nicht,
-weil die Seite ihre Daten per `fetch` lädt.
+1. **UIDs sind unveränderlich** und werden nach dem Löschen nicht wiederverwendet.
+2. **Beschreibungen gehören nach `places`.** In `days[].stops` stehen
+   ausschließlich `uid` und `time`; alles andere lehnt die Prüfung ab.
+3. **Stops sind zeitlich aufsteigend sortiert.** Die Array-Reihenfolge ist die
+   Anzeigereihenfolge.
+4. **Keine erfundenen Prognosezahlen.** In `trip.weather.notes` stehen nur Datum,
+   Wochentag und ein Planungshinweis. Temperaturen und
+   Regenwahrscheinlichkeiten kommen live von Open-Meteo; ohne Netz zeigt die
+   Seite bewusst „keine Prognose“ statt Zahlen, die richtig aussehen, aber
+   geraten sind.
+5. **Bilder nur über den `images`-Block, URL immer von der API.** Keine rohen
+   URLs in den Orten, keine mitgelieferten Dateien, keine selbst gebaute
+   Thumbnail-Breite und kein `Special:Redirect`. Jeder Eintrag braucht `url`,
+   `alt` und `license`; `credit`, sobald die Lizenz eine Namensnennung verlangt.
+   `width` höchstens 1600 px.
+6. **Nichts von Hand pflegen, was sich aus den Reisedateien ergibt.**
+   `docs/data/trips/index.json` und `docs/trips/` sind erzeugt und stehen in der
+   `.gitignore`. Wer sie einchecken will, führt genau den Fehler wieder ein, den
+   sie beseitigt haben.
+7. **Kein Build-Schritt über `build.mjs` hinaus.** Kein npm, kein Bundler, kein
+   Framework, kein `package.json`. Wer eine Abhängigkeit einführen will, braucht
+   einen guten Grund.
 
-Beim Testen von Änderungen stört der Service Worker: In den DevTools unter
-*Application → Service Workers* „Update on reload“ aktivieren oder mit
-Strg+Shift+R neu laden.
+---
+
+## 6. Ansehen und der Unterwegs-Zustand
+
+Die Seite lädt ihre Daten per `fetch`; ein `file://`-Aufruf funktioniert deshalb
+nicht. Vor dem Push braucht es einen Server nur, wenn man das Ergebnis wirklich
+sehen will — zum Veröffentlichen nicht. Für das Erzeugen genügt
+`node tools/build.mjs`, danach lässt sich `docs/` mit jedem statischen Server
+ausliefern.
 
 ### Den Unterwegs-Zustand ansehen
 
 Während einer laufenden Reise sieht die Seite anders aus: kleiner Titelkopf statt
 Vollbild, Wetter als Zeile über dem Plan, eine „Als nächstes“-Karte mit Vorlauf,
 und vergangene Stops des Tages sind abgesetzt. Im Alltag ist dieser Zustand
-**unsichtbar** – ein Fehler darin fiele erst im Urlaub auf.
+**unsichtbar** — ein Fehler darin fiele erst im Urlaub auf.
 
 Deshalb lassen sich Datum und Uhrzeit über die Adresse setzen:
 
@@ -522,24 +385,14 @@ absichtlich unauffällig, aber unterwegs vom Handy aus da.
 
 Ist ein Wert gesetzt, erscheint unten ein roter Hinweis „Testansicht“ mit einem
 Link zurück zur echten Zeit. Eine Testansicht darf nicht mit der Wirklichkeit
-verwechselt werden – erst recht nicht, wenn man unterwegs schnell nachsieht, was
+verwechselt werden — erst recht nicht, wenn man unterwegs schnell nachsieht, was
 als nächstes ansteht.
 
 Ohne Parameter verhält sich die Seite unverändert.
 
-### Veröffentlichen
-
-```bash
-git add -A
-git commit -m "Rom: Centrale Montemartini wegen Regen vorgezogen"
-git push
-```
-
-Die Action prüft, deployt und die Seite ist nach wenigen Minuten aktuell.
-
 ---
 
-## 8. Reihenfolge auf der Startseite
+## 7. Reihenfolge auf der Startseite
 
 Die Kacheln werden **berechnet** sortiert, nicht gepflegt. Grundlage sind die
 `isoDate`-Angaben der Tagesabschnitte: der erste ist der Reisebeginn, der letzte
@@ -555,16 +408,16 @@ Die Liste läuft also von „jetzt“ aus in beide Richtungen auseinander. Jede 
 trägt den Status als Kennzeichnung; vergangene Reisen sind leicht entsättigt,
 bleiben aber vollständig lesbar und anklickbar.
 
-Damit das stimmt, muss jeder Tagesabschnitt ein korrektes `isoDate` haben – die
+Damit das stimmt, muss jeder Tagesabschnitt ein korrektes `isoDate` haben — die
 Prüfung erzwingt das. Ein Umsortieren von Hand ist nicht nötig und nicht möglich:
-die Reihenfolge in `index.json` wird ignoriert.
+die Reihenfolge in der erzeugten Reiseliste wird ignoriert.
 
 > Sollen vergangene Reisen mit der **ältesten** beginnen, ist in
 > `docs/assets/landing.js` nur der Vergleich in `sortTrips` umzudrehen.
 
 ---
 
-## 9. Was die Seite außerdem kann
+## 8. Was die Seite außerdem kann
 
 - **Deep-Links.** `#tag2` klappt einen Tag auf, `#tag2-stop-11` zusätzlich den
   Stop und scrollt hin. Diese Links sind stabil und eignen sich für
@@ -576,6 +429,11 @@ die Reihenfolge in `index.json` wird ignoriert.
   zwischengespeichert. Danach ist der Plan im Flugmodus vollständig lesbar.
   **Bilder und Live-Prognose fehlen dann** — beide liegen auf fremden Hosts, die
   der Service Worker nicht anfasst.
+- **Die Navigationsleiste folgt dem Finger.** Beim Herunterscrollen fährt sie weg,
+  beim Hochscrollen kommt sie zurück. Ein Tageswechsel lässt sie in Ruhe, obwohl
+  er nach oben scrollt: sonst erschien „Alle Reisen“ bei jedem Tippen auf einen
+  Tag — und die einfahrende Leiste verdeckte dabei genau die Karte, auf die eben
+  gescrollt worden war.
 - **Installierbar, auch auf iPhone und iPad.** Über „Zum Home-Bildschirm
   hinzufügen“ läuft die Seite ohne Browserleiste und erscheint eigenständig im
   App-Umschalter. Grundlage ist `display: standalone` im Manifest, das Safari auf
@@ -584,8 +442,8 @@ die Reihenfolge in `index.json` wird ignoriert.
   Zwei Dinge sind dafür eigens gesetzt: `apple-mobile-web-app-title` gibt den
   Namen unter dem Icon vor — ohne das nähme iOS `document.title`, und den setzt
   `app.js` auf den vollen Reisetitel mit über 50 Zeichen. Und
-  `apple-mobile-web-app-capable` bleibt für iOS vor 16.4, wo das Manifest-`display`
-  noch nicht griff.
+  `apple-mobile-web-app-capable` bleibt für iOS vor 16.4, wo das
+  Manifest-`display` noch nicht griff.
 
   **Der Start-Punkt kommt aus dem Manifest, nicht von der Seite, auf der man
   installiert.** `start_url` steht auf `./`, also öffnet ein Icon immer die

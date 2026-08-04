@@ -1,79 +1,67 @@
 # Hinweise für Claude Code / Cowork
 
-**Vor Inhaltsänderungen an den Reiseplänen [COWORK.md](COWORK.md) lesen.** Dort steht
-das Datenmodell, die Befehle und die Rezepte für typische Aufträge.
+**Vor Inhaltsänderungen [COWORK.md](COWORK.md) lesen.** Dort steht das Datenmodell
+und was der Bau prüft.
 
-## Der wichtigste Fall: Umplanen unterwegs
+## Der Grundsatz
 
-Der Hauptzweck dieses Repos ist, dass der Reiseplan **vom Handy aus** geändert werden
-kann, wenn das Wetter am Reiseort kippt. Kein Rechner, keine Installation, keine
-Wartezeit.
+Diese Seite **zeigt nur, was in den Reisedateien steht**. Sie erzeugt keine
+Inhalte, sortiert nicht um und verwaltet keine Liste von Reisen.
 
-Kommt ein Auftrag wie **„es regnet heute, sortier den Tag um"**:
-
-```bash
-python3 tools/plan.py wetter rom tag1
+```text
+eine .json nach docs/data/trips/   →  eine Reise mehr
+eine .json dort löschen            →  eine Reise weniger
 ```
 
-Das ändert nichts, sondern liefert die betroffenen Außenpunkte, überdachte Kandidaten
-aus den anderen Tagen und fertige `swap`-Befehle, nach Tageszeit gepaart. Danach nur
-den passenden Vorschlag ausführen, mit `show` gegenlesen, committen, pushen.
+Der Dateiname wird der Slug und damit Teil der Adresse — nur Kleinbuchstaben,
+Ziffern und Bindestriche.
 
-Für alles andere zuerst `show` – es kennzeichnet jeden Stop mit `außen`, `innen` oder
-`FEST`.
+Die Reisedateien werden **außerhalb dieses Repos** erzeugt, und auch das Umsortieren
+bei Regen passiert dort. `SYSTEMPROMPT.md` ist der Auftrag für die erzeugende
+Anwendung; er beschreibt das Datenmodell vollständig, sodass sie dieses Repo nicht
+kennen muss.
 
-**Feste Termine niemals stillschweigend verschieben.** Flüge, Transfers, Check-out und
-gebuchte Zeitfenster tragen `fixed: true`; `move`, `time`, `swap` und `order` verweigern
-sie von selbst und nennen den Grund. `--force` nur, wenn der Reisende es ausdrücklich
-verlangt hat.
+## Was am eigenen Rechner läuft: nichts
 
-Nur `days[].stops` anfassen. Nichts löschen – ein Stop, der heute nicht passt, wird
-verschoben.
+Es gibt genau ein Werkzeug, und es läuft in der GitHub-Action:
 
-## Kurzfassung
+```bash
+node tools/build.mjs            # prüfen und erzeugen
+node tools/build.mjs --check    # nur prüfen (Pull Requests)
+node tools/build.mjs --bilder   # jede Bild-URL abrufen, braucht Netz
+```
 
-- Statische Website ohne Build-Schritt. `docs/` ist die Seite und wird von
-  GitHub Actions unverändert nach Pages deployt. Kein npm, kein Bundler.
-- Inhalte liegen ausschließlich in `docs/data/trips/*.json`. Der Datenvertrag steht
-  maschinenlesbar in `docs/data/trip.schema.json`, erklärt in [COWORK.md](COWORK.md).
+Es benutzt nur die Node-Standardbibliothek. Kein `package.json`, kein npm, kein
+Bundler, kein Python.
+
+Erzeugt werden `docs/data/trips/index.json` und `docs/trips/<slug>/index.html`.
+**Beides steht in der `.gitignore` und darf nicht eingecheckt werden** — solange es
+im Repo lag, konnte es von den Reisedateien abweichen, und genau das ist passiert:
+eine Reise lag im Ordner, fehlte in der Liste und war unsichtbar, ohne dass etwas
+fehlschlug.
+
+Es gibt **keine Cache-Version** mehr und keinen `?v=`-Parameter. Der Service Worker
+fragt bei jeder Datei mit `cache: "no-cache"` nach; Unverändertes kommt als 304
+zurück. Damit ist nach dem Push nichts anzuheben.
+
+## Kurzfassung des Datenmodells
+
+- Statische Website. `docs/` ist die Seite. Der Datenvertrag steht maschinenlesbar
+  in `docs/data/trip.schema.json`, erklärt in [COWORK.md](COWORK.md).
 - **Reihenfolge und Inhalt sind getrennt:** `days[].stops` enthält nur
   `{ uid, time }`, die Beschreibungen stehen in `places` nach UID. Verschieben
   bewegt eine Zeile, keinen Textblock.
 - UIDs sind unveränderlich und werden nach dem Löschen nicht wiederverwendet.
-- Umstellungen **nicht von Hand** im JSON machen, sondern mit dem Werkzeug – es
-  prüft vor dem Schreiben und schreibt nur, wenn die Datei stimmig bleibt:
-
-  ```bash
-  python3 tools/plan.py show   rom
-  python3 tools/plan.py wetter rom tag1
-  python3 tools/plan.py move   rom 05 tag2 --time 10:30
-  python3 tools/plan.py order  rom tag1 01,02,04,03,05,06,07
-  python3 tools/plan.py swap   rom 11 24
-  python3 tools/plan.py time   rom 11 09:30
-  ```
-
-  Heißt der Interpreter nicht `python3`, dann `python` versuchen oder direkt
-  `./tools/plan.py` – die Skripte sind ausführbar.
-
-- **`bump` nur bei Änderungen an CSS, JavaScript oder HTML.** Für reine
-  Planänderungen nicht nötig: die Reisedaten werden mit `cache: "no-cache"` geladen
-  und sind sofort nach dem Deploy sichtbar.
-- Vor dem Commit `python3 tools/validate_trips.py`. Dieselbe Prüfung blockiert in
-  CI den Deploy.
 - Jeder Ort braucht `weather` (`aussen` | `innen` | `beides`). `fixed: true` nur bei
-  Flügen, Transfers, Check-out und gebuchten Zeitfenstern.
+  Flügen, Transfers, Check-out und gebuchten Zeitfenstern — eine Schutzschaltung
+  gegen Umsortieren, keine Kennzeichnung für „wichtig“.
 - Keine erfundenen Wetterzahlen. Bilder werden **verlinkt**: `image` in einem Ort
   ist ein Schlüssel in den `images`-Block, keine Datei und keine rohe URL. Jeder
   Eintrag dort braucht `url`, `alt` und `license`; `credit` zusätzlich, wenn die
   Lizenz eine Namensnennung verlangt. Der Bildnachweis auf der Seite zeigt nur
   diese Bilder — CC0 und Gemeinfreies bleibt draußen, und verlangt keines eine
-  Nennung, entfällt der Abschnitt. Signierte Google-URLs werden abgelehnt.
-- Die Reihenfolge auf der Startseite wird berechnet (laufende Reise oben,
-  bevorstehende, dann vergangene). Nicht von Hand sortieren.
-
-## Eine Reisedatei von einer anderen KI erzeugen lassen
-
-`SYSTEMPROMPT.md` ist der fertige Auftrag dafür. Er beschreibt das Datenmodell
-vollständig, sodass die erzeugende Anwendung dieses Repo nicht kennen muss. Was
-sie liefert, muss `python3 tools/validate_trips.py` fehlerfrei durchlaufen —
-dieselbe Prüfung blockiert in CI den Deploy.
+  Nennung, entfällt der Abschnitt. Signierte Google-URLs und `Special:Redirect`
+  werden abgelehnt, `width` höchstens 1600 px.
+- Titel, Datum, Untertitel und die Einordnung (`introLabel`) stehen **nur** in der
+  Reisedatei. Die Startseite liest sie dort, die Reihenfolge der Kacheln wird aus
+  den `isoDate`-Angaben berechnet. Nicht von Hand sortieren.

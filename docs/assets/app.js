@@ -439,6 +439,41 @@ function leistenUnterkante() {
 const SCROLL_LUFT = 14;   // etwas Platz, damit es nicht klebt
 
 /**
+ * Läuft gerade ein Scrollen, das die Seite selbst ausgelöst hat?
+ *
+ * Die Navigationsleiste folgt dem Finger: beim Herunterscrollen fährt sie weg,
+ * beim Hochscrollen kommt sie zurück (siehe `bindNavAutoHide`). Ein Tageswechsel
+ * scrollt aber meist nach oben – und das sah für die Automatik aus wie „der
+ * Reisende will das Menü sehen“. Sie fuhr es ein, obwohl er es vorher
+ * weggescrollt hatte. Sichtbarer Fehler: „Alle Reisen“ erscheint bei jedem
+ * Tippen auf einen Tag.
+ *
+ * Der zweite Schaden war unsichtbar und schlimmer: die einfahrende Leiste macht
+ * die Leisten höher, während das Scrollziel schon mit der alten Höhe gerechnet
+ * war. Die Karte über dem Plan lag danach wieder darunter – genau der Fehler,
+ * der eine Änderung vorher behoben worden war.
+ *
+ * Deshalb gilt: die Leiste reagiert auf den Finger, nie auf einen Sprung der
+ * Seite.
+ */
+let scrolltSelbst = false;
+let scrollWaechter = 0;
+
+function eigenesScrollenBeginnt() {
+  scrolltSelbst = true;
+  clearTimeout(scrollWaechter);
+  // `scrollend` beendet den Zustand punktgenau. Der Zeitgeber ist die
+  // Rückfallebene – für Browser ohne das Ereignis und für den Fall, dass gar
+  // nicht gescrollt werden muss: dann kommt weder `scroll` noch `scrollend`.
+  scrollWaechter = setTimeout(() => { scrolltSelbst = false; }, 1200);
+}
+
+window.addEventListener("scrollend", () => {
+  clearTimeout(scrollWaechter);
+  scrolltSelbst = false;
+}, { passive: true });
+
+/**
  * Scrollt ein Element unter die Leisten statt dahinter.
  *
  * `scrollIntoView` kennt nur `scroll-margin-top` und damit die feste Zahl; hier
@@ -450,6 +485,7 @@ function scrolleUnterLeisten(el) {
   requestAnimationFrame(() => {
     const ziel = el.getBoundingClientRect().top + window.scrollY
                - leistenUnterkante() - SCROLL_LUFT;
+    eigenesScrollenBeginnt();
     window.scrollTo({ top: Math.max(0, ziel), behavior: "smooth" });
   });
 }
@@ -570,6 +606,10 @@ function bindNavAutoHide() {
     if (Math.abs(y - letzte) < SCHWELLE) return;
     const runter = y > letzte;
     letzte = y;
+    // Ein Sprung, den die Seite selbst ausgelöst hat, lässt die Leiste in Ruhe.
+    // `letzte` ist oben schon nachgezogen, damit es beim nächsten echten
+    // Fingerscrollen keinen Sprung aus einer veralteten Position gibt.
+    if (scrolltSelbst) return;
     // Mit Tastaturfokus in der Leiste nie ausblenden.
     const versteckt = runter && y > OBEN_FREI && !nav.contains(document.activeElement);
     nav.dataset.hidden = String(versteckt);
