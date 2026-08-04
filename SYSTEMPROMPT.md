@@ -430,27 +430,29 @@ mit dem nächsten zusammen (Führung in zwei Teilen), dann höchstens der Abstan
 dorthin. Sonst überlappt der Termin seinen Nachfolger. Ein zu kurz angesetzter
 Termin sieht dagegen im Kalender aus wie freie Zeit, die es nicht gibt.
 
-### Die UID ist die Klammer zwischen beiden Ausgaben
+### Im Termin steht keine technische Kennung
 
-Jeder Kalendereintrag trägt Reise-Tag und UID in der **letzten Zeile der
-Beschreibung** — nicht im Titel:
+Kein Reise-Tag, keine UID, kein Link auf die Reiseseite. Ein Termin sieht aus wie
+von Hand angelegt: Titel, Zeit, Ort, Beschreibung, am Ende der Kartenlink.
 
-```
-[REISE-ROM-2026-09] [UID:13]
-```
+Die UID bleibt trotzdem **unveränderlich** — sie ist die Identität eines Ortes in
+der Reisedatei und der Anker der Deep-Links auf der Website. Wird eine Nummer neu
+vergeben, zeigt der Link dort auf den falschen Stop.
 
-Der Reise-Tag entsteht aus `trip.destination` (Großbuchstaben, ohne Umlaute und
-Sonderzeichen) und dem frühesten `isoDate`. Die UID ist **wörtlich der Schlüssel
-aus `places`**, keine eigene Zählung — sie sind nicht fortlaufend, weil gelöschte
-Nummern frei bleiben.
+Der **Titel** ist damit das Erkennungsmerkmal beim nächsten Durchlauf. Halte ihn
+kurz, eindeutig und stabil: `Centrale Montemartini`, `Dinner – Open Baladin`,
+`Zug Bozen → Rom`. Ein umbenannter Stop erscheint im Kalender als neuer Termin,
+der alte wird gelöscht.
 
-Deshalb sind UIDs unveränderlich: wird eine Nummer neu vergeben, hängt der alte
-Termin am neuen Ort, und der Link von dort auf die Reiseseite zeigt auf den
-falschen Stop.
+### Die Anfahrt gehört an den Anfang von `description`
 
-Verschiebt sich ein Stop, ändert sich **nur** Datum und Uhrzeit des Termins, nie
-seine Kennung. Wird ein Stop entfernt, wird der Termin gelöscht — nicht
-umgewidmet.
+Der erste Absatz beginnt mit `Anfahrt:` und nennt Herkunft, Fußweg und ÖPNV — so
+wie bisher. Der Kalender übernimmt ihn als erste Zeile der Terminbeschreibung, die
+übrigen Absätze werden der Beschreibungstext.
+
+**Deshalb braucht `description` drei Einträge:** die Anfahrt plus zwei Absätze
+Beschreibung. Mit nur zwei Einträgen bleibt ein einziger Absatz echter Inhalt, und
+die Regel „mindestens zwei Absätze" ist nur formal erfüllt.
 
 Die vollständigen Kalenderregeln stehen in `KALENDER.md` im Repository.
 

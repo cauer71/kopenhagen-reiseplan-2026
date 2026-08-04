@@ -6,16 +6,16 @@ Datei beschreibt, was aus einem Stop der Reisedatei ein Termin wird.
 Datenmodell und Feldregeln stehen in [COWORK.md](COWORK.md), der Auftrag zum
 Erzeugen einer Reisedatei in [SYSTEMPROMPT.md](SYSTEMPROMPT.md).
 
-> **Vorrang.** Die Kalenderkonventionen — Zielkalender, Reise-Tag, Aufbau der
-> Beschreibung, Mobilitätsangaben, Essensbudget — stehen in `Assistent.md` und
-> gelten dort verbindlich. Diese Datei sagt nur, **wie die Felder der Reisedatei
-> darauf abgebildet werden**. Bei einem Widerspruch gilt `Assistent.md`.
+> **Vorrang.** Zielkalender, Mobilitätsangaben, Essensbudget, Recherche- und
+> Freigaberegeln stehen in `Assistent.md` und gelten dort verbindlich. Diese Datei
+> sagt, **wie die Felder der Reisedatei auf einen Termin abgebildet werden**.
 >
-> Genau dieser Fall ist schon eingetreten: hier stand einmal `[REISE-rom]
-> [UID:05]` **im Titel**. `Assistent.md` verlangt aber `[REISE-ROM-2026-09]
-> [UID:05]` in der **letzten Zeile der Beschreibung** und ausdrücklich nicht im
-> Titel. Wäre die falsche Form geschrieben worden, hätte der zweite Durchlauf
-> jeden Termin verdoppelt statt ihn zu aktualisieren.
+> An **einer** Stelle weicht sie bewusst ab: `Assistent.md` §5 verlangt in der
+> letzten Zeile jeder Beschreibung `[REISE-<ORT>-<JAHR>-<MONAT>] [UID:XX]`. Diese
+> Kennung wird **nicht** geschrieben — im Termin soll nur stehen, was unterwegs
+> hilft. Wie ohne sie wiedererkannt wird, steht unter „Aktualisieren statt
+> verdoppeln". **`Assistent.md` §5 und §6 müssen dazu nachgezogen werden**, sonst
+> gewinnt die dortige Fassung und die Kennung kommt zurück.
 
 ---
 
@@ -41,42 +41,17 @@ Sammeltermine, keine Ganztagstermine außer für tatsächlich ganztägige Inhalt
 | Ort | `places[<uid>].place` — **nicht** `address`, siehe unten |
 | Beschreibung | siehe unten |
 
-### Der Reise-Tag wird abgeleitet, nicht erfunden
+### Weder Reise-Tag noch UID stehen im Termin
 
-```
-[REISE-<ORT>-<JAHR>-<MONAT>]
-```
+Der Titel enthält keine Kennung, die Beschreibung endet mit dem Kartenlink. Ein
+Termin sieht damit aus wie ein von Hand angelegter.
 
-- `<ORT>` = `trip.destination`, in Großbuchstaben, ohne Leerzeichen und
-  Sonderzeichen; Umlaute umgeschrieben (ä→AE, ö→OE, ü→UE, ß→SS).
-- `<JAHR>-<MONAT>` = aus dem **frühesten** `isoDate` der Tagesabschnitte.
-
-Ergibt für die vorhandenen Reisen:
-
-| Reisedatei | Reise-Tag |
-|---|---|
-| `rom.json` | `[REISE-ROM-2026-09]` |
-| `kopenhagen.json` | `[REISE-KOPENHAGEN-2026-07]` |
-
-Der Tag ist damit aus der Datei berechenbar und muss nirgends gepflegt werden.
-
-### Die UID kommt aus der Reisedatei
-
-**Nicht** als fortlaufende Nummer beim Schreiben vergeben, sondern **wörtlich der
-Schlüssel aus `places`.**
-
-Das ist die eine Stelle, an der die Kalenderregel gegenüber `Assistent.md` §5
-präzisiert wird — und zwar notwendig: die UIDs der Reisedatei sind **nicht
-fortlaufend.** Rom hat 01, 02, 04, 10, 12 … 38, mit Lücken bei 03, 05–09 und 11,
-weil dort Programmpunkte entfallen sind und gelöschte Nummern nicht neu vergeben
-werden.
-
-Eine eigene Zählung beim Schreiben würde also andere Nummern erzeugen als die
-Website benutzt. Damit wäre der Deep-Link falsch, und beim nächsten Durchlauf
-hinge jeder Termin am falschen Ort.
+Die UID bleibt trotzdem, was sie war: die unveränderliche Identität eines Ortes
+**in der Reisedatei**, Schlüssel in `places`, Anker der Deep-Links auf der Website.
+Sie wird nur nicht in den Kalender geschrieben.
 
 > Deshalb bleiben UIDs unveränderlich und werden nach dem Löschen nicht neu
-> vergeben — in der Reisedatei **und** im Kalender.
+> vergeben — sonst zeigt der Link auf der Website auf den falschen Stop.
 
 ### Der Ort kommt aus `place`, nicht aus `address`
 
@@ -124,9 +99,12 @@ woher jeder Teil kommt:
 | 3 | zwei bis vier Sätze | `places[].detail` und die **übrigen** Absätze aus `description`, sinnvoll gekürzt |
 | 4 | Leerzeile, dann `Tickets/Reservierung: …` | `places[].tip`, ergänzt um `places[].price` wenn relevant |
 | 5 | offizieller Buchungslink | `places[].ticketUrl` |
-| 6 | Google-Maps-Link | aus `places[].place` |
-| 7 | Link auf die Reiseseite | siehe unten |
-| 8 | letzte Zeile: `[REISE-…] [UID:XX]` | abgeleitet |
+| 6 | Leerzeile | |
+| 7 | **letzte Zeile:** `Google Maps: <Link>` | aus `places[].place` |
+
+Die Beschreibung endet mit dem Kartenlink. **Keine Kennung, keine UID und kein
+Link auf die Reiseseite** — bewusst so entschieden: im Termin soll nur stehen, was
+unterwegs hilft. Wie ohne Kennung wiedererkannt wird, steht im nächsten Abschnitt.
 
 ### Die Anfahrtszeile steht schon in der Reisedatei
 
@@ -155,58 +133,53 @@ nur `Fuß`. Keine Taxis, außer ausdrücklich verlangt.
 > `description` bei neuen Reisen **drei** Einträge haben: Anfahrt plus zwei
 > Absätze. Die Rom-Orte machen das schon so.
 
-### Der Link auf die Reiseseite
-
-```
-https://cauer71.github.io/reiseplan/trips/<slug>/#<tag-id>-stop-<uid>
-```
-
-Beispiel: `https://cauer71.github.io/reiseplan/trips/rom/#tag1-stop-13`
-
-`<slug>` ist der Dateiname der Reisedatei ohne `.json`, `<tag-id>` das `id`-Feld
-des Tagesabschnitts.
-
-Er öffnet die Reiseseite mit dem richtigen Tag und der aufgeklappten Karte des
-Stops. Damit führt ein Termin zum Bild, zur vollständigen Beschreibung, zum
-Wetter und zum Kartenlink — Dinge, die in einen Kalendereintrag nicht passen.
-
-Das war von Anfang an der Zweck der UID: `Assistent.md` §5 nennt sie „für eine
-spätere Website mit einer eigenen Karte pro Termin". Diese Website gibt es jetzt.
-
 ### Beispiel
 
 ```text
-Anfahrt: von Seven Rooms Hotel → Roma Termini · zu Fuß 6–8 Min. · ÖPNV —
+Anfahrt: von Seven → Roma Termini · zu Fuß 6–8 Min. · ÖPNV —
 
-Der Italo verbindet Bozen ohne Umsteigen mit Rom. Die Fahrt führt durch das
-Etschtal und die Poebene; ab Florenz geht es über die Schnellfahrstrecke.
+Gemeinsame Hinfahrt mit fast vollständigem ersten Reisetag in Rom.
+Abfahrt in Bozen ist am Samstag um 06:42 Uhr. Der Italo 8953 erreicht Roma
+Termini planmäßig um 11:40 Uhr.
 
-Tickets/Reservierung: Gebucht. Spätestens 15 Min. vor Abfahrt am Bahnsteig sein.
+Tickets/Reservierung: Spätestens 15 Min. vor Abfahrt am Bahnsteig sein. Gebucht.
 https://www.italotreno.com/
-https://www.google.com/maps/search/?api=1&query=Stazione%20di%20Bolzano
-https://cauer71.github.io/reiseplan/trips/rom/#tag1-stop-13
-[REISE-ROM-2026-09] [UID:13]
+
+Google Maps: https://www.google.com/maps/search/?api=1&query=Stazione%20di%20Bolzano%2C%20Piazza%20della%20Stazione%201%2C%2039100%20Bolzano%20BZ%2C%20Italien
 ```
 
 ## Aktualisieren statt verdoppeln
 
-Vor dem Schreiben:
+Ohne Kennung in der Beschreibung geht die Wiedererkennung über **Kalender und
+Zeitraum**:
 
-1. **Nur** im festgelegten Urlaubskalender suchen.
-2. Alle Termine mit dem **exakt** passenden Reise-Tag ermitteln und ihre UIDs
-   auflisten.
-3. Für jeden Stop der Reisedatei:
-   - UID vorhanden → Termin **aktualisieren** (Zeit, Dauer, Ort, Beschreibung).
-   - UID nicht vorhanden → Termin **anlegen**.
-4. Für jede UID im Kalender, die in der Reisedatei nicht mehr vorkommt → Termin
-   **löschen**. Nicht umwidmen.
+1. **Nur** im festgelegten Urlaubskalender arbeiten. Dort stehen ausschließlich
+   Urlaubsreisen — das ist die Voraussetzung dafür, dass dieser Weg trägt.
+2. Alle Termine im Zeitraum der Reise auflisten: vom frühesten bis zum spätesten
+   `isoDate` der Tagesabschnitte. Diese Termine gehören zu dieser Reise.
+3. Für jeden Stop der Reisedatei über den **Titel** abgleichen:
+   - Titel vorhanden → Termin **aktualisieren** (Datum, Zeit, Dauer, Ort,
+     Beschreibung).
+   - Titel nicht vorhanden → Termin **anlegen**.
+4. Übrig gebliebene Termine im Zeitraum → **löschen**.
 5. Anschließend Vollständigkeit und zeitliche Konflikte prüfen.
 
-„Reise ersetzen", „Plan aktualisieren" oder „neu planen" gilt als Freigabe, die
-Termine mit **genau diesem** Reise-Tag zu ersetzen.
+Das trägt auch, wenn ein Stop auf einen anderen Tag wandert: der Titel bleibt, der
+Termin wird verschoben statt verdoppelt.
 
-**Termine ohne den exakten Reise-Tag werden nie angefasst.** Im Kalender stehen
-andere Reisen und private Termine.
+**Ein umbenannter Stop wird zu Löschen plus Anlegen.** Das Ergebnis ist richtig,
+nur die Termin-Historie bricht. Das ist der Preis dafür, dass keine Kennung in der
+Beschreibung steht — bewusst in Kauf genommen.
+
+> **Voraussetzung, die nicht verhandelbar ist:** der Zielkalender enthält nur
+> Urlaubsreisen. Läge dort ein privater Termin im Reisezeitraum, würde Schritt 4
+> ihn löschen. Deshalb niemals in den Hauptkalender schreiben.
+
+> **`Assistent.md` muss dazu nachgezogen werden.** Dort verlangt §5, die letzte
+> Zeile jeder Beschreibung lautet exakt `[REISE-<ORT>-<JAHR>-<MONAT>] [UID:XX]`,
+> und §6 sucht danach. Solange das dort steht, gewinnt es — die Kennung käme
+> zurück. Zu ändern sind §5 (letzte Zeile entfällt) und §6 Punkte 2–5 (Abgleich
+> über Zeitraum und Titel statt über den Reise-Tag).
 
 ## Was nicht gemacht wird
 
