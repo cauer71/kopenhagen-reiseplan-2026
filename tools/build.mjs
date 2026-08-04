@@ -289,6 +289,23 @@ function pruefeReise(slug, data) {
     }
   }
 
+  // Doppelte Titel sind seit der Umstellung des Kalenders ein echter Fehler: der
+  // Titel ist dort die Identität eines Termins. Steht „Lunch" zweimal, weiß ein
+  // zweiter Durchlauf nicht, welcher Termin zu welchem Stop gehört — er
+  // aktualisiert den falschen oder legt einen doppelt an. Siehe KALENDER.md.
+  const nachTitel = new Map();
+  for (const uid of Object.keys(orte).sort()) {
+    const titel = String(orte[uid].title ?? "").trim();
+    if (!titel) continue;
+    (nachTitel.get(titel) ?? nachTitel.set(titel, []).get(titel)).push(uid);
+  }
+  for (const [titel, uids] of nachTitel) {
+    if (uids.length > 1) {
+      funde.push(`${slug}: Titel '${titel}' steht bei ${uids.length} Orten (${uids.join(", ")}) – `
+               + `er ist im Kalender die Kennung des Termins und muss eindeutig sein`);
+    }
+  }
+
   const benutzt = new Set([trip.heroImage, trip.tileImage, ...tage.map((t) => t.heroImage),
                            ...Object.values(orte).map((o) => o.image)]);
   for (const name of Object.keys(bilder).sort()) {
@@ -304,8 +321,10 @@ function pruefeReise(slug, data) {
  * Was der zweite Abnehmer der Reisedatei braucht: der Google-Kalender.
  *
  * Die Website ist nicht die einzige Verwendung — aus derselben Datei entstehen
- * Kalendereinträge, je Stop einer, wiedererkennbar über `[REISE-<slug>] [UID:xx]`.
- * Dafür fehlen zwei Angaben, die die Seite selbst nicht braucht:
+ * Kalendereinträge, je Stop einer. Im Termin steht keine technische Kennung;
+ * wiedererkannt wird über Zielkalender, Reisezeitraum und **Titel**. Deshalb prüft
+ * `pruefeReise` die Eindeutigkeit der Titel blockierend, und deshalb fehlen hier
+ * zwei Angaben, die die Seite selbst nicht braucht:
  *
  *   `minutes`  – die Dauer als Zahl. `duration` ist Prosa („ca. 60–75 Min. als
  *                erster Teil einer 2,5–3-stündigen Führung") und für Menschen
@@ -374,6 +393,31 @@ function kalenderHinweise(slug, data) {
   }
 
   const orte = data.places ?? {};
+
+  // Die Anfahrt steht als erster description-Absatz und zählt bei der
+  // Pflichtprüfung „mindestens zwei Absätze" mit. Übrig bleibt dann oft nur ein
+  // Absatz echter Beschreibung – im Termin wie auf der Seite.
+  const duenn = Object.keys(orte).filter((uid) => {
+    const a = [...(orte[uid].description ?? [])];
+    if (/^Anfahrt:/.test(a[0] ?? "")) a.shift();
+    return a.length < 2;
+  }).sort();
+  if (duenn.length) {
+    hinweise.push(`${slug}: ${duenn.length} von ${Object.keys(orte).length} Orten haben ohne die `
+                + `Anfahrtszeile nur einen Absatz Beschreibung `
+                + `(${duenn.slice(0, 6).join(", ")}${duenn.length > 6 ? " …" : ""}) – `
+                + `description sollte drei Einträge haben: Anfahrt plus zwei Absätze`);
+  }
+
+  // `place` ist der Suchbegriff für den Kartenlink. Ein Pfeil darin heißt, dass
+  // dort eine Route statt eines Ortes steht – der Link führt dann ins Nichts.
+  const routen = Object.keys(orte).filter((uid) => /→|->/.test(String(orte[uid].place ?? ""))).sort();
+  if (routen.length) {
+    hinweise.push(`${slug}: places[${routen.join(", ")}].place enthält einen Pfeil – `
+                + `dort gehört ein Ort hin, keine Route, sonst zeigt der Kartenlink ins Nichts `
+                + `(eine Route darf in 'address' stehen)`);
+  }
+
   const ohne = Object.keys(orte).filter((uid) => !Number.isInteger(orte[uid].minutes)).sort();
   if (ohne.length) {
     hinweise.push(`${slug}: ${ohne.length} von ${Object.keys(orte).length} Orten ohne `

@@ -367,6 +367,12 @@ Geprüft wird:
 - `fixed` ist entweder `true` oder fehlt
 - `trip.weather.notes` enthält keine Prognosezahlen
 - `ticketUrl` ist eine `https`-Adresse
+- **kein Titel kommt zweimal vor** — er ist im Kalender die Kennung des Termins
+
+Nicht blockierend gemeldet werden außerdem: fehlende Kalenderangaben
+(`trip.timezone`, `places[].minutes`), Bilder breiter als nötig oder mit falscher
+Breitenangabe, ein `place`, das eine Route statt eines Ortes enthält, und
+Beschreibungen, die ohne die Anfahrtszeile nur einen Absatz übrig lassen.
 
 Der zweite Schritt in der Action ruft jede Bild-URL wirklich ab. Er **blockiert
 nicht**: ein langsamer Bildserver ist kein Grund, eine Planänderung nicht zu

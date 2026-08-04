@@ -290,7 +290,8 @@
       "properties": {
         "title": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "description": "Kurz und eindeutig. Muss innerhalb der Reise einmalig sein und über Änderungen hinweg stabil bleiben: der Titel ist im Google-Kalender die Kennung des Termins, weil dort keine UID steht. Also nicht zweimal 'Lunch', sondern 'Lunch – Mercato Centrale'. Eine Wiederholung lehnt die Prüfung ab."
         },
         "detail": {
           "type": "string",
@@ -304,7 +305,7 @@
             "type": "string",
             "minLength": 1
           },
-          "description": "Mindestens zwei Absätze. Ein String ist nicht erlaubt."
+          "description": "Absätze. Ein String ist nicht erlaubt. Der erste Absatz beginnt mit 'Anfahrt:' und nennt Herkunft, Fußweg und ÖPNV; der Kalender übernimmt ihn als erste Zeile der Terminbeschreibung. Weil er mitzählt, sollten drei Einträge stehen: Anfahrt plus zwei Absätze Beschreibung. Mit nur zwei bleibt ein einziger Absatz Inhalt."
         },
         "image": {
           "type": "string",
@@ -314,7 +315,7 @@
         "place": {
           "type": "string",
           "minLength": 1,
-          "description": "Suchbegriff für den Google-Maps-Link, möglichst vollständige Adresse."
+          "description": "Suchbegriff für den Google-Maps-Link, möglichst vollständige Adresse. Immer ein Ort, niemals eine Route: aus 'Bozen → Rom' wird kein Kartenpunkt. Eine Route darf in 'address' stehen, das ist ein Anzeigefeld."
         },
         "weather": {
           "enum": [

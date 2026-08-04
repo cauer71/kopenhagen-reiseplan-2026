@@ -402,6 +402,10 @@ Die Prüfung lehnt ab, und dann geht nichts live:
 13. `ticketUrl` ohne `https://`.
 14. Ein Dateiname mit Großbuchstaben, Umlauten oder Leerzeichen.
 15. `theme` außerhalb von `teal`, `gold`, `coral`, `navy`.
+16. **Zwei Orte mit demselben `title`.** Der Titel ist im Kalender die Kennung des
+    Termins; steht er zweimal, aktualisiert ein zweiter Durchlauf den falschen.
+    Also nicht zweimal „Lunch", sondern „Lunch – Mercato Centrale" und
+    „Lunch – Romeow Cat Bistrot".
 
 ## Zweite Verwendung: der Google-Kalender
 
