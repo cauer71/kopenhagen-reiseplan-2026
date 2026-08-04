@@ -100,9 +100,14 @@ woher jeder Teil kommt:
 | 4 | Leerzeile, dann `Tickets/Reservierung: …` | `places[].tip`, ergänzt um `places[].price` wenn relevant |
 | 5 | offizieller Buchungslink | `places[].ticketUrl` |
 | 6 | Leerzeile | |
-| 7 | **letzte Zeile:** `Google Maps: <Link>` | aus `places[].place` |
+| 7 | `Google Maps:` | die Beschriftung allein auf ihrer Zeile |
+| 8 | **letzte Zeile:** der Link | aus `places[].place` |
 
-Die Beschreibung endet mit dem Kartenlink. **Keine Kennung, keine UID und kein
+Der Link steht auf einer **eigenen** Zeile, nicht hinter der Beschriftung. Google
+Kalender macht aus einer Zeile, die nur aus einer URL besteht, einen sauberen
+Verweis; steht Text davor, wird das Antippen auf dem Handy zur Zielübung.
+
+Die Beschreibung endet damit beim Kartenlink. **Keine Kennung, keine UID und kein
 Link auf die Reiseseite** — bewusst so entschieden: im Termin soll nur stehen, was
 unterwegs hilft. Wie ohne Kennung wiedererkannt wird, steht im nächsten Abschnitt.
 
@@ -145,7 +150,8 @@ Termini planmäßig um 11:40 Uhr.
 Tickets/Reservierung: Spätestens 15 Min. vor Abfahrt am Bahnsteig sein. Gebucht.
 https://www.italotreno.com/
 
-Google Maps: https://www.google.com/maps/search/?api=1&query=Stazione%20di%20Bolzano%2C%20Piazza%20della%20Stazione%201%2C%2039100%20Bolzano%20BZ%2C%20Italien
+Google Maps:
+https://www.google.com/maps/search/?api=1&query=Stazione%20di%20Bolzano%2C%20Piazza%20della%20Stazione%201%2C%2039100%20Bolzano%20BZ%2C%20Italien
 ```
 
 ## Aktualisieren statt verdoppeln
