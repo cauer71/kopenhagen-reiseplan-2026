@@ -1,267 +1,160 @@
 # Termine im Google-Kalender
 
-Die Reisedatei hat **zwei Abnehmer**: die Website und den Google-Kalender. Diese
-Datei beschreibt, was aus einem Stop der Reisedatei ein Termin wird.
+Die Reisedatei hat zwei Abnehmer: die Website und den Google-Kalender. Diese Datei regelt verbindlich, wie aus jedem Eintrag in `days[].stops` genau ein Kalendertermin entsteht und wie ein erneuter Lauf bestehende Termine aktualisiert, statt sie zu verdoppeln.
 
-Datenmodell und Feldregeln stehen in [COWORK.md](COWORK.md), der Auftrag zum
-Erzeugen einer Reisedatei in [SYSTEMPROMPT.md](SYSTEMPROMPT.md).
-
-> **Vorrang.** Zielkalender, Mobilitätsangaben, Essensbudget, Recherche- und
-> Freigaberegeln stehen in `Assistent.md` und gelten dort verbindlich. Diese Datei
-> sagt, **wie die Felder der Reisedatei auf einen Termin abgebildet werden**.
->
-> An **einer** Stelle weicht sie bewusst ab: `Assistent.md` §5 verlangt in der
-> letzten Zeile jeder Beschreibung `[REISE-<ORT>-<JAHR>-<MONAT>] [UID:XX]`. Diese
-> Kennung wird **nicht** geschrieben — im Termin soll nur stehen, was unterwegs
-> hilft. Wie ohne sie wiedererkannt wird, steht unter „Aktualisieren statt
-> verdoppeln". **`Assistent.md` §5 und §6 müssen dazu nachgezogen werden**, sonst
-> gewinnt die dortige Fassung und die Kennung kommt zurück.
+Datenmodell und Feldregeln stehen in [COWORK.md](COWORK.md), der Auftrag zum Erzeugen einer Reisedatei in [SYSTEMPROMPT.md](SYSTEMPROMPT.md).
 
 ---
 
-## Zielkalender
+## 1. Harte Sicherheitsregel: niemals in `primary` schreiben
 
-Der in `Assistent.md` festgelegte Urlaubskalender — **nicht** der Hauptkalender.
+Reisetermine gehören ausschließlich in den in `Assistent.md` festgelegten Urlaubskalender.
 
-**Die Kalender-Adresse steht bewusst nicht in dieser Datei.** Dieses Repo ist
-öffentlich (siehe COWORK.md, Abschnitt 6); die Kennung eines privaten Kalenders
-gehört nicht hinein. Sie steht in `Assistent.md`, und die liegt nicht im Repo.
+- `calendar_id` muss die konkrete ID des Urlaubskalenders sein.
+- `calendar_id: "primary"` ist für Reisepläne verboten.
+- Auch zum Testen darf nicht in den Hauptkalender geschrieben werden.
+- Vor jedem Schreibvorgang muss `list_calendars` ausgeführt und der Zielkalender anhand von **Name und ID** eindeutig bestimmt werden.
+- Ist die Urlaubskalender-ID nicht verfügbar oder nicht eindeutig, wird nichts geschrieben.
 
-### Technische Vorgaben für den Google-Kalender-Konnektor
-
-Beim Anlegen oder Aktualisieren eines Termins im Urlaubskalender müssen immer
-folgende Werte verwendet werden:
-
-- `calendar_id`: ausschließlich die ID des festgelegten Urlaubskalenders, niemals
-  `primary`.
-- `attendees`: immer eine leere Liste `[]`.
-- `self_attendance`: zwingend `"omit"`.
-- `add_google_meet`: `false`.
-
-`self_attendance` darf weder auf `"accepted"`, `"tentative"` noch auf
-`"declined"` gesetzt und auch nicht weggelassen werden. Der Konnektor verwendet
-sonst standardmäßig `"accepted"` und trägt das angemeldete Google-Konto als
-Teilnehmer ein. Dadurch erscheint derselbe Termin zusätzlich im persönlichen
-Hauptkalender.
-
-Nach dem ersten angelegten Termin muss geprüft werden:
-
-1. Der Termin ist im Urlaubskalender vorhanden.
-2. Der Termin erscheint nicht im Hauptkalender.
-3. Der Termin enthält keine Teilnehmer.
-
-Erst danach dürfen die übrigen Termine der Reise angelegt werden.
-
-## Ein Stop, ein Termin
-
-Für jeden Eintrag in `days[].stops` entsteht **genau ein** Termin — auch für An-
-und Abreise, Transfers, Restaurants und als optional gekennzeichnete Punkte. Keine
-Sammeltermine, keine Ganztagstermine außer für tatsächlich ganztägige Inhalte.
-
-| Feld des Termins | kommt aus der Reisedatei |
-|---|---|
-| Beginn | `days[].isoDate` + `days[].stops[].time`, in `trip.timezone` |
-| Ende | Beginn + `places[<uid>].minutes` |
-| Titel | `places[<uid>].title` — **ohne** Tag und UID |
-| Ort | `places[<uid>].place` — **nicht** `address`, siehe unten |
-| Beschreibung | siehe unten |
-
-### Weder Reise-Tag noch UID stehen im Termin
-
-Der Titel enthält keine Kennung, die Beschreibung endet mit dem Kartenlink. Ein
-Termin sieht damit aus wie ein von Hand angelegter.
-
-Die UID bleibt trotzdem, was sie war: die unveränderliche Identität eines Ortes
-**in der Reisedatei**, Schlüssel in `places`, Anker der Deep-Links auf der Website.
-Sie wird nur nicht in den Kalender geschrieben.
-
-> Deshalb bleiben UIDs unveränderlich und werden nach dem Löschen nicht neu
-> vergeben — sonst zeigt der Link auf der Website auf den falschen Stop.
-
-### Der Ort kommt aus `place`, nicht aus `address`
-
-`place` ist laut Datenvertrag der Suchbegriff für den Kartenlink und enthält die
-möglichst vollständige Adresse. `address` ist ein **Anzeigefeld** und darf etwas
-anderes sein — bei Transfers ist es eine Route:
-
-| UID | `address` | `place` |
-|---|---|---|
-| 13 | `Bozen → Roma Termini` | `Stazione di Bolzano, Piazza della Stazione 1, 39100 Bolzano` |
-| 32 | `FCO → MAH` | Flughafen Rom-Fiumicino, vollständig |
-
-Ein Kartenlink aus `address` führt bei diesen fünf Rom- und drei
-Kopenhagen-Einträgen ins Nichts. Deshalb: Ortsfeld und Google-Maps-Link **immer**
-aus `place`.
-
-### Die Zeitzone ist Pflicht
-
-`trip.timezone` (IANA-Name, z. B. `Europe/Rome`). Ohne sie ist `09:30` nicht
-eindeutig, und der Termin landet auf der falschen Stunde — beim Reisenden, der
-gerade in einer anderen Zeitzone sitzt, garantiert.
-
-Fehlt das Feld, nimm `trip.weather.timezone`. Fehlen beide, **schreibe nicht**,
-sondern melde es. Eine geratene Zeitzone ist schlimmer als kein Termin.
-
-### Das Ende kommt aus `minutes`, nicht aus `duration`
-
-`minutes` ist eine ganze Zahl und bildet die reine Aktivitätsdauer ab; Wegezeiten
-werden nicht dazugerechnet. `duration` daneben ist Prosa für die Website („ca.
-60–75 Min. als erster Teil einer 2,5-stündigen Führung") und lässt sich nicht
-rechnen.
-
-Fehlt `minutes`, **rate nicht** und setze keine Standarddauer. Melde den Ort und
-lass den Termin weg. Ein Termin mit erfundenem Ende verdeckt den nächsten.
-
-## Die Beschreibung
-
-Reiner Text, in der Reihenfolge aus `Assistent.md` §11 — hier mit der Angabe,
-woher jeder Teil kommt:
-
-| # | Zeile | Quelle |
-|---|---|---|
-| 1 | `Anfahrt: von <vorher> → <jetzt> · zu Fuß <Zeit> · ÖPNV <Zeit und Linie>` | **`description[0]`**, siehe unten |
-| 2 | Leerzeile | |
-| 3 | zwei bis vier Sätze | `places[].detail` und die **übrigen** Absätze aus `description`, sinnvoll gekürzt |
-| 4 | Leerzeile, dann `Tickets/Reservierung: …` | `places[].tip`, ergänzt um `places[].price` wenn relevant |
-| 5 | offizieller Buchungslink | `places[].ticketUrl` |
-| 6 | Leerzeile | |
-| 7 | `Google Maps:` | die Beschriftung allein auf ihrer Zeile |
-| 8 | **letzte Zeile:** der Link | aus `places[].place` |
-
-Der Link steht auf einer **eigenen** Zeile, nicht hinter der Beschriftung. Google
-Kalender macht aus einer Zeile, die nur aus einer URL besteht, einen sauberen
-Verweis; steht Text davor, wird das Antippen auf dem Handy zur Zielübung.
-
-Die Beschreibung endet damit beim Kartenlink. **Keine Kennung, keine UID und kein
-Link auf die Reiseseite** — bewusst so entschieden: im Termin soll nur stehen, was
-unterwegs hilft. Wie ohne Kennung wiedererkannt wird, steht im nächsten Abschnitt.
-
-### Die Anfahrtszeile steht schon in der Reisedatei
-
-Sie ist **der erste Absatz von `description`** und beginnt mit `Anfahrt:`. Der
-erzeugende Prompt schreibt sie dort hin: bei 28 von 31 Rom-Orten und bei allen 30
-Kopenhagen-Orten, immer an Position 0.
-
-Deshalb:
-
-1. Beginnt `description[0]` mit `Anfahrt:`, **übernimm den Absatz wörtlich** als
-   Zeile 1 und stelle **keine zweite** davor. Sonst steht die Anfahrt zweimal im
-   Termin.
-2. Die **übrigen** Absätze sind der Beschreibungstext für Punkt 3.
-3. Fehlt der Absatz, entweder die Zeiten beim Schreiben recherchieren wie in
-   `Assistent.md` §8, oder die Zeile weglassen. **Keine ungeprüfte Schätzung** —
-   eine erfundene Metrolinie ist schlimmer als keine Angabe.
-
-Wird geschätzt, dann als Spanne und als Schätzung erkennbar. `zu Fuß`, niemals
-nur `Fuß`. Keine Taxis, außer ausdrücklich verlangt.
-
-> **Nebenwirkung, die man kennen muss.** Weil die Anfahrt in `description` steckt,
-> zählt sie bei der Prüfung „mindestens zwei Absätze" mit. Alle 30
-> Kopenhagen-Orte haben genau zwei Einträge — einer davon ist die Anfahrt. Es
-> bleibt also **ein** Absatz echte Beschreibung, wo zwei gemeint waren. Sauber
-> wäre ein eigenes Feld für die Anfahrt; solange es das nicht gibt, sollte
-> `description` bei neuen Reisen **drei** Einträge haben: Anfahrt plus zwei
-> Absätze. Die Rom-Orte machen das schon so.
-
-### Beispiel
+Beim Anlegen oder Aktualisieren gelten immer:
 
 ```text
-Anfahrt: von Seven → Roma Termini · zu Fuß 6–8 Min. · ÖPNV —
-
-Gemeinsame Hinfahrt mit fast vollständigem ersten Reisetag in Rom.
-Abfahrt in Bozen ist am Samstag um 06:42 Uhr. Der Italo 8953 erreicht Roma
-Termini planmäßig um 11:40 Uhr.
-
-Tickets/Reservierung: Spätestens 15 Min. vor Abfahrt am Bahnsteig sein. Gebucht.
-https://www.italotreno.com/
-
-Google Maps:
-https://www.google.com/maps/search/?api=1&query=Stazione%20di%20Bolzano%2C%20Piazza%20della%20Stazione%201%2C%2039100%20Bolzano%20BZ%2C%20Italien
+calendar_id: <ID des Urlaubskalenders>
+attendees: []
+self_attendance: "omit"
+add_google_meet: false
 ```
 
-## Aktualisieren statt verdoppeln
+`self_attendance` darf nicht fehlen. Sonst kann Google das angemeldete Konto als Teilnehmer eintragen und denselben Termin zusätzlich im Hauptkalender anzeigen.
 
-Ohne Kennung in der Beschreibung geht die Wiedererkennung über **Kalender und
-Zeitraum**:
+## 2. Vor jedem Lauf: beide Kalender prüfen
 
-1. **Nur** im festgelegten Urlaubskalender arbeiten. Dort stehen ausschließlich
-   Urlaubsreisen — das ist die Voraussetzung dafür, dass dieser Weg trägt.
-2. Alle Termine im Zeitraum der Reise auflisten: vom frühesten bis zum spätesten
-   `isoDate` der Tagesabschnitte. Diese Termine gehören zu dieser Reise.
-3. Für jeden Stop der Reisedatei über den **Titel** abgleichen:
-   - Titel vorhanden → Termin **aktualisieren** (Datum, Zeit, Dauer, Ort,
-     Beschreibung).
-   - Titel nicht vorhanden → Termin **anlegen**.
-4. Übrig gebliebene Termine im Zeitraum → **löschen**.
-5. Anschließend Vollständigkeit und zeitliche Konflikte prüfen.
+Bevor ein einziger Termin angelegt, aktualisiert oder gelöscht wird:
 
-Das trägt auch, wenn ein Stop auf einen anderen Tag wandert: der Titel bleibt, der
-Termin wird verschoben statt verdoppelt.
+1. Reisezeitraum aus den frühesten und spätesten `days[].isoDate` bestimmen.
+2. Alle Termine in diesem Zeitraum im Urlaubskalender auflisten.
+3. Zusätzlich denselben Zeitraum im Hauptkalender auflisten.
+4. Für jeden Reisetitel prüfen, ob er bereits in einem der beiden Kalender vorkommt.
+5. Werden passende Reisetermine im Hauptkalender gefunden, Vorgang stoppen und zuerst melden. Sie dürfen nicht stillschweigend ignoriert werden.
 
-**Ein umbenannter Stop wird zu Löschen plus Anlegen.** Das Ergebnis ist richtig,
-nur die Termin-Historie bricht. Das ist der Preis dafür, dass keine Kennung in der
-Beschreibung steht — bewusst in Kauf genommen.
+Der Hauptkalender dient nur zur Sicherheitskontrolle. Neue Reiseeinträge werden dort niemals erzeugt.
 
-> **Voraussetzung, die nicht verhandelbar ist:** der Zielkalender enthält nur
-> Urlaubsreisen. Läge dort ein privater Termin im Reisezeitraum, würde Schritt 4
-> ihn löschen. Deshalb niemals in den Hauptkalender schreiben.
+## 3. Ein Stop, ein Termin
 
-> **`Assistent.md` muss dazu nachgezogen werden.** Dort verlangt §5, die letzte
-> Zeile jeder Beschreibung lautet exakt `[REISE-<ORT>-<JAHR>-<MONAT>] [UID:XX]`,
-> und §6 sucht danach. Solange das dort steht, gewinnt es — die Kennung käme
-> zurück. Zu ändern sind §5 (letzte Zeile entfällt) und §6 Punkte 2–5 (Abgleich
-> über Zeitraum und Titel statt über den Reise-Tag).
+Für jeden Eintrag in `days[].stops` entsteht genau ein Termin, auch für An- und Abreise, Transfers, Restaurants und optionale Punkte.
 
-## Was nicht gemacht wird
+| Feld des Termins | Quelle |
+|---|---|
+| Beginn | `days[].isoDate` + `days[].stops[].time` in `trip.timezone` |
+| Ende | Beginn + `places[uid].minutes` |
+| Titel | `places[uid].title` |
+| Ort | `places[uid].place` |
+| Beschreibung | nach Abschnitt 5 |
 
-- **Keine Einladungen und keine Selbstteilnahme.** Keine Teilnehmer hinzufügen,
-  auch nicht das angemeldete Google-Konto oder die Mitreisenden. Beim
-  Google-Kalender-Konnektor deshalb immer `attendees: []` und
-  `self_attendance: "omit"` setzen; `self_attendance` darf nicht weggelassen
-  werden. Ein Reiseplan ist keine Besprechung, und eine versehentliche Einladung
-  trägt die Termine zusätzlich in den Hauptkalender ein oder verschickt die
-  komplette Reise mit allen Adressen und Zeiten.
-- **Keine Erinnerungen** über die Voreinstellung des Kalenders hinaus. 61 Termine
-  mit eigener Erinnerung sind 61 Benachrichtigungen.
-- **Keine ICS-Datei**, außer sie wird ausdrücklich verlangt.
-- **Keine Personennamen im Ortsfeld.** Dort steht die reale Ortsbezeichnung, sonst
-  zeigt der Kartenlink ins Leere.
-- **Nichts löschen ohne den exakten Reise-Tag.**
-- **Keine Farben oder Sichtbarkeiten setzen**, solange nicht verlangt.
+Keine Sammeltermine und keine Ganztagstermine, außer der Inhalt ist tatsächlich ganztägig.
 
-## Überlappungen: die Regel hat eine Ausnahme
+## 4. Eindeutige Identität und Aktualisieren statt Verdoppeln
 
-`Assistent.md` §7 verlangt „Plane keine Überschneidungen". Das gilt für **eine**
-Person. Reisen zwei und trennen sich, sind gleichzeitige Termine richtig.
+Die UID bleibt unveränderlich in der Reisedatei. Im Kalender wird sie nicht angezeigt. Dort ist der stabile, eindeutige Titel das Erkennungsmerkmal.
 
-In der Rom-Reise überlappt Julias Flug nach Menorca (95 Min., UID 32) mit
-Christians Rückfahrt vom Flughafen, die 28 Minuten später beginnt (UID 33). Das
-wird **nicht** korrigiert.
+Vor dem Schreiben wird im Urlaubskalender für den gesamten Reisezeitraum ein vollständiger Bestand aufgenommen. Dann gilt:
 
-Überlappen zwei Termine **derselben** Person, stimmt entweder `minutes` oder die
-Uhrzeit nicht. Dann melden, nicht stillschweigend kürzen.
+1. **Exakt ein Treffer mit gleichem Titel:** bestehenden Termin aktualisieren.
+2. **Kein Treffer:** neuen Termin anlegen.
+3. **Mehr als ein Treffer mit gleichem Titel:** nichts schreiben; Doppeltermin melden und zuerst bereinigen.
+4. **Termin im Zeitraum, dessen Titel nicht mehr in der Reisedatei vorkommt:** nur nach eindeutiger Zuordnung zur Reise löschen.
 
-Ein echter Fall: die Kolosseum-Führung stand mit „ca. 60–75 Min. als erster Teil
-einer 2,5–3-stündigen Führung" in der Datei. Der zweite Teil beginnt 65 Minuten
-später. Die obere Grenze von 75 hätte ihn überlappt — richtig sind 65, weil die
-Teile zusammenhängen. Deshalb steht in `places["01"].minutes` jetzt 65.
+Ein zweiter Lauf muss dieselben Kalender-IDs wiederverwenden und darf keine neuen Termine erzeugen, solange bereits passende Titel vorhanden sind.
 
-## Erster Durchlauf: in einen Testkalender
+### Verbotener Ablauf
 
-Beim ersten Mal für eine Reise **nicht** in den Urlaubskalender schreiben, sondern
-in einen eigenen (z. B. „Reiseplan Test"):
+Dieser Ablauf ist falsch:
 
-- 61 Termine mit falscher Kennung sind mühsam aufzuräumen; ein Testkalender ist
-  ein Klick zum Löschen.
-- Reise-Tag, UID, Zeitzone und Dauern lassen sich an ein paar Terminen prüfen,
-  bevor es die ganze Reise betrifft.
-- Ein zweiter Durchlauf muss **aktualisieren, nicht verdoppeln**. Das ist der
-  eigentliche Test, und er kostet nichts, solange er im Testkalender läuft.
+1. Termine ohne vorherige Suche neu anlegen.
+2. Danach feststellen, dass sie schon vorhanden waren.
+3. Alte und neue Termine parallel bestehen lassen.
 
-## Bevor du schreibst, melde den Plan
+### Pflichtprüfung nach jedem Lauf
 
-Reise und Reise-Tag, Zielkalender, Reisezeitraum, Anzahl neu angelegter,
-aktualisierter und gelöschter Termine, Zeitzone. Warte auf Freigabe.
+Nach dem Schreiben werden Urlaubskalender und Hauptkalender erneut vollständig für den Reisezeitraum abgefragt.
 
-Ein Kalender ist geteilt und sichtbar; ein falscher Durchlauf ist nicht so einfach
-zurückzunehmen wie ein Commit.
+Der Lauf ist nur erfolgreich, wenn:
+
+- im Urlaubskalender die Anzahl der Reisetermine exakt der Anzahl der Stopps entspricht,
+- jeder Titel genau einmal vorkommt,
+- im Hauptkalender kein neu erzeugter Reisetermin vorhanden ist,
+- keine unerwarteten Überschneidungen derselben Person bestehen.
+
+Bei einer Abweichung wird nicht weitergeschrieben. Die konkrete Ursache wird gemeldet.
+
+## 5. Terminbeschreibung
+
+Die Beschreibung ist reiner Text in dieser Reihenfolge:
+
+1. Erster Absatz aus `description[0]`, sofern er mit `Anfahrt:` beginnt.
+2. Leerzeile.
+3. `detail` und die übrigen Beschreibungsabsätze, sinnvoll gekürzt.
+4. Leerzeile und `Tickets/Reservierung:` mit `tip` und gegebenenfalls `price`.
+5. `ticketUrl`, sofern vorhanden.
+6. Leerzeile.
+7. `Google Maps:` auf eigener Zeile.
+8. Kartenlink aus `places[uid].place` auf eigener letzter Zeile.
+
+Keine UID, kein technischer Reise-Tag und kein Link auf die Reiseseite im Termin.
+
+## 6. Ort, Zeitzone und Dauer
+
+- Das Ortsfeld und der Kartenlink kommen immer aus `place`, nicht aus `address`.
+- `trip.timezone` ist Pflicht. Fehlt sie, darf nicht geschrieben werden.
+- Das Terminende wird ausschließlich aus `minutes` berechnet.
+- Fehlt `minutes`, darf für diesen Stop kein Termin erzeugt werden.
+- `duration` ist nur Anzeigetext und darf nicht zur Berechnung verwendet werden.
+
+## 7. Löschen einer ganzen Reise
+
+Eine ganze Reise entfernen bedeutet:
+
+1. Reisedatei aus `docs/data/trips/` löschen.
+2. Urlaubskalender im exakten Reisezeitraum vollständig auflisten.
+3. Alle eindeutig zu dieser Reise gehörenden Termine löschen.
+4. Hauptkalender im selben Zeitraum prüfen und dort vorhandene, versehentlich erzeugte Reisetermine ebenfalls eindeutig identifizieren und löschen.
+5. Beide Kalender erneut abfragen und bestätigen, dass keine Reisetermine mehr vorhanden sind.
+6. GitHub-Action abwarten und prüfen, dass die Reiseseite nicht mehr veröffentlicht wird.
+
+Es genügt nicht, nur die ursprünglich bekannten Event-IDs zu löschen. Immer den gesamten Zeitraum erneut durchsuchen, weil spätere Testläufe zusätzliche Termine erzeugt haben können.
+
+## 8. Was nicht gemacht wird
+
+- Keine Einladungen und keine Selbstteilnahme.
+- Keine zusätzlichen Erinnerungen.
+- Keine ICS-Datei, außer ausdrücklich verlangt.
+- Keine Personennamen im Ortsfeld.
+- Keine Farben oder Sichtbarkeiten setzen, solange nicht verlangt.
+- Keine Löschung nur anhand eines unscharfen Suchbegriffs.
+- Kein Schreiben, wenn Zielkalender, Zeitraum oder vorhandener Bestand nicht eindeutig sind.
+
+## 9. Testläufe
+
+Der erste technische Test einer neuen Kalenderlogik erfolgt in einem eigenen Testkalender, niemals im Hauptkalender und nicht sofort im Urlaubskalender.
+
+Ablauf:
+
+1. Einen einzelnen Testtermin erzeugen.
+2. Prüfen, dass er nur im Testkalender vorkommt und keine Teilnehmer enthält.
+3. Denselben Lauf erneut ausführen.
+4. Prüfen, dass der bestehende Termin aktualisiert und kein zweiter erzeugt wurde.
+5. Testkalender leeren.
+6. Erst danach die echte Reise in den Urlaubskalender schreiben.
+
+## 10. Vor dem Schreiben melden
+
+Vor jeder Kalenderänderung werden genannt:
+
+- Reise und Zeitraum,
+- exakter Zielkalender mit Name und ID,
+- Anzahl vorhandener passender Termine im Urlaubskalender,
+- Anzahl vorhandener passender Termine im Hauptkalender,
+- Anzahl neu anzulegender, zu aktualisierender und zu löschender Termine,
+- Zeitzone.
+
+Erst nach dieser Bestandsaufnahme darf geschrieben werden.
