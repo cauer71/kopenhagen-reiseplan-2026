@@ -406,6 +406,15 @@ Bei einem Pull Request läuft nur die Prüfung, nichts wird veröffentlicht.
 7. **Kein Build-Schritt über `build.mjs` hinaus.** Kein npm, kein Bundler, kein
    Framework, kein `package.json`. Wer eine Abhängigkeit einführen will, braucht
    einen guten Grund.
+8. **Wer Reisedaten liefert, ändert nur Reisedaten.** Die KI, die eine Reisedatei
+   erzeugt oder umsortiert, fasst ausschließlich `docs/data/trips/*.json` an —
+   nicht die Darstellung, nicht `tools/`, nicht die Action, nicht diese Regeln.
+   Fällt ihr dort ein Fehler auf, **meldet** sie ihn mit Datei und Stelle.
+
+   Das ist Arbeitsteilung, kein Misstrauen: die Darstellung wird an echten Geräten
+   gemessen — Kontraste, Tippflächen, Scrollziele, Offline-Verhalten. Eine
+   Änderung, die im Diff harmlos aussieht, kann davon etwas kippen, und es fällt
+   erst unterwegs auf. Deshalb ändert sie nur, wer sie danach auch prüft.
 
 ---
 

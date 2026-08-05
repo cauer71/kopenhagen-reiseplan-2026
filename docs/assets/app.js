@@ -122,16 +122,19 @@ function weatherCard(note, live = null) {
 }
 
 /**
- * Unterwegs steht das Wetter nicht in einer eigenen Sektion, sondern als eine
- * Zeile über dem Plan: Prognosepille plus die Konsequenz aus den Planungs-
- * hinweisen. Gerendert wird eine Zeile je Tag; umgeschaltet wird sie wie die
- * Tageskarten, damit `loadWeather()` die Pillen weiterhin über
- * `.weather-pill[data-iso]` findet und nichts nachgeladen werden muss.
+ * Unterwegs steht das Wetter nicht in einer eigenen Sektion, sondern als Zeile
+ * am Kopf der Tageskarte: Prognosepille plus die Konsequenz aus den
+ * Planungshinweisen. `loadWeather()` findet die Pillen über
+ * `.weather-pill[data-iso]`, egal wo sie stehen.
+ *
+ * Früher lagen alle Zeilen als Block über dem Plan und wurden wie die Tageskarten
+ * umgeschaltet. Seit alle Tage gleichzeitig sichtbar sind, gehört jede Zeile zu
+ * ihrem Tag — sonst stünde eine Wetterangabe ohne erkennbaren Bezug am Seitenkopf.
  */
 function renderWeatherLine(trip, day) {
   if (!trip.weather?.enabled || !day.isoDate) return "";
   const note = (trip.weather.notes ?? []).find((n) => n.date === day.isoDate);
-  return `<div class="weather-line" data-day="${esc(day.id)}" hidden><span class="weather-pill" data-iso="${esc(day.isoDate)}">${esc(day.weather ?? "")}</span><b>${esc(note?.action ?? "")}</b></div>`;
+  return `<div class="weather-line" data-day="${esc(day.id)}"><span class="weather-pill" data-iso="${esc(day.isoDate)}">${esc(day.weather ?? "")}</span><b>${esc(note?.action ?? "")}</b></div>`;
 }
 
 /* ----------------------------------------------------------------- Stops */
@@ -206,36 +209,50 @@ function renderStop(stop, previous, dayId, index = 0) {
 }
 
 /**
- * Eine Tageskarte ist kein Aufklapper mehr, sondern ein Panel: sichtbar ist
- * immer genau ein Tag, gewechselt wird über die Leiste.
+ * Eine Tageskarte. **Alle Tage sind gleichzeitig sichtbar** — der Plan ist eine
+ * durchgehende Liste, kein Kartenstapel mit einem Fenster darauf.
  *
- * Läuft die Reise (`laufend`), fallen Tagesbild, Tagesnummer und Wetterpille
- * weg: Die Nummer steht im Kopf, das Wetter in der Zeile darüber, und das Bild
- * doppelt den Kopf. Vor und nach der Reise bleibt die Karte wie bisher.
+ * Vorher war genau ein Tag zu sehen und die Leiste schaltete um. Das versteckte
+ * drei Viertel der Reise: Wer wissen wollte, was übermorgen ansteht, musste
+ * suchen, und ein Überblick über die ganzen Tage war gar nicht möglich. Die Leiste
+ * springt jetzt, statt zu filtern.
+ *
+ * Läuft die Reise (`laufend`), fallen Tagesbild und Tagesnummer weg: die Nummer
+ * steht im Kopf, das Bild doppelt ihn. Das Wetter steht dann als Zeile am
+ * Kartenkopf statt als Pille im Text.
  */
-function renderDay(day, laufend = false) {
+function renderDay(day, laufend = false, trip = {}) {
   let previous = "Unterkunft / Basis";
   const stops = day.stops.map((stop, i) => { const html = renderStop(stop, previous, day.id, i); previous = stop.title; return html; }).join("");
   const hero = laufend ? "" : `<img class="day-hero" src="${image(day.heroImage)}"${masse(day.heroImage)} alt="${bildAlt(day.heroImage, day.title)}" loading="lazy" decoding="async">`;
+  const wetter = laufend ? renderWeatherLine(trip, day) : "";
   const kopf = laufend
     ? `<h3 class="day-title">${esc(day.title)}</h3><p class="day-note">${esc(day.note ?? "")}</p>`
     : `<p class="day-label">${esc(day.label)} · ${esc(day.date)}</p><h3 class="day-title">${esc(day.title)}</h3><p class="weather-pill" data-iso="${esc(day.isoDate ?? "")}">${esc(day.weather ?? "")}</p><p class="day-note">${esc(day.note ?? "")}</p>`;
-  return `<article class="day-card ${esc(day.tone)}" id="${esc(day.id)}" role="tabpanel" aria-labelledby="tab-${esc(day.id)}" hidden>
-    ${hero}
+  return `<article class="day-card ${esc(day.tone)}" id="${esc(day.id)}" aria-label="${esc(day.label)} · ${esc(day.date)}">
+    ${hero}${wetter}
     <div class="day-body">${kopf}</div>
     <div class="day-details"><div class="stops">${stops}</div></div>
   </article>`;
 }
 
-/** Die Leiste, die den Tag wechselt. Wochentag groß, Datum klein darunter. */
+/**
+ * Die Leiste über dem Plan. Sie **springt** zu einem Tag und blendet nichts aus.
+ *
+ * Deshalb Links und keine Knöpfe: ein Sprungziel ist ein Link. Das gibt ohne
+ * Zutun das richtige Verhalten — Adresse teilbar, in neuem Tab öffenbar,
+ * Tastaturbedienung inklusive — und die ARIA-Rollen `tablist`/`tab`, die ein
+ * Umschalten versprachen, entfallen. `aria-current` markiert den Tag, der gerade
+ * im Bild ist.
+ */
 function renderTabs(days) {
   const tabs = days.map((day) => {
     const [weekday, dayMonth] = String(day.date ?? "").split(" ");
-    return `<button class="day-tab" type="button" role="tab" id="tab-${esc(day.id)}" aria-controls="${esc(day.id)}" aria-selected="false" data-day="${esc(day.id)}">
+    return `<a class="day-tab" href="#${esc(day.id)}" data-day="${esc(day.id)}">
       <b>${esc(weekday || day.label)}</b><small>${esc(dayMonth ?? "")}</small>
-    </button>`;
+    </a>`;
   }).join("");
-  return `<div class="day-tabs" role="tablist" aria-label="Reisetage">${tabs}</div>`;
+  return `<nav class="day-tabs" aria-label="Zu einem Reisetag springen">${tabs}</nav>`;
 }
 
 /* ------------------------------------------------------------------ Kopf */
@@ -397,21 +414,24 @@ function markProgress(days) {
 /* ------------------------------------------- Aufklappen, Zustand, Links */
 
 const openIds = new Set();
-let currentDay = null;
-/** Alle Tage der geladenen Reise – selectDay braucht sie für die Fokuskarte. */
+/** Alle Tage der geladenen Reise – die Fokuskarte rechnet daraus ihren Zustand. */
 let alleTage = [];
 
+/**
+ * Gemerkt werden nur die offenen Stop-Karten. Früher stand hier zusätzlich der
+ * gewählte Tag – seit alle Tage sichtbar sind, gibt es keine Auswahl mehr zu
+ * merken. Ein alter Eintrag mit `day` schadet nicht, er wird ignoriert.
+ */
 function readState() {
   try {
     const saved = JSON.parse(sessionStorage.getItem(stateKey) ?? "{}");
     (saved.stops ?? []).forEach((id) => openIds.add(id));
-    currentDay = saved.day ?? null;
-  } catch { /* kein nutzbarer Zustand – dann entscheidet das Datum */ }
+  } catch { /* kein nutzbarer Zustand – dann bleibt alles zugeklappt */ }
 }
 
 function writeState() {
   try {
-    sessionStorage.setItem(stateKey, JSON.stringify({ day: currentDay, stops: [...openIds] }));
+    sessionStorage.setItem(stateKey, JSON.stringify({ stops: [...openIds] }));
   } catch { /* privater Modus o. Ä. – Zustand ist dann nur flüchtig */ }
 }
 
@@ -474,13 +494,20 @@ const SCROLL_LUFT = 14;   // etwas Platz, damit es nicht klebt
 let scrolltSelbst = false;
 let scrollWaechter = 0;
 
-function eigenesScrollenBeginnt() {
+function eigenesScrollenBeginnt(strecke = 0) {
   scrolltSelbst = true;
   clearTimeout(scrollWaechter);
   // `scrollend` beendet den Zustand punktgenau. Der Zeitgeber ist die
   // Rückfallebene – für Browser ohne das Ereignis und für den Fall, dass gar
   // nicht gescrollt werden muss: dann kommt weder `scroll` noch `scrollend`.
-  scrollWaechter = setTimeout(() => { scrolltSelbst = false; }, 1200);
+  //
+  // Die Frist hängt an der Strecke. Vorher waren es feste 1200 ms; seit alle Tage
+  // gleichzeitig sichtbar sind, ist die Seite rund 10 000 px lang, und ein Sprung
+  // von Tag 1 auf Tag 4 dauert länger. Die Frist lief mitten im Scrollen ab, die
+  // Automatik hielt den Rest für Fingerscrollen und schob die Leiste weg — das
+  // Ziel war dann mit der falschen Leistenhöhe gerechnet.
+  const frist = Math.min(3000, 500 + Math.abs(strecke) / 3);
+  scrollWaechter = setTimeout(() => { scrolltSelbst = false; }, frist);
 }
 
 window.addEventListener("scrollend", () => {
@@ -500,55 +527,102 @@ function scrolleUnterLeisten(el) {
   requestAnimationFrame(() => {
     const ziel = el.getBoundingClientRect().top + window.scrollY
                - leistenUnterkante() - SCROLL_LUFT;
-    eigenesScrollenBeginnt();
+    eigenesScrollenBeginnt(Math.max(0, ziel) - window.scrollY);
     window.scrollTo({ top: Math.max(0, ziel), behavior: "smooth" });
   });
 }
 
-/**
- * Der obere Rand des Tagesblocks. Das ist **nicht** die Tageskarte, sondern die
- * Karte darüber („Noch 33 Tage …", unterwegs „Als nächstes …"). Sie gehört zum
- * gewählten Tag und muss vollständig sichtbar sein – scrollt man auf die
- * Tageskarte, rutscht sie hinter die Leiste.
- */
-const tagesBlockAnfang = (id) =>
-  document.getElementById("fokus") ?? document.getElementById(id);
-
-/** Wechselt den sichtbaren Tag. Genau einer ist immer offen. */
-function selectDay(id, { scroll = false } = {}) {
-  const card = id ? document.getElementById(id) : null;
-  if (!card) return;
-  document.querySelectorAll(".day-card").forEach((el) => { el.hidden = el.id !== id; });
-  // Die Wetterzeile gehört zum Tag und wird mitgeschaltet.
-  document.querySelectorAll(".weather-line").forEach((el) => { el.hidden = el.dataset.day !== id; });
-  document.querySelectorAll(".day-tab").forEach((tab) => {
-    tab.setAttribute("aria-selected", String(tab.dataset.day === id));
-  });
-  currentDay = id;
-  fokusZeichnen(id);
-  writeState();
-  if (scroll) scrolleUnterLeisten(tagesBlockAnfang(id));
+/** Springt zu einem Tag. Blendet nichts aus – alle Tage bleiben sichtbar. */
+function springeZuTag(id) {
+  const karte = id ? document.getElementById(id) : null;
+  if (!karte) return false;
+  scrolleUnterLeisten(karte);
+  return true;
 }
 
 /**
- * Zeichnet die Karte über dem Plan für den angegebenen Tag neu.
+ * Zeichnet die Karte über dem Plan neu: den Zustand der **Reise**, nicht eines
+ * gewählten Tages — Countdown davor, „Als nächstes" unterwegs, Rückblick danach.
  *
- * Sie wurde vorher nur einmal beim Aufbau gerendert und blieb danach auf Tag 1
- * stehen, auch wenn man in der Leiste weiterblätterte. Da sie direkt unter der
- * Leiste sitzt, sah das aus wie ein Fehler – und war einer.
+ * Sie hing früher am gewählten Tag, weil die Leiste umschaltete. Seit alle Tage
+ * sichtbar sind, gibt es keine Auswahl, an der sie hängen könnte. Die Frage, die
+ * sie beantwortet, ist ohnehin „wo stehe ich in dieser Reise".
  */
-function fokusZeichnen(id) {
+function fokusZeichnen() {
   const ziel = document.getElementById("fokus");
-  if (!ziel) return;
-  const tag = alleTage.find((d) => d.id === id);
-  if (!tag) return;
-  ziel.innerHTML = renderFocus(fokusFuerTag(tag, alleTage));
+  if (ziel) ziel.innerHTML = renderFocus(focusOf(alleTage));
+}
+
+/**
+ * Blendet die Navigationsleiste aus und ruft danach `weiter()` auf.
+ *
+ * Das Warten ist nötig, nicht kosmetisch: die Leiste hat einen 240-ms-Übergang,
+ * und die Tagesleiste rückt in die frei werdende Höhe nach. Wer sofort messen
+ * würde, bekäme die alte Höhe und rechnete das Scrollziel um die Leistenhöhe
+ * daneben. Ohne Übergang (`prefers-reduced-motion`) ist die Wartezeit überflüssig,
+ * aber unschädlich.
+ */
+function navAusblendenDann(weiter) {
+  const nav = document.querySelector(".topnav");
+  if (!nav || nav.dataset.hidden === "true") return weiter();
+  nav.dataset.hidden = "true";
+  document.documentElement.dataset.nav = "hidden";
+  setTimeout(weiter, 260);
 }
 
 function bindTabs() {
-  document.querySelectorAll(".day-tab").forEach((tab) => {
-    tab.addEventListener("click", () => selectDay(tab.dataset.day, { scroll: true }));
-  });
+  for (const tab of document.querySelectorAll(".day-tab")) {
+    tab.addEventListener("click", (event) => {
+      // Der Link bleibt ein Link, aber das Scrollen macht die Seite: der Browser
+      // springt sonst hart und schiebt das Ziel unter die klebende Leiste.
+      // `replaceState` statt Zuweisung an location.hash – das löst kein
+      // `hashchange` aus und damit kein zweites Scrollen.
+      event.preventDefault();
+      history.replaceState(null, "", `#${tab.dataset.day}`);
+      // Beim Tagessprung geht das Hauptmenü weg: der Reisende will den Plan
+      // sehen, nicht die Navigation. Das schafft zugleich Platz und macht die
+      // Leistenhöhe eindeutig, mit der das Scrollziel gerechnet wird.
+      navAusblendenDann(() => springeZuTag(tab.dataset.day));
+    });
+  }
+}
+
+/**
+ * Markiert in der Leiste den Tag, der gerade im Bild ist.
+ *
+ * Bewusst über die Scrollposition statt über einen IntersectionObserver: der
+ * feuert in eingebetteten Ansichten ohne eigenes Compositing nicht, was bei den
+ * Tagesbildern schon einmal in eine lange Fehlersuche geführt hat. Vier
+ * Rechtecke pro Bildaufbau zu messen ist billig genug.
+ */
+function bindTagImBlick() {
+  const tabs = [...document.querySelectorAll(".day-tab")];
+  if (!tabs.length) return;
+  const karten = tabs.map((tab) => document.getElementById(tab.dataset.day));
+
+  let geplant = false;
+  const aktualisieren = () => {
+    geplant = false;
+    // Gesucht ist der Tag, der die Stelle **direkt unter der Leiste** einnimmt:
+    // erste Karte, deren Unterkante noch darunter liegt. Vorher war es „letzte
+    // Karte, deren Oberkante schon oberhalb der Leiste liegt" — nach einem Sprung
+    // steht die Zielkarte aber knapp *unter* der Leiste, und die Marke blieb beim
+    // Tag davor hängen.
+    const grenze = leistenUnterkante() + SCROLL_LUFT + 1;
+    let treffer = karten.findIndex((karte) => karte && karte.getBoundingClientRect().bottom > grenze);
+    if (treffer < 0) treffer = karten.length - 1;   // ganz unten: letzter Tag
+    tabs.forEach((tab, i) => {
+      if (i === treffer) tab.setAttribute("aria-current", "true");
+      else tab.removeAttribute("aria-current");
+    });
+  };
+
+  window.addEventListener("scroll", () => {
+    if (geplant) return;
+    geplant = true;
+    requestAnimationFrame(aktualisieren);
+  }, { passive: true });
+  aktualisieren();
 }
 
 function bindToggles() {
@@ -586,8 +660,6 @@ function openFromHash() {
   if (!id) return false;
   const target = document.getElementById(id);
   if (!target) return false;
-  const day = target.closest(".day-card");
-  if (day) selectDay(day.id);
   const stop = target.closest(".stop-card");
   if (stop) {
     // Absteigend suchen, nicht `:scope >`: der Knopf liegt seit der Zeitachse
@@ -597,7 +669,9 @@ function openFromHash() {
     if (toggle) setExpanded(toggle, true);
   }
   writeState();
-  scrolleUnterLeisten(stop ? target : tagesBlockAnfang(day?.id ?? id));
+  // Kein Umschalten mehr nötig: alle Tage stehen da. `#tag2` zeigt direkt auf die
+  // Tageskarte, `#tag2-stop-11` auf die Stop-Karte – beides ist das Scrollziel.
+  scrolleUnterLeisten(target);
   return true;
 }
 
@@ -749,27 +823,26 @@ async function init() {
   document.title = `${trip.title} · ${trip.destination}`;
 
   const kopf = renderHero(trip, days, focus);
-  const wetterzeilen = days.map((day) => renderWeatherLine(trip, day)).join("");
   const einleitung = `<section class="section intro"><p class="eyebrow">${esc(trip.introLabel ?? "Reise")}</p><h2>${esc(trip.introTitle ?? trip.destination)}</h2><p>${esc(trip.introText ?? "")}</p></section>`;
   // Unterwegs kostet der Sektionskopf eine halbe Bildschirmhöhe vor der Leiste.
   const kopfzeile = laufend ? "" : `<div class="section-head"><p class="eyebrow">Tagespläne</p><h2>${days.length} Tage, mobil lesbar</h2></div>`;
-  const tage = `<section class="section day-section${laufend ? " is-running" : ""}" id="tage">${kopfzeile}${renderTabs(days)}<div id="fokus">${renderFocus(focus)}</div><div class="days">${days.map((day) => renderDay(day, laufend)).join("")}</div></section>`;
+  const tage = `<section class="section day-section${laufend ? " is-running" : ""}" id="tage">${kopfzeile}${renderTabs(days)}<div id="fokus">${renderFocus(focus)}</div><div class="days">${days.map((day) => renderDay(day, laufend, trip)).join("")}</div></section>`;
 
-  // Unterwegs zählt der Tag, davor und danach die Reise.
+  // Unterwegs zählt der Tag, davor und danach die Reise. Die Wetterzeilen stehen
+  // jetzt in den Tageskarten selbst, nicht mehr als Block über dem Plan.
   root.innerHTML = (laufend
-    ? `${kopf}${wetterzeilen}${tage}${einleitung}${renderWeather(trip)}`
+    ? `${kopf}${tage}${einleitung}${renderWeather(trip)}`
     : `${kopf}${einleitung}${renderWeather(trip)}${tage}`) + renderBildnachweis() + renderTestHint() + renderFusszeile();
 
   readState();
   bindTabs();
   bindToggles();
   bindNavAutoHide();
+  bindTagImBlick();
   restoreStops();
-  // Deep-Link gewinnt; sonst der gespeicherte Tag, sonst der heutige.
-  if (!openFromHash()) {
-    const gespeichert = currentDay && document.getElementById(currentDay) ? currentDay : null;
-    selectDay(gespeichert ?? focus.day?.id, { scroll: !gespeichert && focus.status === "laufend" });
-  }
+  // Deep-Link gewinnt. Sonst wird nur unterwegs gescrollt – auf den heutigen Tag,
+  // weil der zählt. Davor und danach beginnt die Seite oben, beim Titelbild.
+  if (!openFromHash() && laufend) springeZuTag(focus.day?.id);
   window.addEventListener("hashchange", openFromHash);
 
   markProgress(days);
@@ -777,7 +850,7 @@ async function init() {
   // Ohne das zweite stimmt „in 25 Min." nach einer Stunde nicht mehr.
   setInterval(() => {
     markProgress(days);
-    if (currentDay) fokusZeichnen(currentDay);
+    fokusZeichnen();
   }, 60000);
 
   loadWeather(trip);

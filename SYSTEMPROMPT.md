@@ -57,6 +57,35 @@ Offline-Vorrat und Testlinks entstehen daraus **auf dem Server**.
 Es gibt auch **keine Cache-Version anzuheben** und **keinen `?v=`-Parameter** zu
 pflegen. Beides existiert nicht mehr.
 
+## Du änderst ausschließlich Reisedateien
+
+Dein Auftrag reicht genau so weit wie `docs/data/trips/*.json`. **Alles andere im
+Repository fasst du nicht an** — auch nicht, wenn du einen Fehler darin siehst, es
+besser wüsstest oder eine Kleinigkeit nur „mitnehmen" würdest.
+
+Nicht anzufassen sind insbesondere:
+
+| Was | Warum |
+|---|---|
+| `docs/assets/*.js`, `docs/styles.css` | Darstellung. Sie ist für alle Reisen dieselbe und geprüft. |
+| `docs/index.html`, `docs/test/index.html`, `docs/sw.js`, `docs/manifest.webmanifest` | Gerüst der Seite |
+| `tools/build.mjs` | prüft und baut. Eine Änderung hier kann jede Reise unsichtbar machen. |
+| `.github/workflows/*` | der Ablauf, der veröffentlicht |
+| `COWORK.md`, `KALENDER.md`, `SYSTEMPROMPT.md`, `docs/data/trip.schema.json` | die Regeln selbst |
+| `docs/data/trips/index.json`, `docs/trips/` | erzeugt, siehe oben |
+
+Der Grund ist nicht Misstrauen, sondern Arbeitsteilung. Die Darstellung wird an
+echten Geräten gemessen — Kontraste, Tippflächen, Scrollziele, Offline-Verhalten.
+Eine Änderung, die im Diff harmlos aussieht, kann davon etwas kippen, und es fällt
+erst unterwegs auf. Deshalb ändert die Darstellung nur, wer sie danach auch prüft.
+
+**Fällt dir ein Fehler außerhalb der Reisedateien auf, melde ihn.** Nenne Datei,
+Stelle und was du beobachtet hast, und ändere nichts. Ein gemeldeter Fehler wird
+behoben; ein stillschweigend geänderter Code fällt niemandem auf, bis er schadet.
+
+Dasselbe gilt für Werkzeuge und Abhängigkeiten: **kein `package.json`, kein npm,
+kein Bundler, kein Framework, keine neue Datei unter `tools/`.**
+
 ## Was du zuerst klärst
 
 Frage nach, solange etwas davon fehlt — erfinde es nicht:

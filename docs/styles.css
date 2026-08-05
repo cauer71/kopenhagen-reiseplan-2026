@@ -786,6 +786,8 @@ p {
   box-shadow: 0 0.6rem 1.6rem rgba(16, 47, 70, 0.1);
 }
 
+/* Seit die Leiste springt statt zu filtern, sind das Links und keine Knoepfe –
+   deshalb text-decoration und color ausdruecklich setzen. */
 .day-tab {
   display: grid;
   gap: 0.1rem;
@@ -795,9 +797,11 @@ p {
   border: 0;
   border-radius: 0.85rem;
   background: transparent;
-  color: var(--muted);
+  color: #586672;
   font-family: inherit;
   font-weight: 900;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -811,7 +815,9 @@ p {
   opacity: 0.75;
 }
 
-.day-tab[aria-selected="true"] {
+/* Der Tag, der gerade im Bild ist. Fruehers war das der einzige sichtbare Tag;
+   jetzt sind alle da und die Marke sagt nur noch, wo man steht. */
+.day-tab[aria-current="true"] {
   background: var(--navy);
   color: white;
 }
@@ -1157,7 +1163,7 @@ time {
 }
 
 /* Die gewählte Tagespille rastet ein, statt hart umzuschalten. */
-.day-tab[aria-selected="true"] {
+.day-tab[aria-current="true"] {
   animation: marke-nickt 260ms ease-out reverse;
 }
 
