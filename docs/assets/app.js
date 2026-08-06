@@ -252,7 +252,12 @@ function renderTabs(days) {
       <b>${esc(weekday || day.label)}</b><small>${esc(dayMonth ?? "")}</small>
     </a>`;
   }).join("");
-  return `<nav class="day-tabs" aria-label="Zu einem Reisetag springen">${tabs}</nav>`;
+  // Zwei Ebenen: außen die klebende Hülle mit dem Rahmen und den Randverläufen,
+  // innen der waagrecht wischbare Streifen. Nötig, weil die Verläufe als
+  // Pseudoelemente im Grid sonst eigene Spalten würden.
+  return `<div class="day-tabs">
+    <nav class="day-tabs-inner" aria-label="Zu einem Reisetag springen">${tabs}</nav>
+  </div>`;
 }
 
 /* ------------------------------------------------------------------ Kopf */
@@ -595,12 +600,67 @@ function bindTabs() {
  * Tagesbildern schon einmal in eine lange Fehlersuche geführt hat. Vier
  * Rechtecke pro Bildaufbau zu messen ist billig genug.
  */
-function bindTagImBlick() {
+/**
+ * Zeigt an, dass die Tagesleiste seitlich weitergeht.
+ *
+ * Der angeschnittene nächste Tag am Rand reicht als Hinweis nicht: auf dem Handy
+ * sieht er aus wie ein Anschnitt des Rahmens. Deshalb ein Verlauf mit Pfeil, und
+ * zwar nur auf der Seite, auf der wirklich mehr kommt — steht man am Ende, wäre
+ * ein Pfeil nach rechts eine Lüge.
+ */
+function bindWischhinweis() {
+  const huelle = document.querySelector(".day-tabs");
+  const streifen = document.querySelector(".day-tabs-inner");
+  if (!huelle || !streifen) return;
+
+  const pruefen = () => {
+    const rest = streifen.scrollWidth - streifen.clientWidth;
+    if (rest <= 1) { huelle.removeAttribute("data-mehr"); return; }
+    const seiten = [];
+    if (streifen.scrollLeft > 2) seiten.push("links");
+    if (streifen.scrollLeft < rest - 2) seiten.push("rechts");
+    huelle.dataset.mehr = seiten.join(" ");
+  };
+
+  // Mehrere Auslöser, weil `scroll` auf verschachtelten Scrollern nicht überall
+  // ankommt – in eingebetteten Vorschauen ohne eigenes Compositing feuert es
+  // nachweislich nicht. `pointerup`/`touchend` kommen dort an, und das
+  // Seitenscrollen ruft `pruefen` ohnehin über bindTagImBlick auf.
+  for (const art of ["scroll", "scrollend", "pointerup", "touchend"]) {
+    streifen.addEventListener(art, pruefen, { passive: true });
+  }
+  window.addEventListener("resize", pruefen);
+  // Nach dem Bildaufbau: vorher stehen Breiten noch nicht fest.
+  requestAnimationFrame(pruefen);
+  return pruefen;
+}
+
+function bindTagImBlick(wischhinweis) {
   const tabs = [...document.querySelectorAll(".day-tab")];
   if (!tabs.length) return;
   const karten = tabs.map((tab) => document.getElementById(tab.dataset.day));
 
+  /**
+   * Holt einen Tag in der Leiste ins Bild, wenn sie breiter ist als das Fenster.
+   *
+   * Bei vielen Tagen wird die Leiste seitlich gewischt. Ohne das stünde die
+   * Marke bei Tag 7 von 10 außerhalb – man sähe nirgends, wo man ist.
+   *
+   * `scrollLeft` von Hand statt `scrollIntoView`: das würde auch die Seite
+   * senkrecht verschieben und damit gegen das eigene Scrollen arbeiten.
+   */
+  const tabInsBlick = (tab) => {
+    const leiste = tab.parentElement;
+    if (leiste.scrollWidth <= leiste.clientWidth + 1) return;
+    const luft = 12;
+    const links = tab.offsetLeft - luft;
+    const rechts = tab.offsetLeft + tab.offsetWidth + luft - leiste.clientWidth;
+    if (links < leiste.scrollLeft) leiste.scrollTo({ left: links, behavior: "smooth" });
+    else if (rechts > leiste.scrollLeft) leiste.scrollTo({ left: rechts, behavior: "smooth" });
+  };
+
   let geplant = false;
+  let markiert = -1;
   const aktualisieren = () => {
     geplant = false;
     // Gesucht ist der Tag, der die Stelle **direkt unter der Leiste** einnimmt:
@@ -611,10 +671,16 @@ function bindTagImBlick() {
     const grenze = leistenUnterkante() + SCROLL_LUFT + 1;
     let treffer = karten.findIndex((karte) => karte && karte.getBoundingClientRect().bottom > grenze);
     if (treffer < 0) treffer = karten.length - 1;   // ganz unten: letzter Tag
+    if (treffer === markiert) return;
+    markiert = treffer;
     tabs.forEach((tab, i) => {
       if (i === treffer) tab.setAttribute("aria-current", "true");
       else tab.removeAttribute("aria-current");
     });
+    // Nur beim Wechsel nachführen, nicht bei jedem Bildaufbau – sonst arbeitet
+    // die Leiste gegen den Finger, während man sie selbst wischt.
+    tabInsBlick(tabs[treffer]);
+    wischhinweis?.();
   };
 
   window.addEventListener("scroll", () => {
@@ -838,7 +904,7 @@ async function init() {
   bindTabs();
   bindToggles();
   bindNavAutoHide();
-  bindTagImBlick();
+  bindTagImBlick(bindWischhinweis());
   restoreStops();
   // Deep-Link gewinnt. Sonst wird nur unterwegs gescrollt – auf den heutigen Tag,
   // weil der zählt. Davor und danach beginnt die Seite oben, beim Titelbild.

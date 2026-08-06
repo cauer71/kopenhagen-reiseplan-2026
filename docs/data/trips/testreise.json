@@ -1,0 +1,2399 @@
+{
+  "trip": {
+    "destination": "Testreise",
+    "title": "Testreise mit zwoelf Tagen",
+    "subtitle": "Nur zum Pruefen der Darstellung: viele Tage, wischbare Tagesleiste, lange Seite.",
+    "dates": "03.10.–14.10. Oktober 2026",
+    "travellers": "Christian & Julia",
+    "timezone": "Europe/Rome",
+    "heroImage": "colosseo",
+    "introLabel": "Testreise",
+    "introTitle": "Diese Reise gibt es nicht.",
+    "introText": "Sie dient nur dazu, die Seite mit mehr als vier Tagen zu pruefen: die Tagesleiste laesst sich dann seitlich wischen.",
+    "theme": "navy",
+    "weather": {
+      "enabled": true,
+      "latitude": 41.9028,
+      "longitude": 12.4964,
+      "timezone": "Europe/Rome",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-14",
+      "notes": [
+        {
+          "date": "2026-10-03",
+          "day": "Sa",
+          "action": "Testtag 1: Beispielhinweis fuer die Wetterzeile."
+        },
+        {
+          "date": "2026-10-04",
+          "day": "So",
+          "action": "Testtag 2: Beispielhinweis fuer die Wetterzeile."
+        },
+        {
+          "date": "2026-10-05",
+          "day": "Mo",
+          "action": "Testtag 3: Beispielhinweis fuer die Wetterzeile."
+        },
+        {
+          "date": "2026-10-06",
+          "day": "Di",
+          "action": "Testtag 4: Beispielhinweis fuer die Wetterzeile."
+        },
+        {
+          "date": "2026-10-07",
+          "day": "Mi",
+          "action": "Testtag 5: Beispielhinweis fuer die Wetterzeile."
+        },
+        {
+          "date": "2026-10-08",
+          "day": "Do",
+          "action": "Testtag 6: Beispielhinweis fuer die Wetterzeile."
+        },
+        {
+          "date": "2026-10-09",
+          "day": "Fr",
+          "action": "Testtag 7: Beispielhinweis fuer die Wetterzeile."
+        },
+        {
+          "date": "2026-10-10",
+          "day": "Sa",
+          "action": "Testtag 8: Beispielhinweis fuer die Wetterzeile."
+        },
+        {
+          "date": "2026-10-11",
+          "day": "So",
+          "action": "Testtag 9: Beispielhinweis fuer die Wetterzeile."
+        },
+        {
+          "date": "2026-10-12",
+          "day": "Mo",
+          "action": "Testtag 10: Beispielhinweis fuer die Wetterzeile."
+        },
+        {
+          "date": "2026-10-13",
+          "day": "Di",
+          "action": "Testtag 11: Beispielhinweis fuer die Wetterzeile."
+        },
+        {
+          "date": "2026-10-14",
+          "day": "Mi",
+          "action": "Testtag 12: Beispielhinweis fuer die Wetterzeile."
+        }
+      ]
+    }
+  },
+  "days": [
+    {
+      "id": "tag1",
+      "label": "Tag 1",
+      "date": "Sa 03.10.",
+      "isoDate": "2026-10-03",
+      "title": "Ankommen, Zaha Hadid und nächtliche Ara Pacis — Tag 1",
+      "tone": "teal",
+      "heroImage": "maxxi",
+      "weather": "Wettercheck: MAXXI ist der sichere Indoor-Block; der Weg zur Ara Pacis bleibt auch bei Regen kurz planbar.",
+      "note": "Nach der Zugankunft wird das Gepäck sofort im Seven abgegeben. Der Nachmittag gehört ganz dem MAXXI und seiner Architektur, bevor Open Baladin Craft Beer und vegetarische Küche zusammenführt. Der gebuchte Abendtermin an der Ara Pacis ist nicht verschiebbar; der anschließende Bierstopp in Trastevere bleibt optional.",
+      "stops": [
+        {
+          "uid": "01",
+          "time": "06:42"
+        },
+        {
+          "uid": "02",
+          "time": "11:55"
+        },
+        {
+          "uid": "03",
+          "time": "12:20"
+        },
+        {
+          "uid": "04",
+          "time": "16:00"
+        },
+        {
+          "uid": "05",
+          "time": "19:00"
+        },
+        {
+          "uid": "06",
+          "time": "21:00"
+        },
+        {
+          "uid": "07",
+          "time": "22:05"
+        }
+      ]
+    },
+    {
+      "id": "tag2",
+      "label": "Tag 2",
+      "date": "So 04.10.",
+      "isoDate": "2026-10-04",
+      "title": "Maschinen, Jugendstil, Bunker und Coppedè — Tag 2",
+      "tone": "gold",
+      "heroImage": "montemartini",
+      "weather": "Wettercheck: Gasometro und Coppedè sind Außenpunkte; Centrale, Casina und Bunker funktionieren bei Regen.",
+      "note": "Der Tag beginnt im ehemaligen Elektrizitätswerk an der Via Ostiense und bleibt zunächst im Industrieviertel. Nach dem veganen Mittagessen führt die Metro ohne Altstadtumweg zur Villa Torlonia. Die gebuchte Bunkerführung um 17:00 Uhr hat Vorrang vor allen anderen Sonntagsstopps.",
+      "stops": [
+        {
+          "uid": "08",
+          "time": "09:00"
+        },
+        {
+          "uid": "09",
+          "time": "11:20"
+        },
+        {
+          "uid": "10",
+          "time": "13:00"
+        },
+        {
+          "uid": "11",
+          "time": "15:00"
+        },
+        {
+          "uid": "12",
+          "time": "17:00"
+        },
+        {
+          "uid": "13",
+          "time": "18:10"
+        },
+        {
+          "uid": "14",
+          "time": "19:30"
+        }
+      ]
+    },
+    {
+      "id": "tag3",
+      "label": "Tag 3",
+      "date": "Mo 05.10.",
+      "isoDate": "2026-10-05",
+      "title": "Pantheon, Il Gesù und das antike Rom — Tag 3",
+      "tone": "coral",
+      "heroImage": "pantheon",
+      "weather": "Wettercheck: Pantheon und Il Gesù sind innen; Kolosseum, Forum, Palatin und der Stadtspaziergang sind wetterabhängig.",
+      "note": "Der Montag ist als kompakte Baugeschichte angelegt: erst die römische Kuppelkonstruktion des Pantheon, dann der prägende Jesuitenkirchentyp von Il Gesù und anschließend das große antike Ensemble. Trevi und Piazza di Spagna liegen danach in einer natürlichen Fußwegkette zurück Richtung Unterkunft.",
+      "stops": [
+        {
+          "uid": "15",
+          "time": "09:00"
+        },
+        {
+          "uid": "16",
+          "time": "10:00"
+        },
+        {
+          "uid": "17",
+          "time": "10:50"
+        },
+        {
+          "uid": "18",
+          "time": "12:30"
+        },
+        {
+          "uid": "19",
+          "time": "13:35"
+        },
+        {
+          "uid": "20",
+          "time": "15:45"
+        },
+        {
+          "uid": "21",
+          "time": "16:35"
+        },
+        {
+          "uid": "22",
+          "time": "17:30"
+        },
+        {
+          "uid": "23",
+          "time": "19:30"
+        }
+      ]
+    },
+    {
+      "id": "tag4",
+      "label": "Tag 4",
+      "date": "Di 06.10.",
+      "isoDate": "2026-10-06",
+      "title": "Ankommen, Zaha Hadid und nächtliche Ara Pacis — Tag 4",
+      "tone": "navy",
+      "heroImage": "maxxi",
+      "weather": "Wettercheck: MAXXI ist der sichere Indoor-Block; der Weg zur Ara Pacis bleibt auch bei Regen kurz planbar.",
+      "note": "Nach der Zugankunft wird das Gepäck sofort im Seven abgegeben. Der Nachmittag gehört ganz dem MAXXI und seiner Architektur, bevor Open Baladin Craft Beer und vegetarische Küche zusammenführt. Der gebuchte Abendtermin an der Ara Pacis ist nicht verschiebbar; der anschließende Bierstopp in Trastevere bleibt optional.",
+      "stops": [
+        {
+          "uid": "24",
+          "time": "06:42"
+        },
+        {
+          "uid": "25",
+          "time": "11:55"
+        },
+        {
+          "uid": "26",
+          "time": "12:20"
+        },
+        {
+          "uid": "27",
+          "time": "16:00"
+        },
+        {
+          "uid": "28",
+          "time": "19:00"
+        },
+        {
+          "uid": "29",
+          "time": "21:00"
+        },
+        {
+          "uid": "30",
+          "time": "22:05"
+        }
+      ]
+    },
+    {
+      "id": "tag5",
+      "label": "Tag 5",
+      "date": "Mi 07.10.",
+      "isoDate": "2026-10-07",
+      "title": "Maschinen, Jugendstil, Bunker und Coppedè — Tag 5",
+      "tone": "teal",
+      "heroImage": "montemartini",
+      "weather": "Wettercheck: Gasometro und Coppedè sind Außenpunkte; Centrale, Casina und Bunker funktionieren bei Regen.",
+      "note": "Der Tag beginnt im ehemaligen Elektrizitätswerk an der Via Ostiense und bleibt zunächst im Industrieviertel. Nach dem veganen Mittagessen führt die Metro ohne Altstadtumweg zur Villa Torlonia. Die gebuchte Bunkerführung um 17:00 Uhr hat Vorrang vor allen anderen Sonntagsstopps.",
+      "stops": [
+        {
+          "uid": "31",
+          "time": "09:00"
+        },
+        {
+          "uid": "32",
+          "time": "11:20"
+        },
+        {
+          "uid": "33",
+          "time": "13:00"
+        },
+        {
+          "uid": "34",
+          "time": "15:00"
+        },
+        {
+          "uid": "35",
+          "time": "17:00"
+        },
+        {
+          "uid": "36",
+          "time": "18:10"
+        },
+        {
+          "uid": "37",
+          "time": "19:30"
+        }
+      ]
+    },
+    {
+      "id": "tag6",
+      "label": "Tag 6",
+      "date": "Do 08.10.",
+      "isoDate": "2026-10-08",
+      "title": "Pantheon, Il Gesù und das antike Rom — Tag 6",
+      "tone": "gold",
+      "heroImage": "pantheon",
+      "weather": "Wettercheck: Pantheon und Il Gesù sind innen; Kolosseum, Forum, Palatin und der Stadtspaziergang sind wetterabhängig.",
+      "note": "Der Montag ist als kompakte Baugeschichte angelegt: erst die römische Kuppelkonstruktion des Pantheon, dann der prägende Jesuitenkirchentyp von Il Gesù und anschließend das große antike Ensemble. Trevi und Piazza di Spagna liegen danach in einer natürlichen Fußwegkette zurück Richtung Unterkunft.",
+      "stops": [
+        {
+          "uid": "38",
+          "time": "09:00"
+        },
+        {
+          "uid": "39",
+          "time": "10:00"
+        },
+        {
+          "uid": "40",
+          "time": "10:50"
+        },
+        {
+          "uid": "41",
+          "time": "12:30"
+        },
+        {
+          "uid": "42",
+          "time": "13:35"
+        },
+        {
+          "uid": "43",
+          "time": "15:45"
+        },
+        {
+          "uid": "44",
+          "time": "16:35"
+        },
+        {
+          "uid": "45",
+          "time": "17:30"
+        },
+        {
+          "uid": "46",
+          "time": "19:30"
+        }
+      ]
+    },
+    {
+      "id": "tag7",
+      "label": "Tag 7",
+      "date": "Fr 09.10.",
+      "isoDate": "2026-10-09",
+      "title": "Ankommen, Zaha Hadid und nächtliche Ara Pacis — Tag 7",
+      "tone": "coral",
+      "heroImage": "maxxi",
+      "weather": "Wettercheck: MAXXI ist der sichere Indoor-Block; der Weg zur Ara Pacis bleibt auch bei Regen kurz planbar.",
+      "note": "Nach der Zugankunft wird das Gepäck sofort im Seven abgegeben. Der Nachmittag gehört ganz dem MAXXI und seiner Architektur, bevor Open Baladin Craft Beer und vegetarische Küche zusammenführt. Der gebuchte Abendtermin an der Ara Pacis ist nicht verschiebbar; der anschließende Bierstopp in Trastevere bleibt optional.",
+      "stops": [
+        {
+          "uid": "47",
+          "time": "06:42"
+        },
+        {
+          "uid": "48",
+          "time": "11:55"
+        },
+        {
+          "uid": "49",
+          "time": "12:20"
+        },
+        {
+          "uid": "50",
+          "time": "16:00"
+        },
+        {
+          "uid": "51",
+          "time": "19:00"
+        },
+        {
+          "uid": "52",
+          "time": "21:00"
+        },
+        {
+          "uid": "53",
+          "time": "22:05"
+        }
+      ]
+    },
+    {
+      "id": "tag8",
+      "label": "Tag 8",
+      "date": "Sa 10.10.",
+      "isoDate": "2026-10-10",
+      "title": "Maschinen, Jugendstil, Bunker und Coppedè — Tag 8",
+      "tone": "navy",
+      "heroImage": "montemartini",
+      "weather": "Wettercheck: Gasometro und Coppedè sind Außenpunkte; Centrale, Casina und Bunker funktionieren bei Regen.",
+      "note": "Der Tag beginnt im ehemaligen Elektrizitätswerk an der Via Ostiense und bleibt zunächst im Industrieviertel. Nach dem veganen Mittagessen führt die Metro ohne Altstadtumweg zur Villa Torlonia. Die gebuchte Bunkerführung um 17:00 Uhr hat Vorrang vor allen anderen Sonntagsstopps.",
+      "stops": [
+        {
+          "uid": "54",
+          "time": "09:00"
+        },
+        {
+          "uid": "55",
+          "time": "11:20"
+        },
+        {
+          "uid": "56",
+          "time": "13:00"
+        },
+        {
+          "uid": "57",
+          "time": "15:00"
+        },
+        {
+          "uid": "58",
+          "time": "17:00"
+        },
+        {
+          "uid": "59",
+          "time": "18:10"
+        },
+        {
+          "uid": "60",
+          "time": "19:30"
+        }
+      ]
+    },
+    {
+      "id": "tag9",
+      "label": "Tag 9",
+      "date": "So 11.10.",
+      "isoDate": "2026-10-11",
+      "title": "Pantheon, Il Gesù und das antike Rom — Tag 9",
+      "tone": "teal",
+      "heroImage": "pantheon",
+      "weather": "Wettercheck: Pantheon und Il Gesù sind innen; Kolosseum, Forum, Palatin und der Stadtspaziergang sind wetterabhängig.",
+      "note": "Der Montag ist als kompakte Baugeschichte angelegt: erst die römische Kuppelkonstruktion des Pantheon, dann der prägende Jesuitenkirchentyp von Il Gesù und anschließend das große antike Ensemble. Trevi und Piazza di Spagna liegen danach in einer natürlichen Fußwegkette zurück Richtung Unterkunft.",
+      "stops": [
+        {
+          "uid": "61",
+          "time": "09:00"
+        },
+        {
+          "uid": "62",
+          "time": "10:00"
+        },
+        {
+          "uid": "63",
+          "time": "10:50"
+        },
+        {
+          "uid": "64",
+          "time": "12:30"
+        },
+        {
+          "uid": "65",
+          "time": "13:35"
+        },
+        {
+          "uid": "66",
+          "time": "15:45"
+        },
+        {
+          "uid": "67",
+          "time": "16:35"
+        },
+        {
+          "uid": "68",
+          "time": "17:30"
+        },
+        {
+          "uid": "69",
+          "time": "19:30"
+        }
+      ]
+    },
+    {
+      "id": "tag10",
+      "label": "Tag 10",
+      "date": "Mo 12.10.",
+      "isoDate": "2026-10-12",
+      "title": "Ankommen, Zaha Hadid und nächtliche Ara Pacis — Tag 10",
+      "tone": "gold",
+      "heroImage": "maxxi",
+      "weather": "Wettercheck: MAXXI ist der sichere Indoor-Block; der Weg zur Ara Pacis bleibt auch bei Regen kurz planbar.",
+      "note": "Nach der Zugankunft wird das Gepäck sofort im Seven abgegeben. Der Nachmittag gehört ganz dem MAXXI und seiner Architektur, bevor Open Baladin Craft Beer und vegetarische Küche zusammenführt. Der gebuchte Abendtermin an der Ara Pacis ist nicht verschiebbar; der anschließende Bierstopp in Trastevere bleibt optional.",
+      "stops": [
+        {
+          "uid": "70",
+          "time": "06:42"
+        },
+        {
+          "uid": "71",
+          "time": "11:55"
+        },
+        {
+          "uid": "72",
+          "time": "12:20"
+        },
+        {
+          "uid": "73",
+          "time": "16:00"
+        },
+        {
+          "uid": "74",
+          "time": "19:00"
+        },
+        {
+          "uid": "75",
+          "time": "21:00"
+        },
+        {
+          "uid": "76",
+          "time": "22:05"
+        }
+      ]
+    },
+    {
+      "id": "tag11",
+      "label": "Tag 11",
+      "date": "Di 13.10.",
+      "isoDate": "2026-10-13",
+      "title": "Maschinen, Jugendstil, Bunker und Coppedè — Tag 11",
+      "tone": "coral",
+      "heroImage": "montemartini",
+      "weather": "Wettercheck: Gasometro und Coppedè sind Außenpunkte; Centrale, Casina und Bunker funktionieren bei Regen.",
+      "note": "Der Tag beginnt im ehemaligen Elektrizitätswerk an der Via Ostiense und bleibt zunächst im Industrieviertel. Nach dem veganen Mittagessen führt die Metro ohne Altstadtumweg zur Villa Torlonia. Die gebuchte Bunkerführung um 17:00 Uhr hat Vorrang vor allen anderen Sonntagsstopps.",
+      "stops": [
+        {
+          "uid": "77",
+          "time": "09:00"
+        },
+        {
+          "uid": "78",
+          "time": "11:20"
+        },
+        {
+          "uid": "79",
+          "time": "13:00"
+        },
+        {
+          "uid": "80",
+          "time": "15:00"
+        },
+        {
+          "uid": "81",
+          "time": "17:00"
+        },
+        {
+          "uid": "82",
+          "time": "18:10"
+        },
+        {
+          "uid": "83",
+          "time": "19:30"
+        }
+      ]
+    },
+    {
+      "id": "tag12",
+      "label": "Tag 12",
+      "date": "Mi 14.10.",
+      "isoDate": "2026-10-14",
+      "title": "Pantheon, Il Gesù und das antike Rom — Tag 12",
+      "tone": "navy",
+      "heroImage": "pantheon",
+      "weather": "Wettercheck: Pantheon und Il Gesù sind innen; Kolosseum, Forum, Palatin und der Stadtspaziergang sind wetterabhängig.",
+      "note": "Der Montag ist als kompakte Baugeschichte angelegt: erst die römische Kuppelkonstruktion des Pantheon, dann der prägende Jesuitenkirchentyp von Il Gesù und anschließend das große antike Ensemble. Trevi und Piazza di Spagna liegen danach in einer natürlichen Fußwegkette zurück Richtung Unterkunft.",
+      "stops": [
+        {
+          "uid": "84",
+          "time": "09:00"
+        },
+        {
+          "uid": "85",
+          "time": "10:00"
+        },
+        {
+          "uid": "86",
+          "time": "10:50"
+        },
+        {
+          "uid": "87",
+          "time": "12:30"
+        },
+        {
+          "uid": "88",
+          "time": "13:35"
+        },
+        {
+          "uid": "89",
+          "time": "15:45"
+        },
+        {
+          "uid": "90",
+          "time": "16:35"
+        },
+        {
+          "uid": "91",
+          "time": "17:30"
+        },
+        {
+          "uid": "92",
+          "time": "19:30"
+        }
+      ]
+    }
+  ],
+  "places": {
+    "10": {
+      "title": "Lunch – Romeow Cat Bistrot · T2",
+      "detail": "Vollständig pflanzliches Gourmet-Bistrot mit acht Katzen und reservierungspflichtigem Sonntagslunch.",
+      "description": [
+        "Anfahrt: vom Gasometro beziehungsweise Ostiense → Romeow, Via Francesco Negri 15 · zu Fuß etwa 10–15 Min. · ÖPNV —. Das Lokal liegt damit genau am Ende des Industrieblocks.",
+        "Romeow ist mehr als ein klassisches Katzencafé: Zum Mittag wird ein saisonales, vollständig pflanzliches Restaurantkonzept angeboten. Die Katzen stammen aus einer Tierschutzorganisation und bestimmen den Raum mit; ihre Rückzugsbereiche und Ruhezeiten müssen respektiert werden.",
+        "Am Samstag und Sonntag ist der Restaurantbetrieb von 13:00 bis 15:45 Uhr ausschließlich mit Reservierung zugänglich. Der Stopp ist bewusst länger geplant, weil das Essen stärker auf ein Menüerlebnis als auf einen schnellen Snack ausgerichtet ist."
+      ],
+      "image": "cucina",
+      "place": "Romeow Cat Bistrot, Via Francesco Negri 15, 00154 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Francesco Negri 15, 00154 Roma",
+      "duration": "ca. 1 Std. 15 Min.",
+      "minutes": 75,
+      "price": "ca. 25–40 € pro Person.",
+      "tip": "Reservierung für Sonntag 13:00 Uhr verpflichtend; den Katzen nicht nachlaufen oder sie wecken.",
+      "ticketUrl": "https://www.romeowcatbistrot.com/orari-e-informazioni-importanti/"
+    },
+    "11": {
+      "title": "Casina delle Civette – Villa Torlonia · T2",
+      "detail": "Eklektische Wohnarchitektur mit Jugendstilfenstern, Türmchen, Holzarbeiten und märchenhafter Silhouette.",
+      "description": [
+        "Anfahrt: von Romeow → Villa Torlonia · zu Fuß etwa 10–12 Min. bis Garbatella · Metro B bis Policlinico und anschließend 12–15 Min. zu Fuß · insgesamt ungefähr 35–45 Min. Der Weg umgeht die Altstadt und nutzt die direkte Nord-Süd-Verbindung.",
+        "Die Casina delle Civette entwickelte sich aus einer ländlich-schweizerisch gedachten Hütte zu einem eklektischen Wohnhaus des frühen 20. Jahrhunderts. Spitzdächer, Erker, Loggien, Majolika, Holz, Schmiedeeisen und vor allem die farbigen Glasfenster ergeben kein einheitliches Stilprogramm, sondern eine bewusst fantastische Collage zwischen Mittelalterbild und Jugendstil.",
+        "Der Museumsbesuch endet spätestens gegen 16:10 Uhr, damit genügend Zeit für den Weg zum Casino Nobile, Toilette und Einlasskontrolle der Bunkerführung bleibt. Bei langen Gratis-Sonntagswarteschlangen wird die Casina verkürzt; der gebuchte Bunkertermin ist unantastbar."
+      ],
+      "image": "civette",
+      "place": "Casina delle Civette, Villa Torlonia, Via Nomentana 70, 00161 Roma RM, Italien",
+      "weather": "beides",
+      "address": "Villa Torlonia, Via Nomentana 70, 00161 Roma",
+      "duration": "ca. 60–70 Min.",
+      "minutes": 70,
+      "price": "Am ersten Sonntag des Monats voraussichtlich kostenlos.",
+      "tip": "Spätestens 16:10 Uhr beenden. Eintrittslage am Gratis-Sonntag vor Ort prüfen; Bunker hat Vorrang.",
+      "ticketUrl": "https://www.museivillatorlonia.it/it/orari-indirizzi/musei-di-villa-torlonia"
+    },
+    "12": {
+      "title": "Bunker und Luftschutzräume der Villa Torlonia · T2",
+      "detail": "Fix gebuchte italienische Führung durch Schutzräume unter Mussolinis früherem Wohnsitz.",
+      "description": [
+        "Anfahrt: von der Casina delle Civette → Casino Nobile · zu Fuß etwa 5–8 Min. · ÖPNV —. Die Eintrittskontrolle wird mit mindestens 20 Minuten Reserve erreicht.",
+        "Die Führung verbindet die Nutzung der Villa Torlonia durch Mussolini mit der Entwicklung verschiedener Schutzanlagen während des Zweiten Weltkriegs. Zu sehen sind verstärkte Bereiche, Luftschutzräume und der unvollendete eigentliche Bunker. Die baulichen Unterschiede zeigen, wie schnell auf die zunehmende Bedrohung durch Luftangriffe reagiert wurde.",
+        "Der Rundgang dauert etwa 50 Minuten, führt über steile Treppen und endet an einem anderen Punkt im Park als der Eingang. Große Gegenstände, Speisen und Getränke sind nicht erlaubt; im Rundgang gibt es keine Toilette. Die zwei italienischen Führungen sind auf den 6. September um 17:00 Uhr korrigiert und fest gebucht."
+      ],
+      "image": "civette",
+      "place": "Bunker e Rifugi Antiaerei di Villa Torlonia, Via Nomentana 70, 00161 Roma RM, Italien",
+      "weather": "innen",
+      "fixed": true,
+      "address": "Casino Nobile, Villa Torlonia, Via Nomentana 70, 00161 Roma",
+      "duration": "ca. 50 Min.",
+      "minutes": 50,
+      "price": "Gebucht: 2 × 13 € inklusive Vorverkauf.",
+      "tip": "Bequeme Schuhe, keine großen Taschen; vorher Toilette benutzen. Ein- und Ausgang sind nicht identisch.",
+      "ticketUrl": "https://www.museivillatorlonia.it/node/1018227"
+    },
+    "13": {
+      "title": "Quartiere Coppedè · T2",
+      "detail": "Ein fantasievolles Stadtensemble zwischen Jugendstil, Barockzitaten, Mittelalterbild und Filmkulisse.",
+      "description": [
+        "Anfahrt: vom Ausgang des Bunkers → Piazza Mincio · zu Fuß etwa 20–25 Min. · ÖPNV ähnlich lang. Der Spaziergang durch das Wohnviertel ist nach dem unterirdischen Termin ein bewusster Wechsel ins Freie.",
+        "Gino Coppedè entwarf das Quartier ab 1915 als Ensemble, nicht als einzelne Sehenswürdigkeit. Torbogen, Palazzi, Villini, Mosaike, Tierfiguren, Säulen, Loggien und übersteigerte Dekoration greifen historische Formen auf, ohne sich einer Stilreinheit zu unterwerfen. Piazza Mincio und die Fontana delle Rane bilden den räumlichen Mittelpunkt.",
+        "Der Rundgang konzentriert sich auf wenige Straßen und dauert ungefähr 45 Minuten. Das weichere Abendlicht eignet sich gut für Fassadendetails; danach liegt Berberè in kurzer Gehweite, sodass kein weiterer Verkehrswechsel nötig ist."
+      ],
+      "image": "coppede",
+      "place": "Quartiere Coppedè, Piazza Mincio, 00198 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza Mincio, 00198 Roma",
+      "duration": "ca. 45–50 Min.",
+      "minutes": 50,
+      "price": "Kostenlos.",
+      "tip": "Schwerpunkt: Arco dei Palazzi degli Ambasciatori, Piazza Mincio und Fontana delle Rane."
+    },
+    "14": {
+      "title": "Dinner – Berberè Roma Porta Pia · T2",
+      "detail": "Sauerteigpizza mit mehreren vegetarischen Varianten, unkompliziert nach Coppedè erreichbar.",
+      "description": [
+        "Anfahrt: von Piazza Mincio → Berberè, Via Mantova 5 · zu Fuß etwa 10–15 Min. · ÖPNV —. Die kurze Verbindung vermeidet nach dem dichten Museumstag eine weitere Fahrt durch Rom.",
+        "Berberè arbeitet mit langsam geführtem Teig und serviert die Pizza häufig bereits in Stücken, sodass verschiedene Sorten geteilt werden können. Vegetarische Kombinationen sind fester Bestandteil der Karte; für Christian bleibt dazu Bier verfügbar.",
+        "Das Lokal öffnet sonntags zum Abendbetrieb um 19:00 Uhr. Eine Reservierung für 19:30 Uhr ist sinnvoll, weil der Tag durch die Bunkerführung zeitlich gebunden ist und eine Warteliste die Abendlogik unnötig verlängern würde."
+      ],
+      "image": "cucina",
+      "place": "Berberè Roma Porta Pia, Via Mantova 5, 00198 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Mantova 5, 00198 Roma",
+      "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
+      "price": "ca. 20–30 € pro Person.",
+      "tip": "Für Sonntag 19:30 Uhr reservieren; vegetarische Tagespizza und Bierauswahl vor Ort prüfen.",
+      "ticketUrl": "https://www.berberepizza.it/berbere-roma-porta-pia/"
+    },
+    "15": {
+      "title": "Pantheon – früher Montagsslot · T3",
+      "detail": "Die größte unbewehrte Betonkuppel der Welt möglichst gleich zur Öffnung und ohne Gratis-Sonntagsandrang.",
+      "description": [
+        "Anfahrt: von Seven, Via Nazionale 249 → Pantheon · zu Fuß etwa 20–25 Min. · ÖPNV etwa 20–30 Min. mit Bus und kurzem Fußweg. Am frühen Morgen ist der direkte Spaziergang zuverlässiger als der Stadtverkehr; Abmarsch ist gegen 08:15 Uhr vorgesehen.",
+        "Der heutige Bau entstand um 126 n. Chr. und überlebt nicht als Ruine, sondern als bis heute genutzter Innenraum. Durchmesser und Scheitelhöhe liegen jeweils bei ungefähr 43 Metern, sodass sich eine vollständige Kugel in den Raum denken lässt. Die Kuppelschale wird nach oben dünner und leichter; Kassettierung, abgestufte Zuschläge und der fast neun Meter breite Oculus reduzieren Gewicht und erzeugen zugleich die prägende Lichtdramaturgie.",
+        "Der Montag wurde bewusst dem kostenlosen ersten Sonntag vorgezogen: Die Eintrittskosten sind niedrig, dafür ist ein früher offizieller Slot planbarer. Eine echte Skip-the-line-Garantie gibt es nicht; der 09:00-Uhr-Termin bleibt trotzdem die beste Chance auf einen vergleichsweise ruhigen Raumeindruck."
+      ],
+      "image": "pantheon",
+      "place": "Pantheon, Piazza della Rotonda, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Piazza della Rotonda, 00186 Roma",
+      "duration": "45–50 Min.",
+      "minutes": 50,
+      "price": "7 € regulär; 2 € ermäßigt für berechtigte EU-Bürger von 18 bis 25 Jahren.",
+      "tip": "Offiziellen 09:00-Uhr-Slot buchen; Schultern und Knie bedeckt halten. Danach 8–10 Min. zu Fuß zu Il Gesù.",
+      "ticketUrl": "https://portale.museiitaliani.it/b2c/#/"
+    },
+    "16": {
+      "title": "Il Gesù · T3",
+      "detail": "Prototyp der Jesuitenkirche und Schlüsselbau für Raum, Liturgie und barocke Illusion.",
+      "description": [
+        "Anfahrt: vom Pantheon → Il Gesù · zu Fuß etwa 8–10 Min. · ÖPNV —. Die direkte Route führt über das historische Zentrum und hält den Vormittag kompakt.",
+        "Vignolas Grundriss bündelt die Aufmerksamkeit in einem breiten, tonnengewölbten Langhaus mit seitlichen Kapellen und klarer Sicht auf den Altar. Giacomo della Portas Fassade übersetzt die unterschiedliche Breite von Mittelschiff und Kapellen in zwei Geschosse mit Voluten und wurde zum Vorbild zahlreicher Jesuiten- und Gegenreformationskirchen.",
+        "Im Inneren steigert Baciccias Trionfo del Nome di Gesù die Architektur durch Malerei, Stuck und Figuren, die scheinbar aus dem Deckenrahmen in den Raum treten. Im Sommer ist die Kirche montags vormittags geöffnet, doch die Besichtigung wird vor der Messe um 11:00 Uhr abgeschlossen."
+      ],
+      "image": "gesu",
+      "place": "Chiesa del Gesù, Piazza del Gesù, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Piazza del Gesù, 00186 Roma",
+      "duration": "ca. 30–35 Min.",
+      "minutes": 35,
+      "price": "Eintritt frei; Spende möglich.",
+      "tip": "Ruhig verhalten und Gottesdienste respektieren. Spätestens 10:35–10:40 Uhr weitergehen.",
+      "ticketUrl": "https://www.chiesadelgesu.org/"
+    },
+    "17": {
+      "title": "Brunch – Buddy Vegan Restaurant Café · T3",
+      "detail": "Pflanzliche römische Küche direkt zwischen Il Gesù und dem Treffpunkt der Antike-Führung.",
+      "description": [
+        "Anfahrt: von Il Gesù → Buddy, Corso Vittorio Emanuele II 107A · zu Fuß etwa 5–7 Min. · ÖPNV —. Das Lokal liegt genau auf der weiteren Achse Richtung Kolosseum.",
+        "Buddy interpretiert römische und italienische Gerichte vollständig pflanzlich. Neben Pasta und Pinsa gibt es Brunchkombinationen, Sandwiches und leichtere Bowls. Damit bekommt Julia eine verlässliche vegane Mahlzeit, ohne dass der Tag vor der mehrstündigen Führung zu schwer wird.",
+        "Der Stopp ist als frühes Mittagessen geplant und endet gegen 11:50 Uhr. Die Buchung der Kolosseumführung muss den tatsächlichen Treffpunkt berücksichtigen; bei einem weiter östlich gelegenen Meeting Point wird das Essen entsprechend verkürzt."
+      ],
+      "image": "cucina",
+      "place": "Buddy Vegan Restaurant Café, Corso Vittorio Emanuele II 107A, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Corso Vittorio Emanuele II 107A, 00186 Roma",
+      "duration": "ca. 55–60 Min.",
+      "minutes": 60,
+      "price": "ca. 18–30 € pro Person.",
+      "tip": "Leicht essen und spätestens 11:50 Uhr aufbrechen; Tourtreffpunkt nach Buchung nochmals gegenprüfen.",
+      "ticketUrl": "https://buddyroma.com/contatti/"
+    },
+    "18": {
+      "title": "Kolosseum – deutschsprachige Führung · T3",
+      "detail": "Das Amphitheater als konstruktiver Höhepunkt; bevorzugt mit Arenaboden und gemeinsamem Antike-Ticket.",
+      "description": [
+        "Anfahrt: von Buddy am Corso Vittorio Emanuele II zum endgültigen Treffpunkt rund um Via dei Fori Imperiali oder Largo Gaetana Agnesi · zu Fuß etwa 20–25 Min. · ÖPNV etwa 15–25 Min. Der Voucher des Veranstalters entscheidet über den tatsächlichen Treffpunkt; dafür wird ein zusätzlicher Puffer eingeplant.",
+        "Das Flavische Amphitheater wurde ab 72 n. Chr. unter Vespasian errichtet und 80 n. Chr. unter Titus eröffnet. Für Julia ist weniger die ikonische Silhouette als die innere Organisation entscheidend: Travertinpfeiler, radial angelegte Gewölbe, nummerierte Zugänge und die konsequente Trennung der Besucherströme machten aus dem Bau eine leistungsfähige Großmaschine für zehntausende Menschen.",
+        "Vorgesehen ist eine deutschsprachige GetYourGuide-Führung durch Kolosseum, Forum und Palatin, möglichst mit Arenaboden. Der genaue Startzeitpunkt und die tatsächliche Reihenfolge der drei Bereiche sind noch nicht gebucht. Nach der Buchung wird dieser Stopp mit fixed: true geschützt."
+      ],
+      "image": "colosseo",
+      "place": "Colosseo, Piazza del Colosseo 1, 00184 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza del Colosseo 1, 00184 Roma",
+      "duration": "ca. 60–75 Min. als erster Teil einer 2,5–3-stündigen Führung",
+      "minutes": 65,
+      "price": "Noch zu buchen; Preis und deutscher Slot im Buchungskalender prüfen.",
+      "tip": "Personalausweise mitnehmen; nominative Eintrittskarten. Mindestens 15 Min. vor dem Treffpunkt sein.",
+      "ticketUrl": "https://www.getyourguide.com/de-at/kolosseum-l2619/kolosseum-und-forum-romanum-gefuhrte-tour-mit-bevorzugtem-zugang-t195566/"
+    },
+    "19": {
+      "title": "Forum Romanum und Palatin – Führung · T3",
+      "detail": "Stadtraum, Topografie und kaiserliche Palastarchitektur als zweiter Teil derselben Antike-Führung.",
+      "description": [
+        "Anfahrt: direkt aus dem Kolosseum beziehungsweise gemeinsam mit der gebuchten Führungsgruppe · zu Fuß wenige Minuten · ÖPNV —. Je nach Veranstalter beginnt die Tour auch zuerst im Forum; die Uhrzeit ist deshalb als Planungsmarke und nicht als zweites separates Ticket zu verstehen.",
+        "Das Forum war kein in einem Zug entworfener Platz, sondern eine über Jahrhunderte verdichtete Stadtmitte aus Basiliken, Tempeln, Triumphbögen, Rednertribünen und Prozessionswegen. Der Palatin darüber zeigt den Sprung vom republikanischen Wohnhügel zum zusammenhängenden kaiserlichen Palastbezirk. Besonders lesbar sind die Beziehungen zwischen Via Sacra, Titusbogen, Domus Flavia, Domus Augustana und den Terrassen über dem Tal.",
+        "Der Palatin bietet mehr Vegetation und Aussicht als das Forum. Im September sind Trinkwasser, Sonnenschutz und feste Schuhe wichtiger als ein minutiöses Abarbeiten jeder Ruine. Die Führung endet voraussichtlich gegen 15:00 Uhr; danach führt der Weg ohne großen Umweg zur Fontana di Trevi."
+      ],
+      "image": "forum",
+      "place": "Foro Romano, Via della Salara Vecchia 5/6, 00186 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Via della Salara Vecchia 5/6, 00186 Roma",
+      "duration": "ca. 80–90 Min. als zweiter Teil der Führung",
+      "minutes": 90,
+      "price": "Im gemeinsamen Führungsticket mit dem Kolosseum enthalten.",
+      "tip": "Wasserflasche, Sonnenschutz und rutschfeste Schuhe mitnehmen; Tourreihenfolge kann variieren.",
+      "ticketUrl": "https://www.getyourguide.com/de-at/kolosseum-l2619/kolosseum-und-forum-romanum-gefuhrte-tour-mit-bevorzugtem-zugang-t195566/"
+    },
+    "20": {
+      "title": "Fontana di Trevi – innerer Bereich · T3",
+      "detail": "Flexibles Open-Ticket für den nahen Zugang zur Brunnenanlage; bereits für zwei Personen gebucht.",
+      "description": [
+        "Anfahrt: vom Ende der Kolosseum-/Forumführung → Fontana di Trevi · zu Fuß etwa 25–30 Min. · ÖPNV etwa 20–25 Min., spart aber meist wenig Zeit. Der Spaziergang durch das Zentrum ist als Übergang und Erholung nach den archäologischen Bereichen gedacht.",
+        "Nicola Salvis Brunnen verwandelt die schmale Piazza in eine theatralische Fassade aus Travertin, Wasser und bewegten Figuren. Der Palazzo Poli wird zur Hintergrundarchitektur; Oceanus, Felsen und Kaskaden scheinen den Stadtraum vollständig zu besetzen.",
+        "Seit 2026 kostet der Zugang zum inneren Bereich für Nichtresidenten 2 €. Eure beiden Open-Tickets sind nicht an eine bestimmte Uhrzeit gebunden. Montags beginnt der reguläre Zugang um 11:30 Uhr, daher passt der geplante Besuch am Nachmittag problemlos."
+      ],
+      "image": "trevi",
+      "place": "Fontana di Trevi, Piazza di Trevi, 00187 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza di Trevi, 00187 Roma",
+      "duration": "ca. 30–35 Min.",
+      "minutes": 35,
+      "price": "Gebucht: 2 € pro Person.",
+      "tip": "Open-Ticket bereithalten; Montag 11:30–22:00 Uhr, letzter Einlass 21:00 Uhr.",
+      "ticketUrl": "https://fontanaditrevi.roma.it/"
+    },
+    "21": {
+      "title": "Piazza di Spagna und Spanische Treppe · T3",
+      "detail": "Barocker Stadtraum, Treppeninszenierung und Blickachse zur Trinità dei Monti.",
+      "description": [
+        "Anfahrt: von der Fontana di Trevi → Piazza di Spagna · zu Fuß etwa 10–12 Min. · ÖPNV —. Der kurze Weg führt ohne Umweg über die Einkaufsstraßen des Zentrums.",
+        "Die Scalinata di Trinità dei Monti verbindet die tiefer liegende Piazza di Spagna mit Kirche und Kloster auf dem Pincio. Rampen, Podeste und wechselnde Blickrichtungen machen die Treppe zu einem eigenständigen Stadtraum und nicht nur zu einer Höhendifferenz. Berninis Fontana della Barcaccia bildet den Gegenpol am Fuß.",
+        "Der Stopp bleibt kurz und dient zugleich als Übergang zurück Richtung Via Nazionale. Auf den Stufen zu sitzen ist nicht gestattet; für eine ruhigere Wahrnehmung lohnt der Blick von seitlichen Absätzen und vom oberen Niveau."
+      ],
+      "image": "spagna",
+      "place": "Piazza di Spagna, 00187 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza di Spagna, 00187 Roma",
+      "duration": "ca. 35–40 Min.",
+      "minutes": 40,
+      "price": "Kostenlos.",
+      "tip": "Nicht auf den Stufen sitzen. Danach zu Fuß etwa 15–20 Min. zurück zum Seven."
+    },
+    "22": {
+      "title": "Pause im Seven · T3",
+      "detail": "Duschen, Geräte laden und vor dem letzten gemeinsamen Abend kurz ausruhen.",
+      "description": [
+        "Anfahrt: von Piazza di Spagna → Seven · zu Fuß etwa 15–20 Min. · Metro A von Spagna nach Repubblica plus kurzer Fußweg etwa 10–15 Min. Bei müden Beinen ist die Metro die bessere Variante.",
+        "Die Pause ist kein verlorener Programmpunkt, sondern hält den dichten Montag realistisch. Nach Pantheon, Kirche und etwa drei Stunden Antike werden Schuhe gewechselt, Geräte geladen und die Open-Tickets sowie Reisedokumente für den Abreisetag geordnet."
+      ],
+      "image": "seven",
+      "place": "Seven, Via Nazionale 249, 00184 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Nazionale 249, 00184 Roma",
+      "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
+      "price": "—",
+      "tip": "Kopien der Flug- und Zugtickets offline speichern; Zugangscode nur in privater Notiz aufbewahren."
+    },
+    "23": {
+      "title": "Dinner – Timoty Drinks & Kitchen · T3",
+      "detail": "Nahe der Unterkunft mit veganen, vegetarischen und klassischen Gerichten sowie regionalen Produkten.",
+      "description": [
+        "Anfahrt: von Seven → Timoty, Via Torino 46 · zu Fuß etwa 5–8 Min. · ÖPNV —. Nach der Hotelpause bleibt der Abend damit ohne zusätzlichen Verkehr.",
+        "Timoty bietet für beide Essenswünsche eine praktikable Karte: vegane Pinsa, pflanzliche Gnocchi, vegetarische und vegane Platten stehen neben klassischen römischen und fleischhaltigen Gerichten. Die Küche wirbt mit biologischen und regionalen Zutaten; auch Drinks und Bier sind verfügbar.",
+        "Der Tisch wird für 19:30 Uhr vorgesehen. Das Budget bleibt mit Hauptgericht und Getränk im gewünschten Rahmen, und der kurze Rückweg zur Unterkunft ist nach dem langen Antike-Tag ein klarer Vorteil."
+      ],
+      "image": "cucina",
+      "place": "Timoty Drinks & Kitchen, Via Torino 46, 00184 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Torino 46, 00184 Roma",
+      "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
+      "price": "ca. 25–35 € pro Person.",
+      "tip": "Tisch für 19:30 Uhr reservieren; vegane und vegetarische Optionen sind auf der Karte gekennzeichnet.",
+      "ticketUrl": "https://www.timotyristorante.it/"
+    },
+    "24": {
+      "title": "Italo Bozen → Roma Termini · T4",
+      "detail": "Gemeinsame Hinfahrt mit fast vollständigem ersten Reisetag in Rom.",
+      "description": [
+        "Abfahrt in Bozen ist am Samstag um 06:42 Uhr. Der Italo 8953 erreicht Roma Termini planmäßig um 11:40 Uhr. Christian und Julia sitzen in Wagen 4 auf den Plätzen 77 und 78 in Smart.",
+        "Die Zugfahrt ist der erste feste Termin der Reise und darf bei späteren Umplanungen nicht verschoben werden. Nach der Ankunft führt der schnellste Weg zu Fuß zur Unterkunft; für die letzten Meter über Via Nazionale ist kein zusätzlicher ÖPNV-Wechsel sinnvoll."
+      ],
+      "image": "termini",
+      "place": "Stazione di Bolzano, Piazza della Stazione 1, 39100 Bolzano BZ, Italien",
+      "weather": "beides",
+      "fixed": true,
+      "address": "Bozen → Roma Termini",
+      "duration": "4 Std. 58 Min.",
+      "minutes": 298,
+      "price": "Gebucht.",
+      "tip": "Spätestens 15 Min. vor Abfahrt am Bahnsteig sein. Smart-Gepäckgrenze des Tickets beachten.",
+      "ticketUrl": "https://www.italotreno.com/"
+    },
+    "25": {
+      "title": "Seven – Gepäck abgeben und später einchecken · T4",
+      "detail": "Die zentrale Basis an der Via Nazionale; Gepäckannahme vor der Zimmerfreigabe ist bestätigt.",
+      "description": [
+        "Anfahrt: von Roma Termini → Seven, Via Nazionale 249 · zu Fuß etwa 10–15 Min. · ÖPNV —. Direkt nach der Ankunft wird das Gepäck abgegeben, damit der erste Stadttag ohne Koffer beginnen kann.",
+        "Das Zimmer ist ab 15:00 Uhr verfügbar. Nach dem Mittagessen bleibt ein kurzer Rückweg für Check-in und Frischmachen, bevor es zum MAXXI geht. Die Unterkunft ist für die gesamte Reise ein guter Verkehrsknoten: Termini, Repubblica, Monti und mehrere Buslinien liegen in kurzer Gehweite.",
+        "Der Zugangscode ist sicherheitsrelevant und wird absichtlich nicht in dieser öffentlichen Reisedatei gespeichert. Er muss aus der privaten Booking-Nachricht beziehungsweise einer separaten privaten Notiz verfügbar sein und bei der Eingabe mit dem dort angegebenen Bestätigungszeichen abgeschlossen werden."
+      ],
+      "image": "seven",
+      "place": "Seven, Via Nazionale 249, 00184 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Nazionale 249, 00184 Roma",
+      "duration": "Gepäckabgabe ca. 10–15 Min.; Check-in ab 15:00 Uhr.",
+      "minutes": 15,
+      "price": "Gebucht.",
+      "tip": "Zugangscode nur privat bereithalten und nicht auf der öffentlichen Website veröffentlichen."
+    },
+    "26": {
+      "title": "Lunch – Mercato Centrale Roma · T4",
+      "detail": "Unkomplizierter Ankunftslunch mit vielen Küchen und flexibler vegetarischer Auswahl.",
+      "description": [
+        "Anfahrt: von Seven → Mercato Centrale Roma · zu Fuß etwa 12–18 Min. · ÖPNV —. Der Markt liegt unmittelbar am Bahnhof Termini und lässt sich ohne Richtungswechsel erreichen.",
+        "Unter einem Dach arbeiten verschiedene Küchenstände mit Pasta, Pizza, Gemüse, Backwaren, Süßem und Getränken. Das offene Format ist am Ankunftstag vorteilhaft: Julia kann gezielt vegetarisch auswählen, während Christian nicht auf dasselbe Konzept festgelegt ist. Bestellt wird an den einzelnen Ständen, sodass keine lange Restaurantpause und keine Reservierung nötig sind.",
+        "Nach dem Essen bleibt Zeit für einen Kaffee und den Rückweg zur Unterkunft. Das MAXXI wird erst nach dem Zimmerbezug angesteuert, damit der Museumsblock nicht durch eine zusätzliche Rückfahrt unterbrochen wird."
+      ],
+      "image": "cucina",
+      "place": "Mercato Centrale Roma, Via Giovanni Giolitti 36, 00185 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Giovanni Giolitti 36, 00185 Roma",
+      "duration": "ca. 60–70 Min.",
+      "minutes": 70,
+      "price": "ca. 15–25 € pro Person.",
+      "tip": "Täglich 07:30–23:30 geöffnet; keine Reservierung nötig. Vegetarische Auswahl direkt an den Ständen prüfen.",
+      "ticketUrl": "https://www.mercatocentrale.it/roma/info/"
+    },
+    "27": {
+      "title": "MAXXI – Zaha Hadid und zwei Ausstellungen · T4",
+      "detail": "Das Gebäude ist das Hauptobjekt: dazu The Large Glass und Vitalità dell’architettura italiana 1946–2026.",
+      "description": [
+        "Anfahrt: von Seven → MAXXI · zu Fuß etwa 5–8 Min. bis Repubblica beziehungsweise Termini · ÖPNV ungefähr 30–40 Min. über Metro A bis Flaminio und weiter Richtung Via Guido Reni. Für den Rückweg zum Zentrum bleibt wegen möglicher Änderungen im Tram- und Ersatzbusverkehr Reserve.",
+        "Zaha Hadid behandelt das Museum nicht als neutrale Schachtel, sondern als ein Geflecht aus Betonbändern, Rampen, Brücken, gekrümmten Wänden und überlagerten Blickachsen. Die schwarze Treppenlandschaft und die linearen Oberlichter lenken Bewegung und Licht; gerade die Konflikte zwischen spektakulärer Wegeführung und klassischer Ausstellungshängung machen den Bau für eine Architekturstudentin besonders ergiebig.",
+        "The Large Glass, kuratiert von Alex Da Corte, verbindet Werke aus Kunst, Architektur und Fotografie mit den räumlichen Eigenschaften des Hauses. Vitalità dell’architettura italiana 1946–2026 spannt den Bogen von der Nachkriegszeit bis zur Gegenwart und beginnt mit Stimmen unter anderem von Renzo Piano, Massimiliano Fuksas, Stefano Boeri und Paola Viganò. Karten werden wie gewünscht erst an der Kasse gekauft."
+      ],
+      "image": "maxxi",
+      "place": "MAXXI, Via Guido Reni 4A, 00196 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Guido Reni 4A, 00196 Roma",
+      "duration": "ca. 2 Std. 20 Min.",
+      "minutes": 140,
+      "price": "Kasse: 15 € regulär, 12 € ermäßigt für Berechtigte.",
+      "tip": "Samstag 16:00–18:20. Zuerst das Gebäude bewusst lesen, danach Vitalità und The Large Glass. Montags geschlossen.",
+      "ticketUrl": "https://www.maxxi.art/orari-e-biglietteria/"
+    },
+    "28": {
+      "title": "Dinner – Open Baladin Roma · T4",
+      "detail": "Italienisches Craft Beer, vegetarische Gerichte und ein sinnvoller Abendstopp vor der Ara Pacis.",
+      "description": [
+        "Anfahrt: vom MAXXI → Open Baladin · ÖPNV ungefähr 30–40 Min. über Flaminio Richtung historisches Zentrum, danach kurzer Fußweg. Die großzügige Fahrzeit schützt den fixen Ara-Pacis-Termin vor Verzögerungen.",
+        "Open Baladin war eine der Adressen, die italienisches Craft Beer in Rom sichtbar machten. Neben den Baladin-Bieren gibt es zahlreiche wechselnde italienische Zapfhähne und Flaschen. Für Julia stehen ausdrücklich vegetarische und vegane Gerichte zur Verfügung; damit ist das Lokal der klarste Kompromiss zwischen Christians Bierinteresse und einem vollwertigen fleischlosen Abendessen.",
+        "Der Tisch sollte für 19:00 Uhr reserviert und die Rechnung spätestens gegen 20:15 Uhr abgeschlossen werden. Von der Via degli Specchi geht es anschließend zu Fuß über Campo de’ Fiori und durch das historische Zentrum zur Ara Pacis; dieser Spaziergang ist zuverlässiger als ein kurzer Buswechsel."
+      ],
+      "image": "cucina",
+      "place": "Open Baladin Roma, Via degli Specchi 6, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via degli Specchi 6, 00186 Roma",
+      "duration": "ca. 1 Std. 15 Min.",
+      "minutes": 75,
+      "price": "ca. 25–35 € pro Person inklusive Bier.",
+      "tip": "Tisch für 19:00 Uhr reservieren; spätestens 20:15 Uhr aufbrechen. Zur Ara Pacis zu Fuß etwa 20–25 Min.",
+      "ticketUrl": "https://pubs.baladin.it/it/restaurant-hamburger-birra-artigianale/via-degli-specchi-6-roma/"
+    },
+    "29": {
+      "title": "L’Ara si rivela – nächtliche Multimedia-Erfahrung · T4",
+      "detail": "Gebuchter Abendtermin am Augustusaltar mit Licht, Projektion und Erzählung in Kopfhörern.",
+      "description": [
+        "Anfahrt: von Open Baladin → Museo dell’Ara Pacis · zu Fuß etwa 20–25 Min. · ÖPNV bringt auf dieser kurzen Altstadtstrecke kaum einen Vorteil. Zielankunft ist spätestens 20:45 Uhr.",
+        "Die rund 40-minütige Inszenierung rekonstruiert den historischen und farblichen Kontext des Ara-Pacis-Altars. Projektionen, Licht und räumliche Erzählung helfen dabei, die Reliefs nicht nur als helle Marmoroberfläche, sondern als Teil der politischen Bildsprache des Augustus zu lesen.",
+        "Für Julia ist auch Richard Meiers Museumshülle wichtig: Tageslicht, Travertin, Glasflächen und die bewusste Konfrontation eines modernen Schutzbaus mit dem historischen Zentrum. Die Tickets sind zeitgebunden; bei Verspätung gibt es laut Bedingungen keine Umbuchung."
+      ],
+      "image": "arapacis",
+      "place": "Museo dell’Ara Pacis, Lungotevere in Augusta, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "fixed": true,
+      "address": "Lungotevere in Augusta, Ecke Via Tomacelli, 00186 Roma",
+      "duration": "ca. 40 Min.",
+      "minutes": 40,
+      "price": "Gebucht: 16 € regulär und 14 € ermäßigt inklusive Vorverkauf.",
+      "tip": "Kopfhörer mitnehmen. Spätestens 20:45 Uhr am Zugang sein; kleine Tasche bevorzugen.",
+      "ticketUrl": "https://www.arapacis.it/it/mostra-evento/l-ara-si-rivela"
+    },
+    "30": {
+      "title": "Craft Beer – Ma Che Siete Venuti A Fà (optional) · T4",
+      "detail": "Später Bierstopp in Trastevere mit 16 wechselnden Zapfhähnen und nationalen wie internationalen Craft-Bieren.",
+      "description": [
+        "Anfahrt: vom Museo dell’Ara Pacis → Ma Che Siete Venuti A Fà · zu Fuß etwa 25–30 Min. · ÖPNV etwa 20–30 Min. mit Bus und kurzem Fußweg. Der Spaziergang führt nach der Abendveranstaltung über den Tiber nach Trastevere.",
+        "Der kleine Pub gehört seit 2001 zur römischen Craft-Beer-Szene und schenkt 16 sorgfältig ausgewählte Biere vom Fass aus. Die Auswahl verbindet italienische Brauereien mit internationalen Gästen und wechselnden Veranstaltungen rund um Brauer und Mikrobrauereien.",
+        "Der Stopp ist bewusst optional: Nach dem langen Ankunftstag entscheidet ihr vor Ort, ob noch Energie für Trastevere bleibt. Der Pub ist täglich bis 02:00 Uhr geöffnet und nimmt keine Reservierungen an."
+      ],
+      "image": "mache",
+      "place": "Ma Che Siete Venuti A Fà, Via Benedetta 25, 00153 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Benedetta 25, 00153 Roma",
+      "duration": "ca. 1 Std. 10 Min.",
+      "minutes": 70,
+      "price": "Kein Eintritt; Getränke nach Verbrauch.",
+      "tip": "Keine Reservierung möglich. Bei Müdigkeit auslassen, damit der frühe Museumsstart am Sonntag realistisch bleibt.",
+      "ticketUrl": "https://www.football-pub.com/"
+    },
+    "31": {
+      "title": "Centrale Montemartini · T5",
+      "detail": "Antike Skulpturen zwischen Turbinen, Kesseln und Maschinen einer ehemaligen Elektrizitätszentrale.",
+      "description": [
+        "Anfahrt: von Seven → Centrale Montemartini · zu Fuß etwa 10–12 Min. bis Termini · Metro B bis Garbatella oder Piramide/Ostiense und anschließend 8–12 Min. zu Fuß · insgesamt etwa 30–40 Min. Die Abfahrt gegen 08:20 Uhr ermöglicht den Eintritt zur Öffnung um 09:00 Uhr.",
+        "Die Centrale Montemartini ist keine bloße Ausstellung in einem Industriegebäude. Weiße antike Skulpturen stehen vor schwarzen Dieselmotoren, Turbinen und Schaltanlagen; Maßstab, Material und historische Funktion der beiden Sammlungen kommentieren einander. Der Bau macht außerdem die frühe Elektrifizierung Roms und die Entwicklung der Via Ostiense als Produktionsachse lesbar.",
+        "Der 6. September ist der erste Sonntag des Monats. Für die kommunalen Museen ist daher ein kostenloser Eintritt vorgesehen; kurz vor der Reise soll die konkrete Septembermitteilung nochmals geprüft werden. Frühes Erscheinen reduziert auch hier den Andrang."
+      ],
+      "image": "montemartini",
+      "place": "Centrale Montemartini, Via Ostiense 106, 00154 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Ostiense 106, 00154 Roma",
+      "duration": "ca. 2 Std. 15 Min.",
+      "minutes": 135,
+      "price": "Am ersten Sonntag des Monats voraussichtlich kostenlos; sonst regulär 11 €.",
+      "tip": "Direkt zur Öffnung um 09:00 Uhr. Mögliche Zuschläge für Sonderausstellungen kurz vor der Reise prüfen.",
+      "ticketUrl": "https://www.centralemontemartini.org/it/informazioni_pratiche/orari_e_indirizzi"
+    },
+    "32": {
+      "title": "Ostiense und Gasometro – Architekturspaziergang · T5",
+      "detail": "Industriebrachen, Backstein, Bahntrassen und der große Stahlzylinder als Stadtzeichen.",
+      "description": [
+        "Anfahrt: von Centrale Montemartini → Gasometro Ostiense · zu Fuß etwa 10–15 Min. · ÖPNV —. Der Spaziergang bleibt im selben Viertel und vermeidet eine zusätzliche Fahrt ins Zentrum.",
+        "Ostiense zeigt ein Rom jenseits von Travertin und Barockfassaden. Gasometer, ehemalige Kraftwerks- und Speicherbauten, Bahn- und Hafeninfrastruktur bilden ein großmaßstäbliches industrielles Stadtfragment. Der Gasometro selbst ist heute vor allem als Stahlskelett präsent und funktioniert als weit sichtbare Landmarke.",
+        "Der Rundgang ist bewusst locker und kann bei Hitze oder Regen gekürzt werden. Wichtig ist weniger ein einzelnes Gebäude als das Verhältnis zwischen Produktionsgeschichte, Umnutzung, Street Art und der heutigen Entwicklung des Quartiers."
+      ],
+      "image": "gasometro",
+      "place": "Gasometro Ostiense, Via del Commercio, 00154 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Via del Commercio, 00154 Roma",
+      "duration": "ca. 60–70 Min.",
+      "minutes": 70,
+      "price": "Kostenlos.",
+      "tip": "Außenbesichtigung; bei starker Hitze auf 30 Min. kürzen. Anschließend zu Fuß etwa 10–15 Min. zu Romeow."
+    },
+    "33": {
+      "title": "Lunch – Romeow Cat Bistrot · T5",
+      "detail": "Vollständig pflanzliches Gourmet-Bistrot mit acht Katzen und reservierungspflichtigem Sonntagslunch.",
+      "description": [
+        "Anfahrt: vom Gasometro beziehungsweise Ostiense → Romeow, Via Francesco Negri 15 · zu Fuß etwa 10–15 Min. · ÖPNV —. Das Lokal liegt damit genau am Ende des Industrieblocks.",
+        "Romeow ist mehr als ein klassisches Katzencafé: Zum Mittag wird ein saisonales, vollständig pflanzliches Restaurantkonzept angeboten. Die Katzen stammen aus einer Tierschutzorganisation und bestimmen den Raum mit; ihre Rückzugsbereiche und Ruhezeiten müssen respektiert werden.",
+        "Am Samstag und Sonntag ist der Restaurantbetrieb von 13:00 bis 15:45 Uhr ausschließlich mit Reservierung zugänglich. Der Stopp ist bewusst länger geplant, weil das Essen stärker auf ein Menüerlebnis als auf einen schnellen Snack ausgerichtet ist."
+      ],
+      "image": "cucina",
+      "place": "Romeow Cat Bistrot, Via Francesco Negri 15, 00154 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Francesco Negri 15, 00154 Roma",
+      "duration": "ca. 1 Std. 15 Min.",
+      "minutes": 75,
+      "price": "ca. 25–40 € pro Person.",
+      "tip": "Reservierung für Sonntag 13:00 Uhr verpflichtend; den Katzen nicht nachlaufen oder sie wecken.",
+      "ticketUrl": "https://www.romeowcatbistrot.com/orari-e-informazioni-importanti/"
+    },
+    "34": {
+      "title": "Casina delle Civette – Villa Torlonia · T5",
+      "detail": "Eklektische Wohnarchitektur mit Jugendstilfenstern, Türmchen, Holzarbeiten und märchenhafter Silhouette.",
+      "description": [
+        "Anfahrt: von Romeow → Villa Torlonia · zu Fuß etwa 10–12 Min. bis Garbatella · Metro B bis Policlinico und anschließend 12–15 Min. zu Fuß · insgesamt ungefähr 35–45 Min. Der Weg umgeht die Altstadt und nutzt die direkte Nord-Süd-Verbindung.",
+        "Die Casina delle Civette entwickelte sich aus einer ländlich-schweizerisch gedachten Hütte zu einem eklektischen Wohnhaus des frühen 20. Jahrhunderts. Spitzdächer, Erker, Loggien, Majolika, Holz, Schmiedeeisen und vor allem die farbigen Glasfenster ergeben kein einheitliches Stilprogramm, sondern eine bewusst fantastische Collage zwischen Mittelalterbild und Jugendstil.",
+        "Der Museumsbesuch endet spätestens gegen 16:10 Uhr, damit genügend Zeit für den Weg zum Casino Nobile, Toilette und Einlasskontrolle der Bunkerführung bleibt. Bei langen Gratis-Sonntagswarteschlangen wird die Casina verkürzt; der gebuchte Bunkertermin ist unantastbar."
+      ],
+      "image": "civette",
+      "place": "Casina delle Civette, Villa Torlonia, Via Nomentana 70, 00161 Roma RM, Italien",
+      "weather": "beides",
+      "address": "Villa Torlonia, Via Nomentana 70, 00161 Roma",
+      "duration": "ca. 60–70 Min.",
+      "minutes": 70,
+      "price": "Am ersten Sonntag des Monats voraussichtlich kostenlos.",
+      "tip": "Spätestens 16:10 Uhr beenden. Eintrittslage am Gratis-Sonntag vor Ort prüfen; Bunker hat Vorrang.",
+      "ticketUrl": "https://www.museivillatorlonia.it/it/orari-indirizzi/musei-di-villa-torlonia"
+    },
+    "35": {
+      "title": "Bunker und Luftschutzräume der Villa Torlonia · T5",
+      "detail": "Fix gebuchte italienische Führung durch Schutzräume unter Mussolinis früherem Wohnsitz.",
+      "description": [
+        "Anfahrt: von der Casina delle Civette → Casino Nobile · zu Fuß etwa 5–8 Min. · ÖPNV —. Die Eintrittskontrolle wird mit mindestens 20 Minuten Reserve erreicht.",
+        "Die Führung verbindet die Nutzung der Villa Torlonia durch Mussolini mit der Entwicklung verschiedener Schutzanlagen während des Zweiten Weltkriegs. Zu sehen sind verstärkte Bereiche, Luftschutzräume und der unvollendete eigentliche Bunker. Die baulichen Unterschiede zeigen, wie schnell auf die zunehmende Bedrohung durch Luftangriffe reagiert wurde.",
+        "Der Rundgang dauert etwa 50 Minuten, führt über steile Treppen und endet an einem anderen Punkt im Park als der Eingang. Große Gegenstände, Speisen und Getränke sind nicht erlaubt; im Rundgang gibt es keine Toilette. Die zwei italienischen Führungen sind auf den 6. September um 17:00 Uhr korrigiert und fest gebucht."
+      ],
+      "image": "civette",
+      "place": "Bunker e Rifugi Antiaerei di Villa Torlonia, Via Nomentana 70, 00161 Roma RM, Italien",
+      "weather": "innen",
+      "fixed": true,
+      "address": "Casino Nobile, Villa Torlonia, Via Nomentana 70, 00161 Roma",
+      "duration": "ca. 50 Min.",
+      "minutes": 50,
+      "price": "Gebucht: 2 × 13 € inklusive Vorverkauf.",
+      "tip": "Bequeme Schuhe, keine großen Taschen; vorher Toilette benutzen. Ein- und Ausgang sind nicht identisch.",
+      "ticketUrl": "https://www.museivillatorlonia.it/node/1018227"
+    },
+    "36": {
+      "title": "Quartiere Coppedè · T5",
+      "detail": "Ein fantasievolles Stadtensemble zwischen Jugendstil, Barockzitaten, Mittelalterbild und Filmkulisse.",
+      "description": [
+        "Anfahrt: vom Ausgang des Bunkers → Piazza Mincio · zu Fuß etwa 20–25 Min. · ÖPNV ähnlich lang. Der Spaziergang durch das Wohnviertel ist nach dem unterirdischen Termin ein bewusster Wechsel ins Freie.",
+        "Gino Coppedè entwarf das Quartier ab 1915 als Ensemble, nicht als einzelne Sehenswürdigkeit. Torbogen, Palazzi, Villini, Mosaike, Tierfiguren, Säulen, Loggien und übersteigerte Dekoration greifen historische Formen auf, ohne sich einer Stilreinheit zu unterwerfen. Piazza Mincio und die Fontana delle Rane bilden den räumlichen Mittelpunkt.",
+        "Der Rundgang konzentriert sich auf wenige Straßen und dauert ungefähr 45 Minuten. Das weichere Abendlicht eignet sich gut für Fassadendetails; danach liegt Berberè in kurzer Gehweite, sodass kein weiterer Verkehrswechsel nötig ist."
+      ],
+      "image": "coppede",
+      "place": "Quartiere Coppedè, Piazza Mincio, 00198 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza Mincio, 00198 Roma",
+      "duration": "ca. 45–50 Min.",
+      "minutes": 50,
+      "price": "Kostenlos.",
+      "tip": "Schwerpunkt: Arco dei Palazzi degli Ambasciatori, Piazza Mincio und Fontana delle Rane."
+    },
+    "37": {
+      "title": "Dinner – Berberè Roma Porta Pia · T5",
+      "detail": "Sauerteigpizza mit mehreren vegetarischen Varianten, unkompliziert nach Coppedè erreichbar.",
+      "description": [
+        "Anfahrt: von Piazza Mincio → Berberè, Via Mantova 5 · zu Fuß etwa 10–15 Min. · ÖPNV —. Die kurze Verbindung vermeidet nach dem dichten Museumstag eine weitere Fahrt durch Rom.",
+        "Berberè arbeitet mit langsam geführtem Teig und serviert die Pizza häufig bereits in Stücken, sodass verschiedene Sorten geteilt werden können. Vegetarische Kombinationen sind fester Bestandteil der Karte; für Christian bleibt dazu Bier verfügbar.",
+        "Das Lokal öffnet sonntags zum Abendbetrieb um 19:00 Uhr. Eine Reservierung für 19:30 Uhr ist sinnvoll, weil der Tag durch die Bunkerführung zeitlich gebunden ist und eine Warteliste die Abendlogik unnötig verlängern würde."
+      ],
+      "image": "cucina",
+      "place": "Berberè Roma Porta Pia, Via Mantova 5, 00198 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Mantova 5, 00198 Roma",
+      "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
+      "price": "ca. 20–30 € pro Person.",
+      "tip": "Für Sonntag 19:30 Uhr reservieren; vegetarische Tagespizza und Bierauswahl vor Ort prüfen.",
+      "ticketUrl": "https://www.berberepizza.it/berbere-roma-porta-pia/"
+    },
+    "38": {
+      "title": "Pantheon – früher Montagsslot · T6",
+      "detail": "Die größte unbewehrte Betonkuppel der Welt möglichst gleich zur Öffnung und ohne Gratis-Sonntagsandrang.",
+      "description": [
+        "Anfahrt: von Seven, Via Nazionale 249 → Pantheon · zu Fuß etwa 20–25 Min. · ÖPNV etwa 20–30 Min. mit Bus und kurzem Fußweg. Am frühen Morgen ist der direkte Spaziergang zuverlässiger als der Stadtverkehr; Abmarsch ist gegen 08:15 Uhr vorgesehen.",
+        "Der heutige Bau entstand um 126 n. Chr. und überlebt nicht als Ruine, sondern als bis heute genutzter Innenraum. Durchmesser und Scheitelhöhe liegen jeweils bei ungefähr 43 Metern, sodass sich eine vollständige Kugel in den Raum denken lässt. Die Kuppelschale wird nach oben dünner und leichter; Kassettierung, abgestufte Zuschläge und der fast neun Meter breite Oculus reduzieren Gewicht und erzeugen zugleich die prägende Lichtdramaturgie.",
+        "Der Montag wurde bewusst dem kostenlosen ersten Sonntag vorgezogen: Die Eintrittskosten sind niedrig, dafür ist ein früher offizieller Slot planbarer. Eine echte Skip-the-line-Garantie gibt es nicht; der 09:00-Uhr-Termin bleibt trotzdem die beste Chance auf einen vergleichsweise ruhigen Raumeindruck."
+      ],
+      "image": "pantheon",
+      "place": "Pantheon, Piazza della Rotonda, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Piazza della Rotonda, 00186 Roma",
+      "duration": "45–50 Min.",
+      "minutes": 50,
+      "price": "7 € regulär; 2 € ermäßigt für berechtigte EU-Bürger von 18 bis 25 Jahren.",
+      "tip": "Offiziellen 09:00-Uhr-Slot buchen; Schultern und Knie bedeckt halten. Danach 8–10 Min. zu Fuß zu Il Gesù.",
+      "ticketUrl": "https://portale.museiitaliani.it/b2c/#/"
+    },
+    "39": {
+      "title": "Il Gesù · T6",
+      "detail": "Prototyp der Jesuitenkirche und Schlüsselbau für Raum, Liturgie und barocke Illusion.",
+      "description": [
+        "Anfahrt: vom Pantheon → Il Gesù · zu Fuß etwa 8–10 Min. · ÖPNV —. Die direkte Route führt über das historische Zentrum und hält den Vormittag kompakt.",
+        "Vignolas Grundriss bündelt die Aufmerksamkeit in einem breiten, tonnengewölbten Langhaus mit seitlichen Kapellen und klarer Sicht auf den Altar. Giacomo della Portas Fassade übersetzt die unterschiedliche Breite von Mittelschiff und Kapellen in zwei Geschosse mit Voluten und wurde zum Vorbild zahlreicher Jesuiten- und Gegenreformationskirchen.",
+        "Im Inneren steigert Baciccias Trionfo del Nome di Gesù die Architektur durch Malerei, Stuck und Figuren, die scheinbar aus dem Deckenrahmen in den Raum treten. Im Sommer ist die Kirche montags vormittags geöffnet, doch die Besichtigung wird vor der Messe um 11:00 Uhr abgeschlossen."
+      ],
+      "image": "gesu",
+      "place": "Chiesa del Gesù, Piazza del Gesù, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Piazza del Gesù, 00186 Roma",
+      "duration": "ca. 30–35 Min.",
+      "minutes": 35,
+      "price": "Eintritt frei; Spende möglich.",
+      "tip": "Ruhig verhalten und Gottesdienste respektieren. Spätestens 10:35–10:40 Uhr weitergehen.",
+      "ticketUrl": "https://www.chiesadelgesu.org/"
+    },
+    "40": {
+      "title": "Brunch – Buddy Vegan Restaurant Café · T6",
+      "detail": "Pflanzliche römische Küche direkt zwischen Il Gesù und dem Treffpunkt der Antike-Führung.",
+      "description": [
+        "Anfahrt: von Il Gesù → Buddy, Corso Vittorio Emanuele II 107A · zu Fuß etwa 5–7 Min. · ÖPNV —. Das Lokal liegt genau auf der weiteren Achse Richtung Kolosseum.",
+        "Buddy interpretiert römische und italienische Gerichte vollständig pflanzlich. Neben Pasta und Pinsa gibt es Brunchkombinationen, Sandwiches und leichtere Bowls. Damit bekommt Julia eine verlässliche vegane Mahlzeit, ohne dass der Tag vor der mehrstündigen Führung zu schwer wird.",
+        "Der Stopp ist als frühes Mittagessen geplant und endet gegen 11:50 Uhr. Die Buchung der Kolosseumführung muss den tatsächlichen Treffpunkt berücksichtigen; bei einem weiter östlich gelegenen Meeting Point wird das Essen entsprechend verkürzt."
+      ],
+      "image": "cucina",
+      "place": "Buddy Vegan Restaurant Café, Corso Vittorio Emanuele II 107A, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Corso Vittorio Emanuele II 107A, 00186 Roma",
+      "duration": "ca. 55–60 Min.",
+      "minutes": 60,
+      "price": "ca. 18–30 € pro Person.",
+      "tip": "Leicht essen und spätestens 11:50 Uhr aufbrechen; Tourtreffpunkt nach Buchung nochmals gegenprüfen.",
+      "ticketUrl": "https://buddyroma.com/contatti/"
+    },
+    "41": {
+      "title": "Kolosseum – deutschsprachige Führung · T6",
+      "detail": "Das Amphitheater als konstruktiver Höhepunkt; bevorzugt mit Arenaboden und gemeinsamem Antike-Ticket.",
+      "description": [
+        "Anfahrt: von Buddy am Corso Vittorio Emanuele II zum endgültigen Treffpunkt rund um Via dei Fori Imperiali oder Largo Gaetana Agnesi · zu Fuß etwa 20–25 Min. · ÖPNV etwa 15–25 Min. Der Voucher des Veranstalters entscheidet über den tatsächlichen Treffpunkt; dafür wird ein zusätzlicher Puffer eingeplant.",
+        "Das Flavische Amphitheater wurde ab 72 n. Chr. unter Vespasian errichtet und 80 n. Chr. unter Titus eröffnet. Für Julia ist weniger die ikonische Silhouette als die innere Organisation entscheidend: Travertinpfeiler, radial angelegte Gewölbe, nummerierte Zugänge und die konsequente Trennung der Besucherströme machten aus dem Bau eine leistungsfähige Großmaschine für zehntausende Menschen.",
+        "Vorgesehen ist eine deutschsprachige GetYourGuide-Führung durch Kolosseum, Forum und Palatin, möglichst mit Arenaboden. Der genaue Startzeitpunkt und die tatsächliche Reihenfolge der drei Bereiche sind noch nicht gebucht. Nach der Buchung wird dieser Stopp mit fixed: true geschützt."
+      ],
+      "image": "colosseo",
+      "place": "Colosseo, Piazza del Colosseo 1, 00184 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza del Colosseo 1, 00184 Roma",
+      "duration": "ca. 60–75 Min. als erster Teil einer 2,5–3-stündigen Führung",
+      "minutes": 65,
+      "price": "Noch zu buchen; Preis und deutscher Slot im Buchungskalender prüfen.",
+      "tip": "Personalausweise mitnehmen; nominative Eintrittskarten. Mindestens 15 Min. vor dem Treffpunkt sein.",
+      "ticketUrl": "https://www.getyourguide.com/de-at/kolosseum-l2619/kolosseum-und-forum-romanum-gefuhrte-tour-mit-bevorzugtem-zugang-t195566/"
+    },
+    "42": {
+      "title": "Forum Romanum und Palatin – Führung · T6",
+      "detail": "Stadtraum, Topografie und kaiserliche Palastarchitektur als zweiter Teil derselben Antike-Führung.",
+      "description": [
+        "Anfahrt: direkt aus dem Kolosseum beziehungsweise gemeinsam mit der gebuchten Führungsgruppe · zu Fuß wenige Minuten · ÖPNV —. Je nach Veranstalter beginnt die Tour auch zuerst im Forum; die Uhrzeit ist deshalb als Planungsmarke und nicht als zweites separates Ticket zu verstehen.",
+        "Das Forum war kein in einem Zug entworfener Platz, sondern eine über Jahrhunderte verdichtete Stadtmitte aus Basiliken, Tempeln, Triumphbögen, Rednertribünen und Prozessionswegen. Der Palatin darüber zeigt den Sprung vom republikanischen Wohnhügel zum zusammenhängenden kaiserlichen Palastbezirk. Besonders lesbar sind die Beziehungen zwischen Via Sacra, Titusbogen, Domus Flavia, Domus Augustana und den Terrassen über dem Tal.",
+        "Der Palatin bietet mehr Vegetation und Aussicht als das Forum. Im September sind Trinkwasser, Sonnenschutz und feste Schuhe wichtiger als ein minutiöses Abarbeiten jeder Ruine. Die Führung endet voraussichtlich gegen 15:00 Uhr; danach führt der Weg ohne großen Umweg zur Fontana di Trevi."
+      ],
+      "image": "forum",
+      "place": "Foro Romano, Via della Salara Vecchia 5/6, 00186 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Via della Salara Vecchia 5/6, 00186 Roma",
+      "duration": "ca. 80–90 Min. als zweiter Teil der Führung",
+      "minutes": 90,
+      "price": "Im gemeinsamen Führungsticket mit dem Kolosseum enthalten.",
+      "tip": "Wasserflasche, Sonnenschutz und rutschfeste Schuhe mitnehmen; Tourreihenfolge kann variieren.",
+      "ticketUrl": "https://www.getyourguide.com/de-at/kolosseum-l2619/kolosseum-und-forum-romanum-gefuhrte-tour-mit-bevorzugtem-zugang-t195566/"
+    },
+    "43": {
+      "title": "Fontana di Trevi – innerer Bereich · T6",
+      "detail": "Flexibles Open-Ticket für den nahen Zugang zur Brunnenanlage; bereits für zwei Personen gebucht.",
+      "description": [
+        "Anfahrt: vom Ende der Kolosseum-/Forumführung → Fontana di Trevi · zu Fuß etwa 25–30 Min. · ÖPNV etwa 20–25 Min., spart aber meist wenig Zeit. Der Spaziergang durch das Zentrum ist als Übergang und Erholung nach den archäologischen Bereichen gedacht.",
+        "Nicola Salvis Brunnen verwandelt die schmale Piazza in eine theatralische Fassade aus Travertin, Wasser und bewegten Figuren. Der Palazzo Poli wird zur Hintergrundarchitektur; Oceanus, Felsen und Kaskaden scheinen den Stadtraum vollständig zu besetzen.",
+        "Seit 2026 kostet der Zugang zum inneren Bereich für Nichtresidenten 2 €. Eure beiden Open-Tickets sind nicht an eine bestimmte Uhrzeit gebunden. Montags beginnt der reguläre Zugang um 11:30 Uhr, daher passt der geplante Besuch am Nachmittag problemlos."
+      ],
+      "image": "trevi",
+      "place": "Fontana di Trevi, Piazza di Trevi, 00187 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza di Trevi, 00187 Roma",
+      "duration": "ca. 30–35 Min.",
+      "minutes": 35,
+      "price": "Gebucht: 2 € pro Person.",
+      "tip": "Open-Ticket bereithalten; Montag 11:30–22:00 Uhr, letzter Einlass 21:00 Uhr.",
+      "ticketUrl": "https://fontanaditrevi.roma.it/"
+    },
+    "44": {
+      "title": "Piazza di Spagna und Spanische Treppe · T6",
+      "detail": "Barocker Stadtraum, Treppeninszenierung und Blickachse zur Trinità dei Monti.",
+      "description": [
+        "Anfahrt: von der Fontana di Trevi → Piazza di Spagna · zu Fuß etwa 10–12 Min. · ÖPNV —. Der kurze Weg führt ohne Umweg über die Einkaufsstraßen des Zentrums.",
+        "Die Scalinata di Trinità dei Monti verbindet die tiefer liegende Piazza di Spagna mit Kirche und Kloster auf dem Pincio. Rampen, Podeste und wechselnde Blickrichtungen machen die Treppe zu einem eigenständigen Stadtraum und nicht nur zu einer Höhendifferenz. Berninis Fontana della Barcaccia bildet den Gegenpol am Fuß.",
+        "Der Stopp bleibt kurz und dient zugleich als Übergang zurück Richtung Via Nazionale. Auf den Stufen zu sitzen ist nicht gestattet; für eine ruhigere Wahrnehmung lohnt der Blick von seitlichen Absätzen und vom oberen Niveau."
+      ],
+      "image": "spagna",
+      "place": "Piazza di Spagna, 00187 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza di Spagna, 00187 Roma",
+      "duration": "ca. 35–40 Min.",
+      "minutes": 40,
+      "price": "Kostenlos.",
+      "tip": "Nicht auf den Stufen sitzen. Danach zu Fuß etwa 15–20 Min. zurück zum Seven."
+    },
+    "45": {
+      "title": "Pause im Seven · T6",
+      "detail": "Duschen, Geräte laden und vor dem letzten gemeinsamen Abend kurz ausruhen.",
+      "description": [
+        "Anfahrt: von Piazza di Spagna → Seven · zu Fuß etwa 15–20 Min. · Metro A von Spagna nach Repubblica plus kurzer Fußweg etwa 10–15 Min. Bei müden Beinen ist die Metro die bessere Variante.",
+        "Die Pause ist kein verlorener Programmpunkt, sondern hält den dichten Montag realistisch. Nach Pantheon, Kirche und etwa drei Stunden Antike werden Schuhe gewechselt, Geräte geladen und die Open-Tickets sowie Reisedokumente für den Abreisetag geordnet."
+      ],
+      "image": "seven",
+      "place": "Seven, Via Nazionale 249, 00184 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Nazionale 249, 00184 Roma",
+      "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
+      "price": "—",
+      "tip": "Kopien der Flug- und Zugtickets offline speichern; Zugangscode nur in privater Notiz aufbewahren."
+    },
+    "46": {
+      "title": "Dinner – Timoty Drinks & Kitchen · T6",
+      "detail": "Nahe der Unterkunft mit veganen, vegetarischen und klassischen Gerichten sowie regionalen Produkten.",
+      "description": [
+        "Anfahrt: von Seven → Timoty, Via Torino 46 · zu Fuß etwa 5–8 Min. · ÖPNV —. Nach der Hotelpause bleibt der Abend damit ohne zusätzlichen Verkehr.",
+        "Timoty bietet für beide Essenswünsche eine praktikable Karte: vegane Pinsa, pflanzliche Gnocchi, vegetarische und vegane Platten stehen neben klassischen römischen und fleischhaltigen Gerichten. Die Küche wirbt mit biologischen und regionalen Zutaten; auch Drinks und Bier sind verfügbar.",
+        "Der Tisch wird für 19:30 Uhr vorgesehen. Das Budget bleibt mit Hauptgericht und Getränk im gewünschten Rahmen, und der kurze Rückweg zur Unterkunft ist nach dem langen Antike-Tag ein klarer Vorteil."
+      ],
+      "image": "cucina",
+      "place": "Timoty Drinks & Kitchen, Via Torino 46, 00184 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Torino 46, 00184 Roma",
+      "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
+      "price": "ca. 25–35 € pro Person.",
+      "tip": "Tisch für 19:30 Uhr reservieren; vegane und vegetarische Optionen sind auf der Karte gekennzeichnet.",
+      "ticketUrl": "https://www.timotyristorante.it/"
+    },
+    "47": {
+      "title": "Italo Bozen → Roma Termini · T7",
+      "detail": "Gemeinsame Hinfahrt mit fast vollständigem ersten Reisetag in Rom.",
+      "description": [
+        "Abfahrt in Bozen ist am Samstag um 06:42 Uhr. Der Italo 8953 erreicht Roma Termini planmäßig um 11:40 Uhr. Christian und Julia sitzen in Wagen 4 auf den Plätzen 77 und 78 in Smart.",
+        "Die Zugfahrt ist der erste feste Termin der Reise und darf bei späteren Umplanungen nicht verschoben werden. Nach der Ankunft führt der schnellste Weg zu Fuß zur Unterkunft; für die letzten Meter über Via Nazionale ist kein zusätzlicher ÖPNV-Wechsel sinnvoll."
+      ],
+      "image": "termini",
+      "place": "Stazione di Bolzano, Piazza della Stazione 1, 39100 Bolzano BZ, Italien",
+      "weather": "beides",
+      "fixed": true,
+      "address": "Bozen → Roma Termini",
+      "duration": "4 Std. 58 Min.",
+      "minutes": 298,
+      "price": "Gebucht.",
+      "tip": "Spätestens 15 Min. vor Abfahrt am Bahnsteig sein. Smart-Gepäckgrenze des Tickets beachten.",
+      "ticketUrl": "https://www.italotreno.com/"
+    },
+    "48": {
+      "title": "Seven – Gepäck abgeben und später einchecken · T7",
+      "detail": "Die zentrale Basis an der Via Nazionale; Gepäckannahme vor der Zimmerfreigabe ist bestätigt.",
+      "description": [
+        "Anfahrt: von Roma Termini → Seven, Via Nazionale 249 · zu Fuß etwa 10–15 Min. · ÖPNV —. Direkt nach der Ankunft wird das Gepäck abgegeben, damit der erste Stadttag ohne Koffer beginnen kann.",
+        "Das Zimmer ist ab 15:00 Uhr verfügbar. Nach dem Mittagessen bleibt ein kurzer Rückweg für Check-in und Frischmachen, bevor es zum MAXXI geht. Die Unterkunft ist für die gesamte Reise ein guter Verkehrsknoten: Termini, Repubblica, Monti und mehrere Buslinien liegen in kurzer Gehweite.",
+        "Der Zugangscode ist sicherheitsrelevant und wird absichtlich nicht in dieser öffentlichen Reisedatei gespeichert. Er muss aus der privaten Booking-Nachricht beziehungsweise einer separaten privaten Notiz verfügbar sein und bei der Eingabe mit dem dort angegebenen Bestätigungszeichen abgeschlossen werden."
+      ],
+      "image": "seven",
+      "place": "Seven, Via Nazionale 249, 00184 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Nazionale 249, 00184 Roma",
+      "duration": "Gepäckabgabe ca. 10–15 Min.; Check-in ab 15:00 Uhr.",
+      "minutes": 15,
+      "price": "Gebucht.",
+      "tip": "Zugangscode nur privat bereithalten und nicht auf der öffentlichen Website veröffentlichen."
+    },
+    "49": {
+      "title": "Lunch – Mercato Centrale Roma · T7",
+      "detail": "Unkomplizierter Ankunftslunch mit vielen Küchen und flexibler vegetarischer Auswahl.",
+      "description": [
+        "Anfahrt: von Seven → Mercato Centrale Roma · zu Fuß etwa 12–18 Min. · ÖPNV —. Der Markt liegt unmittelbar am Bahnhof Termini und lässt sich ohne Richtungswechsel erreichen.",
+        "Unter einem Dach arbeiten verschiedene Küchenstände mit Pasta, Pizza, Gemüse, Backwaren, Süßem und Getränken. Das offene Format ist am Ankunftstag vorteilhaft: Julia kann gezielt vegetarisch auswählen, während Christian nicht auf dasselbe Konzept festgelegt ist. Bestellt wird an den einzelnen Ständen, sodass keine lange Restaurantpause und keine Reservierung nötig sind.",
+        "Nach dem Essen bleibt Zeit für einen Kaffee und den Rückweg zur Unterkunft. Das MAXXI wird erst nach dem Zimmerbezug angesteuert, damit der Museumsblock nicht durch eine zusätzliche Rückfahrt unterbrochen wird."
+      ],
+      "image": "cucina",
+      "place": "Mercato Centrale Roma, Via Giovanni Giolitti 36, 00185 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Giovanni Giolitti 36, 00185 Roma",
+      "duration": "ca. 60–70 Min.",
+      "minutes": 70,
+      "price": "ca. 15–25 € pro Person.",
+      "tip": "Täglich 07:30–23:30 geöffnet; keine Reservierung nötig. Vegetarische Auswahl direkt an den Ständen prüfen.",
+      "ticketUrl": "https://www.mercatocentrale.it/roma/info/"
+    },
+    "50": {
+      "title": "MAXXI – Zaha Hadid und zwei Ausstellungen · T7",
+      "detail": "Das Gebäude ist das Hauptobjekt: dazu The Large Glass und Vitalità dell’architettura italiana 1946–2026.",
+      "description": [
+        "Anfahrt: von Seven → MAXXI · zu Fuß etwa 5–8 Min. bis Repubblica beziehungsweise Termini · ÖPNV ungefähr 30–40 Min. über Metro A bis Flaminio und weiter Richtung Via Guido Reni. Für den Rückweg zum Zentrum bleibt wegen möglicher Änderungen im Tram- und Ersatzbusverkehr Reserve.",
+        "Zaha Hadid behandelt das Museum nicht als neutrale Schachtel, sondern als ein Geflecht aus Betonbändern, Rampen, Brücken, gekrümmten Wänden und überlagerten Blickachsen. Die schwarze Treppenlandschaft und die linearen Oberlichter lenken Bewegung und Licht; gerade die Konflikte zwischen spektakulärer Wegeführung und klassischer Ausstellungshängung machen den Bau für eine Architekturstudentin besonders ergiebig.",
+        "The Large Glass, kuratiert von Alex Da Corte, verbindet Werke aus Kunst, Architektur und Fotografie mit den räumlichen Eigenschaften des Hauses. Vitalità dell’architettura italiana 1946–2026 spannt den Bogen von der Nachkriegszeit bis zur Gegenwart und beginnt mit Stimmen unter anderem von Renzo Piano, Massimiliano Fuksas, Stefano Boeri und Paola Viganò. Karten werden wie gewünscht erst an der Kasse gekauft."
+      ],
+      "image": "maxxi",
+      "place": "MAXXI, Via Guido Reni 4A, 00196 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Guido Reni 4A, 00196 Roma",
+      "duration": "ca. 2 Std. 20 Min.",
+      "minutes": 140,
+      "price": "Kasse: 15 € regulär, 12 € ermäßigt für Berechtigte.",
+      "tip": "Samstag 16:00–18:20. Zuerst das Gebäude bewusst lesen, danach Vitalità und The Large Glass. Montags geschlossen.",
+      "ticketUrl": "https://www.maxxi.art/orari-e-biglietteria/"
+    },
+    "51": {
+      "title": "Dinner – Open Baladin Roma · T7",
+      "detail": "Italienisches Craft Beer, vegetarische Gerichte und ein sinnvoller Abendstopp vor der Ara Pacis.",
+      "description": [
+        "Anfahrt: vom MAXXI → Open Baladin · ÖPNV ungefähr 30–40 Min. über Flaminio Richtung historisches Zentrum, danach kurzer Fußweg. Die großzügige Fahrzeit schützt den fixen Ara-Pacis-Termin vor Verzögerungen.",
+        "Open Baladin war eine der Adressen, die italienisches Craft Beer in Rom sichtbar machten. Neben den Baladin-Bieren gibt es zahlreiche wechselnde italienische Zapfhähne und Flaschen. Für Julia stehen ausdrücklich vegetarische und vegane Gerichte zur Verfügung; damit ist das Lokal der klarste Kompromiss zwischen Christians Bierinteresse und einem vollwertigen fleischlosen Abendessen.",
+        "Der Tisch sollte für 19:00 Uhr reserviert und die Rechnung spätestens gegen 20:15 Uhr abgeschlossen werden. Von der Via degli Specchi geht es anschließend zu Fuß über Campo de’ Fiori und durch das historische Zentrum zur Ara Pacis; dieser Spaziergang ist zuverlässiger als ein kurzer Buswechsel."
+      ],
+      "image": "cucina",
+      "place": "Open Baladin Roma, Via degli Specchi 6, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via degli Specchi 6, 00186 Roma",
+      "duration": "ca. 1 Std. 15 Min.",
+      "minutes": 75,
+      "price": "ca. 25–35 € pro Person inklusive Bier.",
+      "tip": "Tisch für 19:00 Uhr reservieren; spätestens 20:15 Uhr aufbrechen. Zur Ara Pacis zu Fuß etwa 20–25 Min.",
+      "ticketUrl": "https://pubs.baladin.it/it/restaurant-hamburger-birra-artigianale/via-degli-specchi-6-roma/"
+    },
+    "52": {
+      "title": "L’Ara si rivela – nächtliche Multimedia-Erfahrung · T7",
+      "detail": "Gebuchter Abendtermin am Augustusaltar mit Licht, Projektion und Erzählung in Kopfhörern.",
+      "description": [
+        "Anfahrt: von Open Baladin → Museo dell’Ara Pacis · zu Fuß etwa 20–25 Min. · ÖPNV bringt auf dieser kurzen Altstadtstrecke kaum einen Vorteil. Zielankunft ist spätestens 20:45 Uhr.",
+        "Die rund 40-minütige Inszenierung rekonstruiert den historischen und farblichen Kontext des Ara-Pacis-Altars. Projektionen, Licht und räumliche Erzählung helfen dabei, die Reliefs nicht nur als helle Marmoroberfläche, sondern als Teil der politischen Bildsprache des Augustus zu lesen.",
+        "Für Julia ist auch Richard Meiers Museumshülle wichtig: Tageslicht, Travertin, Glasflächen und die bewusste Konfrontation eines modernen Schutzbaus mit dem historischen Zentrum. Die Tickets sind zeitgebunden; bei Verspätung gibt es laut Bedingungen keine Umbuchung."
+      ],
+      "image": "arapacis",
+      "place": "Museo dell’Ara Pacis, Lungotevere in Augusta, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "fixed": true,
+      "address": "Lungotevere in Augusta, Ecke Via Tomacelli, 00186 Roma",
+      "duration": "ca. 40 Min.",
+      "minutes": 40,
+      "price": "Gebucht: 16 € regulär und 14 € ermäßigt inklusive Vorverkauf.",
+      "tip": "Kopfhörer mitnehmen. Spätestens 20:45 Uhr am Zugang sein; kleine Tasche bevorzugen.",
+      "ticketUrl": "https://www.arapacis.it/it/mostra-evento/l-ara-si-rivela"
+    },
+    "53": {
+      "title": "Craft Beer – Ma Che Siete Venuti A Fà (optional) · T7",
+      "detail": "Später Bierstopp in Trastevere mit 16 wechselnden Zapfhähnen und nationalen wie internationalen Craft-Bieren.",
+      "description": [
+        "Anfahrt: vom Museo dell’Ara Pacis → Ma Che Siete Venuti A Fà · zu Fuß etwa 25–30 Min. · ÖPNV etwa 20–30 Min. mit Bus und kurzem Fußweg. Der Spaziergang führt nach der Abendveranstaltung über den Tiber nach Trastevere.",
+        "Der kleine Pub gehört seit 2001 zur römischen Craft-Beer-Szene und schenkt 16 sorgfältig ausgewählte Biere vom Fass aus. Die Auswahl verbindet italienische Brauereien mit internationalen Gästen und wechselnden Veranstaltungen rund um Brauer und Mikrobrauereien.",
+        "Der Stopp ist bewusst optional: Nach dem langen Ankunftstag entscheidet ihr vor Ort, ob noch Energie für Trastevere bleibt. Der Pub ist täglich bis 02:00 Uhr geöffnet und nimmt keine Reservierungen an."
+      ],
+      "image": "mache",
+      "place": "Ma Che Siete Venuti A Fà, Via Benedetta 25, 00153 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Benedetta 25, 00153 Roma",
+      "duration": "ca. 1 Std. 10 Min.",
+      "minutes": 70,
+      "price": "Kein Eintritt; Getränke nach Verbrauch.",
+      "tip": "Keine Reservierung möglich. Bei Müdigkeit auslassen, damit der frühe Museumsstart am Sonntag realistisch bleibt.",
+      "ticketUrl": "https://www.football-pub.com/"
+    },
+    "54": {
+      "title": "Centrale Montemartini · T8",
+      "detail": "Antike Skulpturen zwischen Turbinen, Kesseln und Maschinen einer ehemaligen Elektrizitätszentrale.",
+      "description": [
+        "Anfahrt: von Seven → Centrale Montemartini · zu Fuß etwa 10–12 Min. bis Termini · Metro B bis Garbatella oder Piramide/Ostiense und anschließend 8–12 Min. zu Fuß · insgesamt etwa 30–40 Min. Die Abfahrt gegen 08:20 Uhr ermöglicht den Eintritt zur Öffnung um 09:00 Uhr.",
+        "Die Centrale Montemartini ist keine bloße Ausstellung in einem Industriegebäude. Weiße antike Skulpturen stehen vor schwarzen Dieselmotoren, Turbinen und Schaltanlagen; Maßstab, Material und historische Funktion der beiden Sammlungen kommentieren einander. Der Bau macht außerdem die frühe Elektrifizierung Roms und die Entwicklung der Via Ostiense als Produktionsachse lesbar.",
+        "Der 6. September ist der erste Sonntag des Monats. Für die kommunalen Museen ist daher ein kostenloser Eintritt vorgesehen; kurz vor der Reise soll die konkrete Septembermitteilung nochmals geprüft werden. Frühes Erscheinen reduziert auch hier den Andrang."
+      ],
+      "image": "montemartini",
+      "place": "Centrale Montemartini, Via Ostiense 106, 00154 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Ostiense 106, 00154 Roma",
+      "duration": "ca. 2 Std. 15 Min.",
+      "minutes": 135,
+      "price": "Am ersten Sonntag des Monats voraussichtlich kostenlos; sonst regulär 11 €.",
+      "tip": "Direkt zur Öffnung um 09:00 Uhr. Mögliche Zuschläge für Sonderausstellungen kurz vor der Reise prüfen.",
+      "ticketUrl": "https://www.centralemontemartini.org/it/informazioni_pratiche/orari_e_indirizzi"
+    },
+    "55": {
+      "title": "Ostiense und Gasometro – Architekturspaziergang · T8",
+      "detail": "Industriebrachen, Backstein, Bahntrassen und der große Stahlzylinder als Stadtzeichen.",
+      "description": [
+        "Anfahrt: von Centrale Montemartini → Gasometro Ostiense · zu Fuß etwa 10–15 Min. · ÖPNV —. Der Spaziergang bleibt im selben Viertel und vermeidet eine zusätzliche Fahrt ins Zentrum.",
+        "Ostiense zeigt ein Rom jenseits von Travertin und Barockfassaden. Gasometer, ehemalige Kraftwerks- und Speicherbauten, Bahn- und Hafeninfrastruktur bilden ein großmaßstäbliches industrielles Stadtfragment. Der Gasometro selbst ist heute vor allem als Stahlskelett präsent und funktioniert als weit sichtbare Landmarke.",
+        "Der Rundgang ist bewusst locker und kann bei Hitze oder Regen gekürzt werden. Wichtig ist weniger ein einzelnes Gebäude als das Verhältnis zwischen Produktionsgeschichte, Umnutzung, Street Art und der heutigen Entwicklung des Quartiers."
+      ],
+      "image": "gasometro",
+      "place": "Gasometro Ostiense, Via del Commercio, 00154 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Via del Commercio, 00154 Roma",
+      "duration": "ca. 60–70 Min.",
+      "minutes": 70,
+      "price": "Kostenlos.",
+      "tip": "Außenbesichtigung; bei starker Hitze auf 30 Min. kürzen. Anschließend zu Fuß etwa 10–15 Min. zu Romeow."
+    },
+    "56": {
+      "title": "Lunch – Romeow Cat Bistrot · T8",
+      "detail": "Vollständig pflanzliches Gourmet-Bistrot mit acht Katzen und reservierungspflichtigem Sonntagslunch.",
+      "description": [
+        "Anfahrt: vom Gasometro beziehungsweise Ostiense → Romeow, Via Francesco Negri 15 · zu Fuß etwa 10–15 Min. · ÖPNV —. Das Lokal liegt damit genau am Ende des Industrieblocks.",
+        "Romeow ist mehr als ein klassisches Katzencafé: Zum Mittag wird ein saisonales, vollständig pflanzliches Restaurantkonzept angeboten. Die Katzen stammen aus einer Tierschutzorganisation und bestimmen den Raum mit; ihre Rückzugsbereiche und Ruhezeiten müssen respektiert werden.",
+        "Am Samstag und Sonntag ist der Restaurantbetrieb von 13:00 bis 15:45 Uhr ausschließlich mit Reservierung zugänglich. Der Stopp ist bewusst länger geplant, weil das Essen stärker auf ein Menüerlebnis als auf einen schnellen Snack ausgerichtet ist."
+      ],
+      "image": "cucina",
+      "place": "Romeow Cat Bistrot, Via Francesco Negri 15, 00154 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Francesco Negri 15, 00154 Roma",
+      "duration": "ca. 1 Std. 15 Min.",
+      "minutes": 75,
+      "price": "ca. 25–40 € pro Person.",
+      "tip": "Reservierung für Sonntag 13:00 Uhr verpflichtend; den Katzen nicht nachlaufen oder sie wecken.",
+      "ticketUrl": "https://www.romeowcatbistrot.com/orari-e-informazioni-importanti/"
+    },
+    "57": {
+      "title": "Casina delle Civette – Villa Torlonia · T8",
+      "detail": "Eklektische Wohnarchitektur mit Jugendstilfenstern, Türmchen, Holzarbeiten und märchenhafter Silhouette.",
+      "description": [
+        "Anfahrt: von Romeow → Villa Torlonia · zu Fuß etwa 10–12 Min. bis Garbatella · Metro B bis Policlinico und anschließend 12–15 Min. zu Fuß · insgesamt ungefähr 35–45 Min. Der Weg umgeht die Altstadt und nutzt die direkte Nord-Süd-Verbindung.",
+        "Die Casina delle Civette entwickelte sich aus einer ländlich-schweizerisch gedachten Hütte zu einem eklektischen Wohnhaus des frühen 20. Jahrhunderts. Spitzdächer, Erker, Loggien, Majolika, Holz, Schmiedeeisen und vor allem die farbigen Glasfenster ergeben kein einheitliches Stilprogramm, sondern eine bewusst fantastische Collage zwischen Mittelalterbild und Jugendstil.",
+        "Der Museumsbesuch endet spätestens gegen 16:10 Uhr, damit genügend Zeit für den Weg zum Casino Nobile, Toilette und Einlasskontrolle der Bunkerführung bleibt. Bei langen Gratis-Sonntagswarteschlangen wird die Casina verkürzt; der gebuchte Bunkertermin ist unantastbar."
+      ],
+      "image": "civette",
+      "place": "Casina delle Civette, Villa Torlonia, Via Nomentana 70, 00161 Roma RM, Italien",
+      "weather": "beides",
+      "address": "Villa Torlonia, Via Nomentana 70, 00161 Roma",
+      "duration": "ca. 60–70 Min.",
+      "minutes": 70,
+      "price": "Am ersten Sonntag des Monats voraussichtlich kostenlos.",
+      "tip": "Spätestens 16:10 Uhr beenden. Eintrittslage am Gratis-Sonntag vor Ort prüfen; Bunker hat Vorrang.",
+      "ticketUrl": "https://www.museivillatorlonia.it/it/orari-indirizzi/musei-di-villa-torlonia"
+    },
+    "58": {
+      "title": "Bunker und Luftschutzräume der Villa Torlonia · T8",
+      "detail": "Fix gebuchte italienische Führung durch Schutzräume unter Mussolinis früherem Wohnsitz.",
+      "description": [
+        "Anfahrt: von der Casina delle Civette → Casino Nobile · zu Fuß etwa 5–8 Min. · ÖPNV —. Die Eintrittskontrolle wird mit mindestens 20 Minuten Reserve erreicht.",
+        "Die Führung verbindet die Nutzung der Villa Torlonia durch Mussolini mit der Entwicklung verschiedener Schutzanlagen während des Zweiten Weltkriegs. Zu sehen sind verstärkte Bereiche, Luftschutzräume und der unvollendete eigentliche Bunker. Die baulichen Unterschiede zeigen, wie schnell auf die zunehmende Bedrohung durch Luftangriffe reagiert wurde.",
+        "Der Rundgang dauert etwa 50 Minuten, führt über steile Treppen und endet an einem anderen Punkt im Park als der Eingang. Große Gegenstände, Speisen und Getränke sind nicht erlaubt; im Rundgang gibt es keine Toilette. Die zwei italienischen Führungen sind auf den 6. September um 17:00 Uhr korrigiert und fest gebucht."
+      ],
+      "image": "civette",
+      "place": "Bunker e Rifugi Antiaerei di Villa Torlonia, Via Nomentana 70, 00161 Roma RM, Italien",
+      "weather": "innen",
+      "fixed": true,
+      "address": "Casino Nobile, Villa Torlonia, Via Nomentana 70, 00161 Roma",
+      "duration": "ca. 50 Min.",
+      "minutes": 50,
+      "price": "Gebucht: 2 × 13 € inklusive Vorverkauf.",
+      "tip": "Bequeme Schuhe, keine großen Taschen; vorher Toilette benutzen. Ein- und Ausgang sind nicht identisch.",
+      "ticketUrl": "https://www.museivillatorlonia.it/node/1018227"
+    },
+    "59": {
+      "title": "Quartiere Coppedè · T8",
+      "detail": "Ein fantasievolles Stadtensemble zwischen Jugendstil, Barockzitaten, Mittelalterbild und Filmkulisse.",
+      "description": [
+        "Anfahrt: vom Ausgang des Bunkers → Piazza Mincio · zu Fuß etwa 20–25 Min. · ÖPNV ähnlich lang. Der Spaziergang durch das Wohnviertel ist nach dem unterirdischen Termin ein bewusster Wechsel ins Freie.",
+        "Gino Coppedè entwarf das Quartier ab 1915 als Ensemble, nicht als einzelne Sehenswürdigkeit. Torbogen, Palazzi, Villini, Mosaike, Tierfiguren, Säulen, Loggien und übersteigerte Dekoration greifen historische Formen auf, ohne sich einer Stilreinheit zu unterwerfen. Piazza Mincio und die Fontana delle Rane bilden den räumlichen Mittelpunkt.",
+        "Der Rundgang konzentriert sich auf wenige Straßen und dauert ungefähr 45 Minuten. Das weichere Abendlicht eignet sich gut für Fassadendetails; danach liegt Berberè in kurzer Gehweite, sodass kein weiterer Verkehrswechsel nötig ist."
+      ],
+      "image": "coppede",
+      "place": "Quartiere Coppedè, Piazza Mincio, 00198 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza Mincio, 00198 Roma",
+      "duration": "ca. 45–50 Min.",
+      "minutes": 50,
+      "price": "Kostenlos.",
+      "tip": "Schwerpunkt: Arco dei Palazzi degli Ambasciatori, Piazza Mincio und Fontana delle Rane."
+    },
+    "60": {
+      "title": "Dinner – Berberè Roma Porta Pia · T8",
+      "detail": "Sauerteigpizza mit mehreren vegetarischen Varianten, unkompliziert nach Coppedè erreichbar.",
+      "description": [
+        "Anfahrt: von Piazza Mincio → Berberè, Via Mantova 5 · zu Fuß etwa 10–15 Min. · ÖPNV —. Die kurze Verbindung vermeidet nach dem dichten Museumstag eine weitere Fahrt durch Rom.",
+        "Berberè arbeitet mit langsam geführtem Teig und serviert die Pizza häufig bereits in Stücken, sodass verschiedene Sorten geteilt werden können. Vegetarische Kombinationen sind fester Bestandteil der Karte; für Christian bleibt dazu Bier verfügbar.",
+        "Das Lokal öffnet sonntags zum Abendbetrieb um 19:00 Uhr. Eine Reservierung für 19:30 Uhr ist sinnvoll, weil der Tag durch die Bunkerführung zeitlich gebunden ist und eine Warteliste die Abendlogik unnötig verlängern würde."
+      ],
+      "image": "cucina",
+      "place": "Berberè Roma Porta Pia, Via Mantova 5, 00198 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Mantova 5, 00198 Roma",
+      "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
+      "price": "ca. 20–30 € pro Person.",
+      "tip": "Für Sonntag 19:30 Uhr reservieren; vegetarische Tagespizza und Bierauswahl vor Ort prüfen.",
+      "ticketUrl": "https://www.berberepizza.it/berbere-roma-porta-pia/"
+    },
+    "61": {
+      "title": "Pantheon – früher Montagsslot · T9",
+      "detail": "Die größte unbewehrte Betonkuppel der Welt möglichst gleich zur Öffnung und ohne Gratis-Sonntagsandrang.",
+      "description": [
+        "Anfahrt: von Seven, Via Nazionale 249 → Pantheon · zu Fuß etwa 20–25 Min. · ÖPNV etwa 20–30 Min. mit Bus und kurzem Fußweg. Am frühen Morgen ist der direkte Spaziergang zuverlässiger als der Stadtverkehr; Abmarsch ist gegen 08:15 Uhr vorgesehen.",
+        "Der heutige Bau entstand um 126 n. Chr. und überlebt nicht als Ruine, sondern als bis heute genutzter Innenraum. Durchmesser und Scheitelhöhe liegen jeweils bei ungefähr 43 Metern, sodass sich eine vollständige Kugel in den Raum denken lässt. Die Kuppelschale wird nach oben dünner und leichter; Kassettierung, abgestufte Zuschläge und der fast neun Meter breite Oculus reduzieren Gewicht und erzeugen zugleich die prägende Lichtdramaturgie.",
+        "Der Montag wurde bewusst dem kostenlosen ersten Sonntag vorgezogen: Die Eintrittskosten sind niedrig, dafür ist ein früher offizieller Slot planbarer. Eine echte Skip-the-line-Garantie gibt es nicht; der 09:00-Uhr-Termin bleibt trotzdem die beste Chance auf einen vergleichsweise ruhigen Raumeindruck."
+      ],
+      "image": "pantheon",
+      "place": "Pantheon, Piazza della Rotonda, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Piazza della Rotonda, 00186 Roma",
+      "duration": "45–50 Min.",
+      "minutes": 50,
+      "price": "7 € regulär; 2 € ermäßigt für berechtigte EU-Bürger von 18 bis 25 Jahren.",
+      "tip": "Offiziellen 09:00-Uhr-Slot buchen; Schultern und Knie bedeckt halten. Danach 8–10 Min. zu Fuß zu Il Gesù.",
+      "ticketUrl": "https://portale.museiitaliani.it/b2c/#/"
+    },
+    "62": {
+      "title": "Il Gesù · T9",
+      "detail": "Prototyp der Jesuitenkirche und Schlüsselbau für Raum, Liturgie und barocke Illusion.",
+      "description": [
+        "Anfahrt: vom Pantheon → Il Gesù · zu Fuß etwa 8–10 Min. · ÖPNV —. Die direkte Route führt über das historische Zentrum und hält den Vormittag kompakt.",
+        "Vignolas Grundriss bündelt die Aufmerksamkeit in einem breiten, tonnengewölbten Langhaus mit seitlichen Kapellen und klarer Sicht auf den Altar. Giacomo della Portas Fassade übersetzt die unterschiedliche Breite von Mittelschiff und Kapellen in zwei Geschosse mit Voluten und wurde zum Vorbild zahlreicher Jesuiten- und Gegenreformationskirchen.",
+        "Im Inneren steigert Baciccias Trionfo del Nome di Gesù die Architektur durch Malerei, Stuck und Figuren, die scheinbar aus dem Deckenrahmen in den Raum treten. Im Sommer ist die Kirche montags vormittags geöffnet, doch die Besichtigung wird vor der Messe um 11:00 Uhr abgeschlossen."
+      ],
+      "image": "gesu",
+      "place": "Chiesa del Gesù, Piazza del Gesù, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Piazza del Gesù, 00186 Roma",
+      "duration": "ca. 30–35 Min.",
+      "minutes": 35,
+      "price": "Eintritt frei; Spende möglich.",
+      "tip": "Ruhig verhalten und Gottesdienste respektieren. Spätestens 10:35–10:40 Uhr weitergehen.",
+      "ticketUrl": "https://www.chiesadelgesu.org/"
+    },
+    "63": {
+      "title": "Brunch – Buddy Vegan Restaurant Café · T9",
+      "detail": "Pflanzliche römische Küche direkt zwischen Il Gesù und dem Treffpunkt der Antike-Führung.",
+      "description": [
+        "Anfahrt: von Il Gesù → Buddy, Corso Vittorio Emanuele II 107A · zu Fuß etwa 5–7 Min. · ÖPNV —. Das Lokal liegt genau auf der weiteren Achse Richtung Kolosseum.",
+        "Buddy interpretiert römische und italienische Gerichte vollständig pflanzlich. Neben Pasta und Pinsa gibt es Brunchkombinationen, Sandwiches und leichtere Bowls. Damit bekommt Julia eine verlässliche vegane Mahlzeit, ohne dass der Tag vor der mehrstündigen Führung zu schwer wird.",
+        "Der Stopp ist als frühes Mittagessen geplant und endet gegen 11:50 Uhr. Die Buchung der Kolosseumführung muss den tatsächlichen Treffpunkt berücksichtigen; bei einem weiter östlich gelegenen Meeting Point wird das Essen entsprechend verkürzt."
+      ],
+      "image": "cucina",
+      "place": "Buddy Vegan Restaurant Café, Corso Vittorio Emanuele II 107A, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Corso Vittorio Emanuele II 107A, 00186 Roma",
+      "duration": "ca. 55–60 Min.",
+      "minutes": 60,
+      "price": "ca. 18–30 € pro Person.",
+      "tip": "Leicht essen und spätestens 11:50 Uhr aufbrechen; Tourtreffpunkt nach Buchung nochmals gegenprüfen.",
+      "ticketUrl": "https://buddyroma.com/contatti/"
+    },
+    "64": {
+      "title": "Kolosseum – deutschsprachige Führung · T9",
+      "detail": "Das Amphitheater als konstruktiver Höhepunkt; bevorzugt mit Arenaboden und gemeinsamem Antike-Ticket.",
+      "description": [
+        "Anfahrt: von Buddy am Corso Vittorio Emanuele II zum endgültigen Treffpunkt rund um Via dei Fori Imperiali oder Largo Gaetana Agnesi · zu Fuß etwa 20–25 Min. · ÖPNV etwa 15–25 Min. Der Voucher des Veranstalters entscheidet über den tatsächlichen Treffpunkt; dafür wird ein zusätzlicher Puffer eingeplant.",
+        "Das Flavische Amphitheater wurde ab 72 n. Chr. unter Vespasian errichtet und 80 n. Chr. unter Titus eröffnet. Für Julia ist weniger die ikonische Silhouette als die innere Organisation entscheidend: Travertinpfeiler, radial angelegte Gewölbe, nummerierte Zugänge und die konsequente Trennung der Besucherströme machten aus dem Bau eine leistungsfähige Großmaschine für zehntausende Menschen.",
+        "Vorgesehen ist eine deutschsprachige GetYourGuide-Führung durch Kolosseum, Forum und Palatin, möglichst mit Arenaboden. Der genaue Startzeitpunkt und die tatsächliche Reihenfolge der drei Bereiche sind noch nicht gebucht. Nach der Buchung wird dieser Stopp mit fixed: true geschützt."
+      ],
+      "image": "colosseo",
+      "place": "Colosseo, Piazza del Colosseo 1, 00184 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza del Colosseo 1, 00184 Roma",
+      "duration": "ca. 60–75 Min. als erster Teil einer 2,5–3-stündigen Führung",
+      "minutes": 65,
+      "price": "Noch zu buchen; Preis und deutscher Slot im Buchungskalender prüfen.",
+      "tip": "Personalausweise mitnehmen; nominative Eintrittskarten. Mindestens 15 Min. vor dem Treffpunkt sein.",
+      "ticketUrl": "https://www.getyourguide.com/de-at/kolosseum-l2619/kolosseum-und-forum-romanum-gefuhrte-tour-mit-bevorzugtem-zugang-t195566/"
+    },
+    "65": {
+      "title": "Forum Romanum und Palatin – Führung · T9",
+      "detail": "Stadtraum, Topografie und kaiserliche Palastarchitektur als zweiter Teil derselben Antike-Führung.",
+      "description": [
+        "Anfahrt: direkt aus dem Kolosseum beziehungsweise gemeinsam mit der gebuchten Führungsgruppe · zu Fuß wenige Minuten · ÖPNV —. Je nach Veranstalter beginnt die Tour auch zuerst im Forum; die Uhrzeit ist deshalb als Planungsmarke und nicht als zweites separates Ticket zu verstehen.",
+        "Das Forum war kein in einem Zug entworfener Platz, sondern eine über Jahrhunderte verdichtete Stadtmitte aus Basiliken, Tempeln, Triumphbögen, Rednertribünen und Prozessionswegen. Der Palatin darüber zeigt den Sprung vom republikanischen Wohnhügel zum zusammenhängenden kaiserlichen Palastbezirk. Besonders lesbar sind die Beziehungen zwischen Via Sacra, Titusbogen, Domus Flavia, Domus Augustana und den Terrassen über dem Tal.",
+        "Der Palatin bietet mehr Vegetation und Aussicht als das Forum. Im September sind Trinkwasser, Sonnenschutz und feste Schuhe wichtiger als ein minutiöses Abarbeiten jeder Ruine. Die Führung endet voraussichtlich gegen 15:00 Uhr; danach führt der Weg ohne großen Umweg zur Fontana di Trevi."
+      ],
+      "image": "forum",
+      "place": "Foro Romano, Via della Salara Vecchia 5/6, 00186 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Via della Salara Vecchia 5/6, 00186 Roma",
+      "duration": "ca. 80–90 Min. als zweiter Teil der Führung",
+      "minutes": 90,
+      "price": "Im gemeinsamen Führungsticket mit dem Kolosseum enthalten.",
+      "tip": "Wasserflasche, Sonnenschutz und rutschfeste Schuhe mitnehmen; Tourreihenfolge kann variieren.",
+      "ticketUrl": "https://www.getyourguide.com/de-at/kolosseum-l2619/kolosseum-und-forum-romanum-gefuhrte-tour-mit-bevorzugtem-zugang-t195566/"
+    },
+    "66": {
+      "title": "Fontana di Trevi – innerer Bereich · T9",
+      "detail": "Flexibles Open-Ticket für den nahen Zugang zur Brunnenanlage; bereits für zwei Personen gebucht.",
+      "description": [
+        "Anfahrt: vom Ende der Kolosseum-/Forumführung → Fontana di Trevi · zu Fuß etwa 25–30 Min. · ÖPNV etwa 20–25 Min., spart aber meist wenig Zeit. Der Spaziergang durch das Zentrum ist als Übergang und Erholung nach den archäologischen Bereichen gedacht.",
+        "Nicola Salvis Brunnen verwandelt die schmale Piazza in eine theatralische Fassade aus Travertin, Wasser und bewegten Figuren. Der Palazzo Poli wird zur Hintergrundarchitektur; Oceanus, Felsen und Kaskaden scheinen den Stadtraum vollständig zu besetzen.",
+        "Seit 2026 kostet der Zugang zum inneren Bereich für Nichtresidenten 2 €. Eure beiden Open-Tickets sind nicht an eine bestimmte Uhrzeit gebunden. Montags beginnt der reguläre Zugang um 11:30 Uhr, daher passt der geplante Besuch am Nachmittag problemlos."
+      ],
+      "image": "trevi",
+      "place": "Fontana di Trevi, Piazza di Trevi, 00187 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza di Trevi, 00187 Roma",
+      "duration": "ca. 30–35 Min.",
+      "minutes": 35,
+      "price": "Gebucht: 2 € pro Person.",
+      "tip": "Open-Ticket bereithalten; Montag 11:30–22:00 Uhr, letzter Einlass 21:00 Uhr.",
+      "ticketUrl": "https://fontanaditrevi.roma.it/"
+    },
+    "67": {
+      "title": "Piazza di Spagna und Spanische Treppe · T9",
+      "detail": "Barocker Stadtraum, Treppeninszenierung und Blickachse zur Trinità dei Monti.",
+      "description": [
+        "Anfahrt: von der Fontana di Trevi → Piazza di Spagna · zu Fuß etwa 10–12 Min. · ÖPNV —. Der kurze Weg führt ohne Umweg über die Einkaufsstraßen des Zentrums.",
+        "Die Scalinata di Trinità dei Monti verbindet die tiefer liegende Piazza di Spagna mit Kirche und Kloster auf dem Pincio. Rampen, Podeste und wechselnde Blickrichtungen machen die Treppe zu einem eigenständigen Stadtraum und nicht nur zu einer Höhendifferenz. Berninis Fontana della Barcaccia bildet den Gegenpol am Fuß.",
+        "Der Stopp bleibt kurz und dient zugleich als Übergang zurück Richtung Via Nazionale. Auf den Stufen zu sitzen ist nicht gestattet; für eine ruhigere Wahrnehmung lohnt der Blick von seitlichen Absätzen und vom oberen Niveau."
+      ],
+      "image": "spagna",
+      "place": "Piazza di Spagna, 00187 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza di Spagna, 00187 Roma",
+      "duration": "ca. 35–40 Min.",
+      "minutes": 40,
+      "price": "Kostenlos.",
+      "tip": "Nicht auf den Stufen sitzen. Danach zu Fuß etwa 15–20 Min. zurück zum Seven."
+    },
+    "68": {
+      "title": "Pause im Seven · T9",
+      "detail": "Duschen, Geräte laden und vor dem letzten gemeinsamen Abend kurz ausruhen.",
+      "description": [
+        "Anfahrt: von Piazza di Spagna → Seven · zu Fuß etwa 15–20 Min. · Metro A von Spagna nach Repubblica plus kurzer Fußweg etwa 10–15 Min. Bei müden Beinen ist die Metro die bessere Variante.",
+        "Die Pause ist kein verlorener Programmpunkt, sondern hält den dichten Montag realistisch. Nach Pantheon, Kirche und etwa drei Stunden Antike werden Schuhe gewechselt, Geräte geladen und die Open-Tickets sowie Reisedokumente für den Abreisetag geordnet."
+      ],
+      "image": "seven",
+      "place": "Seven, Via Nazionale 249, 00184 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Nazionale 249, 00184 Roma",
+      "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
+      "price": "—",
+      "tip": "Kopien der Flug- und Zugtickets offline speichern; Zugangscode nur in privater Notiz aufbewahren."
+    },
+    "69": {
+      "title": "Dinner – Timoty Drinks & Kitchen · T9",
+      "detail": "Nahe der Unterkunft mit veganen, vegetarischen und klassischen Gerichten sowie regionalen Produkten.",
+      "description": [
+        "Anfahrt: von Seven → Timoty, Via Torino 46 · zu Fuß etwa 5–8 Min. · ÖPNV —. Nach der Hotelpause bleibt der Abend damit ohne zusätzlichen Verkehr.",
+        "Timoty bietet für beide Essenswünsche eine praktikable Karte: vegane Pinsa, pflanzliche Gnocchi, vegetarische und vegane Platten stehen neben klassischen römischen und fleischhaltigen Gerichten. Die Küche wirbt mit biologischen und regionalen Zutaten; auch Drinks und Bier sind verfügbar.",
+        "Der Tisch wird für 19:30 Uhr vorgesehen. Das Budget bleibt mit Hauptgericht und Getränk im gewünschten Rahmen, und der kurze Rückweg zur Unterkunft ist nach dem langen Antike-Tag ein klarer Vorteil."
+      ],
+      "image": "cucina",
+      "place": "Timoty Drinks & Kitchen, Via Torino 46, 00184 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Torino 46, 00184 Roma",
+      "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
+      "price": "ca. 25–35 € pro Person.",
+      "tip": "Tisch für 19:30 Uhr reservieren; vegane und vegetarische Optionen sind auf der Karte gekennzeichnet.",
+      "ticketUrl": "https://www.timotyristorante.it/"
+    },
+    "70": {
+      "title": "Italo Bozen → Roma Termini · T10",
+      "detail": "Gemeinsame Hinfahrt mit fast vollständigem ersten Reisetag in Rom.",
+      "description": [
+        "Abfahrt in Bozen ist am Samstag um 06:42 Uhr. Der Italo 8953 erreicht Roma Termini planmäßig um 11:40 Uhr. Christian und Julia sitzen in Wagen 4 auf den Plätzen 77 und 78 in Smart.",
+        "Die Zugfahrt ist der erste feste Termin der Reise und darf bei späteren Umplanungen nicht verschoben werden. Nach der Ankunft führt der schnellste Weg zu Fuß zur Unterkunft; für die letzten Meter über Via Nazionale ist kein zusätzlicher ÖPNV-Wechsel sinnvoll."
+      ],
+      "image": "termini",
+      "place": "Stazione di Bolzano, Piazza della Stazione 1, 39100 Bolzano BZ, Italien",
+      "weather": "beides",
+      "fixed": true,
+      "address": "Bozen → Roma Termini",
+      "duration": "4 Std. 58 Min.",
+      "minutes": 298,
+      "price": "Gebucht.",
+      "tip": "Spätestens 15 Min. vor Abfahrt am Bahnsteig sein. Smart-Gepäckgrenze des Tickets beachten.",
+      "ticketUrl": "https://www.italotreno.com/"
+    },
+    "71": {
+      "title": "Seven – Gepäck abgeben und später einchecken · T10",
+      "detail": "Die zentrale Basis an der Via Nazionale; Gepäckannahme vor der Zimmerfreigabe ist bestätigt.",
+      "description": [
+        "Anfahrt: von Roma Termini → Seven, Via Nazionale 249 · zu Fuß etwa 10–15 Min. · ÖPNV —. Direkt nach der Ankunft wird das Gepäck abgegeben, damit der erste Stadttag ohne Koffer beginnen kann.",
+        "Das Zimmer ist ab 15:00 Uhr verfügbar. Nach dem Mittagessen bleibt ein kurzer Rückweg für Check-in und Frischmachen, bevor es zum MAXXI geht. Die Unterkunft ist für die gesamte Reise ein guter Verkehrsknoten: Termini, Repubblica, Monti und mehrere Buslinien liegen in kurzer Gehweite.",
+        "Der Zugangscode ist sicherheitsrelevant und wird absichtlich nicht in dieser öffentlichen Reisedatei gespeichert. Er muss aus der privaten Booking-Nachricht beziehungsweise einer separaten privaten Notiz verfügbar sein und bei der Eingabe mit dem dort angegebenen Bestätigungszeichen abgeschlossen werden."
+      ],
+      "image": "seven",
+      "place": "Seven, Via Nazionale 249, 00184 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Nazionale 249, 00184 Roma",
+      "duration": "Gepäckabgabe ca. 10–15 Min.; Check-in ab 15:00 Uhr.",
+      "minutes": 15,
+      "price": "Gebucht.",
+      "tip": "Zugangscode nur privat bereithalten und nicht auf der öffentlichen Website veröffentlichen."
+    },
+    "72": {
+      "title": "Lunch – Mercato Centrale Roma · T10",
+      "detail": "Unkomplizierter Ankunftslunch mit vielen Küchen und flexibler vegetarischer Auswahl.",
+      "description": [
+        "Anfahrt: von Seven → Mercato Centrale Roma · zu Fuß etwa 12–18 Min. · ÖPNV —. Der Markt liegt unmittelbar am Bahnhof Termini und lässt sich ohne Richtungswechsel erreichen.",
+        "Unter einem Dach arbeiten verschiedene Küchenstände mit Pasta, Pizza, Gemüse, Backwaren, Süßem und Getränken. Das offene Format ist am Ankunftstag vorteilhaft: Julia kann gezielt vegetarisch auswählen, während Christian nicht auf dasselbe Konzept festgelegt ist. Bestellt wird an den einzelnen Ständen, sodass keine lange Restaurantpause und keine Reservierung nötig sind.",
+        "Nach dem Essen bleibt Zeit für einen Kaffee und den Rückweg zur Unterkunft. Das MAXXI wird erst nach dem Zimmerbezug angesteuert, damit der Museumsblock nicht durch eine zusätzliche Rückfahrt unterbrochen wird."
+      ],
+      "image": "cucina",
+      "place": "Mercato Centrale Roma, Via Giovanni Giolitti 36, 00185 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Giovanni Giolitti 36, 00185 Roma",
+      "duration": "ca. 60–70 Min.",
+      "minutes": 70,
+      "price": "ca. 15–25 € pro Person.",
+      "tip": "Täglich 07:30–23:30 geöffnet; keine Reservierung nötig. Vegetarische Auswahl direkt an den Ständen prüfen.",
+      "ticketUrl": "https://www.mercatocentrale.it/roma/info/"
+    },
+    "73": {
+      "title": "MAXXI – Zaha Hadid und zwei Ausstellungen · T10",
+      "detail": "Das Gebäude ist das Hauptobjekt: dazu The Large Glass und Vitalità dell’architettura italiana 1946–2026.",
+      "description": [
+        "Anfahrt: von Seven → MAXXI · zu Fuß etwa 5–8 Min. bis Repubblica beziehungsweise Termini · ÖPNV ungefähr 30–40 Min. über Metro A bis Flaminio und weiter Richtung Via Guido Reni. Für den Rückweg zum Zentrum bleibt wegen möglicher Änderungen im Tram- und Ersatzbusverkehr Reserve.",
+        "Zaha Hadid behandelt das Museum nicht als neutrale Schachtel, sondern als ein Geflecht aus Betonbändern, Rampen, Brücken, gekrümmten Wänden und überlagerten Blickachsen. Die schwarze Treppenlandschaft und die linearen Oberlichter lenken Bewegung und Licht; gerade die Konflikte zwischen spektakulärer Wegeführung und klassischer Ausstellungshängung machen den Bau für eine Architekturstudentin besonders ergiebig.",
+        "The Large Glass, kuratiert von Alex Da Corte, verbindet Werke aus Kunst, Architektur und Fotografie mit den räumlichen Eigenschaften des Hauses. Vitalità dell’architettura italiana 1946–2026 spannt den Bogen von der Nachkriegszeit bis zur Gegenwart und beginnt mit Stimmen unter anderem von Renzo Piano, Massimiliano Fuksas, Stefano Boeri und Paola Viganò. Karten werden wie gewünscht erst an der Kasse gekauft."
+      ],
+      "image": "maxxi",
+      "place": "MAXXI, Via Guido Reni 4A, 00196 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Guido Reni 4A, 00196 Roma",
+      "duration": "ca. 2 Std. 20 Min.",
+      "minutes": 140,
+      "price": "Kasse: 15 € regulär, 12 € ermäßigt für Berechtigte.",
+      "tip": "Samstag 16:00–18:20. Zuerst das Gebäude bewusst lesen, danach Vitalità und The Large Glass. Montags geschlossen.",
+      "ticketUrl": "https://www.maxxi.art/orari-e-biglietteria/"
+    },
+    "74": {
+      "title": "Dinner – Open Baladin Roma · T10",
+      "detail": "Italienisches Craft Beer, vegetarische Gerichte und ein sinnvoller Abendstopp vor der Ara Pacis.",
+      "description": [
+        "Anfahrt: vom MAXXI → Open Baladin · ÖPNV ungefähr 30–40 Min. über Flaminio Richtung historisches Zentrum, danach kurzer Fußweg. Die großzügige Fahrzeit schützt den fixen Ara-Pacis-Termin vor Verzögerungen.",
+        "Open Baladin war eine der Adressen, die italienisches Craft Beer in Rom sichtbar machten. Neben den Baladin-Bieren gibt es zahlreiche wechselnde italienische Zapfhähne und Flaschen. Für Julia stehen ausdrücklich vegetarische und vegane Gerichte zur Verfügung; damit ist das Lokal der klarste Kompromiss zwischen Christians Bierinteresse und einem vollwertigen fleischlosen Abendessen.",
+        "Der Tisch sollte für 19:00 Uhr reserviert und die Rechnung spätestens gegen 20:15 Uhr abgeschlossen werden. Von der Via degli Specchi geht es anschließend zu Fuß über Campo de’ Fiori und durch das historische Zentrum zur Ara Pacis; dieser Spaziergang ist zuverlässiger als ein kurzer Buswechsel."
+      ],
+      "image": "cucina",
+      "place": "Open Baladin Roma, Via degli Specchi 6, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via degli Specchi 6, 00186 Roma",
+      "duration": "ca. 1 Std. 15 Min.",
+      "minutes": 75,
+      "price": "ca. 25–35 € pro Person inklusive Bier.",
+      "tip": "Tisch für 19:00 Uhr reservieren; spätestens 20:15 Uhr aufbrechen. Zur Ara Pacis zu Fuß etwa 20–25 Min.",
+      "ticketUrl": "https://pubs.baladin.it/it/restaurant-hamburger-birra-artigianale/via-degli-specchi-6-roma/"
+    },
+    "75": {
+      "title": "L’Ara si rivela – nächtliche Multimedia-Erfahrung · T10",
+      "detail": "Gebuchter Abendtermin am Augustusaltar mit Licht, Projektion und Erzählung in Kopfhörern.",
+      "description": [
+        "Anfahrt: von Open Baladin → Museo dell’Ara Pacis · zu Fuß etwa 20–25 Min. · ÖPNV bringt auf dieser kurzen Altstadtstrecke kaum einen Vorteil. Zielankunft ist spätestens 20:45 Uhr.",
+        "Die rund 40-minütige Inszenierung rekonstruiert den historischen und farblichen Kontext des Ara-Pacis-Altars. Projektionen, Licht und räumliche Erzählung helfen dabei, die Reliefs nicht nur als helle Marmoroberfläche, sondern als Teil der politischen Bildsprache des Augustus zu lesen.",
+        "Für Julia ist auch Richard Meiers Museumshülle wichtig: Tageslicht, Travertin, Glasflächen und die bewusste Konfrontation eines modernen Schutzbaus mit dem historischen Zentrum. Die Tickets sind zeitgebunden; bei Verspätung gibt es laut Bedingungen keine Umbuchung."
+      ],
+      "image": "arapacis",
+      "place": "Museo dell’Ara Pacis, Lungotevere in Augusta, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "fixed": true,
+      "address": "Lungotevere in Augusta, Ecke Via Tomacelli, 00186 Roma",
+      "duration": "ca. 40 Min.",
+      "minutes": 40,
+      "price": "Gebucht: 16 € regulär und 14 € ermäßigt inklusive Vorverkauf.",
+      "tip": "Kopfhörer mitnehmen. Spätestens 20:45 Uhr am Zugang sein; kleine Tasche bevorzugen.",
+      "ticketUrl": "https://www.arapacis.it/it/mostra-evento/l-ara-si-rivela"
+    },
+    "76": {
+      "title": "Craft Beer – Ma Che Siete Venuti A Fà (optional) · T10",
+      "detail": "Später Bierstopp in Trastevere mit 16 wechselnden Zapfhähnen und nationalen wie internationalen Craft-Bieren.",
+      "description": [
+        "Anfahrt: vom Museo dell’Ara Pacis → Ma Che Siete Venuti A Fà · zu Fuß etwa 25–30 Min. · ÖPNV etwa 20–30 Min. mit Bus und kurzem Fußweg. Der Spaziergang führt nach der Abendveranstaltung über den Tiber nach Trastevere.",
+        "Der kleine Pub gehört seit 2001 zur römischen Craft-Beer-Szene und schenkt 16 sorgfältig ausgewählte Biere vom Fass aus. Die Auswahl verbindet italienische Brauereien mit internationalen Gästen und wechselnden Veranstaltungen rund um Brauer und Mikrobrauereien.",
+        "Der Stopp ist bewusst optional: Nach dem langen Ankunftstag entscheidet ihr vor Ort, ob noch Energie für Trastevere bleibt. Der Pub ist täglich bis 02:00 Uhr geöffnet und nimmt keine Reservierungen an."
+      ],
+      "image": "mache",
+      "place": "Ma Che Siete Venuti A Fà, Via Benedetta 25, 00153 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Benedetta 25, 00153 Roma",
+      "duration": "ca. 1 Std. 10 Min.",
+      "minutes": 70,
+      "price": "Kein Eintritt; Getränke nach Verbrauch.",
+      "tip": "Keine Reservierung möglich. Bei Müdigkeit auslassen, damit der frühe Museumsstart am Sonntag realistisch bleibt.",
+      "ticketUrl": "https://www.football-pub.com/"
+    },
+    "77": {
+      "title": "Centrale Montemartini · T11",
+      "detail": "Antike Skulpturen zwischen Turbinen, Kesseln und Maschinen einer ehemaligen Elektrizitätszentrale.",
+      "description": [
+        "Anfahrt: von Seven → Centrale Montemartini · zu Fuß etwa 10–12 Min. bis Termini · Metro B bis Garbatella oder Piramide/Ostiense und anschließend 8–12 Min. zu Fuß · insgesamt etwa 30–40 Min. Die Abfahrt gegen 08:20 Uhr ermöglicht den Eintritt zur Öffnung um 09:00 Uhr.",
+        "Die Centrale Montemartini ist keine bloße Ausstellung in einem Industriegebäude. Weiße antike Skulpturen stehen vor schwarzen Dieselmotoren, Turbinen und Schaltanlagen; Maßstab, Material und historische Funktion der beiden Sammlungen kommentieren einander. Der Bau macht außerdem die frühe Elektrifizierung Roms und die Entwicklung der Via Ostiense als Produktionsachse lesbar.",
+        "Der 6. September ist der erste Sonntag des Monats. Für die kommunalen Museen ist daher ein kostenloser Eintritt vorgesehen; kurz vor der Reise soll die konkrete Septembermitteilung nochmals geprüft werden. Frühes Erscheinen reduziert auch hier den Andrang."
+      ],
+      "image": "montemartini",
+      "place": "Centrale Montemartini, Via Ostiense 106, 00154 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Ostiense 106, 00154 Roma",
+      "duration": "ca. 2 Std. 15 Min.",
+      "minutes": 135,
+      "price": "Am ersten Sonntag des Monats voraussichtlich kostenlos; sonst regulär 11 €.",
+      "tip": "Direkt zur Öffnung um 09:00 Uhr. Mögliche Zuschläge für Sonderausstellungen kurz vor der Reise prüfen.",
+      "ticketUrl": "https://www.centralemontemartini.org/it/informazioni_pratiche/orari_e_indirizzi"
+    },
+    "78": {
+      "title": "Ostiense und Gasometro – Architekturspaziergang · T11",
+      "detail": "Industriebrachen, Backstein, Bahntrassen und der große Stahlzylinder als Stadtzeichen.",
+      "description": [
+        "Anfahrt: von Centrale Montemartini → Gasometro Ostiense · zu Fuß etwa 10–15 Min. · ÖPNV —. Der Spaziergang bleibt im selben Viertel und vermeidet eine zusätzliche Fahrt ins Zentrum.",
+        "Ostiense zeigt ein Rom jenseits von Travertin und Barockfassaden. Gasometer, ehemalige Kraftwerks- und Speicherbauten, Bahn- und Hafeninfrastruktur bilden ein großmaßstäbliches industrielles Stadtfragment. Der Gasometro selbst ist heute vor allem als Stahlskelett präsent und funktioniert als weit sichtbare Landmarke.",
+        "Der Rundgang ist bewusst locker und kann bei Hitze oder Regen gekürzt werden. Wichtig ist weniger ein einzelnes Gebäude als das Verhältnis zwischen Produktionsgeschichte, Umnutzung, Street Art und der heutigen Entwicklung des Quartiers."
+      ],
+      "image": "gasometro",
+      "place": "Gasometro Ostiense, Via del Commercio, 00154 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Via del Commercio, 00154 Roma",
+      "duration": "ca. 60–70 Min.",
+      "minutes": 70,
+      "price": "Kostenlos.",
+      "tip": "Außenbesichtigung; bei starker Hitze auf 30 Min. kürzen. Anschließend zu Fuß etwa 10–15 Min. zu Romeow."
+    },
+    "79": {
+      "title": "Lunch – Romeow Cat Bistrot · T11",
+      "detail": "Vollständig pflanzliches Gourmet-Bistrot mit acht Katzen und reservierungspflichtigem Sonntagslunch.",
+      "description": [
+        "Anfahrt: vom Gasometro beziehungsweise Ostiense → Romeow, Via Francesco Negri 15 · zu Fuß etwa 10–15 Min. · ÖPNV —. Das Lokal liegt damit genau am Ende des Industrieblocks.",
+        "Romeow ist mehr als ein klassisches Katzencafé: Zum Mittag wird ein saisonales, vollständig pflanzliches Restaurantkonzept angeboten. Die Katzen stammen aus einer Tierschutzorganisation und bestimmen den Raum mit; ihre Rückzugsbereiche und Ruhezeiten müssen respektiert werden.",
+        "Am Samstag und Sonntag ist der Restaurantbetrieb von 13:00 bis 15:45 Uhr ausschließlich mit Reservierung zugänglich. Der Stopp ist bewusst länger geplant, weil das Essen stärker auf ein Menüerlebnis als auf einen schnellen Snack ausgerichtet ist."
+      ],
+      "image": "cucina",
+      "place": "Romeow Cat Bistrot, Via Francesco Negri 15, 00154 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Francesco Negri 15, 00154 Roma",
+      "duration": "ca. 1 Std. 15 Min.",
+      "minutes": 75,
+      "price": "ca. 25–40 € pro Person.",
+      "tip": "Reservierung für Sonntag 13:00 Uhr verpflichtend; den Katzen nicht nachlaufen oder sie wecken.",
+      "ticketUrl": "https://www.romeowcatbistrot.com/orari-e-informazioni-importanti/"
+    },
+    "80": {
+      "title": "Casina delle Civette – Villa Torlonia · T11",
+      "detail": "Eklektische Wohnarchitektur mit Jugendstilfenstern, Türmchen, Holzarbeiten und märchenhafter Silhouette.",
+      "description": [
+        "Anfahrt: von Romeow → Villa Torlonia · zu Fuß etwa 10–12 Min. bis Garbatella · Metro B bis Policlinico und anschließend 12–15 Min. zu Fuß · insgesamt ungefähr 35–45 Min. Der Weg umgeht die Altstadt und nutzt die direkte Nord-Süd-Verbindung.",
+        "Die Casina delle Civette entwickelte sich aus einer ländlich-schweizerisch gedachten Hütte zu einem eklektischen Wohnhaus des frühen 20. Jahrhunderts. Spitzdächer, Erker, Loggien, Majolika, Holz, Schmiedeeisen und vor allem die farbigen Glasfenster ergeben kein einheitliches Stilprogramm, sondern eine bewusst fantastische Collage zwischen Mittelalterbild und Jugendstil.",
+        "Der Museumsbesuch endet spätestens gegen 16:10 Uhr, damit genügend Zeit für den Weg zum Casino Nobile, Toilette und Einlasskontrolle der Bunkerführung bleibt. Bei langen Gratis-Sonntagswarteschlangen wird die Casina verkürzt; der gebuchte Bunkertermin ist unantastbar."
+      ],
+      "image": "civette",
+      "place": "Casina delle Civette, Villa Torlonia, Via Nomentana 70, 00161 Roma RM, Italien",
+      "weather": "beides",
+      "address": "Villa Torlonia, Via Nomentana 70, 00161 Roma",
+      "duration": "ca. 60–70 Min.",
+      "minutes": 70,
+      "price": "Am ersten Sonntag des Monats voraussichtlich kostenlos.",
+      "tip": "Spätestens 16:10 Uhr beenden. Eintrittslage am Gratis-Sonntag vor Ort prüfen; Bunker hat Vorrang.",
+      "ticketUrl": "https://www.museivillatorlonia.it/it/orari-indirizzi/musei-di-villa-torlonia"
+    },
+    "81": {
+      "title": "Bunker und Luftschutzräume der Villa Torlonia · T11",
+      "detail": "Fix gebuchte italienische Führung durch Schutzräume unter Mussolinis früherem Wohnsitz.",
+      "description": [
+        "Anfahrt: von der Casina delle Civette → Casino Nobile · zu Fuß etwa 5–8 Min. · ÖPNV —. Die Eintrittskontrolle wird mit mindestens 20 Minuten Reserve erreicht.",
+        "Die Führung verbindet die Nutzung der Villa Torlonia durch Mussolini mit der Entwicklung verschiedener Schutzanlagen während des Zweiten Weltkriegs. Zu sehen sind verstärkte Bereiche, Luftschutzräume und der unvollendete eigentliche Bunker. Die baulichen Unterschiede zeigen, wie schnell auf die zunehmende Bedrohung durch Luftangriffe reagiert wurde.",
+        "Der Rundgang dauert etwa 50 Minuten, führt über steile Treppen und endet an einem anderen Punkt im Park als der Eingang. Große Gegenstände, Speisen und Getränke sind nicht erlaubt; im Rundgang gibt es keine Toilette. Die zwei italienischen Führungen sind auf den 6. September um 17:00 Uhr korrigiert und fest gebucht."
+      ],
+      "image": "civette",
+      "place": "Bunker e Rifugi Antiaerei di Villa Torlonia, Via Nomentana 70, 00161 Roma RM, Italien",
+      "weather": "innen",
+      "fixed": true,
+      "address": "Casino Nobile, Villa Torlonia, Via Nomentana 70, 00161 Roma",
+      "duration": "ca. 50 Min.",
+      "minutes": 50,
+      "price": "Gebucht: 2 × 13 € inklusive Vorverkauf.",
+      "tip": "Bequeme Schuhe, keine großen Taschen; vorher Toilette benutzen. Ein- und Ausgang sind nicht identisch.",
+      "ticketUrl": "https://www.museivillatorlonia.it/node/1018227"
+    },
+    "82": {
+      "title": "Quartiere Coppedè · T11",
+      "detail": "Ein fantasievolles Stadtensemble zwischen Jugendstil, Barockzitaten, Mittelalterbild und Filmkulisse.",
+      "description": [
+        "Anfahrt: vom Ausgang des Bunkers → Piazza Mincio · zu Fuß etwa 20–25 Min. · ÖPNV ähnlich lang. Der Spaziergang durch das Wohnviertel ist nach dem unterirdischen Termin ein bewusster Wechsel ins Freie.",
+        "Gino Coppedè entwarf das Quartier ab 1915 als Ensemble, nicht als einzelne Sehenswürdigkeit. Torbogen, Palazzi, Villini, Mosaike, Tierfiguren, Säulen, Loggien und übersteigerte Dekoration greifen historische Formen auf, ohne sich einer Stilreinheit zu unterwerfen. Piazza Mincio und die Fontana delle Rane bilden den räumlichen Mittelpunkt.",
+        "Der Rundgang konzentriert sich auf wenige Straßen und dauert ungefähr 45 Minuten. Das weichere Abendlicht eignet sich gut für Fassadendetails; danach liegt Berberè in kurzer Gehweite, sodass kein weiterer Verkehrswechsel nötig ist."
+      ],
+      "image": "coppede",
+      "place": "Quartiere Coppedè, Piazza Mincio, 00198 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza Mincio, 00198 Roma",
+      "duration": "ca. 45–50 Min.",
+      "minutes": 50,
+      "price": "Kostenlos.",
+      "tip": "Schwerpunkt: Arco dei Palazzi degli Ambasciatori, Piazza Mincio und Fontana delle Rane."
+    },
+    "83": {
+      "title": "Dinner – Berberè Roma Porta Pia · T11",
+      "detail": "Sauerteigpizza mit mehreren vegetarischen Varianten, unkompliziert nach Coppedè erreichbar.",
+      "description": [
+        "Anfahrt: von Piazza Mincio → Berberè, Via Mantova 5 · zu Fuß etwa 10–15 Min. · ÖPNV —. Die kurze Verbindung vermeidet nach dem dichten Museumstag eine weitere Fahrt durch Rom.",
+        "Berberè arbeitet mit langsam geführtem Teig und serviert die Pizza häufig bereits in Stücken, sodass verschiedene Sorten geteilt werden können. Vegetarische Kombinationen sind fester Bestandteil der Karte; für Christian bleibt dazu Bier verfügbar.",
+        "Das Lokal öffnet sonntags zum Abendbetrieb um 19:00 Uhr. Eine Reservierung für 19:30 Uhr ist sinnvoll, weil der Tag durch die Bunkerführung zeitlich gebunden ist und eine Warteliste die Abendlogik unnötig verlängern würde."
+      ],
+      "image": "cucina",
+      "place": "Berberè Roma Porta Pia, Via Mantova 5, 00198 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Mantova 5, 00198 Roma",
+      "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
+      "price": "ca. 20–30 € pro Person.",
+      "tip": "Für Sonntag 19:30 Uhr reservieren; vegetarische Tagespizza und Bierauswahl vor Ort prüfen.",
+      "ticketUrl": "https://www.berberepizza.it/berbere-roma-porta-pia/"
+    },
+    "84": {
+      "title": "Pantheon – früher Montagsslot · T12",
+      "detail": "Die größte unbewehrte Betonkuppel der Welt möglichst gleich zur Öffnung und ohne Gratis-Sonntagsandrang.",
+      "description": [
+        "Anfahrt: von Seven, Via Nazionale 249 → Pantheon · zu Fuß etwa 20–25 Min. · ÖPNV etwa 20–30 Min. mit Bus und kurzem Fußweg. Am frühen Morgen ist der direkte Spaziergang zuverlässiger als der Stadtverkehr; Abmarsch ist gegen 08:15 Uhr vorgesehen.",
+        "Der heutige Bau entstand um 126 n. Chr. und überlebt nicht als Ruine, sondern als bis heute genutzter Innenraum. Durchmesser und Scheitelhöhe liegen jeweils bei ungefähr 43 Metern, sodass sich eine vollständige Kugel in den Raum denken lässt. Die Kuppelschale wird nach oben dünner und leichter; Kassettierung, abgestufte Zuschläge und der fast neun Meter breite Oculus reduzieren Gewicht und erzeugen zugleich die prägende Lichtdramaturgie.",
+        "Der Montag wurde bewusst dem kostenlosen ersten Sonntag vorgezogen: Die Eintrittskosten sind niedrig, dafür ist ein früher offizieller Slot planbarer. Eine echte Skip-the-line-Garantie gibt es nicht; der 09:00-Uhr-Termin bleibt trotzdem die beste Chance auf einen vergleichsweise ruhigen Raumeindruck."
+      ],
+      "image": "pantheon",
+      "place": "Pantheon, Piazza della Rotonda, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Piazza della Rotonda, 00186 Roma",
+      "duration": "45–50 Min.",
+      "minutes": 50,
+      "price": "7 € regulär; 2 € ermäßigt für berechtigte EU-Bürger von 18 bis 25 Jahren.",
+      "tip": "Offiziellen 09:00-Uhr-Slot buchen; Schultern und Knie bedeckt halten. Danach 8–10 Min. zu Fuß zu Il Gesù.",
+      "ticketUrl": "https://portale.museiitaliani.it/b2c/#/"
+    },
+    "85": {
+      "title": "Il Gesù · T12",
+      "detail": "Prototyp der Jesuitenkirche und Schlüsselbau für Raum, Liturgie und barocke Illusion.",
+      "description": [
+        "Anfahrt: vom Pantheon → Il Gesù · zu Fuß etwa 8–10 Min. · ÖPNV —. Die direkte Route führt über das historische Zentrum und hält den Vormittag kompakt.",
+        "Vignolas Grundriss bündelt die Aufmerksamkeit in einem breiten, tonnengewölbten Langhaus mit seitlichen Kapellen und klarer Sicht auf den Altar. Giacomo della Portas Fassade übersetzt die unterschiedliche Breite von Mittelschiff und Kapellen in zwei Geschosse mit Voluten und wurde zum Vorbild zahlreicher Jesuiten- und Gegenreformationskirchen.",
+        "Im Inneren steigert Baciccias Trionfo del Nome di Gesù die Architektur durch Malerei, Stuck und Figuren, die scheinbar aus dem Deckenrahmen in den Raum treten. Im Sommer ist die Kirche montags vormittags geöffnet, doch die Besichtigung wird vor der Messe um 11:00 Uhr abgeschlossen."
+      ],
+      "image": "gesu",
+      "place": "Chiesa del Gesù, Piazza del Gesù, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Piazza del Gesù, 00186 Roma",
+      "duration": "ca. 30–35 Min.",
+      "minutes": 35,
+      "price": "Eintritt frei; Spende möglich.",
+      "tip": "Ruhig verhalten und Gottesdienste respektieren. Spätestens 10:35–10:40 Uhr weitergehen.",
+      "ticketUrl": "https://www.chiesadelgesu.org/"
+    },
+    "86": {
+      "title": "Brunch – Buddy Vegan Restaurant Café · T12",
+      "detail": "Pflanzliche römische Küche direkt zwischen Il Gesù und dem Treffpunkt der Antike-Führung.",
+      "description": [
+        "Anfahrt: von Il Gesù → Buddy, Corso Vittorio Emanuele II 107A · zu Fuß etwa 5–7 Min. · ÖPNV —. Das Lokal liegt genau auf der weiteren Achse Richtung Kolosseum.",
+        "Buddy interpretiert römische und italienische Gerichte vollständig pflanzlich. Neben Pasta und Pinsa gibt es Brunchkombinationen, Sandwiches und leichtere Bowls. Damit bekommt Julia eine verlässliche vegane Mahlzeit, ohne dass der Tag vor der mehrstündigen Führung zu schwer wird.",
+        "Der Stopp ist als frühes Mittagessen geplant und endet gegen 11:50 Uhr. Die Buchung der Kolosseumführung muss den tatsächlichen Treffpunkt berücksichtigen; bei einem weiter östlich gelegenen Meeting Point wird das Essen entsprechend verkürzt."
+      ],
+      "image": "cucina",
+      "place": "Buddy Vegan Restaurant Café, Corso Vittorio Emanuele II 107A, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Corso Vittorio Emanuele II 107A, 00186 Roma",
+      "duration": "ca. 55–60 Min.",
+      "minutes": 60,
+      "price": "ca. 18–30 € pro Person.",
+      "tip": "Leicht essen und spätestens 11:50 Uhr aufbrechen; Tourtreffpunkt nach Buchung nochmals gegenprüfen.",
+      "ticketUrl": "https://buddyroma.com/contatti/"
+    },
+    "87": {
+      "title": "Kolosseum – deutschsprachige Führung · T12",
+      "detail": "Das Amphitheater als konstruktiver Höhepunkt; bevorzugt mit Arenaboden und gemeinsamem Antike-Ticket.",
+      "description": [
+        "Anfahrt: von Buddy am Corso Vittorio Emanuele II zum endgültigen Treffpunkt rund um Via dei Fori Imperiali oder Largo Gaetana Agnesi · zu Fuß etwa 20–25 Min. · ÖPNV etwa 15–25 Min. Der Voucher des Veranstalters entscheidet über den tatsächlichen Treffpunkt; dafür wird ein zusätzlicher Puffer eingeplant.",
+        "Das Flavische Amphitheater wurde ab 72 n. Chr. unter Vespasian errichtet und 80 n. Chr. unter Titus eröffnet. Für Julia ist weniger die ikonische Silhouette als die innere Organisation entscheidend: Travertinpfeiler, radial angelegte Gewölbe, nummerierte Zugänge und die konsequente Trennung der Besucherströme machten aus dem Bau eine leistungsfähige Großmaschine für zehntausende Menschen.",
+        "Vorgesehen ist eine deutschsprachige GetYourGuide-Führung durch Kolosseum, Forum und Palatin, möglichst mit Arenaboden. Der genaue Startzeitpunkt und die tatsächliche Reihenfolge der drei Bereiche sind noch nicht gebucht. Nach der Buchung wird dieser Stopp mit fixed: true geschützt."
+      ],
+      "image": "colosseo",
+      "place": "Colosseo, Piazza del Colosseo 1, 00184 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza del Colosseo 1, 00184 Roma",
+      "duration": "ca. 60–75 Min. als erster Teil einer 2,5–3-stündigen Führung",
+      "minutes": 65,
+      "price": "Noch zu buchen; Preis und deutscher Slot im Buchungskalender prüfen.",
+      "tip": "Personalausweise mitnehmen; nominative Eintrittskarten. Mindestens 15 Min. vor dem Treffpunkt sein.",
+      "ticketUrl": "https://www.getyourguide.com/de-at/kolosseum-l2619/kolosseum-und-forum-romanum-gefuhrte-tour-mit-bevorzugtem-zugang-t195566/"
+    },
+    "88": {
+      "title": "Forum Romanum und Palatin – Führung · T12",
+      "detail": "Stadtraum, Topografie und kaiserliche Palastarchitektur als zweiter Teil derselben Antike-Führung.",
+      "description": [
+        "Anfahrt: direkt aus dem Kolosseum beziehungsweise gemeinsam mit der gebuchten Führungsgruppe · zu Fuß wenige Minuten · ÖPNV —. Je nach Veranstalter beginnt die Tour auch zuerst im Forum; die Uhrzeit ist deshalb als Planungsmarke und nicht als zweites separates Ticket zu verstehen.",
+        "Das Forum war kein in einem Zug entworfener Platz, sondern eine über Jahrhunderte verdichtete Stadtmitte aus Basiliken, Tempeln, Triumphbögen, Rednertribünen und Prozessionswegen. Der Palatin darüber zeigt den Sprung vom republikanischen Wohnhügel zum zusammenhängenden kaiserlichen Palastbezirk. Besonders lesbar sind die Beziehungen zwischen Via Sacra, Titusbogen, Domus Flavia, Domus Augustana und den Terrassen über dem Tal.",
+        "Der Palatin bietet mehr Vegetation und Aussicht als das Forum. Im September sind Trinkwasser, Sonnenschutz und feste Schuhe wichtiger als ein minutiöses Abarbeiten jeder Ruine. Die Führung endet voraussichtlich gegen 15:00 Uhr; danach führt der Weg ohne großen Umweg zur Fontana di Trevi."
+      ],
+      "image": "forum",
+      "place": "Foro Romano, Via della Salara Vecchia 5/6, 00186 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Via della Salara Vecchia 5/6, 00186 Roma",
+      "duration": "ca. 80–90 Min. als zweiter Teil der Führung",
+      "minutes": 90,
+      "price": "Im gemeinsamen Führungsticket mit dem Kolosseum enthalten.",
+      "tip": "Wasserflasche, Sonnenschutz und rutschfeste Schuhe mitnehmen; Tourreihenfolge kann variieren.",
+      "ticketUrl": "https://www.getyourguide.com/de-at/kolosseum-l2619/kolosseum-und-forum-romanum-gefuhrte-tour-mit-bevorzugtem-zugang-t195566/"
+    },
+    "89": {
+      "title": "Fontana di Trevi – innerer Bereich · T12",
+      "detail": "Flexibles Open-Ticket für den nahen Zugang zur Brunnenanlage; bereits für zwei Personen gebucht.",
+      "description": [
+        "Anfahrt: vom Ende der Kolosseum-/Forumführung → Fontana di Trevi · zu Fuß etwa 25–30 Min. · ÖPNV etwa 20–25 Min., spart aber meist wenig Zeit. Der Spaziergang durch das Zentrum ist als Übergang und Erholung nach den archäologischen Bereichen gedacht.",
+        "Nicola Salvis Brunnen verwandelt die schmale Piazza in eine theatralische Fassade aus Travertin, Wasser und bewegten Figuren. Der Palazzo Poli wird zur Hintergrundarchitektur; Oceanus, Felsen und Kaskaden scheinen den Stadtraum vollständig zu besetzen.",
+        "Seit 2026 kostet der Zugang zum inneren Bereich für Nichtresidenten 2 €. Eure beiden Open-Tickets sind nicht an eine bestimmte Uhrzeit gebunden. Montags beginnt der reguläre Zugang um 11:30 Uhr, daher passt der geplante Besuch am Nachmittag problemlos."
+      ],
+      "image": "trevi",
+      "place": "Fontana di Trevi, Piazza di Trevi, 00187 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza di Trevi, 00187 Roma",
+      "duration": "ca. 30–35 Min.",
+      "minutes": 35,
+      "price": "Gebucht: 2 € pro Person.",
+      "tip": "Open-Ticket bereithalten; Montag 11:30–22:00 Uhr, letzter Einlass 21:00 Uhr.",
+      "ticketUrl": "https://fontanaditrevi.roma.it/"
+    },
+    "90": {
+      "title": "Piazza di Spagna und Spanische Treppe · T12",
+      "detail": "Barocker Stadtraum, Treppeninszenierung und Blickachse zur Trinità dei Monti.",
+      "description": [
+        "Anfahrt: von der Fontana di Trevi → Piazza di Spagna · zu Fuß etwa 10–12 Min. · ÖPNV —. Der kurze Weg führt ohne Umweg über die Einkaufsstraßen des Zentrums.",
+        "Die Scalinata di Trinità dei Monti verbindet die tiefer liegende Piazza di Spagna mit Kirche und Kloster auf dem Pincio. Rampen, Podeste und wechselnde Blickrichtungen machen die Treppe zu einem eigenständigen Stadtraum und nicht nur zu einer Höhendifferenz. Berninis Fontana della Barcaccia bildet den Gegenpol am Fuß.",
+        "Der Stopp bleibt kurz und dient zugleich als Übergang zurück Richtung Via Nazionale. Auf den Stufen zu sitzen ist nicht gestattet; für eine ruhigere Wahrnehmung lohnt der Blick von seitlichen Absätzen und vom oberen Niveau."
+      ],
+      "image": "spagna",
+      "place": "Piazza di Spagna, 00187 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Piazza di Spagna, 00187 Roma",
+      "duration": "ca. 35–40 Min.",
+      "minutes": 40,
+      "price": "Kostenlos.",
+      "tip": "Nicht auf den Stufen sitzen. Danach zu Fuß etwa 15–20 Min. zurück zum Seven."
+    },
+    "91": {
+      "title": "Pause im Seven · T12",
+      "detail": "Duschen, Geräte laden und vor dem letzten gemeinsamen Abend kurz ausruhen.",
+      "description": [
+        "Anfahrt: von Piazza di Spagna → Seven · zu Fuß etwa 15–20 Min. · Metro A von Spagna nach Repubblica plus kurzer Fußweg etwa 10–15 Min. Bei müden Beinen ist die Metro die bessere Variante.",
+        "Die Pause ist kein verlorener Programmpunkt, sondern hält den dichten Montag realistisch. Nach Pantheon, Kirche und etwa drei Stunden Antike werden Schuhe gewechselt, Geräte geladen und die Open-Tickets sowie Reisedokumente für den Abreisetag geordnet."
+      ],
+      "image": "seven",
+      "place": "Seven, Via Nazionale 249, 00184 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Nazionale 249, 00184 Roma",
+      "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
+      "price": "—",
+      "tip": "Kopien der Flug- und Zugtickets offline speichern; Zugangscode nur in privater Notiz aufbewahren."
+    },
+    "92": {
+      "title": "Dinner – Timoty Drinks & Kitchen · T12",
+      "detail": "Nahe der Unterkunft mit veganen, vegetarischen und klassischen Gerichten sowie regionalen Produkten.",
+      "description": [
+        "Anfahrt: von Seven → Timoty, Via Torino 46 · zu Fuß etwa 5–8 Min. · ÖPNV —. Nach der Hotelpause bleibt der Abend damit ohne zusätzlichen Verkehr.",
+        "Timoty bietet für beide Essenswünsche eine praktikable Karte: vegane Pinsa, pflanzliche Gnocchi, vegetarische und vegane Platten stehen neben klassischen römischen und fleischhaltigen Gerichten. Die Küche wirbt mit biologischen und regionalen Zutaten; auch Drinks und Bier sind verfügbar.",
+        "Der Tisch wird für 19:30 Uhr vorgesehen. Das Budget bleibt mit Hauptgericht und Getränk im gewünschten Rahmen, und der kurze Rückweg zur Unterkunft ist nach dem langen Antike-Tag ein klarer Vorteil."
+      ],
+      "image": "cucina",
+      "place": "Timoty Drinks & Kitchen, Via Torino 46, 00184 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Torino 46, 00184 Roma",
+      "duration": "ca. 1 Std. 30 Min.",
+      "minutes": 90,
+      "price": "ca. 25–35 € pro Person.",
+      "tip": "Tisch für 19:30 Uhr reservieren; vegane und vegetarische Optionen sind auf der Karte gekennzeichnet.",
+      "ticketUrl": "https://www.timotyristorante.it/"
+    },
+    "01": {
+      "title": "Italo Bozen → Roma Termini · T1",
+      "detail": "Gemeinsame Hinfahrt mit fast vollständigem ersten Reisetag in Rom.",
+      "description": [
+        "Abfahrt in Bozen ist am Samstag um 06:42 Uhr. Der Italo 8953 erreicht Roma Termini planmäßig um 11:40 Uhr. Christian und Julia sitzen in Wagen 4 auf den Plätzen 77 und 78 in Smart.",
+        "Die Zugfahrt ist der erste feste Termin der Reise und darf bei späteren Umplanungen nicht verschoben werden. Nach der Ankunft führt der schnellste Weg zu Fuß zur Unterkunft; für die letzten Meter über Via Nazionale ist kein zusätzlicher ÖPNV-Wechsel sinnvoll."
+      ],
+      "image": "termini",
+      "place": "Stazione di Bolzano, Piazza della Stazione 1, 39100 Bolzano BZ, Italien",
+      "weather": "beides",
+      "fixed": true,
+      "address": "Bozen → Roma Termini",
+      "duration": "4 Std. 58 Min.",
+      "minutes": 298,
+      "price": "Gebucht.",
+      "tip": "Spätestens 15 Min. vor Abfahrt am Bahnsteig sein. Smart-Gepäckgrenze des Tickets beachten.",
+      "ticketUrl": "https://www.italotreno.com/"
+    },
+    "02": {
+      "title": "Seven – Gepäck abgeben und später einchecken · T1",
+      "detail": "Die zentrale Basis an der Via Nazionale; Gepäckannahme vor der Zimmerfreigabe ist bestätigt.",
+      "description": [
+        "Anfahrt: von Roma Termini → Seven, Via Nazionale 249 · zu Fuß etwa 10–15 Min. · ÖPNV —. Direkt nach der Ankunft wird das Gepäck abgegeben, damit der erste Stadttag ohne Koffer beginnen kann.",
+        "Das Zimmer ist ab 15:00 Uhr verfügbar. Nach dem Mittagessen bleibt ein kurzer Rückweg für Check-in und Frischmachen, bevor es zum MAXXI geht. Die Unterkunft ist für die gesamte Reise ein guter Verkehrsknoten: Termini, Repubblica, Monti und mehrere Buslinien liegen in kurzer Gehweite.",
+        "Der Zugangscode ist sicherheitsrelevant und wird absichtlich nicht in dieser öffentlichen Reisedatei gespeichert. Er muss aus der privaten Booking-Nachricht beziehungsweise einer separaten privaten Notiz verfügbar sein und bei der Eingabe mit dem dort angegebenen Bestätigungszeichen abgeschlossen werden."
+      ],
+      "image": "seven",
+      "place": "Seven, Via Nazionale 249, 00184 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Nazionale 249, 00184 Roma",
+      "duration": "Gepäckabgabe ca. 10–15 Min.; Check-in ab 15:00 Uhr.",
+      "minutes": 15,
+      "price": "Gebucht.",
+      "tip": "Zugangscode nur privat bereithalten und nicht auf der öffentlichen Website veröffentlichen."
+    },
+    "03": {
+      "title": "Lunch – Mercato Centrale Roma · T1",
+      "detail": "Unkomplizierter Ankunftslunch mit vielen Küchen und flexibler vegetarischer Auswahl.",
+      "description": [
+        "Anfahrt: von Seven → Mercato Centrale Roma · zu Fuß etwa 12–18 Min. · ÖPNV —. Der Markt liegt unmittelbar am Bahnhof Termini und lässt sich ohne Richtungswechsel erreichen.",
+        "Unter einem Dach arbeiten verschiedene Küchenstände mit Pasta, Pizza, Gemüse, Backwaren, Süßem und Getränken. Das offene Format ist am Ankunftstag vorteilhaft: Julia kann gezielt vegetarisch auswählen, während Christian nicht auf dasselbe Konzept festgelegt ist. Bestellt wird an den einzelnen Ständen, sodass keine lange Restaurantpause und keine Reservierung nötig sind.",
+        "Nach dem Essen bleibt Zeit für einen Kaffee und den Rückweg zur Unterkunft. Das MAXXI wird erst nach dem Zimmerbezug angesteuert, damit der Museumsblock nicht durch eine zusätzliche Rückfahrt unterbrochen wird."
+      ],
+      "image": "cucina",
+      "place": "Mercato Centrale Roma, Via Giovanni Giolitti 36, 00185 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Giovanni Giolitti 36, 00185 Roma",
+      "duration": "ca. 60–70 Min.",
+      "minutes": 70,
+      "price": "ca. 15–25 € pro Person.",
+      "tip": "Täglich 07:30–23:30 geöffnet; keine Reservierung nötig. Vegetarische Auswahl direkt an den Ständen prüfen.",
+      "ticketUrl": "https://www.mercatocentrale.it/roma/info/"
+    },
+    "04": {
+      "title": "MAXXI – Zaha Hadid und zwei Ausstellungen · T1",
+      "detail": "Das Gebäude ist das Hauptobjekt: dazu The Large Glass und Vitalità dell’architettura italiana 1946–2026.",
+      "description": [
+        "Anfahrt: von Seven → MAXXI · zu Fuß etwa 5–8 Min. bis Repubblica beziehungsweise Termini · ÖPNV ungefähr 30–40 Min. über Metro A bis Flaminio und weiter Richtung Via Guido Reni. Für den Rückweg zum Zentrum bleibt wegen möglicher Änderungen im Tram- und Ersatzbusverkehr Reserve.",
+        "Zaha Hadid behandelt das Museum nicht als neutrale Schachtel, sondern als ein Geflecht aus Betonbändern, Rampen, Brücken, gekrümmten Wänden und überlagerten Blickachsen. Die schwarze Treppenlandschaft und die linearen Oberlichter lenken Bewegung und Licht; gerade die Konflikte zwischen spektakulärer Wegeführung und klassischer Ausstellungshängung machen den Bau für eine Architekturstudentin besonders ergiebig.",
+        "The Large Glass, kuratiert von Alex Da Corte, verbindet Werke aus Kunst, Architektur und Fotografie mit den räumlichen Eigenschaften des Hauses. Vitalità dell’architettura italiana 1946–2026 spannt den Bogen von der Nachkriegszeit bis zur Gegenwart und beginnt mit Stimmen unter anderem von Renzo Piano, Massimiliano Fuksas, Stefano Boeri und Paola Viganò. Karten werden wie gewünscht erst an der Kasse gekauft."
+      ],
+      "image": "maxxi",
+      "place": "MAXXI, Via Guido Reni 4A, 00196 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Guido Reni 4A, 00196 Roma",
+      "duration": "ca. 2 Std. 20 Min.",
+      "minutes": 140,
+      "price": "Kasse: 15 € regulär, 12 € ermäßigt für Berechtigte.",
+      "tip": "Samstag 16:00–18:20. Zuerst das Gebäude bewusst lesen, danach Vitalità und The Large Glass. Montags geschlossen.",
+      "ticketUrl": "https://www.maxxi.art/orari-e-biglietteria/"
+    },
+    "05": {
+      "title": "Dinner – Open Baladin Roma · T1",
+      "detail": "Italienisches Craft Beer, vegetarische Gerichte und ein sinnvoller Abendstopp vor der Ara Pacis.",
+      "description": [
+        "Anfahrt: vom MAXXI → Open Baladin · ÖPNV ungefähr 30–40 Min. über Flaminio Richtung historisches Zentrum, danach kurzer Fußweg. Die großzügige Fahrzeit schützt den fixen Ara-Pacis-Termin vor Verzögerungen.",
+        "Open Baladin war eine der Adressen, die italienisches Craft Beer in Rom sichtbar machten. Neben den Baladin-Bieren gibt es zahlreiche wechselnde italienische Zapfhähne und Flaschen. Für Julia stehen ausdrücklich vegetarische und vegane Gerichte zur Verfügung; damit ist das Lokal der klarste Kompromiss zwischen Christians Bierinteresse und einem vollwertigen fleischlosen Abendessen.",
+        "Der Tisch sollte für 19:00 Uhr reserviert und die Rechnung spätestens gegen 20:15 Uhr abgeschlossen werden. Von der Via degli Specchi geht es anschließend zu Fuß über Campo de’ Fiori und durch das historische Zentrum zur Ara Pacis; dieser Spaziergang ist zuverlässiger als ein kurzer Buswechsel."
+      ],
+      "image": "cucina",
+      "place": "Open Baladin Roma, Via degli Specchi 6, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via degli Specchi 6, 00186 Roma",
+      "duration": "ca. 1 Std. 15 Min.",
+      "minutes": 75,
+      "price": "ca. 25–35 € pro Person inklusive Bier.",
+      "tip": "Tisch für 19:00 Uhr reservieren; spätestens 20:15 Uhr aufbrechen. Zur Ara Pacis zu Fuß etwa 20–25 Min.",
+      "ticketUrl": "https://pubs.baladin.it/it/restaurant-hamburger-birra-artigianale/via-degli-specchi-6-roma/"
+    },
+    "06": {
+      "title": "L’Ara si rivela – nächtliche Multimedia-Erfahrung · T1",
+      "detail": "Gebuchter Abendtermin am Augustusaltar mit Licht, Projektion und Erzählung in Kopfhörern.",
+      "description": [
+        "Anfahrt: von Open Baladin → Museo dell’Ara Pacis · zu Fuß etwa 20–25 Min. · ÖPNV bringt auf dieser kurzen Altstadtstrecke kaum einen Vorteil. Zielankunft ist spätestens 20:45 Uhr.",
+        "Die rund 40-minütige Inszenierung rekonstruiert den historischen und farblichen Kontext des Ara-Pacis-Altars. Projektionen, Licht und räumliche Erzählung helfen dabei, die Reliefs nicht nur als helle Marmoroberfläche, sondern als Teil der politischen Bildsprache des Augustus zu lesen.",
+        "Für Julia ist auch Richard Meiers Museumshülle wichtig: Tageslicht, Travertin, Glasflächen und die bewusste Konfrontation eines modernen Schutzbaus mit dem historischen Zentrum. Die Tickets sind zeitgebunden; bei Verspätung gibt es laut Bedingungen keine Umbuchung."
+      ],
+      "image": "arapacis",
+      "place": "Museo dell’Ara Pacis, Lungotevere in Augusta, 00186 Roma RM, Italien",
+      "weather": "innen",
+      "fixed": true,
+      "address": "Lungotevere in Augusta, Ecke Via Tomacelli, 00186 Roma",
+      "duration": "ca. 40 Min.",
+      "minutes": 40,
+      "price": "Gebucht: 16 € regulär und 14 € ermäßigt inklusive Vorverkauf.",
+      "tip": "Kopfhörer mitnehmen. Spätestens 20:45 Uhr am Zugang sein; kleine Tasche bevorzugen.",
+      "ticketUrl": "https://www.arapacis.it/it/mostra-evento/l-ara-si-rivela"
+    },
+    "07": {
+      "title": "Craft Beer – Ma Che Siete Venuti A Fà (optional) · T1",
+      "detail": "Später Bierstopp in Trastevere mit 16 wechselnden Zapfhähnen und nationalen wie internationalen Craft-Bieren.",
+      "description": [
+        "Anfahrt: vom Museo dell’Ara Pacis → Ma Che Siete Venuti A Fà · zu Fuß etwa 25–30 Min. · ÖPNV etwa 20–30 Min. mit Bus und kurzem Fußweg. Der Spaziergang führt nach der Abendveranstaltung über den Tiber nach Trastevere.",
+        "Der kleine Pub gehört seit 2001 zur römischen Craft-Beer-Szene und schenkt 16 sorgfältig ausgewählte Biere vom Fass aus. Die Auswahl verbindet italienische Brauereien mit internationalen Gästen und wechselnden Veranstaltungen rund um Brauer und Mikrobrauereien.",
+        "Der Stopp ist bewusst optional: Nach dem langen Ankunftstag entscheidet ihr vor Ort, ob noch Energie für Trastevere bleibt. Der Pub ist täglich bis 02:00 Uhr geöffnet und nimmt keine Reservierungen an."
+      ],
+      "image": "mache",
+      "place": "Ma Che Siete Venuti A Fà, Via Benedetta 25, 00153 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Benedetta 25, 00153 Roma",
+      "duration": "ca. 1 Std. 10 Min.",
+      "minutes": 70,
+      "price": "Kein Eintritt; Getränke nach Verbrauch.",
+      "tip": "Keine Reservierung möglich. Bei Müdigkeit auslassen, damit der frühe Museumsstart am Sonntag realistisch bleibt.",
+      "ticketUrl": "https://www.football-pub.com/"
+    },
+    "08": {
+      "title": "Centrale Montemartini · T2",
+      "detail": "Antike Skulpturen zwischen Turbinen, Kesseln und Maschinen einer ehemaligen Elektrizitätszentrale.",
+      "description": [
+        "Anfahrt: von Seven → Centrale Montemartini · zu Fuß etwa 10–12 Min. bis Termini · Metro B bis Garbatella oder Piramide/Ostiense und anschließend 8–12 Min. zu Fuß · insgesamt etwa 30–40 Min. Die Abfahrt gegen 08:20 Uhr ermöglicht den Eintritt zur Öffnung um 09:00 Uhr.",
+        "Die Centrale Montemartini ist keine bloße Ausstellung in einem Industriegebäude. Weiße antike Skulpturen stehen vor schwarzen Dieselmotoren, Turbinen und Schaltanlagen; Maßstab, Material und historische Funktion der beiden Sammlungen kommentieren einander. Der Bau macht außerdem die frühe Elektrifizierung Roms und die Entwicklung der Via Ostiense als Produktionsachse lesbar.",
+        "Der 6. September ist der erste Sonntag des Monats. Für die kommunalen Museen ist daher ein kostenloser Eintritt vorgesehen; kurz vor der Reise soll die konkrete Septembermitteilung nochmals geprüft werden. Frühes Erscheinen reduziert auch hier den Andrang."
+      ],
+      "image": "montemartini",
+      "place": "Centrale Montemartini, Via Ostiense 106, 00154 Roma RM, Italien",
+      "weather": "innen",
+      "address": "Via Ostiense 106, 00154 Roma",
+      "duration": "ca. 2 Std. 15 Min.",
+      "minutes": 135,
+      "price": "Am ersten Sonntag des Monats voraussichtlich kostenlos; sonst regulär 11 €.",
+      "tip": "Direkt zur Öffnung um 09:00 Uhr. Mögliche Zuschläge für Sonderausstellungen kurz vor der Reise prüfen.",
+      "ticketUrl": "https://www.centralemontemartini.org/it/informazioni_pratiche/orari_e_indirizzi"
+    },
+    "09": {
+      "title": "Ostiense und Gasometro – Architekturspaziergang · T2",
+      "detail": "Industriebrachen, Backstein, Bahntrassen und der große Stahlzylinder als Stadtzeichen.",
+      "description": [
+        "Anfahrt: von Centrale Montemartini → Gasometro Ostiense · zu Fuß etwa 10–15 Min. · ÖPNV —. Der Spaziergang bleibt im selben Viertel und vermeidet eine zusätzliche Fahrt ins Zentrum.",
+        "Ostiense zeigt ein Rom jenseits von Travertin und Barockfassaden. Gasometer, ehemalige Kraftwerks- und Speicherbauten, Bahn- und Hafeninfrastruktur bilden ein großmaßstäbliches industrielles Stadtfragment. Der Gasometro selbst ist heute vor allem als Stahlskelett präsent und funktioniert als weit sichtbare Landmarke.",
+        "Der Rundgang ist bewusst locker und kann bei Hitze oder Regen gekürzt werden. Wichtig ist weniger ein einzelnes Gebäude als das Verhältnis zwischen Produktionsgeschichte, Umnutzung, Street Art und der heutigen Entwicklung des Quartiers."
+      ],
+      "image": "gasometro",
+      "place": "Gasometro Ostiense, Via del Commercio, 00154 Roma RM, Italien",
+      "weather": "aussen",
+      "address": "Via del Commercio, 00154 Roma",
+      "duration": "ca. 60–70 Min.",
+      "minutes": 70,
+      "price": "Kostenlos.",
+      "tip": "Außenbesichtigung; bei starker Hitze auf 30 Min. kürzen. Anschließend zu Fuß etwa 10–15 Min. zu Romeow."
+    }
+  },
+  "images": {
+    "arapacis": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Museo_dell%27Ara_Pacis%2C_retro.tif/lossy-page1-960px-Museo_dell%27Ara_Pacis%2C_retro.tif.jpg",
+      "width": 960,
+      "height": 630,
+      "alt": "Museum des Ara Pacis von Richard Meier",
+      "credit": "MaT12Vi",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Museo_dell%27Ara_Pacis,_retro.tif"
+    },
+    "civette": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Casina_Delle_Civette%2C_Villa_Torlonia%2C_Rome_01.JPG/960px-Casina_Delle_Civette%2C_Villa_Torlonia%2C_Rome_01.JPG",
+      "width": 960,
+      "height": 720,
+      "alt": "Casina delle Civette in der Villa Torlonia",
+      "credit": "Sergio de Ferra",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Casina_Delle_Civette,_Villa_Torlonia,_Rome_01.JPG"
+    },
+    "colosseo": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Colosseum_of_Rome_and_Roman_forum.jpg/1280px-Colosseum_of_Rome_and_Roman_forum.jpg",
+      "width": 1280,
+      "height": 758,
+      "alt": "Kolosseum und Forum Romanum von oben",
+      "credit": "Wilfredor",
+      "license": "CC0",
+      "source": "https://commons.wikimedia.org/wiki/File:Colosseum_of_Rome_and_Roman_forum.jpg"
+    },
+    "coppede": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Lampadario_Quartiere_copped%C3%A8.jpg/960px-Lampadario_Quartiere_copped%C3%A8.jpg",
+      "width": 960,
+      "height": 1077,
+      "alt": "Verzierter Bogen im Quartiere Coppedè",
+      "credit": "Livioandronico2013",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Lampadario_Quartiere_copped%C3%A8.jpg"
+    },
+    "cucina": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Spaghetti%2C_cacio_e_pepe_%26_bitter_leaf_salad_-_Tutto_2024-04-04.jpg/960px-Spaghetti%2C_cacio_e_pepe_%26_bitter_leaf_salad_-_Tutto_2024-04-04.jpg",
+      "width": 960,
+      "height": 720,
+      "alt": "Cacio e pepe mit Salat",
+      "credit": "Andy Li",
+      "license": "CC0",
+      "source": "https://commons.wikimedia.org/wiki/File:Spaghetti,_cacio_e_pepe_%26_bitter_leaf_salad_-_Tutto_2024-04-04.jpg"
+    },
+    "forum": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Forum_romanum_6k_%285760x2097%29.jpg/960px-Forum_romanum_6k_%285760x2097%29.jpg",
+      "width": 960,
+      "height": 350,
+      "alt": "Panorama des Forum Romanum",
+      "credit": "BeBo86",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Forum_romanum_6k_(5760x2097).jpg"
+    },
+    "gasometro": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Gazometro_via_Ostiense_%28Rome%29.JPG/960px-Gazometro_via_Ostiense_%28Rome%29.JPG",
+      "width": 960,
+      "height": 720,
+      "alt": "Gasometer an der Via Ostiense",
+      "credit": "Notafly2",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Gazometro_via_Ostiense_(Rome).JPG"
+    },
+    "gesu": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Iglesia_del_Ges%C3%B9%2C_Roma%2C_Italia%2C_2022-09-16%2C_DD_112-114_HDR.jpg/960px-Iglesia_del_Ges%C3%B9%2C_Roma%2C_Italia%2C_2022-09-16%2C_DD_112-114_HDR.jpg",
+      "width": 960,
+      "height": 640,
+      "alt": "Innenraum der Kirche Il Gesù",
+      "credit": "Diego Delso",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Iglesia_del_Ges%C3%B9,_Roma,_Italia,_2022-09-16,_DD_112-114_HDR.jpg"
+    },
+    "mache": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Via_Benedetta_in_Rome.jpg/960px-Via_Benedetta_in_Rome.jpg",
+      "width": 960,
+      "height": 1471,
+      "alt": "Via Benedetta in Trastevere, Standort des Pubs",
+      "credit": "Krzysztof Golik",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Via_Benedetta_in_Rome.jpg"
+    },
+    "maxxi": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/MAXXI_Museum_interior_09.JPG/960px-MAXXI_Museum_interior_09.JPG",
+      "width": 960,
+      "height": 640,
+      "alt": "Innenraum des MAXXI von Zaha Hadid",
+      "credit": "Commonurbock23",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:MAXXI_Museum_interior_09.JPG"
+    },
+    "montemartini": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Centrale_Montemartini%2C_Rome_%2822172805771%29.jpg/960px-Centrale_Montemartini%2C_Rome_%2822172805771%29.jpg",
+      "width": 960,
+      "height": 636,
+      "alt": "Antike Skulpturen zwischen Turbinen der Centrale Montemartini",
+      "credit": "Carole Raddato from FRANKFURT, Germany",
+      "license": "CC BY-SA 2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Centrale_Montemartini,_Rome_(22172805771).jpg"
+    },
+    "pantheon": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Interior_oculus_of_the_Rome_Pantheon.jpg/960px-Interior_oculus_of_the_Rome_Pantheon.jpg",
+      "width": 960,
+      "height": 540,
+      "alt": "Opaion in der Kuppel des Pantheon",
+      "credit": "T. Le Berre",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Interior_oculus_of_the_Rome_Pantheon.jpg"
+    },
+    "seven": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Via_Nazionale_%28Rome%29_in_2021.01.jpg/960px-Via_Nazionale_%28Rome%29_in_2021.01.jpg",
+      "width": 960,
+      "height": 720,
+      "alt": "Via Nazionale in Rom",
+      "credit": "CAPTAIN RAJU",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Via_Nazionale_(Rome)_in_2021.01.jpg"
+    },
+    "spagna": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Vue_Piazza_di_Spagna_2019.jpg/960px-Vue_Piazza_di_Spagna_2019.jpg",
+      "width": 960,
+      "height": 540,
+      "alt": "Piazza di Spagna mit der Spanischen Treppe",
+      "credit": "Chin844",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Vue_Piazza_di_Spagna_2019.jpg"
+    },
+    "termini": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Roma_termini_01.jpg/960px-Roma_termini_01.jpg",
+      "width": 960,
+      "height": 540,
+      "alt": "Bahnhof Roma Termini",
+      "credit": "Hide1228",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Roma_termini_01.jpg"
+    },
+    "trevi": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fontana_di_Trevi_by_TC.jpg/960px-Fontana_di_Trevi_by_TC.jpg",
+      "width": 960,
+      "height": 1440,
+      "alt": "Fontana di Trevi",
+      "credit": "Tomascastelazo",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Fontana_di_Trevi_by_TC.jpg"
+    }
+  }
+}
