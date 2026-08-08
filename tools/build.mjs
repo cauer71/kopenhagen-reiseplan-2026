@@ -471,6 +471,7 @@ function reiseSeite(slug, data) {
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="manifest" href="../../manifest.webmanifest" />
+    <link rel="icon" href="../../icons/icon.svg" type="image/svg+xml" />
     <link rel="icon" href="../../icons/icon-192.png" sizes="192x192" />
     <!-- Apple: als Web App auf dem Home-Bildschirm.
          apple-mobile-web-app-title ist nötig, weil app.js document.title auf den

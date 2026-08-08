@@ -4,9 +4,10 @@
  * Vorlage ist die Entwurfsfassung „Reiseplan Intro" aus Claude Design. Sie kam
  * als Komponente mit eigenem Laufzeitgerüst (`support.js`, `animations-v3.jsx`,
  * zusammen 124 KB) und Material Symbols vom Google-CDN. Beides ist hier nicht
- * einsetzbar: kein Framework, keine fremden Hosts, offline lesbar. Übernommen
+ * einsetzbar: kein Framework, keine fremden Hosts, offline lesbar. Die Symbole
+ * sind dieselben, nur als Pfade eingebettet statt als Schrift geladen. Übernommen
  * sind deshalb **Komposition, Farben, Zeiten und Bewegung**, umgesetzt mit
- * CSS-Keyframes und drei selbst gezeichneten Symbolen.
+ * CSS-Keyframes und den Material-Symbols-Glyphen als eingebettete Pfade.
  *
  * Vier Szenen, zusammen 2,0 s — die Namen stammen aus dem Entwurf:
  *
@@ -26,12 +27,19 @@
 const SCHLUESSEL = "reiseplan:intro";
 
 const SYMBOLE = {
-  // Selbst gezeichnet, bewusst einfach: bei rund 30 px Kantenlänge zählt die
-  // Silhouette, nicht das Detail. Ein erster Versuch mit einem detaillierten
-  // Flugzeug las sich bei dieser Größe wie ein Schuh.
-  abflug: '<path d="M21.4 2.6 2.9 10.3l7.3 3.5 3.5 7.3 7.7-18.5Z"/><path d="M21.4 2.6 10.2 13.8"/>',
-  essen: '<path d="M7 2v9m0 0v11M4.6 2v5.4a2.4 2.4 0 0 0 4.8 0V2M17.4 22v-8.5h-1.9a.6.6 0 0 1-.6-.7l.7-8.5A2.6 2.6 0 0 1 18.2 2h.2v20Z"/>',
-  foto: '<path d="M3 8.5h3.2l1.4-2.4h8.8l1.4 2.4H21a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="14" r="3.4"/>',
+  // Die echten Glyphen aus **Material Symbols Rounded** — dieselben, die der
+  // Entwurf benutzt: flight_takeoff, restaurant, photo_camera.
+  //
+  // Als Pfade eingebettet statt als Schrift vom Google-CDN geladen: die Seite
+  // bindet keine fremden Hosts ein und muss offline lesbar bleiben. Eine erste
+  // Fassung mit selbst gezeichneten Symbolen war nur eine Annäherung — aus
+  // flight_takeoff war dabei ein Papierflieger geworden, also ein anderes Symbol.
+  //
+  // Quelle: github.com/google/material-design-icons, Apache License 2.0.
+  // Der Lizenztext liegt als docs/icons/MATERIAL-SYMBOLS-LICENSE.txt bei.
+  abflug: "<path d=\"M800-120H160q-17 0-28.5-11.5T120-160q0-17 11.5-28.5T160-200h640q17 0 28.5 11.5T840-160q0 17-11.5 28.5T800-120ZM212-464l192-52-139-236q-8-14-3-30t22-21l17-5q9-3 18-1t16 8l259 233 200-54q32-9 58 12t26 56q0 22-13.5 39T830-492L223-328q-13 4-25-1t-19-17L98-484q-7-11-1.5-23t18.5-14l15-3q6-1 11 .5t10 5.5l61 54Z\"/>",
+  essen: "<path d=\"M280-600v-240q0-17 11.5-28.5T320-880q17 0 28.5 11.5T360-840v240h40v-240q0-17 11.5-28.5T440-880q17 0 28.5 11.5T480-840v240q0 56-34.5 98T360-446v326q0 17-11.5 28.5T320-80q-17 0-28.5-11.5T280-120v-326q-51-14-85.5-56T160-600v-240q0-17 11.5-28.5T200-880q17 0 28.5 11.5T240-840v240h40Zm400 200h-80q-17 0-28.5-11.5T560-440v-240q0-70 51.5-135T718-880q18 0 30 14t12 33v713q0 17-11.5 28.5T720-80q-17 0-28.5-11.5T680-120v-280Z\"/>",
+  foto: "<path d=\"M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l50-54q11-12 26.5-19t32.5-7h170q17 0 32.5 7t26.5 19l50 54h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z\"/>",
 };
 
 /** Die drei Stops der Zeitachse — Motiv aus dem Entwurf. */
@@ -42,8 +50,9 @@ const STOPS = [
 ];
 
 const symbol = (name) =>
-  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${SYMBOLE[name]}</svg>`;
+  // Material Symbols zeichnen im Koordinatenfeld 0 -960 960 960 und sind
+  // gefüllt, nicht gestrichelt.
+  `<svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">${SYMBOLE[name]}</svg>`;
 
 function markup() {
   const stops = STOPS.map((s, i) => `
