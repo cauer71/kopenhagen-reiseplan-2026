@@ -1,3 +1,5 @@
+import { introStarten } from "./intro.js";
+
 const root = document.querySelector("#app");
 const siteRoot = document.body.dataset.siteRoot ?? "./";
 const tripSource = document.body.dataset.trip ?? "./data/trip.json";
@@ -922,6 +924,8 @@ async function init() {
   loadWeather(trip);
   enableOffline(days);
 }
+
+introStarten();
 
 init().catch((error) => {
   root.innerHTML = `<p class="load-error">Der Reiseplan konnte nicht geladen werden. ${esc(error.message ?? "")}</p>`;

@@ -1,3 +1,5 @@
+import { introStarten } from "./intro.js";
+
 /**
  * Startseite mit Reisekacheln.
  *
@@ -133,6 +135,8 @@ async function init() {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   }
 }
+
+introStarten();
 
 init().catch(() => {
   root.innerHTML = '<p class="load-error">Die Reiseübersicht konnte nicht geladen werden.</p>';

@@ -34,6 +34,9 @@ const SHELL = [
   "./assets/styles.css",
   "./assets/app.js",
   "./assets/landing.js",
+  // Wird von beiden oben importiert. Fehlt es im Vorrat, scheitert ohne Netz
+  // schon der Import – und dann startet die App gar nicht, nicht bloß das Intro.
+  "./assets/intro.js",
   "./data/trips/index.json",
 ];
 
