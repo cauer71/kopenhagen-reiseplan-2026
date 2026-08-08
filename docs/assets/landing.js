@@ -125,7 +125,7 @@ async function init() {
     <div class="index-intro">
       <p class="eyebrow">Reiseplaner</p>
       <h1>Meine Reisen</h1>
-      <p>Jede Reise hat ihren eigenen Bereich. Bilder, Tagespläne, Wetter und stabile Termin-UIDs bleiben je Reise getrennt.</p>
+      <p>Wer die Wege kurz hält, gewinnt Zeit für das, weswegen er gekommen ist.</p>
     </div>
     <div class="trip-grid">${tiles}</div>
     <p class="pagefoot"><a href="./test/">Testparameter</a></p>

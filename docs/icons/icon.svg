@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <!--
-    App-Symbol: die oberste Marke aus dem Start-Intro — Abflug.
+    App-Symbol: conversion_path — der Weg mit seinen Stationen.
 
     Dies ist die Quelle; die PNG-Dateien daneben sind daraus gerastert. Wer das
     Symbol ändert, ändert diese Datei und erzeugt die PNGs neu.
@@ -9,16 +9,19 @@
     „maskable" Symbole auf die mittleren 80 %, und dasselbe 512er dient im
     Manifest für beide Zwecke. Der Rand bleibt deshalb frei.
 
-    Die Glyphe ist flight_takeoff aus Material Symbols Rounded
+    Die Glyphe ist conversion_path aus Material Symbols Outlined, ungefüllt
     (github.com/google/material-design-icons, Apache License 2.0 — Lizenztext
     in MATERIAL-SYMBOLS-LICENSE.txt daneben). Sie zeichnet im Koordinatenfeld
     0 -960 960 960; die Transformation setzt sie mittig auf die Scheibe.
+
+    Sie steht etwas größer als das vorige Symbol: eine Linienzeichnung trägt
+    weniger Tinte als eine Fläche und wirkt bei gleicher Kantenlänge kleiner.
   -->
   <rect width="512" height="512" fill="#f8f1e5"/>
   <circle cx="256" cy="256" r="187" fill="none" stroke="#14777c" stroke-opacity="0.45" stroke-width="15"/>
   <circle cx="256" cy="256" r="170" fill="none" stroke="#fffaf0" stroke-width="19"/>
   <circle cx="256" cy="256" r="161" fill="#14777c"/>
-  <g transform="translate(162.5 349.5) scale(0.1948)" fill="#fffaf0">
-    <path d="M800-120H160q-17 0-28.5-11.5T120-160q0-17 11.5-28.5T160-200h640q17 0 28.5 11.5T840-160q0 17-11.5 28.5T800-120ZM212-464l192-52-139-236q-8-14-3-30t22-21l17-5q9-3 18-1t16 8l259 233 200-54q32-9 58 12t26 56q0 22-13.5 39T830-492L223-328q-13 4-25-1t-19-17L98-484q-7-11-1.5-23t18.5-14l15-3q6-1 11 .5t10 5.5l61 54Z"/>
+  <g transform="translate(148.5 363.5) scale(0.2240)" fill="#fffaf0">
+    <path d="M760-120q-39 0-70-22.5T647-200H440q-66 0-113-47t-47-113q0-66 47-113t113-47h80q33 0 56.5-23.5T600-600q0-33-23.5-56.5T520-680H313q-13 35-43.5 57.5T200-600q-50 0-85-35t-35-85q0-50 35-85t85-35q39 0 69.5 22.5T313-760h207q66 0 113 47t47 113q0 66-47 113t-113 47h-80q-33 0-56.5 23.5T360-360q0 33 23.5 56.5T440-280h207q13-35 43.5-57.5T760-360q50 0 85 35t35 85q0 50-35 85t-85 35ZM200-680q17 0 28.5-11.5T240-720q0-17-11.5-28.5T200-760q-17 0-28.5 11.5T160-720q0 17 11.5 28.5T200-680Z"/>
   </g>
 </svg>
